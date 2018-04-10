@@ -10,7 +10,7 @@ Fisa cerintelor poate fi accesata [aici](https://docs.google.com/document/d/1Ydp
 | Team | Scrum Master | Front-end | Back-end | Testing |
 | :--: | :----------: | :-------: | :------: | :-----: |
 | 1 | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei | Nume Prenume 1 |
-| 2 | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei | Nume Prenume 1 |
+| 2 | Bosînceanu Lucian | Timofte Andrei, Cobzac Șerban, Stan Radu | Medvichi Ștefan, Cojocaru Dragoș | Bosînceanu Lucian |
 | 3 | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei | Nume Prenume 1 |
 | 4 | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei | Nume Prenume 1 |
 
