@@ -11,9 +11,9 @@ Componentele proiectului si impartirea lor pe echipe poate fi vizualizata [aici]
 
 | Team | Scrum Master | Front-end | Back-end | Testing |
 | :--: | :----------: | :-------: | :------: | :-----: |
-| 1 | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei, Morcotet Marian | Arvinte Cristian |
-| 2 | Bosînceanu Lucian | Timofte Andrei, Cobzac Șerban, Stan Radu | Medvichi Ștefan, Cojocaru Dragoș | Bosînceanu Lucian |
-| 3 | Feciuc Stelian-Teodor | Anton Cătălin | Bojescu Mihai | Apușcășiței Silviu |
-| 4 | Stan Mihai |  Crivoi Andrei, Rafael Martonca | Stan Mihai, Andrei Tirpescu | Rares Darabana, Cristian Ginju |
+| Team Sierra | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei, Morcotet Marian | Arvinte Cristian |
+| Team Lima | Bosînceanu Lucian | Timofte Andrei, Cobzac Șerban, Stan Radu | Medvichi Ștefan, Cojocaru Dragoș | Bosînceanu Lucian |
+| Team Tango | Feciuc Stelian-Teodor | Anton Cătălin | Bojescu Mihai | Apușcășiței Silviu |
+| Team Mike | Stan Mihai |  Crivoi Andrei, Rafael Martonca | Stan Mihai, Andrei Tirpescu | Rares Darabana, Cristian Ginju |
 
 ***
