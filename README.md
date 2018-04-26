@@ -13,7 +13,7 @@ Componentele proiectului si impartirea lor pe echipe poate fi vizualizata [aici]
 | :--: | :----------: | :-------: | :------: | :-----: |
 | Team Sierra | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei, Morcotet Marian | Arvinte Cristian |
 | Team Lima | Bosînceanu Lucian | Timofte Andrei, Cobzac Șerban, Stan Radu | Medvichi Ștefan, Cojocaru Dragoș | Bosînceanu Lucian |
-| Team Tango | Feciuc Stelian-Teodor | Anton Cătălin | Bojescu Mihai | Apușcășiței Silviu |
+| Team Tango | Feciuc Stelian-Teodor | Anton Cătălin, Cojocariu Paul-Alexandru | Bojescu Mihai | Apușcășiței Silviu |
 | Team Mike | Stan Mihai |  Crivoi Andrei, Rafael Martonca | Stan Mihai, Andrei Tirpescu | Rares Darabana, Cristian Ginju |
 
 ***
