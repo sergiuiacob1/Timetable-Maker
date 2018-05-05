@@ -28,6 +28,8 @@ $(document).ready(function(){
 	}
 
 	$('.login #login-form .login-button').on('click', function() {
+
+		$('.login #login-form .error-msg').remove();
 		let loginBtn = $('.login #login-form .login-button');
 
 		const username = $(".login #login-form .input #username-input").val();
@@ -65,6 +67,6 @@ $(document).ready(function(){
 			else {
 				loginBtn.after($("<div></div>").html("Wrong credentials!").addClass("error-msg"));
 			}
-		}, 2000);
+		}, 800);
 	});
 });
