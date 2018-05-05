@@ -39,11 +39,6 @@ headers {
 ```
 
 
-## GET /api/notifications
-
-## GET /api/asin_changes
-
-
 ##POST /api/update_user
 
 required arguments: old_password, new_password (same as old_password if you don't wanna change it)
