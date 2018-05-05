@@ -3,6 +3,7 @@ $(document).ready(function(){
 
 	const urlLogin = '';
 	let token = undefined;
+	let errorMsg = false;
 
 	function tokenExpire(){
 	  token = undefined;
@@ -26,10 +27,19 @@ $(document).ready(function(){
 		});	
 	}
 
-	$('.login .login-button').on('click', function() {
+	$('.login #login-form .login-button').on('click', function() {
+		let loginBtn = $('.login #login-form .login-button');
 
-		const username = $(".login .input .username-input").val();
-		const password = $(".login .input .password-input").val();
+		const username = $(".login #login-form .input #username-input").val();
+		const password = $(".login #login-form .input #password-input").val();
+
+		if (username.length === 0 || password.length === 0) {
+			if (errorMsg === false) {
+				loginBtn.after($("<div></div>").html("Please provide credentials!").addClass("error-msg"));
+				errorMsg = true;
+			}
+			return;
+		}
 
 		console.log(username);
 		console.log(password);
@@ -49,7 +59,12 @@ $(document).ready(function(){
 		// });
 		
 		setTimeout(function(){
-			$(location).attr('href', 'file:///home/timi/Documents/IP2/IP_LOGIN/index.html');
+			if (false) {
+				$(location).attr('href', 'file:///home/timi/Documents/IP2/IP_LOGIN/index.html');
+			}
+			else {
+				loginBtn.after($("<div></div>").html("Wrong credentials!").addClass("error-msg"));
+			}
 		}, 2000);
 	});
 });
