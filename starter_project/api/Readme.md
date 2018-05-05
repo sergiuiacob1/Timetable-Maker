@@ -39,7 +39,7 @@ headers {
 ```
 
 
-##POST /api/update_user
+## POST /api/update_user
 
 required arguments: old_password, new_password (same as old_password if you don't wanna change it)
 optional argument: name, amazon_account
