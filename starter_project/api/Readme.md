@@ -10,7 +10,7 @@ docker-compose up --force-recreate
 docker-compose build --no-cache
 docker-compose down
 
-##Port: 2222
+## Port: 2222
 
 ## POST '/authenticate' -> recieve token
 ```
