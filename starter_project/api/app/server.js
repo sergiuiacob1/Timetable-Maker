@@ -1,9 +1,8 @@
 module.exports = (() => {
   "use strict";
   const express = require("express");
-  const bodyParser  = require('body-parser');
-  const morgan      = require('morgan');
-  const mongoose    = require('mongoose');
+  const bodyParser = require('body-parser');
+  const morgan = require('morgan');
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
