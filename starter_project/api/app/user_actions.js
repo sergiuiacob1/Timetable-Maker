@@ -15,6 +15,7 @@ module.exports = (() => {
   };
 
   const getUser = ({id, password, mail}) => {
+
     if (id){
       return new User()
         .field('*')
@@ -31,7 +32,7 @@ module.exports = (() => {
       mail, password
     }).valueOf()
     .then((res) => {
-      // console.log(res);
+      console.log("ASDASDAS" + JSON.stringify(res));
       if (res.length > 1)
         return null;
       return res[0];
