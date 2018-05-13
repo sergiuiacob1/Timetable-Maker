@@ -69,7 +69,7 @@ module.exports = (() => {
   
   const getResourcesByNameRoute = (req, res) => {
     const name = req.body.name;
-    getResourceByType({name}).then((resources) => {
+    getResourceByName({name}).then((resources) => {
       if (resources) {
         console.log(resources);
         res.json({success: true, resources});

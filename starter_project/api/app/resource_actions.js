@@ -39,7 +39,7 @@ module.exports = (() => {
   };
 
   const getResourceByName = ({name}) => {
-    if (type) {
+    if (name) {
       return new Resource()
         .field('*')
         .where({name})
