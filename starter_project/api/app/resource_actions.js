@@ -35,15 +35,14 @@ module.exports = (() => {
     };
 
     const getResources = () => {
-        return new Resource()
-        .field('*')
-        .where({})
-        .valueOf()
-        .then((res) => {
-            console.log("got resources" + JSON.stringify(res));
+        return new Room()
+          .field('*')
+          .valueOf()
+          .then((res) => {
             return res;
-        });
-    };
+          });
+      };
+    
   
     return {
         newResource,

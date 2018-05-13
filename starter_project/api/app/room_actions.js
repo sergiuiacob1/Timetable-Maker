@@ -2,11 +2,22 @@ module.exports = (() => {
   'use strict';
   const Room = require('./models/room');
   const RoomHours = require('./models/room_hours');
+  const RoomResource = require('./models/room_resources');
 
   const getRoomHours = (roomId) => {
     return new RoomHours()
       .field('day')
       .field('available_hours')
+      .where({roomId})
+      .valueOf()
+      .then((res) => {
+        return res;
+      });
+  };
+
+  const getRoomResources = (roomId) => {
+    return new RoomResource()
+      .field('resource_id')
       .where({roomId})
       .valueOf()
       .then((res) => {
@@ -26,8 +37,11 @@ module.exports = (() => {
 
           return getRoomHours(room.id).then((hours) => {
             room.defaultAvailableHours = hours;
-            return room;
-          })
+            return getRoomResources(room.id).then((resources) => {
+              room.resources = resources;
+              return room;
+            });
+          });
         });
     }
   };
@@ -40,7 +54,10 @@ module.exports = (() => {
         return Promise.all(res.map((room) => {
           return getRoomHours(room.id).then((hours) => {
             room.defaultAvailableHours = hours;
-            return room;
+            return getRoomResources(room.id).then((resources) => {
+              room.resources = resources;
+              return room;
+            });
           })
         }));
       });

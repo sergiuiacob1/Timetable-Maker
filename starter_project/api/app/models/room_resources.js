@@ -5,30 +5,25 @@ module.exports = (() => {
     const { Extension } = require('./../../config/pools.js');
     const ApplicationRecord = require('./application_record.js');
   
-    class Resource extends ApplicationRecord {
+    class RoomResource extends ApplicationRecord {
       constructor() {
         console.log(Extension);
-        super(Extension, "resources");
+        super(Extension, "rooms_resources");
       }
   
       where({
-        id,
-        name
+        roomId
       }) {
         let whereClause = squel.expr();
   
-        if (id) {
-          whereClause = whereClause.and("id = ?", id);
+        if (roomId) {
+          whereClause = whereClause.and("room_id = ?", roomId);
         }
-        if (name) {
-          whereClause = whereClause.and("name = ?", name);
-        }
-       
         this.query = this.query.where(whereClause);
         return this;
       }
     }
   
-    return User;
+    return RoomResource;
   })();
   
