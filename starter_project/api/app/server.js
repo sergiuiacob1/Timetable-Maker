@@ -7,8 +7,8 @@ module.exports = (() => {
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
-  const {updateUserInfo, getUserRoute} = require('./user_routes');
   const {getRoomsRoute} = require('./room_routes');
+  const {updateUserInfo, getUserRoute, getAllUsers} = require('./user_routes');
 
   let serverInterface = undefined;
 
@@ -39,6 +39,7 @@ module.exports = (() => {
 
 
     const apiRoutes = express.Router();
+    const adminRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
 
@@ -46,7 +47,13 @@ module.exports = (() => {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
 
+<<<<<<< 331bc96fa772ef1612700873dc8122a741e1d5fd
     apiRoutes.get('/rooms', getRoomsRoute);
+=======
+    adminRoutes.get('/users', getAllUsers);
+
+    apiRoutes.use('/admin', adminRoutes);
+>>>>>>> Added admin routes and view all users
 
     app.use('/api', apiRoutes);
 
