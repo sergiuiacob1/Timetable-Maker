@@ -47,3 +47,88 @@ optional argument: name, amazon_account
 
 ## GET /api/user 
 with token: you recieve user info
+
+
+## GET /api/subjects
+
+token
+```
+Response: {
+	success: true,
+	subjects: [
+		{
+			id: '1',
+			name: 'Algoritmi genetici',
+			short: 'AG',
+			date: '13/12/2018',  // (optionala in cazul in care frequency este 0)
+			frequency: 1 // (o data pe sapt)
+		}
+	]
+}
+```
+
+
+## GET /api/rooms
+
+token
+
+```
+Response: {
+	success: true,
+	rooms: [
+		{
+			id: '1221',
+			name: 'C411',
+			resources: [
+				3, 2, 10
+			],
+			defaultAvailableHours: [
+				{
+					zi: 0,
+					interval: "8:00-20:00"
+				}
+			]
+			capacity: 40
+		}
+	]
+}
+```
+
+## GET /api/resources
+
+token
+
+```
+Response: {
+	success: true,
+	resources: [
+		{
+			id: 3,
+			name: 'Videoproiector'
+		},
+		{
+			id: 10,
+			name: 'Aer conditionat'
+		}
+	]
+}
+```
+
+## GET /api/groups
+
+token
+
+```
+Response: {
+	success: true,
+	groups: [
+		{
+			id: 1,
+			name: 'IB1',
+			number: 30,
+			year: 2,
+			subjects: [1, 2]
+		}
+	]
+}
+```

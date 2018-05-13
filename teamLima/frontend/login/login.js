@@ -1,7 +1,8 @@
 $(document).ready(function(){
 
 
-	const urlLogin = '';
+	const hostName = '0.0.0.0:2222';
+	const urlLogin= `http://${hostName}/authenticate`;
 	let token = undefined;
 	let errorMsg = false;
 
@@ -15,13 +16,16 @@ $(document).ready(function(){
 		$.post(urlLogin, credentials)
 		.done(function (data) {
 
-			if (data.success === true) {
+			console.log(data);
+
+			if (data.success === true){
 			  token = data.token;
 			  localStorage.setItem('token', token);
 			  setTimeout(tokenExpire, 21600000); //6 * 60 * 1 min
 			  callback(true);
 			}
 			else {
+			  errorMsg = data.message;
 			  callback(false);
 			}
 		});	
@@ -46,27 +50,17 @@ $(document).ready(function(){
 		console.log(username);
 		console.log(password);
 
-		// apiLoginPost({username, password}, function(response){
+		apiLoginPost({mail:username, password}, function(response){
 
 
-		// 	if (response === true){
-		// 		console.log("Login True");
-				//
-		// 	}
-
-		// 	if (response === false){
-		// 		console.log("Login False");
-		// 	}
-
-		// });
-		
-		setTimeout(function(){
-			if (false) {
+			if (response === true){
 				$(location).attr('href', 'file:///home/timi/Documents/IP2/IP_LOGIN/index.html');
 			}
-			else {
-				loginBtn.after($("<div></div>").html("Wrong credentials!").addClass("error-msg"));
+
+			if (response === false){
+				loginBtn.after($("<div></div>").html(errorMsg).addClass("error-msg"));		
 			}
-		}, 800);
+
+		});
 	});
 });
