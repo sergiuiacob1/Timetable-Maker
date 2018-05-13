@@ -1,0 +1,15 @@
+# create a docker-compose.yml file
+version: "2"
+services:
+  web:
+    build: .
+    ports:
+      - "2223:2223"
+    volumes:
+      - ./:/application
+      - /application/node_modules
+    environment:
+      - MYSQL_DATABASE=extension
+      - MYSQL_USER=extension_api
+      - MYSQL_PASSWORD=extension_api
+      - MYSQL_ROOT_PASSWORD=J4m432423ass
