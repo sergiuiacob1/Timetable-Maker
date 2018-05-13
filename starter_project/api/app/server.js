@@ -7,6 +7,7 @@ module.exports = (() => {
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {getRoomsRoute} = require('./room_routes');
 
   let serverInterface = undefined;
 
@@ -42,6 +43,8 @@ module.exports = (() => {
     apiRoutes.get('/', function (req, res) {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
+
+    apiRoutes.get('/rooms', getRoomsRoute);
 
     app.use('/api', apiRoutes);
 
