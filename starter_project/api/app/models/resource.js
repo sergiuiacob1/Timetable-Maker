@@ -8,7 +8,7 @@ module.exports = (() => {
     class Resource extends ApplicationRecord {
       constructor() {
         console.log(Extension);
-        super(Extension, "resource");
+        super(Extension, "resources");
       }
   
       where({
