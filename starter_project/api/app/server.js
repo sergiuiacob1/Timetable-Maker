@@ -6,7 +6,7 @@ module.exports = (() => {
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
-  const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {updateUserInfo, getUserRoute, getAllUsers} = require('./user_routes');
 
   let serverInterface = undefined;
 
@@ -36,12 +36,17 @@ module.exports = (() => {
 
 
     const apiRoutes = express.Router();
+    const adminRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
 
     apiRoutes.get('/', function (req, res) {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
+
+    adminRoutes.get('/users', getAllUsers);
+
+    apiRoutes.use('/admin', adminRoutes);
 
     app.use('/api', apiRoutes);
 

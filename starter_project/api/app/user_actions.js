@@ -32,7 +32,6 @@ module.exports = (() => {
       mail, password
     }).valueOf()
     .then((res) => {
-      console.log("ASDASDAS" + JSON.stringify(res));
       if (res.length > 1)
         return null;
       return res[0];
@@ -52,11 +51,21 @@ module.exports = (() => {
       .then((res) => {
         return true;
       });
+  };
+
+  const getUsers = () => {
+    return new User()
+    .field('*')
+    .valueOf()
+    .then((res) => {
+      return res;
+    });
   }
 
   return {
     getUser,
     newUser,
-    updateUser
+    updateUser,
+    getUsers
   };
 })();

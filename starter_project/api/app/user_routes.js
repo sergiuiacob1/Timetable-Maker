@@ -2,7 +2,7 @@ module.exports = (() => {
   'use strict';
 
   const User = require('./models/user');
-  const {getUser, updateUser} = require('./user_actions');
+  const {getUser, updateUser, getUsers} = require('./user_actions');
 
   const updateUserInfo = (req, res) => {
     const id = req.decoded.user.id;
@@ -33,8 +33,22 @@ module.exports = (() => {
     })
   };
 
+  const getAllUsers = (req, res) => {
+    getUsers().then((users) => {
+      users.map( (user) => {
+        delete user.password;
+        return user;
+      } )
+      res.json({success: true, users});
+    }).catch((e) => {
+      console.log(e);
+      res.json({success: false, message: "An error occured"});
+    });
+  };
+
   return {
     updateUserInfo,
-    getUserRoute
+    getUserRoute,
+    getAllUsers
   };
 })();
