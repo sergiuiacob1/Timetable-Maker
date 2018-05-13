@@ -29,6 +29,20 @@ module.exports = (() => {
     }
   };
 
+  const checkAdmin = (req, res, next) => {
+    /*const {body} = req;
+    getUser(body)
+    .then((user) => {
+      console.log("Admin middleware:");
+      console.log(user);
+      if (user.isAdmin) {
+          next();
+      }
+      return res.json({success: false, message: "403 Forbidden"});
+    });*/
+    next();
+  };
+
   const authenticate = (req, res) => {
     const {body} = req;
     getUser(body).then((user) => {
@@ -77,6 +91,7 @@ module.exports = (() => {
     authenticate,
     register,
     checkAuthenticated,
-    forgot
+    forgot,
+    checkAdmin
   };
 })();
