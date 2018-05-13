@@ -6,7 +6,8 @@ module.exports = (() => {
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
-  const {updateUserInfo, getUserRoute, getAllUsers} = require('./user_routes');
+  const {updateUserInfo, getUserRoute, getAllUsers,
+        showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute} = require('./user_routes');
 
   let serverInterface = undefined;
 
@@ -44,7 +45,12 @@ module.exports = (() => {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
 
+    adminRoutes.post('/users/:id/update', updateUserRoute);
+    adminRoutes.post('/users/:id/delete', deleteUserRoute);
+    adminRoutes.get('/users/:id', showUserRoute);
+    adminRoutes.post('/users', insertUserRoute);
     adminRoutes.get('/users', getAllUsers);
+    
 
     apiRoutes.use('/admin', adminRoutes);
 
