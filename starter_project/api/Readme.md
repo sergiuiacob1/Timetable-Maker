@@ -132,3 +132,20 @@ Response: {
 	]
 }
 ```
+
+## GET /api/admin/users
+
+token & admin
+Returns array of all users
+
+```
+Response: {
+	success: true,
+	users: [
+		{
+			id: 1,
+			mail: "andrei@gmail.com"
+		}
+	]
+}
+```
