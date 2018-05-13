@@ -1,5 +1,5 @@
 # create a docker-compose.yml file
-version: "2"
+version: "3"
 services:
   web:
     build: .
@@ -35,3 +35,8 @@ services:
       MYSQL_ROOT_PASSWORD: J4m432423ass
     ports:
       - "8080:80"
+
+networks:
+  default:
+    external:
+      name: timetable_maker

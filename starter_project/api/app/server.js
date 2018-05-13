@@ -7,6 +7,7 @@ module.exports = (() => {
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {resources} = require('./resourcesRouting');
 
   let serverInterface = undefined;
 
@@ -34,6 +35,12 @@ module.exports = (() => {
     app.post('/register', register);
     app.post('/forgot', forgot);
 
+    //Sorry for short edit :) - Mihai
+    app.post('/resources', resources);
+    app.post('/resources/add', resources);
+    app.post('/resources/remove', resources);
+    app.post('/resources/edit', resources);
+    
 
     const apiRoutes = express.Router();
 
