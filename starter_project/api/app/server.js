@@ -8,7 +8,8 @@ module.exports = (() => {
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {getRoomsRoute} = require('./room_routes');
-  const {updateUserInfo, getUserRoute, getAllUsers} = require('./user_routes');
+  const {updateUserInfo, getUserRoute, getAllUsers,
+        showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute} = require('./user_routes');
 
   let serverInterface = undefined;
 
@@ -47,10 +48,18 @@ module.exports = (() => {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
 
+<<<<<<< 3c1230be3d5f4ba5a0d43fddda5aa7899307534e
 <<<<<<< 331bc96fa772ef1612700873dc8122a741e1d5fd
     apiRoutes.get('/rooms', getRoomsRoute);
 =======
+=======
+    adminRoutes.post('/users/:id/update', updateUserRoute);
+    adminRoutes.post('/users/:id/delete', deleteUserRoute);
+    adminRoutes.get('/users/:id', showUserRoute);
+    adminRoutes.post('/users', insertUserRoute);
+>>>>>>> Added more admin routes
     adminRoutes.get('/users', getAllUsers);
+    
 
     apiRoutes.use('/admin', adminRoutes);
 >>>>>>> Added admin routes and view all users

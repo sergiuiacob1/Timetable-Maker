@@ -33,6 +33,8 @@ module.exports = (() => {
     })
   };
 
+  // for admin
+
   const getAllUsers = (req, res) => {
     getUsers().then((users) => {
       users.map( (user) => {
@@ -46,9 +48,39 @@ module.exports = (() => {
     });
   };
 
+  const showUserRoute = (req, res) => {
+    // params: id
+    const id = req.params.id;
+    console.log('Show:' + id);
+    res.json({success: true, message: 'user info'});
+  };
+
+  const insertUserRoute = (req, res) => {
+    console.log('Insert:');
+    res.json({success: true, message: 'user insert'});
+  };
+
+  const updateUserRoute = (req, res) => {
+    // params: id
+    const id = req.params.id;
+    console.log('Update:' + id);
+    res.json({success: true, message: 'user update'});
+  };
+
+  const deleteUserRoute = (req, res) => {
+    // params: id
+    const id = req.params.id;
+    console.log('Delete:' + id);
+    res.json({success: true, message: 'user delete'});
+  };
+
   return {
     updateUserInfo,
     getUserRoute,
-    getAllUsers
+    getAllUsers,
+    showUserRoute,
+    insertUserRoute,
+    updateUserRoute,
+    deleteUserRoute
   };
 })();

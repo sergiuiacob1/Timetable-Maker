@@ -135,8 +135,8 @@ Response: {
 
 ## GET /api/admin/users
 
-token & admin
-Returns array of all users
+token & admin  
+returns array of all users
 
 ```
 Response: {
@@ -147,5 +147,33 @@ Response: {
 			mail: "andrei@gmail.com"
 		}
 	]
+}
+```
+
+## POST /api/admin/users
+
+token & admin  
+insert new user  
+
+```
+Response: {
+	success: true
+}
+```
+
+## GET /api/admin/users/:id
+
+token & admin  
+required argument: id  
+returns user information  
+
+```
+Response: {
+	success: true,
+	user:
+		{
+			id: 1,
+			mail: "andrei@gmail.com"
+		}
 }
 ```
