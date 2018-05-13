@@ -35,8 +35,3 @@ services:
       MYSQL_ROOT_PASSWORD: J4m432423ass
     ports:
       - "8080:80"
-
-networks:
-  default:
-    external:
-      name: timetable_maker
