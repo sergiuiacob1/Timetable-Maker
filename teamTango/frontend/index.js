@@ -1,121 +1,142 @@
-//resources will be the array of all resources from the server
-var resources=[
-    {
-        id: 13124,
-        type:'videocam',
-        name: '310',
-        capacity:20,
-        dependency:''
-    },
-    {
-        id: 13123,
-        type:'videocam',
-        name: '309',
-        capacity:20,
-        dependency:''
-    },
-    {
-        id:31231,
-        type:'classroom',
-        name: 'C410',
-        capacity:30,
-        dependency:[13123, 13124] // in arrayul de dependente are id-ul de la cele 2 videocam
-    },
-    {
-        id: 6457,
-        type:'classroom',
-        name: 'C411',
-        capacity:30,
-        dependency:''
-    }
-];
-var resource={
-    type: 'videocam',
-    name:'309',
-    capacity:20
+var newResource={
+    type:'',
+    name:'',
+    capacity:''
 };
 
-var currentId='';
-var edited = false;
+//vars for dialog info
+var showDialogButton = document.querySelector('#show-dialog-info');
+var dialog = document.getElementById('dialog-info');
+showDialogButton.addEventListener('click', function () {
+    dialog.showModal();
+});
+dialog.querySelector('.close').addEventListener('click', function() {
+    dialog.close();
+});
+//vars for delete dialog
+
+var dialogDel = document.querySelector('#dialog-del');
+var showDialogButton = document.querySelector('#show-dialog-del');
+showDialogButton.addEventListener('click', function() {
+    dialogDel.showModal();
+});
+dialogDel.querySelector('.close').addEventListener('click', function() {
+    currentId = '';
+    dialogDel.close();
+});
 
 
-
-//function to create all cards with all resources from the server
-function populateCard(resource, pos){
-        var firstDiv = document.createElement('div');
-        firstDiv.className = "flex little-margins xs12 sm4 md3 lg3";
-        firstDiv.textContent = resource.capacity
-        firstDiv.style.backgroundColor = "red";
-        var Div2 = document.createElement('div');
-        Div2.className = "elevation-1";
-
-        var Div3 = document.createElement('div');
-        Div3.className = "card";
-
-        var Div4 = document.createElement('div');
-        Div4.className = "cars-card card__media";
-
-        var Div5 = document.createElement('div');
-        Div5.className = "card__media__content";
-
-        var Div6 = document.createElement('i');
-        Div6.className = "icon grey--text font-huge center material-icons";
-        Div6.textContent = resource.type
-
-        var Div7 = document.createElement('div');
-        Div7.className = "card__title resource-name";
-        Div7.textContent = resource.name
-
-        Div8 = document.createElement('div');
-        Div8.className = "list list--two-line";
-
-        Div9 = document.createElement('a');
-        Div9.className = "list__tile list__tile--link";
-
-        Div10 = document.createElement('div');
-        Div10.className = "list__tile__action";
-
-        var Div6 = document.createElement('i');
-        Div6.className = "icon grey--text font-huge center material-icons";
-        Div6.textContent = resource.type;
-
-        Div7 = document.createElement('div');
-        Div7.className = "card__title resource-name";
-
-        firstDiv.appendChild(Div2);
-        Div2.appendChild(Div3);
-        Div3.appendChild(Div4);
-        Div4.appendChild(Div5);
-        Div5.appendChild(Div6);
-        Div3.appendChild(Div7);
-        //firstDiv.appendChild(Div2); //apeleaza primul div din firstDiv
-        // firstDiv.appendChild(Div3); //apeleaza al doilea div din firstDiv
-
-        //   console.log("a mers functia");
-        var main = document.getElementById("main");
-        main.appendChild(firstDiv);
-        //add a div like this at the end: <div class="pos"> aici pui variabila pos</div>
-}
-
-//making all the cards here
-for (var i in resources) {
-    console.log(resources[i]);
-    populateCard(resources[i], i);
-}
-
-//gets the current resource, shows all info about it
-function populateDialogInfo(position){
-    var myResource = resources[position];
-    var dialog = document.getElementById('dialog-info');
-
-    if(dialog.open) {
-        //if myResource.type="classroom" blabla... if is videocam bla bla..
-        document.getElementById('title-info').innerHTML = myResource.type; // si tot asa
-        document.getElementById('p1').innerHTML = "Name: " + myResource.name;
-        document.getElementById('p2').innerHTML = "Capacity: " + myResource.capacity;
+//puts the values in an object, sends it to the server
+//send for editForm as well
+function sendAddForm(){
+    newResource.type = document.getElementById('type').value;
+    newResource.name = document.getElementById('name').value;
+    newResource.capacity = document.getElementById('capacity').value;
+    if(edited ===true){
+        newResource.id = currentId;
+        //send for edit
+        console.log("element send to be edited ");
+        console.log(newResource);
+        newResource ={
+            type:'',
+            name:'',
+            capacity:''
+        }
+        currentId ='';
     }
-    console.log("aici construiesti ca mai sus, info despre resursa curenta sunt in var myResource");
-    console.log(myResource);
+    else{
+        //send for add
+    }
+
+//here we send the xmlhtttp request post
+    console.log("data to be sent..");
+    console.log(newResource);
+
+    document.querySelector('dialog').close();
+}
+function sendDeleteResource(){
+    console.log("deleting" +currentId);
+
+    if(currentId){
+        //http request..
+    }
+    else{
+        console.log("id is null");
+    }
+    console.log(currentId);
+    currentId='';
+    dialogDel.close();
+}
+var dialogForm = document.querySelector('dialog');
+//opens the add form
+function showAddForm(){
+
+    var showDialogButton = document.querySelector('#show-dialog');
+    if (! dialogForm.showModal) {
+        // dialogPolyfill.registerDialog(dialog);
+    }
+    showDialogButton.addEventListener('click', function() {
+        document.getElementById('form-title').innerHTML = "Add resource";
+        document.getElementById('submitBtn').innerHTML = "Add";
+        dialogForm.showModal();
+    });
+
+
+    dialogForm.querySelector('.add').addEventListener('click', function(){
+        dialog.close;
+        edited = false;
+    });
+    dialogForm.querySelector('.close').addEventListener('click', function() {
+        dialogForm.close();
+        edited = false;
+    });
+
+    console.log("wuuut");
+};
+showAddForm();
+
+function openEditForm(elem){
+    edited= true;
+    document.getElementById('form-title').innerHTML = "Edit resource";
+    document.getElementById('submitBtn').innerHTML = "Edit";
+    var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
+    var currentElement = resources[pos];
+    console.log("current element");
+    console.log(pos);
+    console.log(currentElement);
+ //   document.querySelector('.mdl-textfield type').MaterialTextfield.change();
+    var inputType = document.getElementById('type');
+
+    inputType.value=currentElement.type;
+    inputType.parentElement.classList.add('is-dirty'); //the label is not going to come over the text
+
+    document.getElementById('name').value = currentElement.name;
+    document.getElementById('name').parentElement.classList.add('is-dirty');
+
+    document.getElementById('capacity').value = currentElement.capacity;
+    document.getElementById('capacity').parentElement.classList.add('is-dirty');
+
+    currentId = currentElement.id;
+
+    dialogForm.showModal();
+
+    console.log('blabla');
+}
+function openDeleteForm(elem){
+    var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
+    var currentElement = resources[pos];
+    currentId = currentElement.id;
+//    dialogDel.showModal();
 }
 
 
+//knows what is the current element, sends the position of the current resource in the array
+// in order for the populateDialogInfo function to know what info to put in the dialog
+function showInfo(btnElem){
+    console.log("here");
+    console.log(btnElem);
+    var pos = btnElem.parentElement.parentElement.lastElementChild.innerHTML; //this how to get the position
+    console.log(pos);
+
+    populateDialogInfo(pos);
+}
