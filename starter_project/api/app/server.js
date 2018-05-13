@@ -7,6 +7,16 @@ module.exports = (() => {
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {
+    newResourceRoute,
+    getResourceByIdRoute,
+    getResourcesByTypeRoute,
+    getResourcesByNameRoute,
+    getResourcesByCapacityRoute,
+    getAllResourcesRoute,
+    updateResourceRoute,
+    deleteResourceRoute
+  } = require('./resource_routes');
 
   let serverInterface = undefined;
 
@@ -33,7 +43,15 @@ module.exports = (() => {
     app.post('/authenticate', authenticate);
     app.post('/register', register);
     app.post('/forgot', forgot);
-
+    app.get('/resources', getAllResourcesRoute);
+    app.post('/resources/byId', getResourceByIdRoute);
+    app.post('/resources/byType', getResourcesByTypeRoute);
+    app.post('/resources/byName', getResourcesByNameRoute);
+    app.post('/resources/byCapacity', getResourcesByCapacityRoute);
+    app.post('/resources/add', newResourceRoute);
+    app.post('/resources/update', updateResourceRoute);
+    app.post('/resources/remove', deleteResourceRoute);
+    
 
     const apiRoutes = express.Router();
 
