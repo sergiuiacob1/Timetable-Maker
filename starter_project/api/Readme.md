@@ -177,3 +177,27 @@ Response: {
 		}
 }
 ```
+
+## POST /api/admin/users/:id/update
+
+token & admin  
+required arguments: id  
+updates user 
+
+```
+Response: {
+	success: true
+}
+```
+
+## POST /api/admin/users/:id/delete
+
+token & admin  
+required arguments: id  
+deletes user 
+
+```
+Response: {
+	success: true
+}
+```

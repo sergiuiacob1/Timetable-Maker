@@ -6,8 +6,8 @@ module.exports = (() => {
   const cors = require('cors');
 
   const config = require('./../config/config');
-  const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {getRoomsRoute} = require('./room_routes');
+  const {authenticate, register, checkAuthenticated, forgot, checkAdmin} = require('./authentication');
   const {updateUserInfo, getUserRoute, getAllUsers,
         showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute} = require('./user_routes');
 
@@ -43,6 +43,7 @@ module.exports = (() => {
     const adminRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
+    adminRoutes.use(checkAdmin);
 
     apiRoutes.get('/', function (req, res) {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
