@@ -22,6 +22,12 @@ module.exports = (() => {
         .valueOf()
         .then((res) => {
           return res[0];
+          const room = res[0];
+
+          return getRoomHours(room.id).then((hours) => {
+            room.defaultAvailableHours = hours;
+            return room;
+          })
         });
     }
   };
