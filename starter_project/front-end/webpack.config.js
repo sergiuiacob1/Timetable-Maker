@@ -1,14 +1,39 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const fs = require('fs');
+
+function generateHtmlPlugins (templateDir) {
+  const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir))
+  return templateFiles.map(item => {
+    const parts = item.split('.')
+    const name = parts[0]
+    const extension = parts[1]
+    if (extension === 'html')
+      return new HtmlWebpackPlugin({
+        hash: true,
+        filename: `${name}.html`,
+        chunks: [name],
+        template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
+        inject: 'body'
+      });
+  }).filter((e) => e !== undefined);
+}
+
+const htmlPlugins = generateHtmlPlugins('./src/')
+console.log(htmlPlugins);
 
 module.exports = {
   devtool: 'inline-sourcemap',
   context: __dirname,
-  entry: './src/index.js',
+  entry: {
+    app: './src/index.js',
+    login: './src/login.js'
+  },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
@@ -41,9 +66,5 @@ module.exports = {
       $: 'jquery',
       jQuery: 'jquery'
     }),
-    new HtmlWebpackPlugin({
-      title: 'Table',
-      path: path.join(__dirname, 'dist'),
-  }),
-  ]
+  ].concat(htmlPlugins)
 }
