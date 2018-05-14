@@ -22,9 +22,10 @@ function generateHtmlPlugins (templateDir) {
 }
 
 const htmlPlugins = generateHtmlPlugins('./src/')
-console.log(htmlPlugins);
+// console.log(htmlPlugins);
 
 module.exports = {
+  mode: 'development',
   devtool: 'inline-sourcemap',
   context: __dirname,
   entry: {
