@@ -14,7 +14,7 @@
 <div class="myHeight" >
     <div class="layout row wrap" id="main">
         <!--ADD CARD-->
-        <div class="flex xs12 sm4 md3 lg3"  id="show-dialog">
+        <div class="flex xs12 sm4 md3 lg3"  id="dialog-form-add">
             <div>
                 <div class="addOperation card">
                     <div class="addCardMedia">
@@ -29,72 +29,72 @@
             </div>
         </div>
 
-        <!-- FIRST RESOURCE-->
-        <div class="flex little-margins xs12 sm4 md3 lg3" style="margin-bottom: 10px;">
+        <!--&lt;!&ndash; FIRST RESOURCE&ndash;&gt;-->
+        <!--<div class="flex little-margins xs12 sm4 md3 lg3" style="margin-bottom: 10px;">-->
 
-            <div class="elevation-1">
+            <!--<div class="elevation-1">-->
 
 
-                <div class="card" style="height: auto;">
-                    <!-- Left aligned menu below button -->
-                    <div class="menu-card">
-                    <button id="demo-menu-lower-left"
-                            class="mdl-button mdl-js-button mdl-button--icon">
-                        <i class="material-icons">more_vert</i>
-                    </button>
-                    <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect"
-                        for="demo-menu-lower-left">
-                        <!--to add onclick to elements directly in js you make DivX.addEventListener('click', showInfo(this)). we need functions in order to work-->
-                        <li class="mdl-menu__item" onclick="openEditForm(this)">Edit</li>
-                        <li class="mdl-menu__item mdl-menu__item--full-bleed-divider" id="show-dialog-del" onclick="openDeleteForm(this)">Delete</li>
-                    </ul>
-                    </div>
+                <!--<div class="card" style="height: auto;">-->
+                    <!--&lt;!&ndash; Left aligned menu below button &ndash;&gt;-->
+                    <!--<div class="menu-card">-->
+                    <!--<button id="demo-menu-lower-left"-->
+                            <!--class="mdl-button mdl-js-button mdl-button&#45;&#45;icon">-->
+                        <!--<i class="material-icons">more_vert</i>-->
+                    <!--</button>-->
+                    <!--<ul class="mdl-menu mdl-menu&#45;&#45;bottom-left mdl-js-menu mdl-js-ripple-effect"-->
+                        <!--for="demo-menu-lower-left">-->
+                        <!--&lt;!&ndash;to add onclick to elements directly in js you make DivX.addEventListener('click', showInfo(this)). we need functions in order to work&ndash;&gt;-->
+                        <!--<li class="mdl-menu__item" onclick="openEditForm(this)">Edit</li>-->
+                        <!--<li class="mdl-menu__item mdl-menu__item&#45;&#45;full-bleed-divider" id="show-dialog-del" onclick="openDeleteForm(this)">Delete</li>-->
+                    <!--</ul>-->
+                    <!--</div>-->
 
-                    <div class="cars-card card__media" style="height: auto;">
-                        <div class="card__media__content"><i aria-hidden="true"
-                                                             class="icon grey--text font-huge center material-icons">domain</i>
-                        </div>
-                    </div>
+                    <!--<div class="cars-card card__media" style="height: auto;">-->
+                        <!--<div class="card__media__content"><i aria-hidden="true"-->
+                                                             <!--class="icon grey&#45;&#45;text font-huge center material-icons">domain</i>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
-                    <div class="card__title resource-name">
-                        c409
-                    </div>
-                    <div class="list list--two-line">
-                        <div><a class="list__tile list__tile--link">
-                            <div class="list__tile__action"><i aria-hidden="true"
-                                                               class="icon indigo--text material-icons">people</i>
-                            </div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">30</div>
-                                <div class="list__tile__sub-title">Capacity</div>
-                            </div>
-                            <div class="list__tile__action"></div>
-                        </a></div>
-                        <hr class="divider wat divider--inset">
-                        <div><a class="list__tile list__tile--link">
-                            <div class="list__tile__action"><i aria-hidden="true"
-                                                               class="icon indigo--text material-icons">desktop_windows</i>
-                            </div>
-                            <div class="list__tile__content">
-                                <div class="list__tile__title">Yes</div>
-                                <div class="list__tile__sub-title">Computers</div>
-                            </div>
-                        </a></div>
-                    </div>
-                    <!--to add onclick to elements directly in js you make DivX.addEventListener('click', showInfo(this))-->
-                    <div class="card__actions text-xs-center" onclick="showInfo(this)">
-                        <button type="button" class="more-info-btn btn btn--flat orange--text" id="show-dialog-info"
-                                style="position: relative;">
-                            <div class="btn__content">More info</div>
+                    <!--<div class="card__title resource-name">-->
+                        <!--c409-->
+                    <!--</div>-->
+                    <!--<div class="list list&#45;&#45;two-line">-->
+                        <!--<div><a class="list__tile list__tile&#45;&#45;link">-->
+                            <!--<div class="list__tile__action"><i aria-hidden="true"-->
+                                                               <!--class="icon indigo&#45;&#45;text material-icons">people</i>-->
+                            <!--</div>-->
+                            <!--<div class="list__tile__content">-->
+                                <!--<div class="list__tile__title">30</div>-->
+                                <!--<div class="list__tile__sub-title">Capacity</div>-->
+                            <!--</div>-->
+                            <!--<div class="list__tile__action"></div>-->
+                        <!--</a></div>-->
+                        <!--<hr class="divider wat divider&#45;&#45;inset">-->
+                        <!--<div><a class="list__tile list__tile&#45;&#45;link">-->
+                            <!--<div class="list__tile__action"><i aria-hidden="true"-->
+                                                               <!--class="icon indigo&#45;&#45;text material-icons">desktop_windows</i>-->
+                            <!--</div>-->
+                            <!--<div class="list__tile__content">-->
+                                <!--<div class="list__tile__title">Yes</div>-->
+                                <!--<div class="list__tile__sub-title">Computers</div>-->
+                            <!--</div>-->
+                        <!--</a></div>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;to add onclick to elements directly in js you make DivX.addEventListener('click', showInfo(this))&ndash;&gt;-->
+                    <!--<div class="card__actions text-xs-center" onclick="showInfo(this)">-->
+                        <!--<button type="button" class="more-info-btn btn btn&#45;&#45;flat orange&#45;&#45;text" id="show-dialog-info"-->
+                                <!--style="position: relative;">-->
+                            <!--<div class="btn__content">More info</div>-->
 
-                        </button>
-                    </div>
-                </div>
+                        <!--</button>-->
+                    <!--</div>-->
+                <!--</div>-->
 
-                <div class="pos">1</div>
-            </div>
+                <!--<div class="pos">1</div>-->
+            <!--</div>-->
 
-        </div>
+        <!--</div>-->
         <!--&lt;!&ndash;SECOND RESOURCE&ndash;&gt;-->
         <!--<div class="flex little-margins xs12 sm4 md3 lg3" style="margin-bottom: 10px;">-->
             <!--<div class="elevation-1">-->
@@ -243,10 +243,9 @@
 </div>
 
 <!--DIALOG ADD CARD-->
-<dialog class="mdl-dialog">
+<dialog class="mdl-dialog" id = 'dialog-form'>
     <h4 class="mdl-dialog__title" id="form-title">Add resource</h4>
     <div class="mdl-dialog__content">
-        <!-- Textfield with Floating Label -->
 
         <form action="#">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -263,11 +262,10 @@
             <label class="mdl-textfield__label" for="capacity">Capacity</label>
             </div>
         </form>
-
     </div>
     <div class="mdl-dialog__actions">
         <button type="button" class="mdl-button add" onclick="sendAddForm()" id="submitBtn">Add</button>
-        <button type="button" class="mdl-button close">Close</button>
+        <button type="button" class="mdl-button close" onclick="dialogAddResource.close()">Close</button>
     </div>
 </dialog>
 <!--DIALOG MORE INFO-->
@@ -285,7 +283,7 @@
         </p>
     </div>
     <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button close">Close</button>
+        <button type="button" class="mdl-button close" onclick="dialogInfo.close()">Close</button>
     </div>
 </dialog>
 <!--DIALOG DELETE-->
@@ -301,6 +299,7 @@
         <button type="button" class="mdl-button close">No</button>
     </div>
 </dialog>
+
 
 <script src="index.js"></script>
 <script src="js/dialogs.js"></script>

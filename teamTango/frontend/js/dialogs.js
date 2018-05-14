@@ -4,8 +4,19 @@ var newResource={
     capacity:''
 };
 
+//dialog form
+var buttonAddResource = document.getElementById('dialog-form-add');
+var dialogAddResource = document.getElementById('dialog-form');
+buttonAddResource.addEventListener('click', function(){
+    dialogAddResource.showModal();
+});
+
+
 //vars for dialog info
-var showDialogButton = document.querySelector('#show-dialog-info');
+var showDialogButton = document.querySelector('more-info-btn');
+var dialogInfo = document.getElementById('dialog-info');
+console.log("showDialogButton");
+console.log(showDialogButton);
 // var infoButtons = document.querySelectorAll('#show-dialog-info');
 // console.log(infoButtons);
 // for(var i in infoButtons){
@@ -13,20 +24,23 @@ var showDialogButton = document.querySelector('#show-dialog-info');
 //         dialog.showModal();
 //     })
 // }
+
 var dialog = document.getElementById('dialog-info');
-showDialogButton.addEventListener('click', function () {
-    dialog.showModal();
-});
+
+// showDialogButton.addEventListener('click', function () {
+//     dialog.showModal();
+// });
 dialog.querySelector('.close').addEventListener('click', function() {
     dialog.close();
 });
+
 //vars for delete dialog
 
 var dialogDel = document.querySelector('#dialog-del');
 var showDialogButton = document.querySelector('#show-dialog-del');
-showDialogButton.addEventListener('click', function() {
-    dialogDel.showModal();
-});
+// showDialogButton.addEventListener('click', function() {
+//     dialogDel.showModal();
+// });
 dialogDel.querySelector('.close').addEventListener('click', function() {
     currentId = '';
     dialogDel.close();
@@ -44,12 +58,7 @@ function sendAddForm(){
         //send for edit
         console.log("element send to be edited ");
         console.log(newResource);
-        newResource ={
-            type:'',
-            name:'',
-            capacity:''
-        }
-        currentId ='';
+
     }
     else{
         //send for add
@@ -60,6 +69,12 @@ function sendAddForm(){
     console.log(newResource);
 
     document.querySelector('dialog').close();
+    newResource ={
+        type:'',
+        name:'',
+        capacity:''
+    };
+    currentId ='';
 }
 function sendDeleteResource(){
     console.log("deleting" +currentId);
@@ -100,11 +115,12 @@ function showAddForm(){
 
     console.log("wuuut");
 };
-showAddForm();
 
 function openEditForm(elem){
     edited= true;
-    console.log(elem);
+    // console.log(elem);
+    // console.log("butonul mergeeee");
+    dialogAddResource.showModal();
     document.getElementById('form-title').innerHTML = "Edit resource";
     document.getElementById('submitBtn').innerHTML = "Edit";
     var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
@@ -126,12 +142,14 @@ function openEditForm(elem){
 
     currentId = currentElement.id;
 
-    dialogForm.showModal();
+    //dialogForm.showModal();
 
     console.log('blabla');
 }
 function openDeleteForm(elem){
     var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
+    var dialogDelete = document.querySelector('#dialog-del');
+    dialogDelete.showModal();
     var currentElement = resources[pos];
     currentId = currentElement.id;
 //    dialogDel.showModal();
@@ -145,6 +163,5 @@ function showInfo(btnElem){
     console.log(btnElem);
     var pos = btnElem.parentElement.parentElement.lastElementChild.innerHTML; //this how to get the position
     console.log(pos);
-
     populateDialogInfo(pos);
 }

@@ -42,8 +42,7 @@ var edited = false;
 
 //function to create all cards with all resources from the server
 function populateCard(resource, pos){
-    console.log("suntem in populate card"
-    );
+    console.log("suntem in populate card");
     var menu = document.createElement('div');
     menu.className = "menu-card";
     menu.innerHTML ="                    <div class=\"menu-card\">\n" +
@@ -163,19 +162,21 @@ function populateCard(resource, pos){
     Div21.textContent = 'Capacity';
 
     //more info
-    var Div22 = document.createElement('div')
+    var Div22 = document.createElement('div');
     Div22.className = "card__actions text-xs-center";
     Div22.addEventListener('click',function(){
-        console.log("am dat click");
-        dialog.showModal();
+         console.log("am dat click");
+        // dialog.showModal();
         showInfo(this);
+      //  dialogInfo.showModal();
     });
 
-    var Div23 = document.createElement('button')
+    var Div23 = document.createElement('button');
     Div23.className = "more-info-btn btn btn--flat orange--text";
 
-    var Div24 = document.createElement('div')
-    Div24.className = "btn__content";
+
+    var Div24 = document.createElement('div');
+    Div24.className = "btn__content ";
     Div24.textContent = 'More info';
 
 
@@ -230,6 +231,7 @@ for (var i in resources) {
 function populateDialogInfo(position){
     var myResource = resources[position];
     var dialog = document.getElementById('dialog-info');
+    dialog.showModal();
 
     if(dialog.open) {
         //if myResource.type="classroom" blabla... if is videocam bla bla..
