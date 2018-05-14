@@ -1,77 +1,27 @@
 module.exports = (() => {
   'use strict';
   const Resource = require('./models/resource');
-
+  
   const newResource = ({type, name, capacity}) => {
     return new Resource()
-      .insert()
-      .set('type', type)
-      .set('name', name)
-      .set('capacity', capacity)
-      .valueOf()
-      .then(() => {
-        return true;
-      });
+    .insert()
+    .set('type', type)
+    .set('name', name)
+    .set('capacity', capacity)
+    .valueOf()
+    .then(() => {
+      return true;
+    });
   };
 
-  const getResourceById = ({id}) => {
-    if (id) {
-      return new Resource()
-        .field('*')
-        .where({id})
-        .valueOf()
-        .then((res) => {
-          return res[0];
-        });
-    }
-  };
-
-  const getResourceByType = ({type}) => {
-    if (type) {
-      return new Resource()
-        .field('*')
-        .where({type})
-        .valueOf()
-        .then((res) => {
-          return res;
-        });
-    }
-  };
-
-  const getResourceByName = ({name}) => {
-    if (name) {
-      return new Resource()
-        .field('*')
-        .where({name})
-        .valueOf()
-        .then((res) => {
-          return res;
-        });
-    }
-  };
-
-  const getResourceByCapacity = ({capacity}) => {
-    if (capacity) {
-      return new Resource()
-        .field('*')
-        .where({capacity})
-        .valueOf()
-        .then((res) => {
-          return res;
-        });
-    }
-  };
-
-  const getAllResources = () => {
+  const getResources = (query) => {
     return new Resource()
       .field('*')
+      .where(query)
       .valueOf()
       .then((res) => {
         return res;
-      }, (err) => {
-        console.log(err);
-        return undefined;
-      })
+      });
   }
 
   const updateResource = ({id, type, name, capacity}) => {
@@ -103,11 +53,7 @@ module.exports = (() => {
 
   return {
     newResource,
-    getResourceById,
-    getResourceByType,
-    getResourceByName,
-    getResourceByCapacity,
-    getAllResources,
+    getResources,
     updateResource,
     deleteResource
   };

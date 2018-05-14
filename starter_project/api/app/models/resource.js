@@ -12,12 +12,21 @@ module.exports = (() => {
       }
   
       where({
-        id
+        id, type, name, capacity
       }) {
         let whereClause = squel.expr();
   
         if (id) {
           whereClause = whereClause.and("id = ?", id);
+        }
+        if (type) {
+          whereClause = whereClause.and('type = ?', type);
+        }
+        if (name) {
+          whereClause = whereClause.and('name = ?', name);
+        }
+        if (capacity) {
+          whereClause = whereClause.and('capacity = ?', capacity);
         }
        
         this.query = this.query.where(whereClause);

@@ -9,11 +9,7 @@ module.exports = (() => {
   const {updateUserInfo, getUserRoute} = require('./user_routes');
   const {
     newResourceRoute,
-    getResourceByIdRoute,
-    getResourcesByTypeRoute,
-    getResourcesByNameRoute,
-    getResourcesByCapacityRoute,
-    getAllResourcesRoute,
+    getResourcesRoute,
     updateResourceRoute,
     deleteResourceRoute
   } = require('./resource_routes');
@@ -43,15 +39,10 @@ module.exports = (() => {
     app.post('/authenticate', authenticate);
     app.post('/register', register);
     app.post('/forgot', forgot);
-    app.get('/resources', getAllResourcesRoute);
-    app.post('/resources/byId', getResourceByIdRoute);
-    app.post('/resources/byType', getResourcesByTypeRoute);
-    app.post('/resources/byName', getResourcesByNameRoute);
-    app.post('/resources/byCapacity', getResourcesByCapacityRoute);
-    app.post('/resources/add', newResourceRoute);
-    app.post('/resources/update', updateResourceRoute);
-    app.post('/resources/remove', deleteResourceRoute);
-    
+    // app.post('/resources/add', newResourceRoute);
+    // app.get('/resources/get', getResourcesRoute);
+    // app.post('/resources/update', updateResourceRoute);
+    // app.post('/resources/remove', deleteResourceRoute);
 
     const apiRoutes = express.Router();
 
@@ -60,6 +51,20 @@ module.exports = (() => {
     apiRoutes.get('/', function (req, res) {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
+    apiRoutes.post('/api/resources/add', function (req, res) {
+      newResourceRoute(req, res);
+    });
+    apiRoutes.get('/api/resources/get', function (req, res) {
+      getResourcesRoute(req, res);
+    });
+    apiRoutes.post('/api/resources/update', function (req, res) {
+      updateResourceRoute(req, res);
+    });
+    apiRoutes.post('/api/resources/remove', function (req, res) {
+      deleteResourceRoute(req, res);
+    });
+
+
 
     app.use('/api', apiRoutes);
 
