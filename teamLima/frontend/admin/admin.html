@@ -9,6 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="./admin.js"></script> 
+  <script type="text/javascript" src="./parsley.js"></script> 
     <link rel="stylesheet" href="./admin.css"></link>
 
   <title>Admin Page </title>
@@ -51,31 +52,35 @@
 
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="fullname">
+                            <input class="mdl-textfield__input" type="text" id="fullname" pattern="[a-zA-Z\s]+">
                             <label class="mdl-textfield__label" for="fname">Full name</label>
                         </div>
+                        <p id="fullname-req"></p>
                     </div>
 
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="username">
+                            <input class="mdl-textfield__input" type="text" id="username" pattern="[0-9a-zA-Z]+">
                             <label class="mdl-textfield__label" for="fname">Username</label>
                         </div>
+                        <p id="username-req"></p>
                     </div>
 
 
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="email">
+                            <input class="mdl-textfield__input" type="email" id="email">
                             <label class="mdl-textfield__label" for="fname">Email</label>
                         </div>
+                        <p id="email-req"></p>
                     </div>
 
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="password">
+                            <input class="mdl-textfield__input" type="password" id="password">
                             <label class="mdl-textfield__label" for="fname">Password</label>
                         </div>
+                        <p id="password-req"></p>
                     </div>
 
                     <div class="content-input">
@@ -83,12 +88,13 @@
                             Add New User
                         </button>
                     </div>
-                 </div>
+                </div>
+
             </div>
         
 
-              <div class="view-users">This is View all Users Page</div>
-              <div class="edit-user">This is Edit User Page</div>
+            <div class="view-users">This is View all Users Page</div>
+            <div class="edit-user">This is Edit User Page</div>
           
         </div>
     </main>
