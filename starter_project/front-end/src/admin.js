@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+
+	require('./admin.less');
+
     $(".mdl-layout__content .page-content .users-management").hide();
     $(".mdl-layout__content .page-content .view-users").hide();
     $(".mdl-layout__content .page-content .edit-user").hide();

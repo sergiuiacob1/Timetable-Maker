@@ -2,8 +2,6 @@ $(document).ready(function(){
 
 	require('./login.less');
 
-	console.log('aaaaaaaaaaa');
-
 	const hostName = '0.0.0.0:2222';
 	const urlLogin= `http://${hostName}/authenticate`;
 	let token = undefined;
