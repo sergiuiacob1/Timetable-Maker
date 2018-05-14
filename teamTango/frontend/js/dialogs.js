@@ -6,6 +6,13 @@ var newResource={
 
 //vars for dialog info
 var showDialogButton = document.querySelector('#show-dialog-info');
+// var infoButtons = document.querySelectorAll('#show-dialog-info');
+// console.log(infoButtons);
+// for(var i in infoButtons){
+//     infoButtons[i].addEventListener('click', function(){
+//         dialog.showModal();
+//     })
+// }
 var dialog = document.getElementById('dialog-info');
 showDialogButton.addEventListener('click', function () {
     dialog.showModal();
@@ -97,9 +104,10 @@ showAddForm();
 
 function openEditForm(elem){
     edited= true;
+    console.log(elem);
     document.getElementById('form-title').innerHTML = "Edit resource";
     document.getElementById('submitBtn').innerHTML = "Edit";
-    var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
+    var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
     var currentElement = resources[pos];
     console.log("current element");
     console.log(pos);
@@ -123,7 +131,7 @@ function openEditForm(elem){
     console.log('blabla');
 }
 function openDeleteForm(elem){
-    var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
+    var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
     var currentElement = resources[pos];
     currentId = currentElement.id;
 //    dialogDel.showModal();
