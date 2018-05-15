@@ -1,12 +1,16 @@
-var newResource={
+var tempResource={
     type:'',
     name:'',
     capacity:''
 };
 
+var response;
+
 //dialog form
 var buttonAddResource = document.getElementById('dialog-form-add');
 var dialogAddResource = document.getElementById('dialog-form');
+dialogPolyfill.registerDialog(dialogAddResource);
+
 buttonAddResource.addEventListener('click', function(){
     dialogAddResource.showModal();
 });
@@ -15,6 +19,7 @@ buttonAddResource.addEventListener('click', function(){
 //vars for dialog info
 var showDialogButton = document.querySelector('more-info-btn');
 var dialogInfo = document.getElementById('dialog-info');
+dialogPolyfill.registerDialog(dialogInfo);
 console.log("showDialogButton");
 console.log(showDialogButton);
 // var infoButtons = document.querySelectorAll('#show-dialog-info');
@@ -37,6 +42,8 @@ dialog.querySelector('.close').addEventListener('click', function() {
 //vars for delete dialog
 
 var dialogDel = document.querySelector('#dialog-del');
+dialogPolyfill.registerDialog(dialogDel);
+
 var showDialogButton = document.querySelector('#show-dialog-del');
 // showDialogButton.addEventListener('click', function() {
 //     dialogDel.showModal();
@@ -50,26 +57,32 @@ dialogDel.querySelector('.close').addEventListener('click', function() {
 //puts the values in an object, sends it to the server
 //send for editForm as well
 function sendAddForm(){
-    newResource.type = document.getElementById('type').value;
-    newResource.name = document.getElementById('name').value;
-    newResource.capacity = document.getElementById('capacity').value;
+    tempResource.type = document.getElementById('type').value;
+    tempResource.name = document.getElementById('name').value;
+    tempResource.capacity = document.getElementById('capacity').value;
     if(edited ===true){
-        newResource.id = currentId;
+        tempResource.id = currentId;
         //send for edit
         console.log("element send to be edited ");
-        console.log(newResource);
-
+        console.log(tempResource);
+		
+		//update
+		response =updateResource(tempResource.id, tempResource.type, tempResource.name, tempResource.capacity);
+		console.log(response);
+		edited=false;
+		currentId='';
     }
     else{
-        //send for add
+		//send for add
+		response = newResource(tempResource.type, tempResource.name, tempResource.capacity);
+		console.log(response);
     }
 
-//here we send the xmlhtttp request post
     console.log("data to be sent..");
-    console.log(newResource);
+    console.log(tempResource);
 
     document.querySelector('dialog').close();
-    newResource ={
+    tempResource ={
         type:'',
         name:'',
         capacity:''
@@ -80,7 +93,9 @@ function sendDeleteResource(){
     console.log("deleting" +currentId);
 
     if(currentId){
-        //http request..
+        //delete resource
+		response = removeResource(currentId);
+		console.log(response);
     }
     else{
         console.log("id is null");
@@ -92,16 +107,13 @@ function sendDeleteResource(){
 var dialogForm = document.querySelector('dialog');
 //opens the add form
 function showAddForm(){
-
+console.log("fct buna");
     var showDialogButton = document.querySelector('#show-dialog');
     if (! dialogForm.showModal) {
-        // dialogPolyfill.registerDialog(dialog);
+         dialogPolyfill.registerDialog(dialog);
     }
-    showDialogButton.addEventListener('click', function() {
-        document.getElementById('form-title').innerHTML = "Add resource";
+	        document.getElementById('form-title').innerHTML = "Add resource";
         document.getElementById('submitBtn').innerHTML = "Add";
-        dialogForm.showModal();
-    });
 
 
     dialogForm.querySelector('.add').addEventListener('click', function(){
