@@ -1,13 +1,12 @@
-// var getAllResources = function() {
-//     // Returns all resources, unfiltered
-
-//     fetch("http://localhost:2222/resources").then((result) => {
-//         return result;
-//     }, (err) => {
-//         console.log(err);
-//         return {};
-//     })
-// }
+ var getAllResources = function() {
+     // Returns all resources, unfiltered
+     fetch("http://localhost:2222/resources").then((result) => {
+         return result;
+     }, (err) => {
+         console.log(err);
+         return {};
+     })
+ }
 
 // var getResourceById = function(id) {
 //     // Returns A SINGLE resource

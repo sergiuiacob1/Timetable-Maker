@@ -1,11 +1,27 @@
-var newResource={
+var tempResource={
     type:'',
     name:'',
     capacity:''
 };
 
+var response;
+
+//dialog form
+var buttonAddResource = document.getElementById('dialog-form-add');
+var dialogAddResource = document.getElementById('dialog-form');
+dialogPolyfill.registerDialog(dialogAddResource);
+
+buttonAddResource.addEventListener('click', function(){
+    dialogAddResource.showModal();
+});
+
+
 //vars for dialog info
-var showDialogButton = document.querySelector('#show-dialog-info');
+var showDialogButton = document.querySelector('more-info-btn');
+var dialogInfo = document.getElementById('dialog-info');
+dialogPolyfill.registerDialog(dialogInfo);
+console.log("showDialogButton");
+console.log(showDialogButton);
 // var infoButtons = document.querySelectorAll('#show-dialog-info');
 // console.log(infoButtons);
 // for(var i in infoButtons){
@@ -13,20 +29,25 @@ var showDialogButton = document.querySelector('#show-dialog-info');
 //         dialog.showModal();
 //     })
 // }
+
 var dialog = document.getElementById('dialog-info');
-showDialogButton.addEventListener('click', function () {
-    dialog.showModal();
-});
+
+// showDialogButton.addEventListener('click', function () {
+//     dialog.showModal();
+// });
 dialog.querySelector('.close').addEventListener('click', function() {
     dialog.close();
 });
+
 //vars for delete dialog
 
 var dialogDel = document.querySelector('#dialog-del');
+dialogPolyfill.registerDialog(dialogDel);
+
 var showDialogButton = document.querySelector('#show-dialog-del');
-showDialogButton.addEventListener('click', function() {
-    dialogDel.showModal();
-});
+// showDialogButton.addEventListener('click', function() {
+//     dialogDel.showModal();
+// });
 dialogDel.querySelector('.close').addEventListener('click', function() {
     currentId = '';
     dialogDel.close();
@@ -36,36 +57,45 @@ dialogDel.querySelector('.close').addEventListener('click', function() {
 //puts the values in an object, sends it to the server
 //send for editForm as well
 function sendAddForm(){
-    newResource.type = document.getElementById('type').value;
-    newResource.name = document.getElementById('name').value;
-    newResource.capacity = document.getElementById('capacity').value;
+    tempResource.type = document.getElementById('type').value;
+    tempResource.name = document.getElementById('name').value;
+    tempResource.capacity = document.getElementById('capacity').value;
     if(edited ===true){
-        newResource.id = currentId;
+        tempResource.id = currentId;
         //send for edit
         console.log("element send to be edited ");
-        console.log(newResource);
-        newResource ={
-            type:'',
-            name:'',
-            capacity:''
-        }
-        currentId ='';
+        console.log(tempResource);
+		
+		//update
+		response =updateResource(tempResource.id, tempResource.type, tempResource.name, tempResource.capacity);
+		console.log(response);
+		edited=false;
+		currentId='';
     }
     else{
-        //send for add
+		//send for add
+		response = newResource(tempResource.type, tempResource.name, tempResource.capacity);
+		console.log(response);
     }
 
-//here we send the xmlhtttp request post
     console.log("data to be sent..");
-    console.log(newResource);
+    console.log(tempResource);
 
     document.querySelector('dialog').close();
+    tempResource ={
+        type:'',
+        name:'',
+        capacity:''
+    };
+    currentId ='';
 }
 function sendDeleteResource(){
     console.log("deleting" +currentId);
 
     if(currentId){
-        //http request..
+        //delete resource
+		response = removeResource(currentId);
+		console.log(response);
     }
     else{
         console.log("id is null");
@@ -77,16 +107,13 @@ function sendDeleteResource(){
 var dialogForm = document.querySelector('dialog');
 //opens the add form
 function showAddForm(){
-
+console.log("fct buna");
     var showDialogButton = document.querySelector('#show-dialog');
     if (! dialogForm.showModal) {
-        // dialogPolyfill.registerDialog(dialog);
+         dialogPolyfill.registerDialog(dialog);
     }
-    showDialogButton.addEventListener('click', function() {
-        document.getElementById('form-title').innerHTML = "Add resource";
+	        document.getElementById('form-title').innerHTML = "Add resource";
         document.getElementById('submitBtn').innerHTML = "Add";
-        dialogForm.showModal();
-    });
 
 
     dialogForm.querySelector('.add').addEventListener('click', function(){
@@ -100,11 +127,12 @@ function showAddForm(){
 
     console.log("wuuut");
 };
-showAddForm();
 
 function openEditForm(elem){
     edited= true;
-    console.log(elem);
+    // console.log(elem);
+    // console.log("butonul mergeeee");
+    dialogAddResource.showModal();
     document.getElementById('form-title').innerHTML = "Edit resource";
     document.getElementById('submitBtn').innerHTML = "Edit";
     var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
@@ -126,12 +154,14 @@ function openEditForm(elem){
 
     currentId = currentElement.id;
 
-    dialogForm.showModal();
+    //dialogForm.showModal();
 
     console.log('blabla');
 }
 function openDeleteForm(elem){
     var pos = elem.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.lastElementChild.innerHTML;//get the position in the array of our element
+    var dialogDelete = document.querySelector('#dialog-del');
+    dialogDelete.showModal();
     var currentElement = resources[pos];
     currentId = currentElement.id;
 //    dialogDel.showModal();
@@ -145,6 +175,5 @@ function showInfo(btnElem){
     console.log(btnElem);
     var pos = btnElem.parentElement.parentElement.lastElementChild.innerHTML; //this how to get the position
     console.log(pos);
-
     populateDialogInfo(pos);
 }
