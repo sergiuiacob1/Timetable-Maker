@@ -27,8 +27,6 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <div class="mdl-navigation__link" id="users-management">Users Management</div>
         <div class="mdl-navigation__link" id="add-user">Add User</div>
-        <div class="mdl-navigation__link" id="view-users">View all Users</div>
-        <div class="mdl-navigation__link" id="edit-user">Edit User</div>
       </nav>
     </div>
   </header>
@@ -43,7 +41,28 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
-        <div class="users-management">This is Users Management Page</div>
+        <div class="users-management">
+            <div class="container">
+           
+                <div class="content-title">Users Management Page</div>
+                    <!-- Expandable Textfield -->
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="sample6">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" id="sample6">
+                            <label class="mdl-textfield__label" for="sample-expandable">Expandable Input</label>
+                        </div>
+                    </div>
+
+                    <ul class="demo-list-icon mdl-list">    
+                      
+                    </ul>
+
+
+            </div>
+        </div>
 
             <div class="add-user">
                 <div class="container">
@@ -75,14 +94,6 @@
                     </div>
 
                     <div class="content-input">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="password" id="password">
-                            <label class="mdl-textfield__label" for="fname">Password</label>
-                        </div>
-                        <p id="password-req"></p>
-                    </div>
-
-                    <div class="content-input">
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                             Add New User
                         </button>
@@ -90,11 +101,7 @@
                 </div>
 
             </div>
-        
-
-            <div class="view-users">This is View all Users Page</div>
-            <div class="edit-user">This is Edit User Page</div>
-          
+      
         </div>
     </main>
   </div>
