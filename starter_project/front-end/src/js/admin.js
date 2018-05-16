@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 
-	require('./admin.less');
+	require('../less/admin.less');
 
 	let navLinkButton = ".mdl-navigation__link";
 	let pageContent = ".mdl-layout__content .page-content";
