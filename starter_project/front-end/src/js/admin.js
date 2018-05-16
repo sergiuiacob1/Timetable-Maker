@@ -6,11 +6,14 @@ $(document).ready(function(){
 	let navLinkButton = ".mdl-navigation__link";
 	let pageContent = ".mdl-layout__content .page-content";
 	let addButton = ".mdl-button";
+	let resetButton = "";
+	let sendEditedButton = ""
 	let searchInput = ".users-management .mdl-textfield__input";
 	let errorMsg = "";
 
 	const dummyUsers = require('./dummyUsers.json'); 
 	let usersData;
+
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/endPointName`;
 	const urlGetUsers= `http://${hostName}/endPointName`;
@@ -22,15 +25,52 @@ $(document).ready(function(){
 
 	apiAllUsersGet(function(response){
 		if (response === true){
-
 			usersData = dummyUsers;
 			renderUsers(usersData.users);
 		}
 
 		if (response === false){
-			console.log("Afiseaza pe pagina: Something went wrong please try again");
+			//"Afiseaza pe pagina: Something went wrong please try again"
 		}
 	});
+
+	function apiSendEditedPost(data, callback){
+
+		// $.post(urlPostEditUser, data)
+		// .done(function (data) {
+
+		// 	console.log(data);
+
+		// 	if (data.success === true){
+			  
+		// 	  callback(true);
+		// 	}
+		// 	else {
+			
+		// 	  callback(false);
+		// 	}
+		// });	
+		callback(true);
+	}
+
+	function apiResetUserPasswordPost(data, callback){
+
+		// $.post(urlPostResetPassword, data)
+		// .done(function (data) {
+
+		// 	console.log(data);
+
+		// 	if (data.success === true){
+			  
+		// 	  callback(true);
+		// 	}
+		// 	else {
+			
+		// 	  callback(false);
+		// 	}
+		// });	
+		callback(true);
+	}
 
 	function apiAllUsersGet(callback){
 
@@ -60,7 +100,7 @@ $(document).ready(function(){
 
 	function apiAddUserPost(data, callback) {
 
-		console.log(data);
+		
 		// $.post(urlAddUser, data)
 		// .done(function (data) {
 
@@ -74,8 +114,6 @@ $(document).ready(function(){
 		// });	
 		callback(true);
 	}
-
-
 
 	function getSuggestions(value){
 
@@ -103,14 +141,47 @@ $(document).ready(function(){
 		});
 	}
 
+
+	$(resetButton).on('click,', function(){
+
+		const id_user = "";
+		apiResetUserPasswordPost({id_user}, function(response){
+
+			if (response === true){
+				//password was successfuly reseted
+			}
+			else{
+				// baga un span sub ceva gen: something went wrong
+			}
+		});
+	});
+
+	$(sendEditedButton).on('click,', function(){
+
+		const fullName = $("");
+		const userName = $("");
+		const email = $("");
+
+		apiSendEditedPost({fullName, userName, email}, function(response){
+
+			if (response === true){
+				//password was successfuly reseted
+			}
+			else{
+				// baga un span sub ceva gen: something went wrong
+			}
+		});
+	});
+
+
 	$(searchInput).on('input', function(){
 		const searchText = $(searchInput).val();
-		console.log(searchText.length);
+		// console.log(searchText.length);
 
 		if (searchText.length !== 0){
 			const array = getSuggestions(searchText);
 
-			console.log(array);
+			// console.log(array);
 			if (array.length !== 0){
 				renderUsers(array);
 			}
@@ -123,7 +194,7 @@ $(document).ready(function(){
 
 	$(navLinkButton).on('click', function() {
 
-		var linkId = $(this).attr("id");
+		const linkId = $(this).attr("id");
 
 		$(".mdl-layout__content .page-content .users-management").hide();
 		$(".mdl-layout__content .page-content .add-user").hide();
@@ -133,27 +204,30 @@ $(document).ready(function(){
 
 	$(addButton).on('click', function(){
 		
-		var fullName = $(".content-input #fullname");
-		var userName = $(".content-input #username");
-		var email = $(".content-input #email");
+		const fullName = $(".content-input #fullname");
+		const userName = $(".content-input #username");
+		const email = $(".content-input #email");
 
-		var cond3 = verifyInput(
+		const cond3 = verifyInput(
 						email, 
 						/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
 					 	"email-req",
 					 	 "Please enter a valid email address"
 		 			);
-		var cond2 = verifyInput(userName, /^[0-9a-zA-Z]+$/, "username-req", "Please use only letters and numbers");
-		var cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, "fullname-req", "Please use only letters");
+		const cond2 = verifyInput(userName, /^[0-9a-zA-Z]+$/, "username-req", "Please use only letters and numbers");
+		const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, "fullname-req", "Please use only letters");
 
 		if (cond1 && cond2 && cond3) {
 			apiAddUserPost({fullName, userName, email}, function(response){
 
 				if (response === true){
-					console.log(true);
+					
+
+					//afiseaza sub user was added succesfully
 				}
 				else{
-					console.log(false);
+					
+					//afiseaza ceva gen something went wrong
 				}
 			});
 		}
