@@ -3,10 +3,13 @@ module.exports = (() => {
   const express = require("express");
   const bodyParser = require('body-parser');
   const morgan = require('morgan');
+  const cors = require('cors');
 
   const config = require('./../config/config');
-  const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
-  const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {getRoomsRoute} = require('./room_routes');
+  const {authenticate, register, checkAuthenticated, forgot, checkAdmin} = require('./authentication');
+  const {updateUserInfo, getUserRoute, getAllUsers,
+        showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute} = require('./user_routes');
 
   let serverInterface = undefined;
 
@@ -21,6 +24,7 @@ module.exports = (() => {
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
+    app.use(cors());
 
     // use morgan to log requests to the console
     app.use(morgan('dev'));
@@ -36,12 +40,24 @@ module.exports = (() => {
 
 
     const apiRoutes = express.Router();
+    const adminRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
+    adminRoutes.use(checkAdmin);
 
     apiRoutes.get('/', function (req, res) {
       res.json({success: true, message: 'Welcome to the coolest API on earth!' });
     });
+
+    apiRoutes.get('/rooms', getRoomsRoute);
+    adminRoutes.post('/users/:id/update', updateUserRoute);
+    adminRoutes.post('/users/:id/delete', deleteUserRoute);
+    adminRoutes.get('/users/:id', showUserRoute);
+    adminRoutes.post('/users', insertUserRoute);
+    adminRoutes.get('/users', getAllUsers);
+    
+
+    apiRoutes.use('/admin', adminRoutes);
 
     app.use('/api', apiRoutes);
 

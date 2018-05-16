@@ -1,0 +1,40 @@
+{
+	"users":[
+		{
+			"fullName": "Costica Costel",
+			"userName": "costel",
+			"email": "costel@mail.com",
+			"userId": "1"
+		},
+		{
+			"fullName": "Timi Andrei",
+			"userName": "ati12",
+			"email": "ati12@mail.com",
+			"userId": "2"
+		},
+		{
+			"fullName": "serban Cbz",
+			"userName": "sBCbZ",
+			"email": "sherb@mail.com",
+			"userId": "3"
+		},
+		{
+			"fullName": "Tiner Aada",
+			"userName": "asdada",
+			"email": "gasdad@mail.com",
+			"userId": "4"
+		},
+		{
+			"fullName": "Gigelus Gigel",
+			"userName": "ggiles",
+			"email": "gigel@mail.com",
+			"userId": "5"
+		},
+		{
+			"fullName": "Ticleanu Gigel",
+			"userName": "tcl",
+			"email": "tcll@mail.com",
+			"userId": "6"
+		}
+	]
+}
