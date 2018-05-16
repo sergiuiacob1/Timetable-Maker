@@ -29,9 +29,9 @@ module.exports = {
   devtool: 'inline-sourcemap',
   context: __dirname,
   entry: {
-    app: './src/index.js',
-    login: './src/login.js',
-    admin: './src/admin.js'
+    app: './src/js/index.js',
+    login: './src/js/login.js',
+    admin: './src/js/admin.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -39,7 +39,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9001
+    port: 9000
   },
   module: {
     rules: [
