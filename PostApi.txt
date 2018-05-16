@@ -1,0 +1,16 @@
+{
+	subjectId, roomIds[], groupId, activity: 'Curs', frequency
+	possibleIntervals: [
+		{
+			day: 0,
+			interval: '10-11'
+		},
+		{
+			day: 0,
+			interval: '11-12'
+		}
+	]
+	important, motive
+}
+
+

@@ -1,8 +1,12 @@
+/* CSS files add styling rules to your content */
+* {
+margin:0;
+padding:0;
+}
 body {
   font-family: 'Roboto', sans-serif;
   margin: 2em;
   background-color: #FAFAFA;
-  padding-top: 20px;
 }
 .boody{
   width: 100%;
@@ -22,39 +26,41 @@ body {
   display: grid;
   grid-template-rows: min-content min-content;
   grid-template-columns: 100%;
-  grid-template-areas: "ore" "clase";
+  grid-template-areas: "ore" "sali";
   grid-gap: 30px;
 }
-.clase{
-  grid-area: clase;
+.sali{
+  grid-area: sali;
 }
-.sali {
-  /*background: lightgray;*/
-  grid-area: main2;
-}
+
 aside{
-  background: #4DB6AC;
+ /* background: #4DB6AC;*/
   grid-area: sidebar;
   padding: 20px;
-  color:white;
+
 }
-option{
-  color:black;
-}
+
 
 th {
   padding: 40px;
   text-align: left;
   font-weight: bold;
-  background: #4DB6AC;
+  /*background: #4DB6AC;*/
 
 }
 td{
   padding: 35px;
   text-align: left;
 }
+td:hover{
+  background-color: #e0e0e0;
+}
 
+/*
+table{
+  box-shadow: 0 4px 8px 0 #9E9E9E, 0 6px 20px 0 #9E9E9E;
 
+}
 .selected{
   background-color: #eeff41;
 }
@@ -62,17 +68,12 @@ td{
 .sali .selected{
   background-color: #eeff41;
 }
-table{
-  box-shadow: 0 4px 8px 0 #9E9E9E, 0 6px 20px 0 #9E9E9E;
 
-}
-td:hover{
-  background-color: #B2DFDB;
-}
+
 td:disabled{
   background-color: #F5F5F5;
   color: gray;
-}
+}*/
 input[type = submit], input[type = number] {
   width: 100%;
 }
@@ -82,4 +83,10 @@ input[type = submit] {
   color: white;
 }
 
+.noColor{
+  background: #FFFFFF;
+}
 
+.redColor{
+  background: #ffd54f;
+}
