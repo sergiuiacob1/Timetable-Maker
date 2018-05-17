@@ -129,7 +129,9 @@ $(document).ready(function(){
 
 	function renderUsers(array){
 
-		$(".users-management .container .demo-list-icon.mdl-list li").remove();
+		$(".users-management .container .demo-list-icon.mdl-list").children().remove();
+		$(".mdl-cell.mdl-cell--6-col#right-side").children().remove();
+		
 		array.map((user, index)=>{
 
 			$(".users-management .container .demo-list-icon.mdl-list").append(
