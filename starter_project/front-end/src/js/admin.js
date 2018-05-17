@@ -97,7 +97,7 @@ $(document).ready(function(){
 			else{
 				callback(false);
 			}
-		}, 2000);
+		}, 1000);
 	}
 
 	function apiAddUserPost(data, callback) {
@@ -133,18 +133,36 @@ $(document).ready(function(){
 		array.map((user, index)=>{
 
 			$(".users-management .container .demo-list-icon.mdl-list").append(
-					  `<li class="mdl-list__item" key=${index}>
+					  	`<li class="mdl-list__item mdl-list__item--two-line" id="user${index}" key=${index}>
                         	<span class="mdl-list__item-primary-content">
-                                <i class="material-icons mdl-list__item-icon">person</i>
-                                Full Name: ${user.fullName}</br>Email: ${user.email}
-                 	       </span>
-                    	</li>`
+                                <i class="material-icons mdl-list__item-avatar">person</i>
+								<span>Full Name: ${user.fullName}</span>
+								<span class="mdl-list__item-sub-title">Email: ${user.email}</span>
+							</span>
+								
+						</li>
+						<div class="user-buttons" id="user${index}">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+								Edit
+							</button>
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+								Remove
+							</button>
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+								Reset Password
+							</button><br><br>
+						</div>`
 			);
+
+		});
+
+		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {
+			$(`.user-buttons#${$(this).attr("id")}`).toggle();
 		});
 	}
 
 
-	$(resetButton).on('click,', function(){
+	$(resetButton).on('click', function(){
 
 		const id_user = "";
 		apiResetUserPasswordPost({id_user}, function(response){
@@ -158,7 +176,7 @@ $(document).ready(function(){
 		});
 	});
 
-	$(sendEditedButton).on('click,', function(){
+	$(sendEditedButton).on('click', function(){
 
 		const fullName = $("");
 		const userName = $("");
@@ -192,6 +210,8 @@ $(document).ready(function(){
 			renderUsers(usersData.users);
 		}
 	});
+
+	$()
 	
 
 	$(navLinkButton).on('click', function() {
