@@ -45,6 +45,7 @@ module.exports = (() => {
   const deleteResource = ({id}) => {
     return new Resource()
       .delete()
+      .where({id})
       .valueOf()
       .then(() => {
         return true;
