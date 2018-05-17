@@ -1,5 +1,5 @@
 {
-	subjectId, roomIds[], groupId, activity: 'Curs', frequency
+	subjectId, roomIds[], groupId, activity: 'Curs', frequency, date,
 	possibleIntervals: [
 		{
 			day: 0,
