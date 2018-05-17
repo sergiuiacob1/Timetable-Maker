@@ -4,24 +4,19 @@ var days = [];
 var roomIds = [];
 var important = false;
 
-
+function reset(){
+   hour = [];
+   days = [];
+   roomIds = [];
+   important = false;
+};
 function cSwap(cell){
 
   if(cell.className == "noColor")
     cell.className = "redColor";
   else if (cell.className == "redColor")
     cell.className = "noColor";
-  hour.push(cell.innerHTML);
-  days.push(($(cell).parent().children().index($(cell))+1) %7);
-};
-
-function cSwap2(cell){
-
-  if(cell.className == "noColor")
-    cell.className = "redColor";
-  else if (cell.className == "redColor")
-    cell.className = "noColor";
-  roomIds.push(cell.innerHTML);
+  
 };
 
 function getSubject(selectedSubject){
@@ -57,9 +52,32 @@ function postThisShit(json){
   
 };
 
+function getTime(){
+  var table = document.getElementById("orar");
+  
+  for (var i = 0, row; row = table.rows[i]; i++) 
+     for (var j = 0, col; col = row.cells[j]; j++) 
+       if(col.className=="redColor"){
+         hour.push(col.innerHTML);
+         days.push(($(col).parent().children().index($(col))+1) %7);
+       } 
+};
+
+function getRooms(){
+  var table = document.getElementById("sali");
+  
+  for (var i = 0, row; row = table.rows[i]; i++) 
+     for (var j = 0, col; col = row.cells[j]; j++) 
+       if(col.className=="redColor"){
+         roomIds.push(col.innerHTML);
+       } 
+};
+
 function send(){
   getText();
   getDate();
+  getTime();
+  getRooms();
   
   if (important && (motive==null))
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
@@ -79,7 +97,7 @@ function send(){
     object["motive"]= motive;
     var json = JSON.stringify(object);
     postThisShit(json);
-  
+    reset();
   }
 };
 
