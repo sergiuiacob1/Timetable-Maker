@@ -233,12 +233,18 @@ $(document).ready(function(){
 		}
 	});
 
+	$(".mdl-textfield__input").on("input", function() {
+		$(".is-focused .mdl-textfield__input").parent().next().empty();
+		console.log("input");
+	});
+
 	function verifyInput(inputText, pattern, alertElem, alertMsg) {
 		if (inputText.val().match(pattern)) {
 			$(".content-input #" + alertElem).empty();
 			return true;
 		} else {
 			$(".content-input #" + alertElem).text(alertMsg);
+			$(".content-input #" + alertElem).prev().addClass("is-invalid");
 			inputText.focus();
 			return false;
 		}
