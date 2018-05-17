@@ -22,6 +22,7 @@ $(document).ready(function(){
 	const urlPostResetPassword = `http://${hostName}/endPointName`;
 
 	$(".mdl-layout__content .page-content .add-user").hide();
+	$(".loader-bck").hide();
 
 	apiAllUsersGet(function(response){
 		if (response === true){
@@ -85,9 +86,10 @@ $(document).ready(function(){
 		// 	  callback(false);
 		// 	}
 		// });
-
+		$(".loader-bck").show();
 		setTimeout(function(){
 			
+			$(".loader-bck").hide();
 			if (true){
 				callback(true);
 				// usersData = dummyUsers;
@@ -95,7 +97,7 @@ $(document).ready(function(){
 			else{
 				callback(false);
 			}
-		}, 1000);
+		}, 2000);
 	}
 
 	function apiAddUserPost(data, callback) {
