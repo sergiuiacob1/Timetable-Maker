@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: May 13, 2018 at 06:58 PM
+-- Generation Time: May 17, 2018 at 07:06 PM
 -- Server version: 5.6.40
 -- PHP Version: 7.2.4
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `resource` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(11) UNSIGNED NOT NULL,
   `type` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `capacity` int(10) UNSIGNED NOT NULL
+  `capacity` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -53,7 +53,7 @@ ALTER TABLE `resource`
 -- AUTO_INCREMENT for table `resource`
 --
 ALTER TABLE `resource`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
