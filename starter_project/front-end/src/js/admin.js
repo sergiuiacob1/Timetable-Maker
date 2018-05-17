@@ -6,8 +6,8 @@ $(document).ready(function(){
 	let navLinkButton = ".mdl-navigation__link";
 	let pageContent = ".mdl-layout__content .page-content";
 	let addButton = ".mdl-button";
-	let resetButton = "";
-	let sendEditedButton = ""
+	let resetButton = ".reset-button";
+	let sendEditedButton = ".save-changes-button"
 	let searchInput = ".users-management .mdl-textfield__input";
 	let errorMsg = "";
 
@@ -142,16 +142,44 @@ $(document).ready(function(){
 								
 						</li>
 						<div class="user-buttons" id="user${index}">
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
 								Edit
 							</button>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored remove-button">
 								Remove
 							</button>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored reset-button">
 								Reset Password
 							</button><br><br>
 						</div>`
+			);
+			$(".mdl-cell.mdl-cell--6-col#right-side").append(
+				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none">
+					<div class="mdl-card__title">
+						<h2 class="mdl-card__title-text">Edit User</h2>
+					</div>
+					<div class="mdl-card__supporting-text">
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" value="${user.fullName}">
+						</div>
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" value="${user.userName}">
+						</div>
+						<div class="mdl-textfield mdl-js-textfield">
+							<input class="mdl-textfield__input" type="text" value="${user.email}">
+						</div>
+					</div>
+					<div class="mdl-card__actions mdl-card--border">
+						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
+							Save changes
+						</a>
+					</div>
+					<div class="mdl-card__menu">
+						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+						<i class="material-icons close">cancel</i>
+						</button>
+					</div>
+				</div>`
 			);
 
 		});
@@ -159,6 +187,15 @@ $(document).ready(function(){
 		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {
 			$(`.user-buttons#${$(this).attr("id")}`).toggle();
 		});
+
+		$(".edit-button").on("click", function() {
+			$(".mdl-cell.mdl-cell--6-col#right-side").children().hide();
+			$(`.mdl-cell.mdl-cell--6-col#right-side #${$(this).parent().attr("id")}`).toggle();
+		});
+
+		$(".close").on("click", function() {
+			$(this).parent().parent().parent().hide();
+		})
 	}
 
 
