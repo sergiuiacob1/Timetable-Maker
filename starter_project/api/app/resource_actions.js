@@ -24,6 +24,15 @@ module.exports = (() => {
       });
   }
 
+  const getLastId = () => {
+    return new Resource()
+      .lastId()
+      .valueOf()
+      .then((res) => {
+        return res[0];
+      })
+  }
+
   const updateResource = ({id, type, name, capacity}) => {
     let updatedResource = new Resource().update();
     updatedResource.where({id});
@@ -55,6 +64,7 @@ module.exports = (() => {
   return {
     newResource,
     getResources,
+    getLastId,
     updateResource,
     deleteResource
   };

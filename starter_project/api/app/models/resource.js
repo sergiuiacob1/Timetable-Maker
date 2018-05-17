@@ -32,6 +32,15 @@ module.exports = (() => {
         this.query = this.query.where(whereClause);
         return this;
       }
+
+      lastId() {
+        this.query = squel.select()
+          .from(this.table)
+          .field("id")
+          .order("id", false)
+          .limit(1);
+        return this;
+      }
     }
   
     return Resource;
