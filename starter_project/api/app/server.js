@@ -3,7 +3,7 @@ module.exports = (() => {
   const express = require("express");
   const bodyParser = require('body-parser');
   const morgan = require('morgan');
-  const cors = require('cors');
+  // const cors = require('cors');
 
   const config = require('./../config/config');
   const { authenticate, register, checkAuthenticated, forgot } = require('./authentication');
@@ -29,7 +29,7 @@ module.exports = (() => {
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
-    app.use(cors());
+    // app.use(cors());
 
     // use morgan to log requests to the console
     app.use(morgan('dev'));
