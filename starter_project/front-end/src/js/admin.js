@@ -188,11 +188,15 @@ $(document).ready(function(){
 
 		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {
 			$(`.user-buttons#${$(this).attr("id")}`).toggle();
+			
 		});
 
 		$(".edit-button").on("click", function() {
+
+			console.log("dadsada");
 			$(".mdl-cell.mdl-cell--6-col#right-side").children().hide();
 			$(`.mdl-cell.mdl-cell--6-col#right-side #${$(this).parent().attr("id")}`).toggle();
+			$(".mdl-layout__content").scrollTop(0);
 		});
 
 		$(".close").on("click", function() {
