@@ -205,13 +205,11 @@ $(document).ready(function(){
 					</div>
 					<div class="mdl-card__supporting-text">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName">
+							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.userId}">
 						</div>
+
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.userName}" id="edit-userName">
-						</div>
-						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.email}" id="edit-email">
+							<input class="mdl-textfield__input" type="text" value="${user.email}" id="edit-email-${user.userId}">
 						</div>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
@@ -249,14 +247,15 @@ $(document).ready(function(){
 
 		$(sendEditedButton).on('click', function(){
 
-			const fullName = $(".mdl-textfield__input#edit-fullName").val();
-			const userName = $(".mdl-textfield__input#edit-userName").val();
-			const email = $(".mdl-textfield__input#edit-email").val();
 			const userId =  $(this).parent().parent().attr("userId");
+			const fullName = $(`.mdl-textfield__input#edit-fullName-${userId}`).val();
+			// const userName = $(".mdl-textfield__input#edit-userName").val();
+			const email = $(`.mdl-textfield__input#edit-email-${userId}`).val();
+			
 
 			
 	
-			apiSendEditedPost({fullName, userName, email, userId}, function(response){
+			apiSendEditedPost({fullName, email, userId}, function(response){
 	
 				if (response === true){
 
@@ -358,7 +357,7 @@ $(document).ready(function(){
 	$(addButton).on('click', function(){
 		
 		const fullName = $(".content-input #fullname");
-		const userName = $(".content-input #username");
+		// const userName = $(".content-input #username");
 		const email = $(".content-input #email");
 
 		const cond3 = verifyInput(
@@ -367,12 +366,12 @@ $(document).ready(function(){
 					 	"email-req",
 					 	 "Please enter a valid email address"
 		 			);
-		const cond2 = verifyInput(userName, /^[0-9a-zA-Z]+$/, "username-req", "Please use only letters and numbers");
+		// const cond2 = verifyInput(userName, /^[0-9a-zA-Z]+$/, "username-req", "Please use only letters and numbers");
 		const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, "fullname-req", "Please use only letters");
 
-		if (cond1 && cond2 && cond3) {
+		if (cond1  && cond3) {
 
-			const obj ={ fullName: $(fullName).val(), userName: $(userName).val(), email: $(email).val()};
+			const obj ={ fullName: $(fullName).val(), email: $(email).val()};
 			apiAddUserPost(obj, function(response){
 
 				if (response === true){
