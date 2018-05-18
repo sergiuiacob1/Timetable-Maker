@@ -186,7 +186,7 @@ $(document).ready(function(){
 							</span>
 								
 						</li>
-						<div class="user-buttons" id="user${index}" userId="${user.userId}">
+						<div class="user-buttons" id="user${index}" userId="${user.id}">
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
 								Edit
 							</button>
@@ -199,17 +199,17 @@ $(document).ready(function(){
 						</div>`
 			);
 			$(".mdl-cell.mdl-cell--6-col#right-side").append(
-				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none" userId="${user.userId}">
+				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none" userId="${user.id}">
 					<div class="mdl-card__title">
 						<h2 class="mdl-card__title-text">Edit User</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.userId}">
+							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}">
 						</div>
 
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.email}" id="edit-email-${user.userId}">
+							<input class="mdl-textfield__input" type="text" value="${user.email}" id="edit-email-${user.id}">
 						</div>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
@@ -247,15 +247,13 @@ $(document).ready(function(){
 
 		$(sendEditedButton).on('click', function(){
 
-			const userId =  $(this).parent().parent().attr("userId");
-			const fullName = $(`.mdl-textfield__input#edit-fullName-${userId}`).val();
+			const id =  $(this).parent().parent().attr("userId");
+			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`).val();
 			// const userName = $(".mdl-textfield__input#edit-userName").val();
-			const email = $(`.mdl-textfield__input#edit-email-${userId}`).val();
+			const email = $(`.mdl-textfield__input#edit-email-${id}`).val();
 			
 
-			
-	
-			apiSendEditedPost({fullName, email, userId}, function(response){
+			apiSendEditedPost({fullName, email, id}, function(response){
 	
 				if (response === true){
 
@@ -288,7 +286,7 @@ $(document).ready(function(){
 
 		$("dialog#dialog-remove").hide();
 		
-		apiSendRemoveUserPost({userId: removeUserId}, function(response){
+		apiSendRemoveUserPost({id: removeUserId}, function(response){
 			if (response === true){
 
 				$(searchInput).val("");
@@ -314,7 +312,7 @@ $(document).ready(function(){
 
 		$("dialog#dialog-reset").hide();
 		
-		apiResetUserPasswordPost({userId: resetUserId}, function(response){
+		apiResetUserPasswordPost({id: resetUserId}, function(response){
 			if (response === true){
 				//afiseaza success
 			}
