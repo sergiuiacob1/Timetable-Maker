@@ -6,10 +6,13 @@ $(document).ready(function(){
 	let navLinkButton = ".mdl-navigation__link";
 	let pageContent = ".mdl-layout__content .page-content";
 	let addButton = ".mdl-button";
-	let resetButton = ".reset-button";
-	let sendEditedButton = ".save-changes-button"
+	let removeButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.remove-button";
+	let sendEditedButton = ".save-changes-button";
+	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
 	let searchInput = ".users-management .mdl-textfield__input";
 	let errorMsg = "";
+	let removeUserId;
+	let resetUserId;
 
 	const dummyUsers = require('./dummyUsers.json'); 
 	let usersData;
@@ -23,7 +26,7 @@ $(document).ready(function(){
 
 	$(".mdl-layout__content .page-content .add-user").hide();
 	$(".loader-bck").hide();
-
+	
 	apiAllUsersGet(function(response){
 		if (response === true){
 			usersData = dummyUsers;
@@ -35,7 +38,32 @@ $(document).ready(function(){
 		}
 	});
 
+	function apiSendRemoveUserPost(data, callback){
+		console.log(data);
+		// $.post(urlPostEditUser, data)
+		// .done(function (data) {
+
+		// 	console.log(data);
+
+		// 	if (data.success === true){
+			  
+		// 	  callback(true);
+		// 	}
+		// 	else {
+			
+		// 	  callback(false);
+		// 	}
+		// });
+		$(".loader-bck").show();
+		setTimeout(function(){
+			$(".loader-bck").hide();
+			callback(true);
+		}, 3000);	
+		
+
+	}
 	function apiSendEditedPost(data, callback){
+		console.log(data);
 
 		// $.post(urlPostEditUser, data)
 		// .done(function (data) {
@@ -51,10 +79,17 @@ $(document).ready(function(){
 		// 	  callback(false);
 		// 	}
 		// });	
-		callback(true);
+		$(".loader-bck").show();
+		setTimeout(function(){
+			callback(false);
+			$(".loader-bck").hide();
+		}, 3000)
+		
 	}
 
 	function apiResetUserPasswordPost(data, callback){
+
+		console.log(data);
 
 		// $.post(urlPostResetPassword, data)
 		// .done(function (data) {
@@ -70,11 +105,14 @@ $(document).ready(function(){
 		// 	  callback(false);
 		// 	}
 		// });	
-		callback(true);
+		$(".loader-bck").show();
+		setTimeout(function(){
+			callback(true);
+			$(".loader-bck").hide();
+		}, 3000)
 	}
 
 	function apiAllUsersGet(callback){
-
 		// $.get(urlGetUsers)
 		// .done(function (data) {
 
@@ -101,6 +139,7 @@ $(document).ready(function(){
 	}
 
 	function apiAddUserPost(data, callback) {
+		console.log(data);
 
 		
 		// $.post(urlAddUser, data)
@@ -114,7 +153,11 @@ $(document).ready(function(){
 		// 	  callback(false);
 		// 	}
 		// });	
-		callback(true);
+		$(".loader-bck").show();
+		setTimeout(function(){
+			callback(true);
+			$(".loader-bck").hide();
+		}, 3000)
 	}
 
 	function getSuggestions(value){
@@ -143,7 +186,7 @@ $(document).ready(function(){
 							</span>
 								
 						</li>
-						<div class="user-buttons" id="user${index}">
+						<div class="user-buttons" id="user${index}" userId="${user.userId}">
 							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
 								Edit
 							</button>
@@ -156,19 +199,19 @@ $(document).ready(function(){
 						</div>`
 			);
 			$(".mdl-cell.mdl-cell--6-col#right-side").append(
-				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none">
+				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none" userId="${user.userId}">
 					<div class="mdl-card__title">
 						<h2 class="mdl-card__title-text">Edit User</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.fullName}">
+							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName">
 						</div>
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.userName}">
+							<input class="mdl-textfield__input" type="text" value="${user.userName}" id="edit-userName">
 						</div>
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.email}">
+							<input class="mdl-textfield__input" type="text" value="${user.email}" id="edit-email">
 						</div>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
@@ -183,17 +226,13 @@ $(document).ready(function(){
 					</div>
 				</div>`
 			);
-
 		});
 
-		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {
-			$(`.user-buttons#${$(this).attr("id")}`).toggle();
-			
+		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {	
+			$(`.user-buttons#${$(this).attr("id")}`).toggle();	
 		});
 
 		$(".edit-button").on("click", function() {
-
-			console.log("dadsada");
 			$(".mdl-cell.mdl-cell--6-col#right-side").children().hide();
 			$(`.mdl-cell.mdl-cell--6-col#right-side #${$(this).parent().attr("id")}`).toggle();
 			$(".mdl-layout__content").scrollTop(0);
@@ -202,40 +241,92 @@ $(document).ready(function(){
 		$(".close").on("click", function() {
 			$(this).parent().parent().parent().hide();
 		})
+
+		$(removeButton).on("click", function(){
+			removeUserId = $(this).parent().attr("userId");
+			$("dialog#dialog-remove").show();
+		});
+
+		$(sendEditedButton).on('click', function(){
+
+			const fullName = $(".mdl-textfield__input#edit-fullName").val();
+			const userName = $(".mdl-textfield__input#edit-userName").val();
+			const email = $(".mdl-textfield__input#edit-email").val();
+			const userId =  $(this).parent().parent().attr("userId");
+
+			
+	
+			apiSendEditedPost({fullName, userName, email, userId}, function(response){
+	
+				if (response === true){
+
+					$(searchInput).val("");
+					apiAllUsersGet(function(response){
+						if (response === true){
+							usersData = dummyUsers;
+							renderUsers(usersData.users);
+						}
+				
+						if (response === false){
+							//"Afiseaza pe pagina: Something went wrong please try again"
+						}
+					});
+									
+				}
+				else{
+					// baga un span sub ceva gen: something went wrong
+				}
+			});
+		});
+
+		$(resetButton).on("click", function(){
+			resetUserId = $(this).parent().attr("userId");
+			$("dialog#dialog-reset").show();
+		});
 	}
 
+	$("button#remove-user-yes").on("click", function(){
 
-	$(resetButton).on('click', function(){
-
-		const id_user = "";
-		apiResetUserPasswordPost({id_user}, function(response){
-
+		$("dialog#dialog-remove").hide();
+		
+		apiSendRemoveUserPost({userId: removeUserId}, function(response){
 			if (response === true){
-				//password was successfuly reseted
+
+				$(searchInput).val("");
+				apiAllUsersGet(function(response){
+					if (response === true){
+						usersData = dummyUsers;
+						renderUsers(usersData.users);
+					}
+
+					if (response === false){
+						//"Afiseaza pe pagina: Something went wrong please try again"
+					}
+				});			
 			}
-			else{
-				// baga un span sub ceva gen: something went wrong
-			}
-		});
+		})
 	});
 
-	$(sendEditedButton).on('click', function(){
-
-		const fullName = $("");
-		const userName = $("");
-		const email = $("");
-
-		apiSendEditedPost({fullName, userName, email}, function(response){
-
-			if (response === true){
-				//password was successfuly reseted
-			}
-			else{
-				// baga un span sub ceva gen: something went wrong
-			}
-		});
+	$("button#remove-user-no").on("click", function(){
+		$("dialog#dialog-remove").hide();
 	});
 
+	$("button#reset-user-yes").on("click", function(){
+
+		$("dialog#dialog-reset").hide();
+		
+		apiResetUserPasswordPost({userId: resetUserId}, function(response){
+			if (response === true){
+				//afiseaza success
+			}
+		})
+	});
+
+	$("button#reset-user-no").on("click", function(){
+		$("dialog#dialog-reset").hide();
+	});
+
+	
 
 	$(searchInput).on('input', function(){
 		const searchText = $(searchInput).val();
@@ -253,9 +344,6 @@ $(document).ready(function(){
 			renderUsers(usersData.users);
 		}
 	});
-
-	$()
-	
 
 	$(navLinkButton).on('click', function() {
 
@@ -283,7 +371,9 @@ $(document).ready(function(){
 		const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, "fullname-req", "Please use only letters");
 
 		if (cond1 && cond2 && cond3) {
-			apiAddUserPost({fullName, userName, email}, function(response){
+
+			const obj ={ fullName: $(fullName).val(), userName: $(userName).val(), email: $(email).val()};
+			apiAddUserPost(obj, function(response){
 
 				if (response === true){
 					
