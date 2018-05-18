@@ -39,6 +39,8 @@ module.exports = (() => {
     app.post('/forgot', forgot);
 
 
+    app.get('/constraints', getConstraintsRoute);
+
     const apiRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
@@ -48,7 +50,7 @@ module.exports = (() => {
     });
 
     apiRoutes.get('/rooms', getRoomsRoute);
-    apiRoutes.get('/constraints', getConstraintsRoute);
+    
     
     app.use('/api', apiRoutes);
 

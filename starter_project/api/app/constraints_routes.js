@@ -4,9 +4,8 @@ module.exports = (() => {
     const {getConstraints} = require('./constraints_actions.js');
   
     const getConstraintsRoute = (req, res) => {
-
-      getConstraints().then((constraint) => {
-        console.log('constraints');
+      getConstraints().then((constraints) => {
+        console.log(constraints);
         res.json({success: true, constraints});
       }).catch((e) => {
         console.log(e);
