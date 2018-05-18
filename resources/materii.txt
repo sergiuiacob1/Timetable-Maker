@@ -1,0 +1,113 @@
+PAUZA
+Algoritmi genetici
+Algoritmica grafurilor
+Analiza bazelor mari de date
+Analiza experimentala a algoritmilor
+Analiza retelelor media sociale
+Animatie 3D: algoritmi si tehnici fundamentale
+Aplicatii ale prelucrarii limbajului natural
+Arhitectura calculatoarelor si sisteme de operare
+Arhitecturi hardware in criptografie
+Aspecte computationale in teoria numerelor
+Baze de date
+Bazele matematice ale lingvisticii computationale si limbaje formale
+Calcul numeric
+Calculabilitate, decidabilitate si complexitate
+Calitatea sistemelor software
+Capitole speciale de inteligenta artificiala
+Capitole speciale de invatare automata
+Capitole speciale de sisteme de operare
+Cerc NLP
+Cerc stiintific
+Cercetari operationale
+Cloud computing
+Cloud shape your idea by Amazon
+Consultatii
+Data Mining
+Dezvoltarea aplicatiilor Web
+Dezvoltarea sistemelor fizice utilizand microprocesoare
+Didactica Informaticii
+Fundamente algebrice ale informaticii
+Grafica pe calculator
+Ingineria programarii
+Inovation Labs
+Instruire asistata de calculator
+Inteligenta artificiala
+Interactiune om-calculator
+Introducere in .NET
+Introducere in criptografie
+Introducere in prelucrarea limbajului natural
+Introducere in programare
+Invatare Automata
+Investigarea criminalitatii informatice
+Lanturi de prelucrari lingvistice
+Lexicologie, morfologie si sintaxa computationala
+Limba engleza I
+Limba engleza II
+Limba engleza III
+Limba engleza IV
+Limbaje de programare probabilista
+Limbaje de scripturi(pentru studentii umanisti)
+Limbaje formale, automate si compilatoare
+Logica pentru informatica
+Logici de incredere in securitatea informatiei
+Managementul clasei de elevi
+Managementul proiectelor
+Matematica
+Metode bioinformatice in securitate
+Metode de invatare aplicate limbajului natural
+Metode formale in ingineria software
+Metode inspirate din natura
+Metodologii de lucru in mediul Open Source
+Modelarea sistemelor distribuite
+Modele continue si Matlab
+Modele de securitate
+Optimizare combinatorica
+Pedagogie II
+Pedagogie
+Practica cercetare
+Practica de cercetare
+Practica SGBD
+Practica(Programare in Python)
+Prelucrarea statistica a limbajului natural
+Prelucrarea vorbirii si sisteme fuzzy
+Principii ale limbajelor de programar
+Probabilitati si statistica
+Progesarea digitala a imaginilor
+Programare avansata
+Programare bazata pe reguli
+Programare Competitiva
+Programare concurenta si distribuita
+Programare functionala
+Programare MS-Office
+Programare orientata-obiect
+Proiectarea algoritmilor
+Protocoale de securitate: modelare si verificare
+Psihologia comunicarii profesionale in domeniul IT-ului
+Psihologia educatiei
+Recuperari
+Retele de calculatoare
+Retele Neuronale
+Retele Petri si aplicatii
+Reverse Engineering
+Rezervat
+Securitate software
+Securitatea comertului electronic
+Securitatea informatiei
+Securitatea retelelor de calculatoare
+Securitatea retelelor wireless si a dispozitivelor mobile
+Securitatea sistemelor de operare si sisteme malitioanse
+Semantica si pragmatica limbajului natural
+Sisteme bazate pe evenimente
+Sisteme de operare distribuite
+Sisteme de operare
+Smart Card-uri si Aplicatii
+Specificarea si verificarea sistemelor distribuite
+Structuri de date
+Tehnici avansate de ingineria programarii
+Tehnici de programare pe platforma Android
+Tehnici si metode de criptanaliza
+Tehnologii Java
+Tehnologii Web
+Topici speciale de programare .NET
+Traducere automata
