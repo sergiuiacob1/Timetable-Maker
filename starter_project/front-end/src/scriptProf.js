@@ -64,7 +64,6 @@ function getDate(){
   dateEntered = document.getElementById("dateInput").value;
 };
 
-
 function getTime(){
   var table = document.getElementById("orar");
   
