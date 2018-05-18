@@ -2,6 +2,7 @@ module.exports = (() => {
   'use strict';
 
   const resource = require('./models/resource');
+  const dependency = require('./models/dependency');
   const {
     newResource,
     getResources,
@@ -9,13 +10,13 @@ module.exports = (() => {
     updateResource,
     deleteResource
   } = require('./resource_actions');
-  const dependency = require('./models/dependency');
   const {
     newDependency,
     getDependencies,
     deleteDependency
   } = require('./dependency_actions');
   const {
+    getDependenciesForItems,
     createDependenciesForItem,
     deleteDependenciesForItem
   } = require('./dependency_utils');
@@ -55,9 +56,22 @@ module.exports = (() => {
   };
 
   const getResourcesRoute = (req, res) => {
-    getResources(req.query).then((resource) => {
-      console.log(resource);
-      res.json({ success: true, resource });
+    getResources(req.query).then((resources) => {
+      if (resources.length >= 1) {
+        getDependenciesForItems(resources)
+          .then((newResources) => {
+            console.log(newResources);
+            res.json({ success: true, newResources });
+          })
+          .catch((e) => {
+            console.log(e);
+            res.json({ success: false, message: 'An error occured!' });
+          })
+      }
+      else {
+        console.log(resources);
+        res.json({ success: true, resources });
+      }
     }).catch((e) => {
       console.log(e);
       res.json({ success: false, message: 'An error occured!' });
@@ -88,12 +102,12 @@ module.exports = (() => {
                 })
             }
             else {
-              res.json({ success: true })              
+              res.json({ success: true })
             }
           });
       }
       else {
-        res.json({ success: false, message: "Element not found"});
+        res.json({ success: false, message: "Element not found" });
       }
     }).catch((e) => {
       console.log(e);

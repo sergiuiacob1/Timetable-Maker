@@ -3,7 +3,34 @@ module.exports = (() => {
     const { getResources,
         getLastId } = require("./resource_actions");
     const { newDependency,
+        getDependencies,
         deleteDependency } = require("./dependency_actions");
+
+    const getDependenciesForItems = (resources) => {
+        return new Promise((resolve, refuse) => {
+            for (let i = 0; i < resources.length; ++i) {
+                console.log(resources[i]);
+                getDependencies({ dependant: resources[i].id })
+                    .then((results) => {
+                        console.log(results);
+                        let dependencyArray = [];
+                        for (let object of results) {
+                            dependencyArray.push(object.dependency);
+                        }
+                        resources[i]["dependencies"] = dependencyArray;
+                        console.log(resources[i]);
+
+                        if (i === resources.length - 1) {
+                            resolve(resources);
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                        refuse(e);
+                    });
+            }
+        })
+    }
 
     const createDependenciesForItem = ({ dependencies }) => {
         return new Promise((resolve, refuse) => {
@@ -45,6 +72,7 @@ module.exports = (() => {
     }
 
     return {
+        getDependenciesForItems,
         createDependenciesForItem,
         deleteDependenciesForItem
     }
