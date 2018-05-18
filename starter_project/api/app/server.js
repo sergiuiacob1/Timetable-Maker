@@ -9,6 +9,7 @@ module.exports = (() => {
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {updateUserInfo, getUserRoute} = require('./user_routes');
   const {getRoomsRoute} = require('./room_routes');
+  const {getConstraintsRoute} = require('./constraints_routes.js');
 
   let serverInterface = undefined;
 
@@ -47,7 +48,8 @@ module.exports = (() => {
     });
 
     apiRoutes.get('/rooms', getRoomsRoute);
-
+    apiRoutes.get('/constraints', getConstraintsRoute);
+    
     app.use('/api', apiRoutes);
 
     const start = (port) => {
