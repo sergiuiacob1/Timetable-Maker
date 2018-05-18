@@ -1,4 +1,22 @@
-var groupId, subjectId, frequency, activityType, motive, dateEntered;
+const hostName = 'localhost:2222';
+const token = localStorage.getItem("token");
+const urlPost = 'https://${hostName}/ENDPOINT?token=${token}';
+
+function postThisShit(json, callback) {
+
+  alert(json);
+
+  $.post(urlPost, json, function (data) {
+    if (data.success === true) {
+      callback(true);    
+    }
+    else {
+      callback(false);
+    }
+  },'jsonp')
+};
+
+var groupId="", subjectId="", frequency="", activityType="", motive="", dateEntered="";
 var hour = [];
 var days = [];
 var roomIds = [];
@@ -45,19 +63,14 @@ function getText(){
 function getDate(){
   dateEntered = document.getElementById("dateInput").value;
 };
-function postThisShit(json){
 
-  alert(json);
-  var token = localStorage.getItem('token');
-  
-};
 
 function getTime(){
   var table = document.getElementById("orar");
   
   for (var i = 0, row; row = table.rows[i]; i++) 
      for (var j = 0, col; col = row.cells[j]; j++) 
-       if(col.className=="redColor"){
+       if(col.className == "redColor"){
          hour.push(col.innerHTML);
          days.push(($(col).parent().children().index($(col))+1) %7);
        } 
@@ -68,7 +81,7 @@ function getRooms(){
   
   for (var i = 0, row; row = table.rows[i]; i++) 
      for (var j = 0, col; col = row.cells[j]; j++) 
-       if(col.className=="redColor"){
+       if(col.className == "redColor"){
          roomIds.push(col.innerHTML);
        } 
 };
@@ -82,7 +95,7 @@ function send(){
   if (important && (motive==null))
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
   else
-  if ((frequency==0) && (dateEntered==""))
+  if ((frequency === 0) && (dateEntered == ""))
    alert("Va rugam introduceti o data!");
   else{
     var object = {};
@@ -96,7 +109,14 @@ function send(){
     object["important"] = important;
     object["motive"]= motive;
     var json = JSON.stringify(object);
-    postThisShit(json);
+    
+    postThisShit(json, function(response){
+      alert(response);
+      if(response === true)
+        alert("Optiune adaugata!");
+      else alert("Optiunea nu s-a adaugat. Va rugam reincercati.");
+    });
+    
     reset();
   }
 };
