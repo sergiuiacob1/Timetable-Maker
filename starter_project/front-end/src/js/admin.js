@@ -26,7 +26,7 @@ $(document).ready(function(){
 	// const dummyUsers = require('./dummyUsers.json'); 
 	const dummySubjects = require('./dummySubjects.json');
 
-	$(".mdl-layout__content .page-content .users-management").hide();
+	$(".mdl-layout__content .page-content .add-user").hide();
 	$(".mdl-layout__content .page-content .add-user .subjects-list").hide();
 	
 	$(".demo-list-control.mdl-list.dropdown").hide();
@@ -34,6 +34,7 @@ $(document).ready(function(){
 	$(".loader-bck").hide();
 	
 	apiAllUsersGet(function(response){
+
 		if (response === true){
 			renderUsers(usersData);
 		}
@@ -212,12 +213,13 @@ $(document).ready(function(){
 
 	function renderUsers(array){
 
-		$(".users-management .container .demo-list-icon.mdl-list").children().remove();
+		$(".users-management .container .mdl-list").children().remove();
 		$(".mdl-cell.mdl-cell--6-col#right-side").children().remove();
+
 		
 		array.map((user, index)=>{
 
-			$(".users-management .container .demo-list-icon.mdl-list").append(
+			$(".users-management .container .mdl-list").append(
 					  	`<li class="mdl-list__item mdl-list__item--two-line" id="user${index}" key=${index}>
                         	<span class="mdl-list__item-primary-content">
                                 <i class="material-icons mdl-list__item-avatar">person</i>
