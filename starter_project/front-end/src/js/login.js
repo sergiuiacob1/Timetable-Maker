@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	require('../less/login.less');
 
 	const hostName = '0.0.0.0:2222';
 	const urlLogin= `http://${hostName}/authenticate`;
@@ -54,7 +55,7 @@ $(document).ready(function(){
 
 
 			if (response === true){
-				$(location).attr('href', 'file:///home/timi/Documents/IP2/IP_LOGIN/index.html');
+				$(location).attr('href', '/');
 			}
 
 			if (response === false){

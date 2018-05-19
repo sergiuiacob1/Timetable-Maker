@@ -2,7 +2,7 @@ module.exports = (() => {
   'use strict';
 
   const User = require('./models/user');
-  const {newUser, getUser, updateUser, getUsers, deleteUser} = require('./user_actions');
+  const {newUser, getUser, updateUser, getUsers, deleteUser, updatePassword} = require('./user_actions');
 
   const updateUserInfo = (req, res) => {
     const id = req.decoded.user.id;
@@ -93,7 +93,7 @@ module.exports = (() => {
 
   const updateUserRoute = (req, res) => {
     // params: id
-    const id = req.params.id;
+    const id = req.params.id;W
     const {body} = req;
     console.log('Update:' + id);
     updateUser(body).then((result) => {
@@ -102,6 +102,28 @@ module.exports = (() => {
       console.log("eroarea e", e);
       res.json({success: false, message: e})
     })
+
+      // getUser({id}).then((user) => {
+      //     console.log(user)
+      //     if (typeof user != 'undefined' && user) {
+
+      //         if (!req.body.new_password)
+      //             res.json({success: false, message: 'please give a new password'});
+
+      //         if (req.body.new_password.length < 6)
+      //             res.json({success: false, message: 'password is too short'});
+
+      //         const updateSet = {id: id, new_password: req.body.new_password};
+      //         updatePassword(updateSet);
+
+      //         console.log('Update:' + id);
+      //         res.json({success: true, message: 'user update'});
+      //     }
+      //     else {
+      //         res.json({success: false, message: 'invalid user id'});
+      //     }
+
+      // });
   };
 
   const deleteUserRoute = (req, res) => {

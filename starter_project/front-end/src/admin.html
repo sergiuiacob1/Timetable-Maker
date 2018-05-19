@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
-  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  
+  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="./admin.js"></script> 
-  <script type="text/javascript" src="./parsley.js"></script> 
-    <link rel="stylesheet" href="./admin.css"></link>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <script type="text/javascript" src="./parsley.js"></script> --> 
+  
 
   <title>Admin Page </title>
 </head>
@@ -28,23 +27,45 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only">
         <div class="mdl-navigation__link" id="users-management">Users Management</div>
         <div class="mdl-navigation__link" id="add-user">Add User</div>
-        <div class="mdl-navigation__link" id="view-users">View all Users</div>
-        <div class="mdl-navigation__link" id="edit-user">Edit User</div>
       </nav>
     </div>
   </header>
-  <div class="mdl-layout__drawer">
-    <span class="mdl-layout-title">Title</span>
-    <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-      <a class="mdl-navigation__link" href="">Link</a>
-    </nav>
-  </div>
+
   <main class="mdl-layout__content">
     <div class="page-content">
-        <div class="users-management">This is Users Management Page</div>
+        <div class="users-management">
+            <div class="container">
+           
+                <div class="content-title">Users Management Page</div>
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col" id="left-side">
+                        <!-- Expandable Textfield -->
+                        <div class="mdl-textfield mdl-js-textfield">
+                            
+                            <!-- <i class="material-icons" style="float: left">search</i> -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label search-input">
+                                <input class="mdl-textfield__input" type="text" id="sample6">
+
+                                <label class="mdl-textfield__label" for="sample-expandable">
+                                        <i class="material-icons">search</i>
+                                        Search a user
+                                    </label>
+                            </div>
+                        </div>
+
+                        <ul class="demo-list-icon mdl-list">    
+                        
+                        </ul>
+                    </div>
+
+                    <div class="mdl-cell mdl-cell--6-col" id="right-side">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
             <div class="add-user">
                 <div class="container">
@@ -58,13 +79,7 @@
                         <p id="fullname-req"></p>
                     </div>
 
-                    <div class="content-input">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="username" pattern="[0-9a-zA-Z]+">
-                            <label class="mdl-textfield__label" for="fname">Username</label>
-                        </div>
-                        <p id="username-req"></p>
-                    </div>
+                 
 
 
                     <div class="content-input">
@@ -76,14 +91,6 @@
                     </div>
 
                     <div class="content-input">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="password" id="password">
-                            <label class="mdl-textfield__label" for="fname">Password</label>
-                        </div>
-                        <p id="password-req"></p>
-                    </div>
-
-                    <div class="content-input">
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                             Add New User
                         </button>
@@ -91,14 +98,40 @@
                 </div>
 
             </div>
-        
-
-            <div class="view-users">This is View all Users Page</div>
-            <div class="edit-user">This is Edit User Page</div>
-          
+      
         </div>
     </main>
   </div>
+
+    <div class="loader-bck">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active loader"></div>
+    </div>
+
+    <dialog class="mdl-dialog" id="dialog-remove">
+        <h5 class="mdl-dialog__title">Are you sure you want to delete this user?</h5>
+        <div class="mdl-dialog__content">
+        </div>
+
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button close-button" id="remove-user-no">No</button>
+          <button type="button" class="mdl-button" id="remove-user-yes">Yes</button>
+          
+        </div>
+    </dialog>
+
+    <dialog class="mdl-dialog" id="dialog-reset">
+            <h5 class="mdl-dialog__title">Are you sure you want to reset users's password?</h5>
+            <div class="mdl-dialog__content">
+            </div>
+    
+            <div class="mdl-dialog__actions">
+              <button type="button" class="mdl-button close-button" id="reset-user-no">No</button>
+              <button type="button" class="mdl-button" id="reset-user-yes">Yes</button>
+              
+            </div>
+        </dialog>
+    
+
 </body>
 
 </html>

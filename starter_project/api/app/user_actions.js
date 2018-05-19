@@ -55,6 +55,19 @@ module.exports = (() => {
       });
   };
 
+    const updatePassword = ({id, new_password}) => {
+        return new User()
+            .update()
+            .set('password', new_password)
+            .where({
+                id
+            })
+            .valueOf()
+            .then((res) => {
+                return true;
+            });
+    };
+
   const getUsers = () => {
     return new User()
       .field('*')
@@ -84,6 +97,7 @@ module.exports = (() => {
     newUser,
     updateUser,
     getUsers,
-    deleteUser
+    deleteUser,
+    updatePassword
   };
 })();
