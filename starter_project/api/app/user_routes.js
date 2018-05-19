@@ -2,7 +2,7 @@ module.exports = (() => {
   'use strict';
 
   const User = require('./models/user');
-  const {getUser, updateUser, getUsers} = require('./user_actions');
+  const {newUser, getUser, updateUser, getUsers, deleteUser} = require('./user_actions');
 
   const updateUserInfo = (req, res) => {
     const id = req.decoded.user.id;
@@ -18,7 +18,7 @@ module.exports = (() => {
       res.json({success: false, message: 'Wrong password'});
     }).catch((e) => {
       console.log(e);
-      res.json({success: false, message: 'An error occurred'});
+      res.json({success: false, message: e});
     })
   };
 
@@ -29,7 +29,7 @@ module.exports = (() => {
       res.json({success: true, user});
     }).catch((e) => {
       console.log(e);
-      res.json({success: false, message: 'An error occurred'});
+      res.json({success: false, message: e});
     })
   };
 
@@ -44,7 +44,7 @@ module.exports = (() => {
       res.json({success: true, users});
     }).catch((e) => {
       console.log(e);
-      res.json({success: false, message: "An error occured"});
+      res.json({success: false, message: e});
     });
   };
 
@@ -52,26 +52,68 @@ module.exports = (() => {
     // params: id
     const id = req.params.id;
     console.log('Show:' + id);
-    res.json({success: true, message: 'user info'});
+    getUser({id}).then((user) => {
+        console.log('Show:' + user.mail);
+        delete user.password;
+        res.json({success: true, user});
+    })
+    .catch((e) => {
+      console.log(e);
+      res.json({success: false, message: e});
+    });
   };
 
   const insertUserRoute = (req, res) => {
-    console.log('Insert:');
-    res.json({success: true, message: 'user insert'});
+    const {body} = req;
+    body.password = makePassword();
+    if(body.mail === undefined){
+      res.json({success: false, message: "Cannot insert user without an email."})
+    }
+    // if(body.name === undefined){
+    //   res.json({success: false, message: "Cannot insert user without a name."})
+    // }
+    console.log(body.password);//TODO: send this with SMTP
+    newUser(body).then((result) => {
+      res.json({success: true, message: 'user insert'});
+    }).catch((e) => {
+      console.log("eroarea e", e);
+      res.json({success: false, message: e})
+    })
   };
+
+  function makePassword() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  
+    for (var i = 0; i < 9; i++)
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+  
+    return text;
+  }
 
   const updateUserRoute = (req, res) => {
     // params: id
     const id = req.params.id;
+    const {body} = req;
     console.log('Update:' + id);
-    res.json({success: true, message: 'user update'});
+    updateUser(body).then((result) => {
+      res.json({success: true, message: 'user updated'});
+    }).catch((e) => {
+      console.log("eroarea e", e);
+      res.json({success: false, message: e})
+    })
   };
 
   const deleteUserRoute = (req, res) => {
     // params: id
     const id = req.params.id;
+    deleteUser({id}).then((resul) => {
+      res.json({success: true, message: 'user deleted'});
+    }).catch((e) => {
+      console.log("eroarea e", e);
+      res.json({success: false, message: e})
+    });
     console.log('Delete:' + id);
-    res.json({success: true, message: 'user delete'});
   };
 
   return {
