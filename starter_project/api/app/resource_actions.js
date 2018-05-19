@@ -1,52 +1,71 @@
 module.exports = (() => {
-    'use strict';
-    const Resource = require('./models/resource');
+  'use strict';
+  const Resource = require('./models/resource');
   
-    const newResource = ({name}) => {
-      return new Resource()
-        .insert()
-        .set('name', name)
-        .valueOf()
-        .then(() => {
-          return true;
-        });
-    };
-  
-    const getResource = ({id, name}) => {
-      if (id){
-        return new Resource()
-          .field('*')
-          .where({id})
-          .valueOf()
-          .then((res) => {
-            return res[0];
-          });
-      }
-      return new Resource()
+  const newResource = ({type, name, capacity}) => {
+    return new Resource()
+    .insert()
+    .set('type', type)
+    .set('name', name)
+    .set('capacity', capacity)
+    .valueOf()
+    .then(() => {
+      return true;
+    });
+  };
+
+  const getResources = (query) => {
+    return new Resource()
       .field('*')
-      .where({name})
+      .where(query)
       .valueOf()
       .then((res) => {
-        console.log("ASDASDAS" + JSON.stringify(res));
-        if (res.length > 1)
-          return null;
-        return res[0];
+        return res;
       });
-    };
+  }
 
-    const getResources = () => {
-        return new Room()
-          .field('*')
-          .valueOf()
-          .then((res) => {
-            return res;
-          });
-      };
-    
-  
-    return {
-        newResource,
-        getResource,
-        getResources
-    };
-  })();
+  const getLastId = () => {
+    return new Resource()
+      .lastId()
+      .valueOf()
+      .then((res) => {
+        return res[0];
+      })
+  }
+
+  const updateResource = ({id, type, name, capacity}) => {
+    let updatedResource = new Resource().update();
+    updatedResource.where({id});
+
+    if (type && name && capacity) {
+      return new Resource()
+        .update()
+        .set('type', type)
+        .set('name', name)
+        .set('capacity', capacity)
+        .where({id})
+        .valueOf()
+        .then((res) => {
+          return res;
+        })
+    }
+  }
+
+  const deleteResource = ({id}) => {
+    return new Resource()
+      .delete()
+      .where({id})
+      .valueOf()
+      .then(() => {
+        return true;
+      });
+  };
+
+  return {
+    newResource,
+    getResources,
+    getLastId,
+    updateResource,
+    deleteResource
+  };
+})();

@@ -3,11 +3,17 @@ module.exports = (() => {
   const express = require("express");
   const bodyParser = require('body-parser');
   const morgan = require('morgan');
-  const cors = require('cors');
+  // const cors = require('cors');
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
   const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {
+    newResourceRoute,
+    getResourcesRoute,
+    updateResourceRoute,
+    deleteResourceRoute
+  } = require('./resource_routes');
   const {getRoomsRoute} = require('./room_routes');
   const {getConstraintsRoute} = require('./constraints_routes.js');
 
@@ -24,7 +30,7 @@ module.exports = (() => {
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
-    app.use(cors());
+    // app.use(cors());
 
     // use morgan to log requests to the console
     app.use(morgan('dev'));
@@ -37,7 +43,10 @@ module.exports = (() => {
     app.post('/authenticate', authenticate);
     app.post('/register', register);
     app.post('/forgot', forgot);
-
+    // app.post('/resources/add', newResourceRoute);
+    // app.get('/resources/get', getResourcesRoute);
+    // app.post('/resources/update', updateResourceRoute);
+    // app.post('/resources/remove', deleteResourceRoute);
 
     app.get('/constraints', getConstraintsRoute);
 
@@ -46,8 +55,12 @@ module.exports = (() => {
     apiRoutes.use(checkAuthenticated);
 
     apiRoutes.get('/', function (req, res) {
-      res.json({success: true, message: 'Welcome to the coolest API on earth!' });
+      res.json({ success: true, message: 'Welcome to the coolest API on earth!' });
     });
+    apiRoutes.post('/resources/add', newResourceRoute);
+    apiRoutes.get('/resources/get', getResourcesRoute);
+    apiRoutes.post('/resources/update', updateResourceRoute);
+    apiRoutes.post('/resources/remove', deleteResourceRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
     
