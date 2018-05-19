@@ -39,7 +39,7 @@ module.exports = (() => {
 
     const createDependenciesForItem = ({ id, dependencies }) => {
         return new Promise((resolve, refuse) => {
-            if (id) {
+            if (id !== undefined) {
                 for (let i = 0; i < dependencies.length; ++i) {
                     if (dependencies[i] !== id) {
                         newDependency({ dependant: id, dependency: dependencies[i] })
@@ -55,17 +55,15 @@ module.exports = (() => {
                 getLastId()
                     .then((row) => {
                         for (let i = 0; i < dependencies.length; ++i) {
-                            if (dependencies[i] !== id) {
-                                newDependency({ dependant: id, dependency: dependencies[i] })
+                            if (dependencies[i] !== row.id) {
+                                newDependency({ dependant: row.id, dependency: dependencies[i] })
                                     .catch((e) => {
                                         console.log(e);
-                                        refuse(`Can't create new dependency between ${id} - ${dependencies[i]}`);
+                                        refuse(`Can't create new dependency between ${row.id} - ${dependencies[i]}`);
                                     })
                             }
-                            if (i === dependencies.length - 1) {
-                                resolve(true);
-                            }
                         }
+                        resolve(true);
                     })
                     .catch((e) => {
                         refuse("Can't get last row");

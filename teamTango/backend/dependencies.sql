@@ -54,7 +54,7 @@ ALTER TABLE `dependencies`
 -- AUTO_INCREMENT for table `dependencies`
 --
 ALTER TABLE `dependencies`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- Constraints for dumped tables
