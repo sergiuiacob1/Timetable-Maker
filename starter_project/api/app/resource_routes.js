@@ -61,7 +61,7 @@ module.exports = (() => {
         getDependenciesForItems(resources)
           .then((newResources) => {
             console.log(newResources);
-            res.json({ success: true, newResources });
+            res.json({ success: true, resources: newResources });
           })
           .catch((e) => {
             console.log(e);
@@ -91,7 +91,7 @@ module.exports = (() => {
             if (Array.isArray(dependencies)) {
               deleteDependenciesForItem({ id })
                 .then(() => {
-                  return createDependenciesForItem({ dependencies })
+                  return createDependenciesForItem({ id,  dependencies })
                 })
                 .then(() => {
                   res.json({ success: true })
