@@ -93,7 +93,7 @@ module.exports = (() => {
 
   const updateUserRoute = (req, res) => {
     // params: id
-    const id = req.params.id;W
+      const id = req.params.id;
     const {body} = req;
     console.log('Update:' + id);
     updateUser(body).then((result) => {
@@ -102,29 +102,35 @@ module.exports = (() => {
       console.log("eroarea e", e);
       res.json({success: false, message: e})
     })
-
-      // getUser({id}).then((user) => {
-      //     console.log(user)
-      //     if (typeof user != 'undefined' && user) {
-
-      //         if (!req.body.new_password)
-      //             res.json({success: false, message: 'please give a new password'});
-
-      //         if (req.body.new_password.length < 6)
-      //             res.json({success: false, message: 'password is too short'});
-
-      //         const updateSet = {id: id, new_password: req.body.new_password};
-      //         updatePassword(updateSet);
-
-      //         console.log('Update:' + id);
-      //         res.json({success: true, message: 'user update'});
-      //     }
-      //     else {
-      //         res.json({success: false, message: 'invalid user id'});
-      //     }
-
-      // });
   };
+
+    const changePasswordRoute = (req, res) => {
+
+        // params: id
+        const id = req.params.id;
+        getUser({id}).then((user) => {
+            console.log(user)
+            if (typeof user != 'undefined' && user) {
+
+                if (!req.body.new_password)
+                    res.json({success: false, message: 'please give a new password'});
+
+                if (req.body.new_password.length < 6)
+                    res.json({success: false, message: 'password is too short'});
+
+                const updateSet = {id: id, new_password: req.body.new_password};
+                updatePassword(updateSet);
+
+                console.log('Update:' + id);
+                res.json({success: true, message: 'user update'});
+            }
+            else {
+                res.json({success: false, message: 'invalid user id'});
+            }
+
+        });
+
+    }
 
   const deleteUserRoute = (req, res) => {
     // params: id
@@ -145,6 +151,7 @@ module.exports = (() => {
     showUserRoute,
     insertUserRoute,
     updateUserRoute,
-    deleteUserRoute
+      deleteUserRoute,
+      changePasswordRoute
   };
 })();

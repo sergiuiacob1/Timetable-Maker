@@ -9,7 +9,8 @@ module.exports = (() => {
   const {getRoomsRoute} = require('./room_routes');
   const {authenticate, register, checkAuthenticated, forgot, checkAdmin} = require('./authentication');
   const {updateUserInfo, getUserRoute, getAllUsers,
-        showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute} = require('./user_routes');
+      showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute, changePasswordRoute
+  } = require('./user_routes');
 
   let serverInterface = undefined;
 
@@ -50,6 +51,7 @@ module.exports = (() => {
     });
 
     apiRoutes.get('/rooms', getRoomsRoute);
+      apiRoutes.post('/users/:id/changepassword', changePasswordRoute);
     adminRoutes.post('/users/:id/update', updateUserRoute);
     adminRoutes.post('/users/:id/delete', deleteUserRoute);
     adminRoutes.get('/users/:id', showUserRoute);
