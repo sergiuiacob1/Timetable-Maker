@@ -25,14 +25,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resource`
+-- Table structure for table `dependencies`
 --
 
-CREATE TABLE `resource` (
+CREATE TABLE `dependencies` (
   `id` int(11) UNSIGNED NOT NULL,
-  `type` varchar(50) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `capacity` int(11) UNSIGNED NOT NULL
+  `dependant` int(11) UNSIGNED NOT NULL,
+  `dependency` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -40,20 +39,33 @@ CREATE TABLE `resource` (
 --
 
 --
--- Indexes for table `resource`
+-- Indexes for table `dependencies`
 --
-ALTER TABLE `resource`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `dependencies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `dependant` (`dependant`),
+  ADD KEY `dependency` (`dependency`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `resource`
+-- AUTO_INCREMENT for table `dependencies`
 --
-ALTER TABLE `resource`
+ALTER TABLE `dependencies`
   MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `dependencies`
+--
+ALTER TABLE `dependencies`
+  ADD CONSTRAINT `Dependant` FOREIGN KEY (`dependant`) REFERENCES `resource` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Dependency` FOREIGN KEY (`dependency`) REFERENCES `resource` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

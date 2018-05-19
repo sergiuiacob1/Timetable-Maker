@@ -1,6 +1,8 @@
  var getAllResources = function() {
      // Returns all resources, unfiltered
-     fetch("http://localhost:2222/resources").then((result) => {
+     fetch("http://localhost:2222/resources", {
+        mode: "cors"
+     }).then((result) => {
          return result;
      }, (err) => {
          console.log(err);
@@ -81,7 +83,8 @@ var newResource = function(type, name, capacity) {
             "type": type,
             "name": name,
             "capacity": capacity
-        }
+        },
+        mode: "cors"
     }).then((result) => {
         return result;
     }, (err) => {
@@ -99,8 +102,9 @@ var updateResource = function(id, type, name, capacity) {
             "id": id,
             "type": type,
             "name": name,
-            "capacity": capacity
-        }
+            "capacity": capacity,
+        },
+        mode: "cors"
     }).then((result) => {
         return result;
     }, (err) => {
@@ -116,7 +120,8 @@ var removeResource = function(id) {
         method: "POST",
         body: {
             "id": id
-        }
+        },
+        mode: "cors"
     }).then((result) => {
         return result;
     }, (err) => {

@@ -3,16 +3,18 @@ module.exports = (() => {
   const express = require("express");
   const bodyParser = require('body-parser');
   const morgan = require('morgan');
+  // const cors = require('cors');
 
   const config = require('./../config/config');
-  const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
-  const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const { authenticate, register, checkAuthenticated, forgot } = require('./authentication');
+  const { updateUserInfo, getUserRoute } = require('./user_routes');
   const {
     newResourceRoute,
     getResourcesRoute,
     updateResourceRoute,
     deleteResourceRoute
   } = require('./resource_routes');
+  const { getRoomsRoute } = require('./room_routes');
 
   let serverInterface = undefined;
 
@@ -27,6 +29,7 @@ module.exports = (() => {
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
+    // app.use(cors());
 
     // use morgan to log requests to the console
     app.use(morgan('dev'));
@@ -49,22 +52,14 @@ module.exports = (() => {
     apiRoutes.use(checkAuthenticated);
 
     apiRoutes.get('/', function (req, res) {
-      res.json({success: true, message: 'Welcome to the coolest API on earth!' });
+      res.json({ success: true, message: 'Welcome to the coolest API on earth!' });
     });
-    apiRoutes.post('/api/resources/add', function (req, res) {
-      newResourceRoute(req, res);
-    });
-    apiRoutes.get('/api/resources/get', function (req, res) {
-      getResourcesRoute(req, res);
-    });
-    apiRoutes.post('/api/resources/update', function (req, res) {
-      updateResourceRoute(req, res);
-    });
-    apiRoutes.post('/api/resources/remove', function (req, res) {
-      deleteResourceRoute(req, res);
-    });
+    apiRoutes.post('/api/resources/add', newResourceRoute);
+    apiRoutes.get('/api/resources/get', getResourcesRoute);
+    apiRoutes.post('/api/resources/update', updateResourceRoute);
+    apiRoutes.post('/api/resources/remove', deleteResourceRoute);
 
-
+    apiRoutes.get('/rooms', getRoomsRoute);
 
     app.use('/api', apiRoutes);
 

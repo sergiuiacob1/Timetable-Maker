@@ -3,28 +3,72 @@ module.exports = (() => {
     const { getResources,
         getLastId } = require("./resource_actions");
     const { newDependency,
+        getDependencies,
         deleteDependency } = require("./dependency_actions");
 
-    const createDependenciesForItem = ({ dependencies }) => {
+    const getDependenciesForItems = (resources) => {
         return new Promise((resolve, refuse) => {
-            getLastId()
-                .then((row) => {
-                    for (let element of dependencies) {
-                        if (element !== row.id) {
-                            newDependency({ dependant: row.id, dependency: element })
-                                .catch((e) => {
-                                    console.log(e);
-                                    refuse(`Can't create new dependency between ${row.id} - ${element}`);
-                                })
+            for (let i = 0; i < resources.length; ++i) {
+                console.log(resources[i]);
+                getDependencies({ dependant: resources[i].id })
+                    .then((results) => {
+                        console.log(results);
+                        let dependencyArray = [];
+                        for (let object of results) {
+                            dependencyArray.push(object.dependency);
                         }
+                        resources[i]["dependencies"] = dependencyArray;
+                        console.log(resources[i]);
+
+                        let allHaveDependencies = true;
+                        for (let element of resources) {
+                            if (element["dependencies"] === undefined)
+                                allHaveDependencies = false;
+                        }
+                        if (allHaveDependencies) {
+                            resolve(resources);
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e);
+                        refuse(e);
+                    });
+            }
+        })
+    }
+
+    const createDependenciesForItem = ({ id, dependencies }) => {
+        return new Promise((resolve, refuse) => {
+            if (id !== undefined) {
+                for (let i = 0; i < dependencies.length; ++i) {
+                    if (dependencies[i] !== id) {
+                        newDependency({ dependant: id, dependency: dependencies[i] })
+                            .catch((e) => {
+                                console.log(e);
+                                refuse(`Can't create new dependency between ${id} - ${dependencies[i]}`);
+                            })
                     }
-                })
-                .then(() => {
-                    resolve(true);
-                })
-                .catch((e) => {
-                    refuse("Can't get last row");
-                })
+                }
+                resolve(true);
+            }
+            else {
+                getLastId()
+                    .then((row) => {
+                        for (let i = 0; i < dependencies.length; ++i) {
+                            if (dependencies[i] !== row.id) {
+                                newDependency({ dependant: row.id, dependency: dependencies[i] })
+                                    .catch((e) => {
+                                        console.log(e);
+                                        refuse(`Can't create new dependency between ${row.id} - ${dependencies[i]}`);
+                                    })
+                            }
+                        }
+                        resolve(true);
+                    })
+                    .catch((e) => {
+                        refuse("Can't get last row");
+                    })
+            }
         })
     }
 
@@ -45,6 +89,7 @@ module.exports = (() => {
     }
 
     return {
+        getDependenciesForItems,
         createDependenciesForItem,
         deleteDependenciesForItem
     }
