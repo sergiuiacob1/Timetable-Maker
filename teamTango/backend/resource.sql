@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: May 17, 2018 at 07:06 PM
+-- Generation Time: May 19, 2018 at 11:15 AM
 -- Server version: 5.6.40
 -- PHP Version: 7.2.4
 
@@ -32,8 +32,19 @@ CREATE TABLE `resource` (
   `id` int(11) UNSIGNED NOT NULL,
   `type` varchar(50) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `capacity` int(11) UNSIGNED NOT NULL
+  `capacity` int(11) UNSIGNED NOT NULL,
+  `remaining` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Triggers `resource`
+--
+DELIMITER $$
+CREATE TRIGGER `Set the remaining counter right after insert` AFTER UPDATE ON `resource` FOR EACH ROW update resource
+set remaining = capacity
+where id = NEW.id
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -53,7 +64,7 @@ ALTER TABLE `resource`
 -- AUTO_INCREMENT for table `resource`
 --
 ALTER TABLE `resource`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

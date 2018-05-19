@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: May 17, 2018 at 07:06 PM
+-- Generation Time: May 19, 2018 at 11:14 AM
 -- Server version: 5.6.40
 -- PHP Version: 7.2.4
 
@@ -35,6 +35,28 @@ CREATE TABLE `dependencies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Triggers `dependencies`
+--
+DELIMITER $$
+CREATE TRIGGER `Update remaining capacities on delete` AFTER DELETE ON `dependencies` FOR EACH ROW update resource
+set remaining = (capacity - (
+ select count(*)
+ from dependencies
+ where dependency = OLD.dependency))
+where id = OLd.dependency
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `Update remaining capacities on insert` AFTER INSERT ON `dependencies` FOR EACH ROW update resource
+set remaining = (capacity - (
+ select count(*)
+ from dependencies
+ where dependency = NEW.dependency))
+where id = NEW.dependency
+$$
+DELIMITER ;
+
+--
 -- Indexes for dumped tables
 --
 
@@ -54,7 +76,7 @@ ALTER TABLE `dependencies`
 -- AUTO_INCREMENT for table `dependencies`
 --
 ALTER TABLE `dependencies`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
