@@ -25,8 +25,9 @@ $(document).ready(function(){
 	// const dummyUsers = require('./dummyUsers.json'); 
 	const dummySubjects = require('./dummySubjects.json');
 
-	$(".mdl-layout__content .page-content .add-user").hide();
-	$(".mdl-layout__content .page-content .subjects-list").hide();
+	$(".mdl-layout__content .page-content .users-management").hide();
+	$(".mdl-layout__content .page-content .add-user .subjects-list").hide();
+	
 	$(".demo-list-control.mdl-list.dropdown").hide();
 
 	$(".loader-bck").hide();
@@ -374,13 +375,10 @@ $(document).ready(function(){
 
 		$(".mdl-layout__content .page-content .users-management").hide();
 		$(".mdl-layout__content .page-content .add-user").hide();
-		$(".mdl-layout__content .page-content .subjects-list").hide();
-
+		
 
 		$(pageContent + " ." + linkId).show();		
-		if (linkId === "add-user"){
-			$(".mdl-layout__content .page-content .subjects-list").show();			
-		}
+		
 	});
 
 	$(addButton).on('click', function(){
@@ -465,6 +463,7 @@ $(document).ready(function(){
 		});
 
 		$(".dropdown .mdl-list__item").on("click", function(){
+
 			let val = $(this).children("span").text();
 			val = val.trim();
 			
@@ -476,7 +475,8 @@ $(document).ready(function(){
 	function renderSubjectsList(list){
 
 		console.log(list);
-		$(".page-content .subjects-list .list").children().remove();
+		$(".mdl-layout__content .page-content .add-user .subjects-list").show();
+		$(".page-content .add-user .subjects-list .list").children().remove();
 		list.map((subj, index) =>{
 
 			$(".page-content .subjects-list .list").append(
