@@ -92,7 +92,7 @@ function send(){
   getTime();
   getRooms();
   
-  if (important && (motive==null))
+  if (important && (motive==""))
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
   else
   if ((frequency === 0) && (dateEntered == ""))
