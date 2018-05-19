@@ -12,6 +12,7 @@ $(document).ready(function(){
 	let searchInput = ".users-management .mdl-textfield__input";
 	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
 	let errorMsg = "";
+	let notification = document.querySelector("#notification");
 	let removeUserId;
 	let resetUserId;
 	let usersData;
@@ -38,7 +39,9 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			//"Afiseaza pe pagina: Something went wrong please try again"
+			notification.MaterialSnackbar.showSnackbar({
+				message: "Something went wrong! Please try again."
+			});
 		}
 	});
 
@@ -49,7 +52,9 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			//"Afiseaza pe pagina: Something went wrong please try again"
+			notification.MaterialSnackbar.showSnackbar({
+				message: "Something went wrong! Please try again."
+			});
 		}
 	});
 
@@ -92,10 +97,11 @@ $(document).ready(function(){
 
 			if (data.success === true){				  
 			  	callback(true);
-			  	console.log("user sters cu succes");
+				notify("User successfully removed.");
 			}
 			else {
 			  	callback(false);
+				notify("Something went wrong! Please try again.");
 			}
 		});
 	}
@@ -116,11 +122,12 @@ $(document).ready(function(){
 			$(".loader-bck").hide();
 
 			if (data.success === true){
-			  console.log("user editat cu succes");
 			  callback(true);
+			  notify("User successfully edited.");
 			}
 			else {
 			  callback(false);
+			  notify("Something went wrong! Please try again.");
 			}
 		});		
 	}
@@ -181,12 +188,15 @@ $(document).ready(function(){
 			$(".loader-bck").hide();
 			// console.log(data);
 			if (data.success === true){
-				console.log("user adaugat cu succes");
 			  	callback(true);
+				notification.MaterialSnackbar.showSnackbar({
+					message: "User successfully added."
+				});
 			}
 			else {
 			  errorMsg = data.message;
 			  callback(false);
+			  notify("Something went wrong! Please try again.");
 			}
 		});	
 	}
@@ -281,27 +291,34 @@ $(document).ready(function(){
 			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`).val();
 			// const userName = $(".mdl-textfield__input#edit-userName").val();
 			const mail = $(`.mdl-textfield__input#edit-email-${id}`).val();
+
+			const cond2 = verifyInput(
+							mail, 
+							/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+							`edit-email-${id}`,
+							"Please enter a valid email address"
+						);
+			const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, `edit-fullName-${id}`, "Please use only letters");
 			
 
-			apiSendEditedPost({fullName, mail, id}, function(response){
-	
-				if (response === true){
+			if (cond1 && cond2) {
+				apiSendEditedPost({fullName, mail, id}, function(response){
+		
+					if (response === true){
 
-					$(searchInput).val("");
-					apiAllUsersGet(function(response){
-						if (response === true){
-							renderUsers(usersData);
-						}
-				
-						if (response === false){
-							//"Afiseaza pe pagina: Something went wrong please try again"
-						}
-					});
-				}
-				else{
-					// baga un span sub ceva gen: something went wrong
-				}
-			});
+						$(searchInput).val("");
+						apiAllUsersGet(function(response){
+							if (response === true){
+								renderUsers(usersData);
+							}
+					
+							if (response === false){
+								notify("Something went wrong! Please try again.");
+							}
+						});
+					}
+				});
+			}
 		});
 
 		$(resetButton).on("click", function(){
@@ -326,7 +343,7 @@ $(document).ready(function(){
 					}
 
 					if (response === false){
-						//"Afiseaza pe pagina: Something went wrong please try again"
+						notify("Something went wrong! Please try again.");
 					}
 				});			
 			}
@@ -343,7 +360,10 @@ $(document).ready(function(){
 		
 		apiResetUserPasswordPost({id: resetUserId}, function(response){
 			if (response === true){
-				//afiseaza success
+				notify("User's password successfully reseted.");
+			}
+			else {
+				notify("Something went wrong! Please try again.");
 			}
 		})
 	});
@@ -407,13 +427,10 @@ $(document).ready(function(){
 							// usersData = dummyUsers;
 							renderUsers(usersData);
 						}
+						else {
+							notify("Something went wrong! Please try again.");
+						}
 					});
-
-					//afiseaza sub user was added succesfully
-				}
-				else{
-					
-					//afiseaza ceva gen something went wrong
 				}
 			});
 		}
@@ -426,11 +443,11 @@ $(document).ready(function(){
 
 	function verifyInput(inputText, pattern, alertElem, alertMsg) {
 		if (inputText.val().match(pattern)) {
-			$(".content-input #" + alertElem).empty();
+			$("#" + alertElem).empty();
 			return true;
 		} else {
-			$(".content-input #" + alertElem).text(alertMsg);
-			$(".content-input #" + alertElem).prev().addClass("is-invalid");
+			$("#" + alertElem).text(alertMsg);
+			$("#" + alertElem).prev().addClass("is-invalid");
 			inputText.focus();
 			return false;
 		}
@@ -528,6 +545,11 @@ $(document).ready(function(){
 		
 	});
 
+	function notify(_message) {
+		notification.MaterialSnackbar.showSnackbar({
+			message: _message
+		});
+	}
 
 
 });
