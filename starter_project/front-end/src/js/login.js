@@ -55,7 +55,7 @@ $(document).ready(function(){
 
 
 			if (response === true){
-				$(location).attr('href', '/');
+				$(location).attr('href', '/admin.html');
 			}
 
 			if (response === false){

@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-
 	require('../less/admin.less');
 
+	let token = localStorage.getItem("token");
 	let navLinkButton = ".mdl-navigation__link";
 	let pageContent = ".mdl-layout__content .page-content";
-	let addButton = ".mdl-button";
+	let addButton = ".mdl-button.add-newUser";
 	let removeButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.remove-button";
 	let sendEditedButton = ".save-changes-button";
 	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
@@ -13,24 +13,20 @@ $(document).ready(function(){
 	let errorMsg = "";
 	let removeUserId;
 	let resetUserId;
-
-	const dummyUsers = require('./dummyUsers.json'); 
 	let usersData;
 
 	const hostName = '0.0.0.0:2222';
-	const urlAddUser = `http://${hostName}/endPointName`;
-	const urlGetUsers= `http://${hostName}/endPointName`;
+	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
+	const urlGetUsers= `http://${hostName}/api/admin/users?token=${token}`;
 	const urlPostEditUser= `http://${hostName}/endPointName`;
-	const urlPostRemoveUser = `http://${hostName}/endPointName`;
-	const urlPostResetPassword = `http://${hostName}/endPointName`;
+	// const dummyUsers = require('./dummyUsers.json'); 
 
 	$(".mdl-layout__content .page-content .add-user").hide();
 	$(".loader-bck").hide();
 	
 	apiAllUsersGet(function(response){
 		if (response === true){
-			usersData = dummyUsers;
-			renderUsers(usersData.users);
+			renderUsers(usersData);
 		}
 
 		if (response === false){
@@ -40,56 +36,53 @@ $(document).ready(function(){
 
 	function apiSendRemoveUserPost(data, callback){
 		console.log(data);
-		// $.post(urlPostEditUser, data)
-		// .done(function (data) {
-
-		// 	console.log(data);
-
-		// 	if (data.success === true){
-			  
-		// 	  callback(true);
-		// 	}
-		// 	else {
-			
-		// 	  callback(false);
-		// 	}
-		// });
+		const urlPostRemoveUser = `http://${hostName}/api/admin/users/${data.id}/delete?token=${token}`;
 		$(".loader-bck").show();
-		setTimeout(function(){
-			$(".loader-bck").hide();
-			callback(true);
-		}, 3000);	
-		
 
+		$.post(urlPostRemoveUser)
+		.done(function (data) {
+	
+			$(".loader-bck").hide();
+
+			if (data.success === true){				  
+			  	callback(true);
+			  	console.log("user sters cu succes");
+			}
+			else {
+			  	callback(false);
+			}
+		});
 	}
+
 	function apiSendEditedPost(data, callback){
-		console.log(data);
-
-		// $.post(urlPostEditUser, data)
-		// .done(function (data) {
-
-		// 	console.log(data);
-
-		// 	if (data.success === true){
-			  
-		// 	  callback(true);
-		// 	}
-		// 	else {
-			
-		// 	  callback(false);
-		// 	}
-		// });	
+		// console.log(data);
+		const urlPostEditUser= `http://${hostName}/api/admin/users/${data.id}/update?token=${token}`;
 		$(".loader-bck").show();
-		setTimeout(function(){
-			callback(false);
+
+		const obj={
+			fullName: data.fullName,
+			mail: data.mail
+		};
+
+		$.post(urlPostEditUser, obj)
+		.done(function (data) {
+
 			$(".loader-bck").hide();
-		}, 3000)
-		
+
+			if (data.success === true){
+			  console.log("user editat cu succes");
+			  callback(true);
+			}
+			else {
+			  callback(false);
+			}
+		});		
 	}
 
 	function apiResetUserPasswordPost(data, callback){
 
-		console.log(data);
+		// const urlPostResetPassword = `http://${hostName}/api/admin/users/${data.id}/delete?token=${token}`;
+		// console.log(data);
 
 		// $.post(urlPostResetPassword, data)
 		// .done(function (data) {
@@ -113,59 +106,50 @@ $(document).ready(function(){
 	}
 
 	function apiAllUsersGet(callback){
-		// $.get(urlGetUsers)
-		// .done(function (data) {
 
-		// 	if (data.success === true){
-		// 	  callback(true);
-		// 	}
-		// 	else {
-		
-		// 	  callback(false);
-		// 	}
-		// });
 		$(".loader-bck").show();
-		setTimeout(function(){
-			
+
+		$.get(urlGetUsers)
+		.done(function (data) {
+
 			$(".loader-bck").hide();
-			if (true){
-				callback(true);
-				// usersData = dummyUsers;
+			if (data.success === true){
+			  console.log("useri luati cu success");
+			  console.log(data);
+			  usersData = data.users;
+			  callback(true);
 			}
-			else{
-				callback(false);
+			else {
+			  callback(false);
 			}
-		}, 1000);
+		});
 	}
 
 	function apiAddUserPost(data, callback) {
-		console.log(data);
-
-		
-		// $.post(urlAddUser, data)
-		// .done(function (data) {
-
-		// 	if (data.success === true){
-		// 	  callback(true);
-		// 	}
-		// 	else {
-		// 	  errorMsg = data.message;
-		// 	  callback(false);
-		// 	}
-		// });	
+		// console.log(data);
 		$(".loader-bck").show();
-		setTimeout(function(){
-			callback(true);
+
+		$.post(urlAddUser, data)
+		.done(function (data) {
+
 			$(".loader-bck").hide();
-		}, 3000)
+			// console.log(data);
+			if (data.success === true){
+				console.log("user adaugat cu succes");
+			  	callback(true);
+			}
+			else {
+			  errorMsg = data.message;
+			  callback(false);
+			}
+		});	
 	}
 
 	function getSuggestions(value){
-
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
       
-        return inputLength <= 1 ? [] : usersData.users.filter(user =>
+        return inputLength <= 1 ? [] : usersData.filter(user =>
           user.fullName.toLowerCase().slice(0, inputLength) === inputValue
         );
     }
@@ -182,7 +166,7 @@ $(document).ready(function(){
                         	<span class="mdl-list__item-primary-content">
                                 <i class="material-icons mdl-list__item-avatar">person</i>
 								<span>Full Name: ${user.fullName}</span>
-								<span class="mdl-list__item-sub-title">Email: ${user.email}</span>
+								<span class="mdl-list__item-sub-title">Email: ${user.mail}</span>
 							</span>
 								
 						</li>
@@ -209,7 +193,7 @@ $(document).ready(function(){
 						</div>
 
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.email}" id="edit-email-${user.id}">
+							<input class="mdl-textfield__input" type="text" value="${user.mail}" id="edit-email-${user.id}">
 						</div>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
@@ -250,25 +234,23 @@ $(document).ready(function(){
 			const id =  $(this).parent().parent().attr("userId");
 			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`).val();
 			// const userName = $(".mdl-textfield__input#edit-userName").val();
-			const email = $(`.mdl-textfield__input#edit-email-${id}`).val();
+			const mail = $(`.mdl-textfield__input#edit-email-${id}`).val();
 			
 
-			apiSendEditedPost({fullName, email, id}, function(response){
+			apiSendEditedPost({fullName, mail, id}, function(response){
 	
 				if (response === true){
 
 					$(searchInput).val("");
 					apiAllUsersGet(function(response){
 						if (response === true){
-							usersData = dummyUsers;
-							renderUsers(usersData.users);
+							renderUsers(usersData);
 						}
 				
 						if (response === false){
 							//"Afiseaza pe pagina: Something went wrong please try again"
 						}
 					});
-									
 				}
 				else{
 					// baga un span sub ceva gen: something went wrong
@@ -287,13 +269,14 @@ $(document).ready(function(){
 		$("dialog#dialog-remove").hide();
 		
 		apiSendRemoveUserPost({id: removeUserId}, function(response){
+
 			if (response === true){
 
 				$(searchInput).val("");
 				apiAllUsersGet(function(response){
 					if (response === true){
-						usersData = dummyUsers;
-						renderUsers(usersData.users);
+						
+						renderUsers(usersData);
 					}
 
 					if (response === false){
@@ -323,8 +306,6 @@ $(document).ready(function(){
 		$("dialog#dialog-reset").hide();
 	});
 
-	
-
 	$(searchInput).on('input', function(){
 		const searchText = $(searchInput).val();
 		// console.log(searchText.length);
@@ -338,7 +319,7 @@ $(document).ready(function(){
 			}
 		}
 		else{
-			renderUsers(usersData.users);
+			renderUsers(usersData);
 		}
 	});
 
@@ -369,11 +350,16 @@ $(document).ready(function(){
 
 		if (cond1  && cond3) {
 
-			const obj ={ fullName: $(fullName).val(), email: $(email).val()};
+			const obj ={ fullName: $(fullName).val(), mail: $(email).val()};
 			apiAddUserPost(obj, function(response){
 
 				if (response === true){
-					
+					apiAllUsersGet(function(response){
+						if (response === true){
+							// usersData = dummyUsers;
+							renderUsers(usersData);
+						}
+					});
 
 					//afiseaza sub user was added succesfully
 				}
@@ -387,7 +373,7 @@ $(document).ready(function(){
 
 	$(".mdl-textfield__input").on("input", function() {
 		$(".is-focused .mdl-textfield__input").parent().next().empty();
-		console.log("input");
+		// console.log("input");
 	});
 
 	function verifyInput(inputText, pattern, alertElem, alertMsg) {
