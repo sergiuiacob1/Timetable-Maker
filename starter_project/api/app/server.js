@@ -6,15 +6,16 @@ module.exports = (() => {
   // const cors = require('cors');
 
   const config = require('./../config/config');
-  const { authenticate, register, checkAuthenticated, forgot } = require('./authentication');
-  const { updateUserInfo, getUserRoute } = require('./user_routes');
+  const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
+  const {updateUserInfo, getUserRoute} = require('./user_routes');
   const {
     newResourceRoute,
     getResourcesRoute,
     updateResourceRoute,
     deleteResourceRoute
   } = require('./resource_routes');
-  const { getRoomsRoute } = require('./room_routes');
+  const {getRoomsRoute} = require('./room_routes');
+  const {getConstraintsRoute} = require('./constraints_routes.js');
 
   let serverInterface = undefined;
 
@@ -47,6 +48,8 @@ module.exports = (() => {
     // app.post('/resources/update', updateResourceRoute);
     // app.post('/resources/remove', deleteResourceRoute);
 
+    app.get('/constraints', getConstraintsRoute);
+
     const apiRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
@@ -60,7 +63,8 @@ module.exports = (() => {
     apiRoutes.post('/resources/remove', deleteResourceRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
-
+    
+    
     app.use('/api', apiRoutes);
 
     const start = (port) => {
