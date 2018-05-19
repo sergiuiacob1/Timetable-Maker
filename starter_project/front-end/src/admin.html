@@ -32,6 +32,14 @@
   </header>
 
   <main class="mdl-layout__content">
+    <div class="page-content"> 
+      <div class="subjects-list"> 
+          <div class="title">Materii selectate</div>
+          <div class="list">
+          
+          </div>
+      </div>
+    </div>
     <div class="page-content">
         <div class="users-management">
             <div class="container">
@@ -48,7 +56,7 @@
                                 <input class="mdl-textfield__input" type="text" id="sample6">
 
                                 <label class="mdl-textfield__label" for="sample-expandable">
-                                        <i class="material-icons">search</i>
+                                        <i class="material-icons search">search</i>
                                         Search a user
                                     </label>
                             </div>
@@ -79,15 +87,24 @@
                         <p id="fullname-req"></p>
                     </div>
 
-                 
-
-
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" type="email" id="email">
                             <label class="mdl-textfield__label" for="fname">Email</label>
                         </div>
                         <p id="email-req"></p>
+                    </div>
+
+                    <div class="content-input">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="subjects">
+                            <label class="mdl-textfield__label" for="fname">Adauga materii profesor</label>
+                        </div>
+                        <p id="subjects-req"></p>
+                    </div>
+
+                    <div class="content-dropdown">
+                      <ul class="demo-list-control mdl-list dropdown"></ul>
                     </div>
 
                     <div class="content-input">

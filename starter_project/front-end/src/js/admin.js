@@ -10,18 +10,25 @@ $(document).ready(function(){
 	let sendEditedButton = ".save-changes-button";
 	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
 	let searchInput = ".users-management .mdl-textfield__input";
+	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
 	let errorMsg = "";
 	let removeUserId;
 	let resetUserId;
 	let usersData;
+	let subjectsData;
+	let subjectsList = [];
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
 	const urlGetUsers= `http://${hostName}/api/admin/users?token=${token}`;
 	const urlPostEditUser= `http://${hostName}/endPointName`;
 	// const dummyUsers = require('./dummyUsers.json'); 
+	const dummySubjects = require('./dummySubjects.json');
 
 	$(".mdl-layout__content .page-content .add-user").hide();
+	$(".mdl-layout__content .page-content .subjects-list").hide();
+	$(".demo-list-control.mdl-list.dropdown").hide();
+
 	$(".loader-bck").hide();
 	
 	apiAllUsersGet(function(response){
@@ -33,6 +40,44 @@ $(document).ready(function(){
 			//"Afiseaza pe pagina: Something went wrong please try again"
 		}
 	});
+
+	apiAllSubjectsGet(function(response){
+		if (response === true){
+			subjectsData = dummySubjects.subjects;
+			// renderUsers(usersData);
+		}
+
+		if (response === false){
+			//"Afiseaza pe pagina: Something went wrong please try again"
+		}
+	});
+
+	function apiAllSubjectsGet(callback){
+
+		$(".loader-bck").show();
+
+		// $.get(urlGetSubjects)
+		// .done(function (data) {
+
+		// 	$(".loader-bck").hide();
+		// 	if (data.success === true){
+		// 	  console.log("materii luate cu success");
+		// 	  console.log(data);
+		// 	  subjectsData = data.users;
+		// 	  callback(true);
+		// 	}
+		// 	else {
+		// 	  callback(false);
+		// 	}
+		// });
+
+		setTimeout(function(){
+			$(".loader-bck").hide();
+
+			
+			callback(true);
+		}, 1000);
+	}
 
 	function apiSendRemoveUserPost(data, callback){
 		console.log(data);
@@ -329,8 +374,13 @@ $(document).ready(function(){
 
 		$(".mdl-layout__content .page-content .users-management").hide();
 		$(".mdl-layout__content .page-content .add-user").hide();
+		$(".mdl-layout__content .page-content .subjects-list").hide();
+
 
 		$(pageContent + " ." + linkId).show();		
+		if (linkId === "add-user"){
+			$(".mdl-layout__content .page-content .subjects-list").show();			
+		}
 	});
 
 	$(addButton).on('click', function(){
@@ -387,4 +437,97 @@ $(document).ready(function(){
 			return false;
 		}
 	}
+
+	function getSuggestions_subjects(value){
+		const inputValue = value.trim().toLowerCase();
+        const inputLength = inputValue.length;
+      
+        return inputLength <= 1 ? [] : subjectsData.filter(subj =>
+          subj.toLowerCase().slice(0, inputLength) === inputValue
+        );
+	}
+	function renderSubjects(array){
+
+		$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").children().remove();
+		$(".demo-list-control.mdl-list.dropdown").show();
+
+		console.log(array);
+		array.map((subj, index) =>{
+
+
+			$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").append(
+					`<li class="mdl-list__item" key=${index}>
+                        <span class="mdl-list__item-primary-content">
+                        ${subj}
+                        </span>
+                     </li>`
+            );
+		});
+
+		$(".dropdown .mdl-list__item").on("click", function(){
+			let val = $(this).children("span").text();
+			val = val.trim();
+			
+			subjectsList.push(val);
+			renderSubjectsList(subjectsList);
+		});
+	}
+
+	function renderSubjectsList(list){
+
+		console.log(list);
+		$(".page-content .subjects-list .list").children().remove();
+		list.map((subj, index) =>{
+
+			$(".page-content .subjects-list .list").append(
+				`<div class="mdl-chip mdl-chip--deletable">
+          			<div class="mdl-chip__text">${subj}</div>
+          			<button type="button" class="mdl-chip__action">
+          				<i class="material-icons">cancel</i>
+          			</button>
+        		</div>`
+        	);
+		});
+
+		$(".page-content .subjects-list .list .mdl-chip__action").on("click", function(){
+			let subj = $(this).prev().text();
+			let index = subjectsList.indexOf(subj);
+			if (index > -1) {
+			  subjectsList.splice(index, 1);
+			}
+
+			
+			renderSubjectsList(subjectsList);
+
+
+		});
+	}
+
+
+
+
+	$(subjectsInput).on('input', function(){
+
+		const searchText = $(subjectsInput).val();
+
+		if (searchText.length !== 0){
+			const array = getSuggestions_subjects(searchText);
+
+			console.log(array);
+			
+			if (array.length !== 0){
+				renderSubjects(array);
+			}
+			else{
+				$(".demo-list-control.mdl-list.dropdown").hide();	
+			}
+		}
+		else{
+			$(".demo-list-control.mdl-list.dropdown").hide();
+		}
+		
+	});
+
+
+
 });
