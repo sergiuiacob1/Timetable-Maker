@@ -29,7 +29,9 @@ module.exports = {
   context: __dirname,
   entry: {
     app: './src/index.js',
-    login: './src/login.js'
+    login: './src/login.js',
+    // material: './src/node_modules/material-design-lite/dist/material.min.js',
+    resources: './src/resources.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -37,7 +39,14 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9000
+    port: 9000,
+    historyApiFallback: true,
+    watchOptions: { aggregateTimeout: 300, poll: 1000 },
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+      // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      // "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+    }
   },
   module: {
     rules: [
@@ -57,6 +66,14 @@ module.exports = {
           loader: 'css-loader' // translates CSS into CommonJS
         }, {
           loader: 'less-loader' // compiles Less to CSS
+        }]
+      },
+      {
+        test: /\.css$/,
+        use: [{
+          loader: 'style-loader' // creates style nodes from JS strings
+        }, {
+          loader: 'css-loader' // translates CSS into CommonJS
         }]
       }
     ]
