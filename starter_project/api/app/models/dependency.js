@@ -1,4 +1,3 @@
-
 module.exports = (() => {
     'use strict';
   
@@ -6,25 +5,32 @@ module.exports = (() => {
     const { Extension } = require('./../../config/pools.js');
     const ApplicationRecord = require('./application_record.js');
   
-    class Subject extends ApplicationRecord {
+    class Dependency extends ApplicationRecord {
       constructor() {
         console.log(Extension);
-        super(Extension, "subjects");
+        super(Extension, "dependencies");
       }
   
       where({
-        id
+        id, dependant, dependency
       }) {
         let whereClause = squel.expr();
   
         if (id) {
           whereClause = whereClause.and("id = ?", id);
         }
+        if (dependant) {
+          whereClause = whereClause.and('dependant = ?', dependant);
+        }
+        if (dependency) {
+          whereClause = whereClause.and('dependency = ?', dependency);
+        }
+       
         this.query = this.query.where(whereClause);
         return this;
       }
     }
   
-    return Subject;
+    return Dependency;
   })();
   

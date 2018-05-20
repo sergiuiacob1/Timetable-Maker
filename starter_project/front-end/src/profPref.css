@@ -11,10 +11,9 @@ body {
 .boody{
   width: 100%;
   display: grid;
-  grid-template-rows: min-content min-content;
+  grid-template-rows: min-content;
   grid-template-columns: 1% 18% 80% 1%;
-  grid-template-areas: ". sidebar main1 ."
-                       ". sidebar main1 .";
+  grid-template-areas: ". sidebar main1 .";
   grid-gap: 3em;
 }
 .orar {
@@ -89,4 +88,14 @@ input[type = submit] {
 
 .redColor{
   background: #ffd54f;
+}
+
+/* phone addaptation */
+
+@media only screen and (max-width: 1000px){
+  .boody{
+    grid-template-rows: min-content min-content;
+    grid-template-columns: 1% 98% 1%;
+    grid-template-areas: ". main1 ." ". sidebar .";
+  }
 }

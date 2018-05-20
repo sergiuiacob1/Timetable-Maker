@@ -26,9 +26,19 @@ module.exports = (() => {
           });
       }
     };
+
+    const getGroups = () => {
+      return new Group()
+        .field('*')
+        .valueOf()
+        .then((res) => {
+          return res;
+        });
+    };
   
     return {
       newGroup,
-      getGroup
+      getGroup,
+      getGroups
     };
   })();

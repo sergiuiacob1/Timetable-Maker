@@ -64,7 +64,6 @@ function getDate(){
   dateEntered = document.getElementById("dateInput").value;
 };
 
-
 function getTime(){
   var table = document.getElementById("orar");
   
@@ -92,7 +91,7 @@ function send(){
   getTime();
   getRooms();
   
-  if (important && (motive==null))
+  if (important && (motive==""))
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
   else
   if ((frequency === 0) && (dateEntered == ""))
@@ -130,6 +129,47 @@ function openTab(tabName) {
   document.getElementById(tabName).style.display = "block";       
 };
 
+
 /*function getStudentNumber(selectedNumber){
   studentNumber = selectedNumber;
 };*/
+
+
+
+function getSubjectsShow(){
+	var url = 'https://api.myjson.com/bins/13eg4e';
+	$.get(`${url}`).done(function (result){
+		for(var i=0;i<result.subjects.length;i++){
+			$("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
+			
+		}
+	});
+};
+
+function getRoomsShow(){
+	var url = 'https://api.myjson.com/bins/b6i1q';
+	var pos;
+	$.get(`${url}`).done(function(result){
+		for(var i=0;i<result.rooms.length;i++){
+			pos = Math.ceil((i+1)/3);
+			if(i%3 == 0)
+				$('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
+			$("#tr"+pos).append('<td class="noColor" onclick="cSwap(this)">'+result.rooms[i].name+'</td>');
+		}
+	});
+};
+
+function getGroupsShow(){
+	var url = '...';
+	$.get(`${url}`).done(function(result){
+		for(var i=0;i<result.groups.length;i++){
+			$("#grupa").append('<option value="'+result.groups[i].id+'">'+result.groups[i].name+'</option>');
+		}
+	});
+};
+
+$(document).ready(function() {
+	getSubjectsShow();
+	getRoomsShow();
+	getGroupsShow();
+});
