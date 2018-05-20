@@ -27,6 +27,7 @@ $(document).ready(function(){
 	const dummySubjects = require('./dummySubjects.json');
 
 	$(".mdl-layout__content .page-content .add-user").hide();
+	$(".mdl-layout__content.no-scroll").css("overflow", "hidden");
 	$(".mdl-layout__content .page-content .add-user .subjects-list").hide();
 	
 	$(".demo-list-control.mdl-list.dropdown").hide();
@@ -290,9 +291,10 @@ $(document).ready(function(){
 		$(sendEditedButton).on('click', function(){
 
 			const id =  $(this).parent().parent().attr("userId");
-			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`).val();
+
+			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`);
 			// const userName = $(".mdl-textfield__input#edit-userName").val();
-			const mail = $(`.mdl-textfield__input#edit-email-${id}`).val();
+			const mail = $(`.mdl-textfield__input#edit-email-${id}`);
 
 			const cond2 = verifyInput(
 							mail, 
@@ -302,9 +304,12 @@ $(document).ready(function(){
 						);
 			const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, `edit-fullName-${id}`, "Please use only letters");
 			
-
 			if (cond1 && cond2) {
-				apiSendEditedPost({fullName, mail, id}, function(response){
+
+				const obj = {fullName: $(fullName).val(), mail: $(mail).val(), id};
+
+
+				apiSendEditedPost(obj, function(response){
 		
 					if (response === true){
 
@@ -399,7 +404,16 @@ $(document).ready(function(){
 		$(".mdl-layout__content .page-content .add-user").hide();
 		
 
+		if (linkId === "users-management"){
+			$(".mdl-layout__content.no-scroll").scrollTop(0);
+			$(".mdl-layout__content.no-scroll").css("overflow", "hidden");
+		}
+		else{
+			$(".mdl-layout__content.no-scroll").css("overflow", "auto");	
+		}
 		$(pageContent + " ." + linkId).show();		
+
+
 		
 	});
 
@@ -521,8 +535,6 @@ $(document).ready(function(){
 
 		});
 	}
-
-
 
 
 	$(subjectsInput).on('input', function(){
