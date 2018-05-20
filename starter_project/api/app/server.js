@@ -3,7 +3,7 @@ module.exports = (() => {
   const express = require("express");
   const bodyParser = require('body-parser');
   const morgan = require('morgan');
-  // const cors = require('cors');
+  const cors = require('cors');
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
@@ -15,6 +15,8 @@ module.exports = (() => {
     deleteResourceRoute
   } = require('./resource_routes');
   const {getRoomsRoute} = require('./room_routes');
+  const {getGroupsRoute} = require('./group_routes');
+  const {getSubjectsRoute} = require('./subject_routes');
   const {getConstraintsRoute} = require('./constraints_routes.js');
 
   let serverInterface = undefined;
@@ -30,7 +32,7 @@ module.exports = (() => {
 
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(bodyParser.json());
-    // app.use(cors());
+    app.use(cors());
 
     // use morgan to log requests to the console
     app.use(morgan('dev'));
@@ -63,6 +65,9 @@ module.exports = (() => {
     apiRoutes.post('/resources/remove', deleteResourceRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
+
+    apiRoutes.get('/groups', getGroupsRoute);
+    apiRoutes.get('/subjects', getSubjectsRoute);
     
     
     app.use('/api', apiRoutes);
