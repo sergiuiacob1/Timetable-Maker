@@ -1,5 +1,5 @@
 # create a docker-compose.yml file
-version: "3"
+version: "2"
 services:
   web:
     build: .
