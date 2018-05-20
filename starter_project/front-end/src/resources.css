@@ -1,0 +1,342 @@
+*{
+    font-family: 'Roboto' sans-serif;
+}
+body{
+    display:flex;
+}
+
+#navigator{
+    display: inline-block;
+}
+
+nav {
+    max-width: 960px;
+    mask-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, #ffffff 25%, #ffffff 75%, rgba(255, 255, 255, 0) 100%);
+    margin: 0 auto;
+    padding: 60px 0;
+}
+
+nav ul {
+    text-align: center;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.2) 25%, rgba(255, 255, 255, 0.2) 75%, rgba(255, 255, 255, 0) 100%);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    padding: 18px;
+    font-family: sans-serif;
+    text-transform:uppercase;
+    color: black;
+    font-size: 18px;
+    text-decoration: none;
+    display: block;
+}
+
+nav ul li a:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1), inset 0 0 1px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 35, 122, 0.7);
+}
+.elevation-1 {
+    position: relative;
+}
+.points {
+    position: absolute;
+    right: 0 !important;
+    top: 0 !important;
+}
+
+.points .menu__content {
+    top: 50px !important;
+    left: 0px !important;
+}
+.moreInfo{
+    width: 70%;
+    margin-top:10px;
+    margin-bottom:26px;
+}
+
+.poster img {
+    width: 100%;
+
+}
+
+.car-info {
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+    line-height: 1.3;
+}
+
+.car-info .categories {
+    flex-grow: 1;
+}
+
+.car-info .btn.btn--icon.btn {
+    justify-self: flex-end;
+}
+
+.categories {
+    font-size: 11px;
+    display: block;
+    color: #E4BC2E;
+    font-weight: bold;
+}
+
+.description {
+    text-overflow: ellipsis;
+    color: blue;
+    font-size: 18px;
+}
+
+.capitals input[type="text"] {
+    text-transform: uppercase;
+}
+
+.myInputs {
+    display: flex;
+    justify-content: space-around;
+}
+
+.valueField {
+    margin-left: 10px;
+}
+
+.pagination {
+    padding-right: 135px !important;
+}
+
+.cars-card {
+    display: flex;
+    text-align: center;
+}
+.registerNo{
+    margin-top:10px;
+    margin-bottom:10px;
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+img {
+    border-radius: 100%;
+    height: 120px;
+    width: 120px;
+    margin-top: 50px;
+    object-fit:cover;
+}
+
+.cars-info {
+    display: flex;
+    text-align: center;
+}
+.registerNo {
+    font-size: 22px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+img {
+    height: 300px;
+    object-fit:cover;
+}
+.addCar{
+    margin-bottom:78px;
+}
+img.myPlus {
+    height: 160px;
+    width: 150px;
+}
+
+.carAdd:hover{
+    cursor:pointer;
+
+}
+.carCardHeight{
+    margin-bottom:20px;
+}
+.tData{
+    padding:5px 15px 5px 5px;
+    font-size:16px;
+}
+.capitalize::first-letter{
+    text-transform: uppercase;
+}
+.capitalize{
+    margin: 0 0 3px 0;
+}
+addOperation{
+    background: rgba(0,0,0,0);
+    border: 2px dashed #dadada;
+    border-radius:3px;
+    margin-bottom:8px;
+}
+.textAdd.own.car {
+    padding-top: 111px;
+    padding-bottom: 111px;
+}
+
+.tasks_card.card__media {
+    background-color: white;
+}
+
+.cardTitle {
+    background-color: white;
+}
+
+.overflowText2 {
+    color: black;
+    width: calc(100% - 33px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.dialogOpEdit {
+    position: relative;
+}
+
+.noItems {
+    margin-top: 30vh;
+    text-align: center;
+    font-size: 2.9vh;
+    color: #3486D7;
+}
+
+.noItems:hover{
+    cursor:default;
+}
+.hoverSpan{
+    border-bottom:2px solid #3486D7;
+}
+.hoverSpan:hover{
+    cursor:pointer;
+}
+
+.plusItem {
+    font-size: 38px;
+    text-align:center;
+}
+
+.addCardMedia:hover {
+    cursor: pointer;
+}
+.textAdd {
+    color: #bfbfbf;
+    font-size: 25px;
+    font-family:'Roboto', sans-serif;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-bottom: 43px;
+    padding-top: 44px;
+    text-align:center;
+
+}
+.searchBar{
+    top:-10px;
+}
+
+@media screen and (max-width: 400px)
+{
+    .dialog,
+    .dialogEdit{
+        min-width:90vw !important;
+    }
+}
+.titleOperation{
+    margin:10px 0 10px 15px;
+    height:48px;
+}
+.operation-page.list__tile__sub-title {
+    display: flex;
+    justify-content: space-between;
+}
+.list__tile__sub-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card.addOperation{
+    background: rgba(0,0,0,0);
+    border: 2px dashed #dadada;
+    border-radius:3px;
+    box-shadow:none;
+    margin-bottom:8px;
+}
+
+#listOp {
+    border-top: 1px solid #dadada;
+    box-shadow: inset -2px 0px 3px 0px rgba(218,218,218,0.5);
+}
+.font-huge{
+    margin-top:20px;
+    font-size:80px;
+}
+.center{
+    text-align:center;
+    margin:auto;
+}
+.little-margins{
+    padding-right:6px;
+    padding-left:6px;
+}
+.myHeight{
+    margin-top:4%;
+    margin-left:12%;
+}
+.addCardMedia{
+    height:326px;
+}
+.more-info-btn{
+    display: flex;
+    justify-content: center;
+}
+.divider{
+    background-color: #c7c7c7;
+}
+.list{
+    padding:0;
+}
+.resource-name{
+    color:#3F51B5;
+}
+.dialog,
+.dialogEdit{
+    background:white;
+}
+
+dialog{
+    /*display:flex;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    margin-left:auto;
+    margin-right:auto;
+}
+.pos{
+    display:none;
+}
+.menu-card {
+    display: flex;
+    justify-content: flex-end;
+    /*background-color:#3F51B5;*/
+    padding:5px;
+}
+/*.textAdd.own.res {*/
+    /*padding-top: 111px;*/
+    /*padding-bottom: 111px;*/
+/*}*/
