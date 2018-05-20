@@ -64,6 +64,7 @@ function getDate(){
   dateEntered = document.getElementById("dateInput").value;
 };
 
+
 function getTime(){
   var table = document.getElementById("orar");
   
@@ -137,7 +138,7 @@ function openTab(tabName) {
 
 
 function getSubjectsShow(){
-	var url = 'https://api.myjson.com/bins/13eg4e';
+	var url = 'http://0.0.0.0:2222/api/subjects?token={' + localStorage.getItem("token") + '}';
 	$.get(`${url}`).done(function (result){
 		for(var i=0;i<result.subjects.length;i++){
 			$("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
@@ -147,7 +148,7 @@ function getSubjectsShow(){
 };
 
 function getRoomsShow(){
-	var url = 'https://api.myjson.com/bins/b6i1q';
+	var url = 'http://0.0.0.0:2222/api/rooms?token={' + localStorage.getItem("token") + '}';
 	var pos;
 	$.get(`${url}`).done(function(result){
 		for(var i=0;i<result.rooms.length;i++){
@@ -160,10 +161,10 @@ function getRoomsShow(){
 };
 
 function getGroupsShow(){
-	var url = '...';
+	var url = 'http://0.0.0.0:2222/api/groups?token={' + localStorage.getItem("token") + '}';
 	$.get(`${url}`).done(function(result){
 		for(var i=0;i<result.groups.length;i++){
-			$("#grupa").append('<option value="'+result.groups[i].id+'">'+result.groups[i].name+'</option>');
+			$("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
 		}
 	});
 };
