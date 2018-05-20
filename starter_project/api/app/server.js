@@ -15,6 +15,8 @@ module.exports = (() => {
     deleteResourceRoute
   } = require('./resource_routes');
   const {getRoomsRoute} = require('./room_routes');
+  const {getGroupsRoute} = require('./group_routes');
+  const {getSubjectsRoute} = require('./subject_routes');
   const {getConstraintsRoute} = require('./constraints_routes.js');
 
   let serverInterface = undefined;
@@ -63,6 +65,9 @@ module.exports = (() => {
     apiRoutes.post('/resources/remove', deleteResourceRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
+
+    apiRoutes.get('/groups', getGroupsRoute);
+    apiRoutes.get('/subjects', getSubjectsRoute);
     
     
     app.use('/api', apiRoutes);
