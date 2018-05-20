@@ -41,9 +41,7 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notification.MaterialSnackbar.showSnackbar({
-				message: "Something went wrong! Please try again."
-			});
+			notify("Something went wrong! Please try again.");
 		}
 	});
 
@@ -54,9 +52,7 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notification.MaterialSnackbar.showSnackbar({
-				message: "Something went wrong! Please try again."
-			});
+			notify("Something went wrong! Please try again.");
 		}
 	});
 
@@ -250,10 +246,12 @@ $(document).ready(function(){
 						<div class="mdl-textfield mdl-js-textfield">
 							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}">
 						</div>
+                        <p id="edit-fullName-req-${user.id}"></p>
 
 						<div class="mdl-textfield mdl-js-textfield">
 							<input class="mdl-textfield__input" type="text" value="${user.mail}" id="edit-email-${user.id}">
 						</div>
+                        <p id="edit-email-req-${user.id}"></p>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
@@ -299,10 +297,15 @@ $(document).ready(function(){
 			const cond2 = verifyInput(
 							mail, 
 							/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
-							`edit-email-${id}`,
+							`edit-email-req-${id}`,
 							"Please enter a valid email address"
 						);
-			const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, `edit-fullName-${id}`, "Please use only letters");
+			const cond1 = verifyInput(
+							fullName, 
+							/^[a-zA-Z\s]+$/, 
+							`edit-fullName-req-${id}`, 
+							"Please use only letters"
+						);
 			
 			if (cond1 && cond2) {
 
