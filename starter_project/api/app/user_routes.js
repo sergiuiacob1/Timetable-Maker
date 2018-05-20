@@ -104,6 +104,25 @@ module.exports = (() => {
     })
   };
 
+    const resetPasswordRoute = (req, res) => {
+        const id = req.params.id;
+
+        getUser({id}).then((user) => {
+            console.log(user);
+            if (typeof user != 'undefined' && user) {
+                const updateSet = {id: id, new_password: makePassword()};
+                updatePassword(updateSet);
+
+                console.log('Password reset:' + id);
+                res.json({success: true, message: 'password reset'});
+            }
+            else {
+                console.log('Failed password reset');
+                res.json({success: false, message: 'invalid user id'});
+            }
+        });
+    };
+
     const changePasswordRoute = (req, res) => {
 
         // params: id
@@ -152,6 +171,7 @@ module.exports = (() => {
     insertUserRoute,
     updateUserRoute,
       deleteUserRoute,
-      changePasswordRoute
+      changePasswordRoute,
+      resetPasswordRoute
   };
 })();
