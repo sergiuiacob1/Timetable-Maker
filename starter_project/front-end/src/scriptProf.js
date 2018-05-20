@@ -138,7 +138,7 @@ function openTab(tabName) {
 
 
 function getSubjectsShow(){
-	var url = 'http://0.0.0.0:2222/api/subjects?token={' + localStorage.getItem("token") + '}';
+	var url = 'http://0.0.0.0:2222/api/subjects?token=' + token;
 	$.get(`${url}`).done(function (result){
 		for(var i=0;i<result.subjects.length;i++){
 			$("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
@@ -147,8 +147,9 @@ function getSubjectsShow(){
 	});
 };
 
+
 function getRoomsShow(){
-	var url = 'http://0.0.0.0:2222/api/rooms?token={' + localStorage.getItem("token") + '}';
+	var url = 'http://0.0.0.0:2222/api/rooms?token=' + token;
 	var pos;
 	$.get(`${url}`).done(function(result){
 		for(var i=0;i<result.rooms.length;i++){
@@ -161,7 +162,7 @@ function getRoomsShow(){
 };
 
 function getGroupsShow(){
-	var url = 'http://0.0.0.0:2222/api/groups?token={' + localStorage.getItem("token") + '}';
+	var url = 'http://0.0.0.0:2222/api/groups?token=' + token;
 	$.get(`${url}`).done(function(result){
 		for(var i=0;i<result.groups.length;i++){
 			$("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
