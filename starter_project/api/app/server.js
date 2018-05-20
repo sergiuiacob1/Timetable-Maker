@@ -3,11 +3,7 @@ module.exports = (() => {
   const express = require("express");
   const bodyParser = require('body-parser');
   const morgan = require('morgan');
-<<<<<<< HEAD
-  // const cors = require('cors');
-=======
   const cors = require('cors');
->>>>>>> front end setup done as well
 
   const config = require('./../config/config');
   const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
