@@ -46,7 +46,7 @@ module.exports = (() => {
   const authenticate = (req, res) => {
     const {body} = req;
     getUser(body).then((user) => {
-      // console.log(user);
+       console.log(user);
       if (user) {
         const token = jwt.sign({user}, secret, {
           expiresIn: 86400
