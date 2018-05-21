@@ -287,7 +287,7 @@ $(document).ready(function(){
 
 		$(".close").on("click", function() {
 			$(this).parent().parent().parent().hide();
-		})
+		});
 
 		$(removeButton).on("click", function(){
 			removeUserId = $(this).parent().attr("userId");
@@ -365,7 +365,7 @@ $(document).ready(function(){
 					}
 				});			
 			}
-		})
+		});
 	});
 
 	$("button#remove-user-no").on("click", function(){
@@ -383,7 +383,7 @@ $(document).ready(function(){
 			else {
 				notify("Something went wrong! Please try again.");
 			}
-		})
+		});
 	});
 
 	$("button#reset-user-no").on("click", function(){
