@@ -6,18 +6,21 @@ module.exports = (() => {
   const cors = require('cors');
 
   const config = require('./../config/config');
-  const {authenticate, register, checkAuthenticated, forgot} = require('./authentication');
-  const {updateUserInfo, getUserRoute} = require('./user_routes');
+  const {getRoomsRoute} = require('./room_routes');
+  const {authenticate, register, checkAuthenticated, forgot, checkAdmin} = require('./authentication');
+  const {updateUserInfo, getUserRoute, getAllUsers,
+      showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute, changePasswordRoute, resetPasswordRoute
+  } = require('./user_routes');
   const {
     newResourceRoute,
     getResourcesRoute,
     updateResourceRoute,
     deleteResourceRoute
   } = require('./resource_routes');
-  const {getRoomsRoute} = require('./room_routes');
   const {getGroupsRoute} = require('./group_routes');
   const {getSubjectsRoute} = require('./subject_routes');
   const {getConstraintsRoute} = require('./constraints_routes.js');
+
 
   let serverInterface = undefined;
 
@@ -53,8 +56,10 @@ module.exports = (() => {
     app.get('/constraints', getConstraintsRoute);
 
     const apiRoutes = express.Router();
+    const adminRoutes = express.Router();
 
     apiRoutes.use(checkAuthenticated);
+    adminRoutes.use(checkAdmin);
 
     apiRoutes.get('/', function (req, res) {
       res.json({ success: true, message: 'Welcome to the coolest API on earth!' });
@@ -65,6 +70,16 @@ module.exports = (() => {
     apiRoutes.post('/resources/remove', deleteResourceRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
+      apiRoutes.post('/users/:id/changepassword', changePasswordRoute);
+    adminRoutes.post('/users/:id/update', updateUserRoute);
+      adminRoutes.post('/users/:id/reset', resetPasswordRoute);
+    adminRoutes.post('/users/:id/delete', deleteUserRoute);
+    adminRoutes.get('/users/:id', showUserRoute);
+    adminRoutes.post('/users', insertUserRoute);
+    adminRoutes.get('/users', getAllUsers);
+    
+
+    apiRoutes.use('/admin', adminRoutes);
 
     apiRoutes.get('/groups', getGroupsRoute);
     apiRoutes.get('/subjects', getSubjectsRoute);

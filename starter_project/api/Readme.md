@@ -132,3 +132,72 @@ Response: {
 	]
 }
 ```
+
+## GET /api/admin/users
+
+token & admin  
+returns array of all users
+
+```
+Response: {
+	success: true,
+	users: [
+		{
+			id: 1,
+			mail: "andrei@gmail.com"
+		}
+	]
+}
+```
+
+## POST /api/admin/users
+
+token & admin  
+insert new user  
+
+```
+Response: {
+	success: true
+}
+```
+
+## GET /api/admin/users/:id
+
+token & admin  
+required argument: id  
+returns user information  
+
+```
+Response: {
+	success: true,
+	user:
+		{
+			id: 1,
+			mail: "andrei@gmail.com"
+		}
+}
+```
+
+## POST /api/admin/users/:id/update
+
+token & admin  
+required arguments: id  
+updates user 
+
+```
+Response: {
+	success: true
+}
+```
+
+## POST /api/admin/users/:id/delete
+
+token & admin  
+required arguments: id  
+deletes user 
+
+```
+Response: {
+	success: true
+}
+```

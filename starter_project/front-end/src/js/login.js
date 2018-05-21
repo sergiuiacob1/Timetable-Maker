@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+	require('../less/login.less');
 
 	const hostName = '0.0.0.0:2222';
 	const urlLogin= `http://${hostName}/authenticate`;
@@ -31,17 +32,18 @@ $(document).ready(function(){
 		});	
 	}
 
-	$('.login #login-form .login-button').on('click', function() {
+	$('#login-button').on('click', function() {
 
-		$('.login #login-form .error-msg').remove();
-		let loginBtn = $('.login #login-form .login-button');
+		$('#login-form .error-msg').remove();
+		let loginBtn = $('#login-button');
 
-		const username = $(".login #login-form .input #username-input").val();
-		const password = $(".login #login-form .input #password-input").val();
+		const username = $("#login-form #username-input").val();
+		const password = $("#login-form #password-input").val();
 
 		if (username.length === 0 || password.length === 0) {
 			if (errorMsg === false) {
-				loginBtn.after($("<div></div>").html("Please provide credentials!").addClass("error-msg"));
+				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Please provide credentials!").addClass("error-msg"));
+				$(".mdl-textfield").addClass("is-invalid");
 				errorMsg = true;
 			}
 			return;
@@ -54,13 +56,19 @@ $(document).ready(function(){
 
 
 			if (response === true){
-				$(location).attr('href', 'file:///home/timi/Documents/IP2/IP_LOGIN/index.html');
+				$(location).attr('href', '/admin.html');
 			}
 
 			if (response === false){
-				loginBtn.after($("<div></div>").html(errorMsg).addClass("error-msg"));		
+				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
+				$(".mdl-textfield").addClass("is-invalid");
 			}
 
 		});
+	});
+
+	$(".mdl-textfield__input").on("input", function() {
+		$(".error-msg").remove();
+		errorMsg = false;
 	});
 });
