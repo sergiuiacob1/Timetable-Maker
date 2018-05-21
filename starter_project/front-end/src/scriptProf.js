@@ -1,6 +1,8 @@
 const hostName = 'localhost:2222';
 const token = localStorage.getItem("token");
-const urlPost = 'https://${hostName}/ENDPOINT?token=${token}';
+const urlPost = 'https://${hostName}/constraint?token=${token}';
+
+require('./profPref.less');
 
 function postThisShit(json, callback) {
 

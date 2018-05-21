@@ -29,7 +29,8 @@ module.exports = {
   context: __dirname,
   entry: {
     app: './src/index.js',
-    login: './src/login.js'
+    login: './src/login.js',
+    profPref: './src/scriptProf.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

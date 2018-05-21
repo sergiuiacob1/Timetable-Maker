@@ -1,7 +1,7 @@
 module.exports = (() => {
     'use strict';
   
-    const {getConstraints} = require('./constraints_actions.js');
+    const {getConstraints, addConstraint} = require('./constraints_actions.js');
   
     const getConstraintsRoute = (req, res) => {
       getConstraints().then((constraints) => {
@@ -13,8 +13,18 @@ module.exports = (() => {
       });
 
     };
+
+    const newConstraintRoute = (req, res) => {
+      addConstraint(req).then(() => {
+        res.json({success: true, message: "Added constraint"});
+      }).catch((e) => {
+        console.log(e);
+        res.json({success: false});
+      });
+    };
   
     return {
-      getConstraintsRoute
+      getConstraintsRoute,
+      newConstraintRoute
     };
   })();
