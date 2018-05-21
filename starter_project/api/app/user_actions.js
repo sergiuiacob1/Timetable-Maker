@@ -2,7 +2,12 @@ module.exports = (() => {
   'use strict';
   const User = require('./models/user');
 
-  const newUser = ({ password, mail, userName, fullName }) => {
+  const newUser = ({
+    password,
+    mail,
+    userName,
+    fullName
+  }) => {
     return new User()
       .insert()
       .set('password', password)
@@ -15,12 +20,18 @@ module.exports = (() => {
       });
   };
 
-  const getUser = ({ id, password, mail }) => {
+  const getUser = ({
+    id,
+    password,
+    mail
+  }) => {
 
     if (id) {
       return new User()
         .field('*')
-        .where({ id })
+        .where({
+          id
+        })
         .valueOf()
         .then((res) => {
           return res[0];
@@ -30,7 +41,8 @@ module.exports = (() => {
     return new User()
       .field('*')
       .where({
-        mail, password
+        mail,
+        password
       }).valueOf()
       .then((res) => {
         if (res.length > 1)
@@ -39,12 +51,17 @@ module.exports = (() => {
       });
   };
 
-  const updateUser = ({ id, mail, fullName, userName, old_password, new_password }) => {
+  const updateUser = ({
+    id,
+    mail,
+    fullName,
+    old_password,
+    new_password
+  }) => {
     return new User()
       .update()
       .set('mail', mail)
       .set('fullName', fullName)
-      .set('userName', userName)
       .set('password', new_password)
       .where({
         id
@@ -55,18 +72,21 @@ module.exports = (() => {
       });
   };
 
-    const updatePassword = ({id, new_password}) => {
-        return new User()
-            .update()
-            .set('password', new_password)
-            .where({
-                id
-            })
-            .valueOf()
-            .then((res) => {
-                return true;
-            });
-    };
+  const updatePassword = ({
+    id,
+    new_password
+  }) => {
+    return new User()
+      .update()
+      .set('password', new_password)
+      .where({
+        id
+      })
+      .valueOf()
+      .then((res) => {
+        return true;
+      });
+  };
 
   const getUsers = () => {
     return new User()
@@ -77,7 +97,9 @@ module.exports = (() => {
       });
   }
 
-  const deleteUser = ({ id }) => {
+  const deleteUser = ({
+    id
+  }) => {
     console.log(id);
     if (id) {
       return new User()
