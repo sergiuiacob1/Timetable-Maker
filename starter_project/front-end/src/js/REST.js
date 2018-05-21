@@ -1,8 +1,9 @@
+
 var getAllResources = function () {
     // Returns all resources, unfiltered
 
     return new Promise((resolve, refuse) => {
-        fetch("http://localhost:2222/resources/get", {
+        fetch("http://mihaibojescu.cf:2222/resources/get", {
             mode: "cors"
         }).then((result) => {
             resolve(result);
@@ -17,7 +18,7 @@ var newResource = function ({ type, name, capacity, dependencies }) {
     // Returns a JSON with success status
 
     return new Promise((resolve, refuse) => {
-        fetch("http://localhost:2222/resources/add", {
+        fetch("http://mihaibojescu.cf:2222/resources/add", {
             method: "POST",
             body: {
                 "type": type,

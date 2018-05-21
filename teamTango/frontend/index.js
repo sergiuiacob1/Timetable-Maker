@@ -29,6 +29,8 @@ var resources=[
         dependency:''
     }
 ];
+var backupRes = resources;
+
 var resource={
     type: 'videocam',
     name:'LG',
@@ -38,10 +40,16 @@ var resource={
 var currentId='';
 var edited = false;
 
+// var res;
+// res = getAllResources();
+// console.log(res);
+// resources = res;
+// console.log(resources);
 
 
 //function to create all cards with all resources from the server
 function populateCard(resource, pos){
+	resources = getAllResources();
     console.log("suntem in populate card");
     var menu = document.createElement('div');
     menu.className = "menu-card";
@@ -222,9 +230,12 @@ function populateCard(resource, pos){
 }
 
 //making all the cards here
+resources = backupRes;
+console.log(resources);
 for (var i in resources) {
-    console.log(resources[i]);
+    
     populateCard(resources[i], i);
+    console.log(resources[i]);
 }
 
 //gets the current resource, shows all info about it

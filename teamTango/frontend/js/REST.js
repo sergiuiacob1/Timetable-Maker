@@ -1,14 +1,32 @@
+ const url="http://mihaibojescu.cf:2222"; //localhost:2222
+var check ;
  var getAllResources = function() {
      // Returns all resources, unfiltered
-     fetch("http://localhost:2222/resources", {
-        mode: "cors"
-     }).then((result) => {
-         return result;
-     }, (err) => {
-         console.log(err);
-         return {};
-     })
+     // fetch( url + "/resources/get", {
+     //    mode: "cors"
+     // }).then((result) => {
+     //    var xx = result.json();
+     //    console.log("inainte de res");
+     //    console.log(xx);
+     //     return xx;
+     // }, (err) => {
+     //     console.log(err);
+     //     return {};
+     // })
+     fetch(url + "/resources/get")
+  .then(function(response) {
+    // The response is a Response instance.
+    // You parse the data into a useable format using `.json()`
+    return response.json();
+  }).then(function(data) {
+    // `data` is the parsed version of the JSON returned from the above endpoint.
+    console.log(data);  // { "userId": 1, "id": 1, "title": "...", "body": "..." }
+    resources = data.resources;
+    return data.resources;
+  });
+
  }
+
 
 // var getResourceById = function(id) {
 //     // Returns A SINGLE resource
