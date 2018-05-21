@@ -30,7 +30,7 @@ module.exports = {
   entry: {
     app: './src/index.js',
     login: './src/login.js',
-    profPref: './src/scriptProf.js'
+    profPref: './src/profPref.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

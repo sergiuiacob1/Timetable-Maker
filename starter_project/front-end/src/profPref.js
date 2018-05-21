@@ -175,5 +175,6 @@ function getGroupsShow(){
 $(document).ready(function() {
 	getSubjectsShow();
 	getRoomsShow();
-	getGroupsShow();
+  getGroupsShow();
+  addListeners();
 });
