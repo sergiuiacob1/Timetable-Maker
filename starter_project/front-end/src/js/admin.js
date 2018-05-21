@@ -245,12 +245,12 @@ $(document).ready(function(){
 					</div>
 					<div class="mdl-card__supporting-text">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}">
+							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}" pattern="[a-zA-Z\\s]+">
 						</div>
                         <p id="edit-fullName-req-${user.id}"></p>
 
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.mail}" id="edit-email-${user.id}">
+							<input class="mdl-textfield__input" type="email" value="${user.mail}" id="edit-email-${user.id}">
 						</div>
                         <p id="edit-email-req-${user.id}"></p>
 					</div>
@@ -268,8 +268,15 @@ $(document).ready(function(){
 			);
 		});
 
+		componentHandler.upgradeDom();
+
 		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {	
 			$(`.user-buttons#${$(this).attr("id")}`).toggle();	
+		});
+
+		$(".mdl-textfield__input").on("input", function() {
+			$(".is-focused .mdl-textfield__input").parent().next().empty();
+			// console.log("input");
 		});
 
 		$(".edit-button").on("click", function() {
@@ -456,10 +463,10 @@ $(document).ready(function(){
 		}
 	});
 
-	$(".mdl-textfield__input").on("input", function() {
-		$(".is-focused .mdl-textfield__input").parent().next().empty();
-		// console.log("input");
-	});
+	// $(".mdl-textfield__input").on("input", function() {
+	// 	$(".is-focused .mdl-textfield__input").parent().next().empty();
+	// 	// console.log("input");
+	// });
 
 	function verifyInput(inputText, pattern, alertElem, alertMsg) {
 		if (inputText.val().match(pattern)) {
