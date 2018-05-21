@@ -31,16 +31,19 @@ var resources=[
         dependency:''
     }
 ];
-const url = "http://mihaibojescu.cf:2222"; //localhost:2222
+const url = "http://mihaibojescu.cf:2222"; // http://localhost:2222
 $(document).ready(() => {
     var getAllResources = function () {
+      console.log("getting resources");
         // Returns all resources, unfiltered
         return new Promise((resolve, refuse) => {
             fetch(url +"/resources/get", {
                 mode: "cors",
             }).then((result) => {
+              console.log("result");
                 resolve(result);
             }, (err) => {
+                console.log("eroare la getting resources");
                 console.log(err);
                 refuse(err);
             })
@@ -598,3 +601,5 @@ if(resources.constructor == Array){
     }
 
 });
+
+getAllResources();

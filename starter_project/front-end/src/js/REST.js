@@ -1,9 +1,10 @@
 
+//const url = "http://mihaibojescu.cf:2222"; //http://localhost:2222
 var getAllResources = function () {
     // Returns all resources, unfiltered
 
     return new Promise((resolve, refuse) => {
-        fetch("http://mihaibojescu.cf:2222/resources/get", {
+        fetch(url +"/resources/get", {
             mode: "cors"
         }).then((result) => {
             resolve(result);
@@ -18,7 +19,7 @@ var newResource = function ({ type, name, capacity, dependencies }) {
     // Returns a JSON with success status
 
     return new Promise((resolve, refuse) => {
-        fetch("http://mihaibojescu.cf:2222/resources/add", {
+        fetch(url + "/resources/add", {
             method: "POST",
             body: {
                 "type": type,
@@ -40,7 +41,7 @@ var updateResource = function ({ id, type, name, capacity, dependencies }) {
     // Returns a JSON with success status
 
     return new Promise((resolve, refuse) => {
-        fetch("http://localhost:2222/resources/update", {
+        fetch(url + "/resources/update", {
             method: "POST",
             body: {
                 "id": id,
@@ -63,7 +64,7 @@ var removeResource = function ({ id }) {
     // Returns a JSON with success status
 
     return new Promise((resolve, refuse) => {
-        fetch("http://localhost:2222/resources/remove", {
+        fetch(url + "/resources/remove", {
             method: "POST",
             body: {
                 "id": id
