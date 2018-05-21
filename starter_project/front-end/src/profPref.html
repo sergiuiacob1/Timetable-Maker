@@ -7,12 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="profPref.css">
-    
-    <!-- import the webpage's javascript file -->
-    <script src="scriptProf.js" defer></script>
     
     <!-- Google Material Design -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -32,10 +26,11 @@
   
   
   <body>
+
     <div class="w3-bar w3-black" >
-      <button class="w3-bar-item w3-button" onclick="openTab('tab1')">Adauga ora</button>
-      <button class="w3-bar-item w3-button" onclick="openTab('tab2')">Orarul tau</button>
-      <button class="w3-bar-item w3-button" onclick="openTab('tab3')"></button>
+      <button class="w3-bar-item w3-button">Adauga ora</button>
+      <button class="w3-bar-item w3-button">Orarul tau</button>
+      <button class="w3-bar-item w3-button"></button>
     </div>
   
     
@@ -76,11 +71,10 @@
               </select>
             </div>
 
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-              Grupa / Semian  
-              <select onchange="getGroup(this.value)" class="mdl-textfield__input" id="grupa" name="grupa">
-                <option></option>
-              </select>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="grupa">
+              Grupa / Semian
+              <br><br>
+              <!-- EXEMPLU DE CHECKBOX: <input type="checkbox" name="grupa" value="A"> Semianul A<br> -->
             </div>
 
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -150,7 +144,7 @@
               <br>
               
                 <div class="mdl-textfield mdl-js-textfield">
-                            <p style="font-size:10px">*Va rugam specificati motivul:</p>
+                            <p style="font-size: 10px">*Va rugam specificati motivul:</p>
 
                   <textarea class="mdl-textfield__input" type="text" rows= "3" id="textarea" ></textarea>
                   <label class="mdl-textfield__label" for="sample5"></label>
@@ -158,7 +152,7 @@
               </form>      
      
       
-      <button onclick="send()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Trimite</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="sendData">Trimite</button>
      
     </aside>
       
@@ -179,121 +173,121 @@
         </thead>
         <tbody>
           <tr>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
-              <td class="noColor" onclick="cSwap(this)">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
+              <td class="noColor">08:00 - 09:00</td>
 
             </tr>
           <tr>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
-              <td class="noColor" onclick="cSwap(this)">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
+              <td class="noColor">09:00 - 10:00</td>
 
           </tr>
             <tr>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
-              <td class="noColor" onclick="cSwap(this)">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
+              <td class="noColor">10:00 - 11:00</td>
             </tr>
           <tr>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
-              <td class="noColor" onclick="cSwap(this)">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
+              <td class="noColor">11:00 - 12:00</td>
 
           </tr>
             <tr>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
-              <td class="noColor" onclick="cSwap(this)">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
+              <td class="noColor">12:00 - 13:00</td>
             </tr>
 
           <tr>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
-              <td class="noColor" onclick="cSwap(this)">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
+              <td class="noColor">13:00 - 14:00</td>
 
           </tr>
             <tr>
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>          
-              <td class="noColor" onclick="cSwap(this)">14:00 - 15:00</td>          
+              <td class="noColor">14:00 - 15:00</td>
+              <td class="noColor">14:00 - 15:00</td>
+              <td class="noColor">14:00 - 15:00</td>
+              <td class="noColor">14:00 - 15:00</td>
+              <td class="noColor">14:00 - 15:00</td>
+              <td class="noColor">14:00 - 15:00</td>          
+              <td class="noColor">14:00 - 15:00</td>          
 
           </tr>
           <tr>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
-              <td class="noColor" onclick="cSwap(this)">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
+              <td class="noColor">15:00 - 16:00</td>
           </tr>
           <tr>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
-              <td class="noColor" onclick="cSwap(this)">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
+              <td class="noColor">16:00 - 17:00</td>
 
 
           </tr>
           <tr>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
-              <td class="noColor" onclick="cSwap(this)">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
+              <td class="noColor">17:00 - 18:00</td>
           </tr>
 
           <tr>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
-              <td class="noColor" onclick="cSwap(this)">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
+              <td class="noColor">18:00 - 19:00</td>
           </tr>
           <tr>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
-            <td class="noColor" onclick="cSwap(this)">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
+            <td class="noColor">19:00 - 20:00</td>
           </tr>
         </tbody>
       </table>

@@ -29,6 +29,7 @@ module.exports = {
   devtool: 'inline-sourcemap',
   context: __dirname,
   entry: {
+    profPref: './src/profPref.js',
     app: './src/js/index.js',
     login: './src/js/login.js',
     admin: './src/js/admin.js'
