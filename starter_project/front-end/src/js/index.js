@@ -1,5 +1,5 @@
 import sayHello from './hello.js';
-import './body.less';
+import '../less/body.less';
 
 $(document).ready(() => {
     console.log('so2m222ething');
