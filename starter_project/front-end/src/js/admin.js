@@ -117,6 +117,7 @@ $(document).ready(function(){
 		$.post(urlPostEditUser, obj)
 		.done(function (data) {
 
+			console.log(data);
 			$(".loader-bck").hide();
 
 			if (data.success === true){
@@ -132,28 +133,28 @@ $(document).ready(function(){
 
 	function apiResetUserPasswordPost(data, callback){
 
-		// const urlPostResetPassword = `http://${hostName}/api/admin/users/${data.id}/delete?token=${token}`;
+		const urlPostResetPassword = `http://${hostName}/api/admin/users/${data.id}/reset?token=${token}`;
 		// console.log(data);
-
-		// $.post(urlPostResetPassword, data)
-		// .done(function (data) {
-
-		// 	console.log(data);
-
-		// 	if (data.success === true){
-			  
-		// 	  callback(true);
-		// 	}
-		// 	else {
-			
-		// 	  callback(false);
-		// 	}
-		// });	
 		$(".loader-bck").show();
-		setTimeout(function(){
-			callback(true);
+		$.post(urlPostResetPassword, data)
+		.done(function (data) {
+
+			console.log(data);
 			$(".loader-bck").hide();
-		}, 3000)
+			if (data.success === true){
+			  console.log("parola user resetata cu succes");
+			  callback(true);
+			}
+			else {
+			
+			  callback(false);
+			}
+		});	
+		// $(".loader-bck").show();
+		// setTimeout(function(){
+		// 	callback(true);
+		// 	$(".loader-bck").hide();
+		// }, 3000);
 	}
 
 	function apiAllUsersGet(callback){
@@ -307,10 +308,10 @@ $(document).ready(function(){
 							"Please use only letters"
 						);
 			
+			console.log(cond1, cond2);
 			if (cond1 && cond2) {
 
 				const obj = {fullName: $(fullName).val(), mail: $(mail).val(), id};
-
 
 				apiSendEditedPost(obj, function(response){
 		
