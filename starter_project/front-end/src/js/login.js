@@ -43,6 +43,7 @@ $(document).ready(function(){
 		if (username.length === 0 || password.length === 0) {
 			if (errorMsg === false) {
 				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Please provide credentials!").addClass("error-msg"));
+				$(".mdl-textfield").addClass("is-invalid");
 				errorMsg = true;
 			}
 			return;
@@ -59,9 +60,15 @@ $(document).ready(function(){
 			}
 
 			if (response === false){
-				loginBtn.after($("<div></div>").html(errorMsg).addClass("error-msg"));		
+				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
+				$(".mdl-textfield").addClass("is-invalid");
 			}
 
 		});
+	});
+
+	$(".mdl-textfield__input").on("input", function() {
+		$(".error-msg").remove();
+		errorMsg = false;
 	});
 });
