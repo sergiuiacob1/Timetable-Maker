@@ -2,7 +2,7 @@ const hostName = 'localhost:2222';
 const token = localStorage.getItem("token");
 const urlPost = 'https://${hostName}/constraints?token=${token}';
 
-require('./profPref.less');
+require('../less/profPref.less');
 
 function postThisShit(json, callback) {
 
