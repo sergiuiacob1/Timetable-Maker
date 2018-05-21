@@ -1,6 +1,6 @@
 const hostName = 'localhost:2222';
 const token = localStorage.getItem("token");
-const urlPost = 'https://${hostName}/constraint?token=${token}';
+const urlPost = 'https://${hostName}/constraints?token=${token}';
 
 require('./profPref.less');
 
@@ -30,18 +30,17 @@ function reset(){
    roomIds = [];
    important = false;
 };
-function cSwap(cell){
-
-  if(cell.className == "noColor")
-    cell.className = "redColor";
-  else if (cell.className == "redColor")
-    cell.className = "noColor";
-  
+function cSwap(){
+  if(this.className == "noColor")
+    this.className = "redColor";
+  else if (this.className == "redColor")
+    this.className = "noColor";
 };
 
 function getSubject(selectedSubject){
   subjectId = selectedSubject;
 };
+
 function getGroup(selectedGroup){
   groupId = selectedGroup;
 };
@@ -155,12 +154,13 @@ function getRoomsShow(){
 	var pos;
 	$.get(`${url}`).done(function(result){
 		for(var i=0;i<result.rooms.length;i++){
-			pos = Math.ceil((i+1)/3);
+      pos = Math.ceil((i+1)/3);
 			if(i%3 == 0)
 				$('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
-			$("#tr"+pos).append('<td class="noColor" onclick="cSwap(this)">'+result.rooms[i].name+'</td>');
+      $("#tr"+pos).append('<td class="noColor">'+result.rooms[i].name+'</td>');
+      addListeners();
 		}
-	});
+  });
 };
 
 function getGroupsShow(){
@@ -178,3 +178,12 @@ $(document).ready(function() {
   getGroupsShow();
   addListeners();
 });
+
+function addListeners(){
+  var noColorItems = document.getElementsByClassName("noColor");
+  for (var i = 0; i < noColorItems.length; ++i)
+    noColorItems[i].addEventListener('click', cSwap);
+
+  var sendButton = document.getElementById("sendData");
+  sendButton.addEventListener('click', send);
+}
