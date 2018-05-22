@@ -27,14 +27,28 @@
   
   <body>
 
-    <div class="w3-bar w3-black" >
-      <button class="w3-bar-item w3-button">Adauga ora</button>
-      <button class="w3-bar-item w3-button">Orarul tau</button>
-      <button class="w3-bar-item w3-button"></button>
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Doru salvatoru</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="profPref.html">Adauga o ora</a>
+            <a class="mdl-navigation__link" href="orarulTau.html">Orarul tau</a>
+ 
+          </nav>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="page-content"><!-- Your content goes here --></div>
+      </main>
     </div>
   
     
-   <div id="tab1" class="tab">
       <div class="boody">
       
           <aside>
@@ -131,7 +145,6 @@
                 <input onchange = "addResource(this.value)" type="checkbox" id="resurse3" class="mdl-checkbox__input" value="Laptop">
                 <span class="mdl-checkbox__label">Laptop</span>
               </label>
-
             <br>
             -->
 
@@ -303,29 +316,6 @@
         </div>
         </div>
      </div>
-    </div>
-
-    
-    
-    
-    
-    
-    <div id="tab2" class="tab" style="display:none">
-     
-    </div>
-
-    <div id="tab3" class="tab" style="display:none">
-      <h2>moo-nica was here</h2>
-<img src="https://i.imgur.com/fd3yMR3.jpg" style="max-width:100%"/>
-    </div>
-    
-    <script>
-
-// am mutat tot js-ul in script.js :)      
-      
-    </script>
-    
-    
     
   </body>
 </html>
