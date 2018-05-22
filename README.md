@@ -17,3 +17,5 @@ Componentele proiectului si impartirea lor pe echipe poate fi vizualizata [aici]
 | Team Mike | Stan Mihai |  Crivoi Andrei, Rafael Martonca | Stan Mihai, Andrei Tirpescu | Rares Darabana, Cristian Ginju |
 
 ***
+
+#test
