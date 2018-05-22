@@ -18,7 +18,7 @@ function postThisShit(json, callback) {
   },'jsonp')
 };
 
-var groupId="", subjectId="", frequency="", activityType="", motive="", dateEntered="";
+var groupId=[], subjectId="", activityType="", motive="", dateEntered="";
 var hour = [];
 var days = [];
 var roomIds = [];
@@ -29,6 +29,11 @@ function reset(){
    days = [];
    roomIds = [];
    important = false;
+   groupId=[];
+   subjectId="";
+   activityType = "";
+   motive="";
+   dateEntered="";
 };
 function cSwap(){
   if(this.className == "noColor")
@@ -37,24 +42,24 @@ function cSwap(){
     this.className = "noColor";
 };
 
-function getSubject(selectedSubject){
-  subjectId = selectedSubject;
+function getSubject(){
+  subjectId = document.getElementById("materie").value;
 };
 
-function getGroup(selectedGroup){
-  groupId = selectedGroup;
+function getGroup(){
+  
+    $('#grupa input[type=checkbox]:checked').each(function(index, value) {
+        groupId.push($(this).attr("value"));
+    });
 };
 
-function getFrequency(selectedFrequency){
-  frequency = selectedFrequency;
+function getActivity(){
+  activityType = document.getElementById("activitate").value;
 };
-function getActivity(selectedActivity){
-  activityType = selectedActivity;
-};
-function setImportant(value){
-  if (!important)
-    important = true;
-  else important = false;
+
+function getImportant(){
+  var checkbox = document.getElementById("switch1");
+  important = checkbox.checked;    
 };
 
 function getText(){
@@ -88,23 +93,26 @@ function getRooms(){
 };
 
 function send(){
-  getText();
+
+  getActivity();
+  getSubject();
+  getGroup();
   getDate();
+  getImportant();
+  getText();
   getTime();
   getRooms();
   
-  if (important && (motive==""))
+  if (important && motive==""){
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
-  else
-  if ((frequency === 0) && (dateEntered == ""))
-   alert("Va rugam introduceti o data!");
+    reset();
+  }
   else{
     var object = {};
     object["subjectId"] = subjectId;
     object["roomIds"] = roomIds;
     object["groupId"] = groupId;
     object["activity"] = activityType;
-    object["frequency"] = frequency;
     object["date"] = dateEntered;
     object["possibleIntervals"] = {days, hour};
     object["important"] = important;
@@ -139,42 +147,42 @@ function openTab(tabName) {
 
 
 function getSubjectsShow(){
-	var url = 'http://0.0.0.0:2222/api/subjects?token=' + token;
-	$.get(`${url}`).done(function (result){
-		for(var i=0;i<result.subjects.length;i++){
-			$("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
-			
-		}
-	});
+  var url = 'http://0.0.0.0:2222/api/subjects?token=' + token;
+  $.get(`${url}`).done(function (result){
+    for(var i=0;i<result.subjects.length;i++){
+      $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
+      
+    }
+  });
 };
 
 
 function getRoomsShow(){
-	var url = 'http://0.0.0.0:2222/api/rooms?token=' + token;
-	var pos;
-	$.get(`${url}`).done(function(result){
-		for(var i=0;i<result.rooms.length;i++){
+  var url = 'http://0.0.0.0:2222/api/rooms?token=' + token;
+  var pos;
+  $.get(`${url}`).done(function(result){
+    for(var i=0;i<result.rooms.length;i++){
       pos = Math.ceil((i+1)/3);
-			if(i%3 == 0)
-				$('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
+      if(i%3 == 0)
+        $('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
       $("#tr"+pos).append('<td class="noColor">'+result.rooms[i].name+'</td>');
       addListeners();
-		}
+    }
   });
 };
 
 function getGroupsShow(){
-	var url = 'http://0.0.0.0:2222/api/groups?token=' + token;
-	$.get(`${url}`).done(function(result){
-		for(var i=0;i<result.groups.length;i++){
-			$("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
-		}
-	});
+  var url = 'http://0.0.0.0:2222/api/groups?token=' + token;
+  $.get(`${url}`).done(function(result){
+    for(var i=0;i<result.groups.length;i++){
+      $("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
+    }
+  });
 };
 
 $(document).ready(function() {
-	getSubjectsShow();
-	getRoomsShow();
+  getSubjectsShow();
+  getRoomsShow();
   getGroupsShow();
   addListeners();
 });
