@@ -84,8 +84,7 @@ module.exports = (() => {
 
     apiRoutes.get('/groups', getGroupsRoute);
     apiRoutes.get('/subjects', getSubjectsRoute);
-    
-    
+
     app.use('/api', apiRoutes);
 
     const start = (port) => {

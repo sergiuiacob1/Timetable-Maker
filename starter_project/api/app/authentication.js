@@ -30,15 +30,16 @@ module.exports = (() => {
   };
 
   const checkAdmin = (req, res, next) => {
-    /*const {body} = req;
-    getUser(body)
+    /*const id = req.decoded.user.id;
+    getUser({id})
     .then((user) => {
-      console.log("Admin middleware:");
-      console.log(user);
-      if (user.isAdmin) {
+      if (user.admin == 1) {
           next();
+      } else {
+        return res.json({succes: false, message: '403 Forbidden'});
       }
-      return res.json({success: false, message: "403 Forbidden"});
+    }).catch((e) => {
+      return res.status(403).send({success: false, message: '403 Forbidden'});
     });*/
     next();
   };
