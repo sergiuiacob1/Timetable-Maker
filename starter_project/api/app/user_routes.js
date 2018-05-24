@@ -10,6 +10,7 @@ module.exports = (() => {
     deleteUser,
     updatePassword
   } = require('./user_actions');
+  const Mail = require('./mail_service');
 
   const updateUserInfo = (req, res) => {
     const id = req.decoded.user.id;
