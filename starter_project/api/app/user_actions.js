@@ -1,6 +1,7 @@
 module.exports = (() => {
   'use strict';
   const User = require('./models/user');
+    const TeacherSubjectMap = require('./models/teacher_subject_map');
 
   const newUser = ({
     password,
@@ -19,6 +20,20 @@ module.exports = (() => {
         return true;
       });
   };
+
+    const newTeacherSubjectMap = ({
+                                      id_user,
+                                      id_subject
+                                  }) => {
+        return new TeacherSubjectMap()
+            .insert()
+            .set('id_user', id_user)
+            .set('id_subject', id_subject)
+            .valueOf()
+            .then(() => {
+                return true;
+            });
+    };
 
   const getUser = ({
     id,
@@ -120,6 +135,7 @@ module.exports = (() => {
     updateUser,
     getUsers,
     deleteUser,
-    updatePassword
+      updatePassword,
+      newTeacherSubjectMap
   };
 })();

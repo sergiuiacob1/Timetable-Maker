@@ -8,7 +8,8 @@ module.exports = (() => {
     updateUser,
     getUsers,
     deleteUser,
-    updatePassword
+      updatePassword,
+      newTeacherSubjectMap
   } = require('./user_actions');
 
   const updateUserInfo = (req, res) => {
@@ -118,17 +119,32 @@ module.exports = (() => {
     // }
     console.log(body.password); //TODO: send this with SMTP
     newUser(body).then((result) => {
-      res.json({
-        success: true,
-        message: 'user insert'
-      });
+
+        getUser({mail: body.mail, password: body.password}).then((user) => {
+
+            let i;
+            for (i = 0; i < body.id_subjects.length; i++) {
+                let values = {id_subject: body.id_subjects[i], id_user: user.id};
+                newTeacherSubjectMap(values).then((relation) => {
+                    console.log('Added relation from ' + values.id_subject + ' to ' + values.id_user);
+                });
+            }
+
+            res.json({
+                success: true,
+                message: 'user insert'
+            });
+        });
+
+
+
     }).catch((e) => {
       console.log("eroarea e", e);
       res.json({
         success: false,
         message: e
       })
-    })
+    });
   };
 
   function makePassword() {
