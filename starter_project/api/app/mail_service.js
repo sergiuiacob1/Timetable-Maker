@@ -1,37 +1,3 @@
-/*module.exports = (() => {
-    'use strict';
-  
-    const Mailgun = require('mailgun-js');
-    const config = require('./../config/mail');
-
-    const sendMail = (mail, subject, message) => {
-        if (mail) {
-            var mailgun = new Mailgun({apiKey: config.key, domain: config.domain});
-            var data = {
-                  from: config.account,
-                  to: mail,
-                  subject: subject,
-                  html: message
-            }
-            mailgun.messages().send(data, function (err, body) {
-                if (err) {
-                    console.log("got an error: ", err);
-                    return false;
-                }
-                else {
-                    console.log(body);
-                    return true;
-                }
-            });
-        }
-        return false;
-    };
-  
-    return {
-      sendMail
-    };
-  })();
-  */
  module.exports = (() => {
     'use strict';
   
@@ -62,7 +28,7 @@
                     }
                     else {
                         console.log(body);
-                    }
+                    }   
                 });
             }
         };
