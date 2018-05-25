@@ -50,13 +50,13 @@
 				<ul>
 					<li id="seminar1"></li>
 
-					<li class="single-event" data-start="11:00" data-end="12:30" data-content="Seminar Introducere in programare" data-event="event-2">
+					<li class="single-event" data-start="12:00" data-end="14:30" data-content="Seminar Introducere in programare" data-event="event-2">
 						<a href="#0">
 							<em class="event-name">Seminar Introducere in programare</em>
 						</a>
 					</li> 
 
-					<li class="single-event" data-start="14:00" data-end="16:00"  data-content="Seminar Logica" data-event="event-2">
+					<li class="single-event" data-start="15:00" data-end="16:00"  data-content="Seminar Logica" data-event="event-2">
 						<a href="#0">
 							<em class="event-name">Seminar Logica</em>
 						</a>
@@ -214,49 +214,69 @@
 
 <footer>
 
-		<table id="customers">
+		<table class = "conflicts" id = "customers">
 				<tr>
-				  <th>Profesor 1</th>
-				  <th>Materie</th>
-				  <th>Interval Orar</th>
-				  <th>Sala</th>
-				  <th>Profesor 2</th>
-				  <th>Materie</th>
+				  <th>Zi</th>
 				  <th>Interval Orar</th>
 				  <th>Sala</th>
 				  <th>Alegere profesor</th>
 				</tr>
 				<tr>
-				  <td>Vlad Radulescu</td>
-				  <td>Seminar Arhitectura Calculatoarlor</td>
-				  <td>Marti 10:00-12:00</td>
+				  <td>Luni</td>
+				  <td>10:00-12:00</td>
 				  <td>C412</td>
-				  <td>Cristian Gatu</td>
-				  <td>Curs Structuri de date</td>
-				  <td>Marti 11:00-13:00</td>
-				  <td>C412</td>
-				  <td>
-					  <button  class="button"><input type="checkbox">Profesor 1</button>
-					  <button  class="button"><input type="checkbox">Profesor 2</button>
+				  <td class = "conflinct-dropdown">
+					  <button onclick = "myFunction()" class = "dropbtn">Dropdown</button>
+					  <div id = "myDropdown" class = "dropdown-content">
+						  <a href = "#">Prof1</a>
+						  <a>Prof2</a>
+						  <a>Prof3</a>
+					  </div>
+
+					  </div>
 				  </td>
 				</tr>
 				<tr>
-				    <td>Bogdan Patrut</td>
-					<td>Seminar Introducere in Programare</td>
-					<td>Marti 11:00-13:00</td>
-					<td>C413</td>
-					<td>Augusto Perez</td>
-					<td>Seminar Engleza</td>
-					<td>Marti 12:00-14:00</td>
-					<td>C413</td>
-					<td>
-						<button  class="button"><input type="checkbox">Profesor 1</button>
-						<button  class="button"><input type="checkbox">Profesor 2</button>
-					</td>
+						<td>Miercuri</td>
+						<td>12:00-14:00</td>
+						<td>C413</td>
+						<td class = "conflinct-dropdown">
+							<button onclick = "myFunction()" class = "dropbtn">Dropdown</button>
+							<div id = "myDropdown" class = "dropdown-content">
+								<a href = "#prof1">Prof1</a>
+								<a>Prof2</a>
+								<a>Prof3</a>
+							</div>
+	  
+							</div>
+						</td>
+				</tr>
+				<tr>
+				    
 				</tr>
 				</tr>
 			  </table>
 			  <button class="button" onclick="location.href='www.orarfinal.ro'" type="button" >Inregistrare optiuni profesori</button>
 
+		<script>
+			function myFunction() {
+			document.getElementById("myDropdown").classList.toggle("show");
+			}
+
+			// Close the dropdown if the user clicks outside of it
+			window.onclick = function(event) {
+			if (!event.target.matches('.dropbtn')) {
+
+			var dropdowns = document.getElementsByClassName("dropdown-content");
+			var i;
+			for (i = 0; i < dropdowns.length; i++) {
+			var openDropdown = dropdowns[i];
+			if (openDropdown.classList.contains('show')) {
+			openDropdown.classList.remove('show');
+			}
+			}
+			}
+			}
+		</script>
 </footer>
 </html>
