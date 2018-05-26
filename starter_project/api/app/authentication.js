@@ -56,6 +56,7 @@ module.exports = (() => {
         res.json({
           success: true,
           message: 'Enjoy your token!',
+            is_admin: user.is_admin,
           token: token
         });
       }
