@@ -24,6 +24,13 @@ function postThisShit(json, callback) {
     method: 'POST',
     contentType: 'application/json',
     data: json
+  }).done(function(data){
+      if (data.success === true){
+        callback(true);
+      }
+      else{
+        callback(false);
+      }
   });
 };
 
@@ -146,8 +153,8 @@ function getUnlinkedConstraints(){
     if (result.success !== true)
       return;
     for(var i=0;i<result.constraints.length;i++){
-		var days='';
-		var hours='';
+    var days='';
+    var hours='';
       for(var j=0;j<result.constraints[i].possibleIntervals.length;j++)
       {
         // debugger;
@@ -156,11 +163,11 @@ function getUnlinkedConstraints(){
         if(result.constraints[i].possibleIntervals[j].intervals.length !== 0)
         {
           days= days+'<li>'+getDayName(result.constraints[i].possibleIntervals[j].days)+'</li>';
-		  hours=hours+'<li>'+result.constraints[i].possibleIntervals[j].intervals+'</li>';
+      hours=hours+'<li>'+result.constraints[i].possibleIntervals[j].intervals+'</li>';
         }
       }
-	  
-	  $("#tabl tbody").append(`
+    
+    $("#tabl tbody").append(`
           <tr data-id=${result.constraints[i].id}>
           <td>
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -180,12 +187,12 @@ function getUnlinkedConstraints(){
 };
 
 function getLinkedConstraints(){
-	var url='http://'+hostName+'/api/linkedconstraints?token='+token;
-	var pos;
-	$.get(`${url}`).done(function(result){
-		if(result.success !== true) return;
-		
-	});
+  var url='http://'+hostName+'/api/linkedconstraints?token='+token;
+  var pos;
+  $.get(`${url}`).done(function(result){
+    if(result.success !== true) return;
+    
+  });
 }
 
 
@@ -201,12 +208,12 @@ function getRows(){
 
 function getDays(){
   mon = document.getElementById("luni").checked;
-    tue = document.getElementById("marti").checked;
-    wed = document.getElementById("miercuri").checked;
-    thu = document.getElementById("joi").checked;
-    fri = document.getElementById("vineri").checked;
-    sat = document.getElementById("sambata").checked;
-    sun = document.getElementById("duminica").checked;
+  tue = document.getElementById("marti").checked;
+  wed = document.getElementById("miercuri").checked;
+  thu = document.getElementById("joi").checked;
+  fri = document.getElementById("vineri").checked;
+  sat = document.getElementById("sambata").checked;
+  sun = document.getElementById("duminica").checked;
   if(mon)
     days.push(1);
   if(tue)
@@ -239,7 +246,13 @@ function start(){
   var json = JSON.stringify(object);
   
   postThisShit(json, function(response){
-      location.reload();
+      if(response){
+        alert("Optiune adaugata!");
+        location.reload();
+      }else{
+        alert("Auleu buba!");
+        location.reload();
+      }
     });
     
    
@@ -265,10 +278,16 @@ function sterge(){
       var object = {};
       object["id"] = delRows[i];
       var json = JSON.stringify(object);
-      
+      console.log("im ere");
       deleteThisShit(json, function(response){
-          if(i==(delRows.length-1) && response)
-            location.reload();
+          if(i==(delRows.length-1))
+          {
+            if(response){
+              alert("Optiuni sterse cu succes!");
+            }else{
+              alert("Auleu buba");
+            }
+          }
         });
     }
 };
@@ -276,7 +295,6 @@ function stergeLinked(){
    var table = document.getElementById("tabl2");
     for (var i = 1, row; row = table.rows[i]; i++){
       if ($(row).find('input')[0].checked === true) {
-      // if(row.className=="is-selected"){
           delLinkedRows.push($(row).attr('data-id'));
           document.getElementById("tabl2").deleteRow(i);
           i--;
@@ -289,8 +307,14 @@ function stergeLinked(){
       var json = JSON.stringify(object);
       
       deleteThisLinkedShit(json, function(response){
-          if(i==(delLinkedRows.length-1) && response)
-            location.reload();
+          if(i==(delLinkedRows.length-1))
+          {
+            if(response){
+              alert("Optiuni sterse cu succes!");
+            }else{
+              alert("Auleu buba");
+            }
+          }
         });
     }
 };
