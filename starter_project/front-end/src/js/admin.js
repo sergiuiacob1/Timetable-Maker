@@ -48,6 +48,8 @@ $(document).ready(function(){
 	});
 
 	apiAllSubjectsGet(function(response){
+
+
 		if (response === true){
 			// subjectsData = dummySubjects.subjects;
 			// renderUsers(usersData);
@@ -166,14 +168,21 @@ $(document).ready(function(){
 		$.get(urlGetUsers)
 		.done(function (data) {
 
+
+			console.log(data);
 			$(".loader-bck").hide();
 			if (data.success === true){
+
 			  console.log("useri luati cu success");
 			  console.log(data);
 			  usersData = data.users;
 			  callback(true);
 			}
 			else {
+			  if (data.message === "403 Forbidden"){
+			  	$("body div").remove();
+			  	$("body").append(`<div class="forbidden">${data.message}</div>`)
+			  }
 			  callback(false);
 			}
 		});
