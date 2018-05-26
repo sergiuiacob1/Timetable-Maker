@@ -32,8 +32,7 @@ module.exports = {
     app: './src/js/index.js',
     login: './src/js/login.js',
     admin: './src/js/admin.js',
-    resources: './src/js/resources.js',
-    resourcesNew: './src/js/resourcesNew.js'
+    resources: './src/js/resources.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

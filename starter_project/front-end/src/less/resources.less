@@ -1,11 +1,15 @@
  * {
-    font-family: sans-serif;
+    font-family: Roboto;
     box-sizing: border-box;
  }
 
 body {
     padding: 0;
     margin: 0;
+}
+
+h1 {
+    font-weight: normal;
 }
 
 .container {
@@ -16,10 +20,11 @@ body {
 }
 
 .card {
+    position: relative;
     border: 1px solid #eee;
     border-bottom: 1px solid #aaa;
-    padding: 0 2em;
-    margin: 2em;
+    padding: 0 3em;
+    margin: 1em;
     background: #fff;
     
     form {
@@ -73,7 +78,7 @@ body {
 
     .menu {
         display: flex;
-        padding: 1em 0;
+        padding: 1.5em 0;
     }
     
     .menu-left {
@@ -96,13 +101,17 @@ body {
 
     .spacing {
         i {
-            margin: 0.5em 0.5em 0.5em 0;
+            margin-right: 1em;
         }
         
         span {
             width: 10em;
             height: 1.2em;
         }
+    }
+
+    .nospacing {
+        padding: 0em;
     }
     
     .title {
@@ -119,8 +128,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    cursor: pointer;
 
-    padding: 5em;
+    padding: 6.1em;
     border: 1px solid #aaa;
     border-style: dashed;
 
@@ -131,9 +141,23 @@ body {
 
 .card.form {
     border-radius: 10px;
+
+    a {
+        display: none;
+    }
+}
+
+.card.moreMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    top: 48px;
 }
 
 .overlay {
+    z-index: 999;
     position: fixed;
     display: flex;
     flex-direction: column;

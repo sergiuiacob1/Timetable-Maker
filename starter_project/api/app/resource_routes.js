@@ -2,7 +2,6 @@ module.exports = (() => {
   'use strict';
 
   const resource = require('./models/resource');
-  const dependency = require('./models/dependency');
   const {
     newResource,
     getResources,
@@ -10,42 +9,19 @@ module.exports = (() => {
     updateResource,
     deleteResource
   } = require('./resource_actions');
-  const {
-    newDependency,
-    getDependencies,
-    deleteDependency
-  } = require('./dependency_actions');
-  const {
-    getDependenciesForItems,
-    createDependenciesForItem,
-    deleteDependenciesForItem
-  } = require('./dependency_utils');
 
   const newResourceRoute = (req, res) => {
     const type = req.body.type;
     const name = req.body.name;
     const capacity = req.body.capacity;
-    const dependencies = req.body.dependencies;
 
-    if (type || name || capacity || dependencies) {
+    if (type || name || capacity) {
       newResource({ type, name, capacity })
         .then((result) => {
-          if (Array.isArray(dependencies)) {
-            createDependenciesForItem({ dependencies })
-              .then((result) => {
-                console.log(result);
-                res.json({ success: result });
-              })
-              .catch((e) => {
-                console.log(e);
-                res.json({ success: false, message: 'An error occured!' });
-              });
-          }
-          else {
-            console.log(result);
-            res.json({ success: result });
-          }
-        }).catch((e) => {
+          console.log(result);
+          res.json({ success: result });
+        })
+        .catch((e) => {
           console.log(e);
           res.json({ success: false, message: 'An error occured!' });
         })
@@ -56,54 +32,26 @@ module.exports = (() => {
   };
 
   const getResourcesRoute = (req, res) => {
-    getResources(req.query).then((resources) => {
-      if (resources.length >= 1) {
-        getDependenciesForItems(resources)
-          .then((newResources) => {
-            console.log(newResources);
-            res.json({ success: true, resources: newResources });
-          })
-          .catch((e) => {
-            console.log(e);
-            res.json({ success: false, message: 'An error occured!' });
-          })
-      }
-      else {
+    getResources(req.query)
+      .then((resources) => {
         console.log(resources);
         res.json({ success: true, resources });
-      }
-    }).catch((e) => {
-      console.log(e);
-      res.json({ success: false, message: 'An error occured!' });
-    })
+      })
+      .catch((e) => {
+        console.log(e);
+        res.json({ success: false, message: 'An error occured!' });
+      })
   };
 
   const updateResourceRoute = (req, res) => {
     const id = req.body.id;
-    const dependencies = req.body.dependencies;
     const body = req.body;
     body.id = id;
     getResources({ id }).then((resource) => {
-      console.log(resource);
       if (resource.length === 1) {
         return updateResource(body)
           .then(() => {
-            if (Array.isArray(dependencies)) {
-              deleteDependenciesForItem({ id })
-                .then(() => {
-                  return createDependenciesForItem({ id,  dependencies })
-                })
-                .then(() => {
-                  res.json({ success: true })
-                })
-                .catch((e) => {
-                  console.log(e);
-                  res.json({ success: false });
-                })
-            }
-            else {
               res.json({ success: true })
-            }
           });
       }
       else {
