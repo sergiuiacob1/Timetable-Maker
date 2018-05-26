@@ -8,6 +8,10 @@ body {
 .mdl-navigation__link{
 	cursor: pointer;
 }
+.mdl-navigation__link:hover, .active {
+	color: #3F51B5 !important;
+	background-color: white;
+}
 
 /*.mdl-layout__content.no-scroll {
 	overflow: hidden;
@@ -15,7 +19,7 @@ body {
 
 #lista-useri {
 	overflow-y: auto;
-	height: 40vh;
+	height: 60vh;
 }
 
 
@@ -34,13 +38,7 @@ body {
     padding: 50px;
 }
 
-.content-title{
-	font-size: 20px;
-	text-align: center;
-}
-
 .content-input{
-	margin-top: 10px;
 	text-align: center;
 }
 
@@ -50,9 +48,7 @@ body {
 }
 
 .users-management .container{
-	margin-top: 10px;
-	margin: 30px auto;
-    padding: 50px;
+	margin: 0 auto;
 }
 
 .user-buttons {
@@ -87,16 +83,19 @@ dialog{
 
 #left-side {
 	margin-left: 10%;
-	margin-top: 3%;
 }
 
 #right-side {
-	margin-top: 7%;
+	margin-top: 4%;
+	height: 70vh;
+	overflow-y: auto;
+	text-align: center;
 }
 
 
 .demo-card-wide.mdl-card {
-	width: 512px;
+	width: 100%;
+	border: 2px solid #3F51B5;
   }
 
 .search-input .mdl-textfield__input {
@@ -137,18 +136,18 @@ dialog{
   display: inline;
 }
 
-.content-dropdown{
+.content-dropdown-style{
 	margin-top: -35px;
 	text-align: center;
 	margin-bottom: 35px;
 }
 
-.content-dropdown li:hover{
+.content-dropdown-style li:hover{
 	background-color: #3F51B5;
 	color: white;
 }
 
-.content-dropdown .dropdown .mdl-list__item{
+.content-dropdown-style .dropdown .mdl-list__item{
 	font-size: 15px;
 }
 .dropdown{
@@ -162,19 +161,19 @@ dialog{
 	padding: 0;
 }
 
-.subjects-list{
+.subjects-style{
 	
 	text-align: center;
 	width: 350px;
     margin: 0 auto;
 }
 
-.subjects-list .title{
+.subjects-style .title{
 	font-size: 18px;
 	text-align: center;
 }
 
-.subjects-list .list{
+.subjects-style .list{
 	padding: 10px;
 	margin-top: 10px;
 }
