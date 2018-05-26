@@ -12,7 +12,7 @@ module.exports = (() => {
             return res;
           });
       }
-    }
+    };
 
     const getConstraints = ({userId}) => {
       if (userId) {

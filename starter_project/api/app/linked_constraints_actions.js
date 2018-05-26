@@ -2,6 +2,18 @@ module.exports = (() => {
     'use strict';
     const LinkedConstraint = require('./models/linked_constraint.js');
 
+    const deleteLinkedConstraint = ({id}) => {
+      if (id) {
+        return new LinkedConstraint()
+          .delete()
+          .where({id})
+          .valueOf()
+          .then((res) => {
+            return res;
+          });
+      }
+    };
+
     const getLinkedConstraints = ({userId}) => {
       if (userId) {
         return new LinkedConstraint()
@@ -37,6 +49,7 @@ module.exports = (() => {
   
     return {
         getLinkedConstraints,
-        addLinkedConstraint
+        addLinkedConstraint,
+        deleteLinkedConstraint
     };
   })();
