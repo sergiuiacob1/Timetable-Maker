@@ -112,7 +112,7 @@ module.exports = (() => {
     const getUserSubjects = (userId) => {
         return new TeacherSubjectMap()
             .field('id_subject')
-            .where({userId})
+            .where({id_user: userId})
             .valueOf()
             .then((res) => {
                 console.log(userId);
