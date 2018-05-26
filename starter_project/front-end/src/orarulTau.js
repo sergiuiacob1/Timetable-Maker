@@ -33,6 +33,13 @@ function deleteThisShit(json, callback){
     method: 'POST',
     contentType: 'application/json',
     data: json
+  }).done(function(data){
+      if (data.success === true){
+        callback(true);
+      }
+      else{
+        callback(false);
+      }
   });
 };
 
@@ -42,6 +49,13 @@ function deleteThisLinkedShit(json, callback){
     method: 'POST',
     contentType: 'application/json',
     data: json
+  }).done(function(data){
+    if (data.success === true){
+      callback(true);
+    }
+    else{
+      callback(false);
+    }
   });
 };
 
@@ -235,6 +249,7 @@ var delRows = [];
 var delLinkedRows = [];
 
 function sterge(){
+  delRows = [];
    var table = document.getElementById("tabl");
     for (var i = 1, row; row = table.rows[i]; i++){
       if ($(row).find('input')[0].checked === true) {
@@ -252,7 +267,7 @@ function sterge(){
       var json = JSON.stringify(object);
       
       deleteThisShit(json, function(response){
-          if(i==(delRows.length-1))
+          if(i==(delRows.length-1) && response)
             location.reload();
         });
     }
@@ -274,7 +289,7 @@ function stergeLinked(){
       var json = JSON.stringify(object);
       
       deleteThisLinkedShit(json, function(response){
-          if(i==(delLinkedRows.length-1))
+          if(i==(delLinkedRows.length-1) && response)
             location.reload();
         });
     }

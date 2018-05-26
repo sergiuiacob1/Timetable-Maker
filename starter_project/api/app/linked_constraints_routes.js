@@ -1,7 +1,18 @@
 module.exports = (() => {
     'use strict';
   
-    const {getLinkedConstraints, addLinkedConstraint} = require('./linked_constraints_actions.js');
+    const {getLinkedConstraints, addLinkedConstraint, deleteLinkedConstraint} = require('./linked_constraints_actions.js');
+
+    const deleteLinkedConstraintRoute = (req, res) => {
+      const id = req.body.id;
+      deleteLinkedConstraint({id}).then((linkedConstraint) => {
+        console.log (linkedConstraint);
+        res.json({success: true, message: "Deleted linked constraint"});
+      }).catch((e) => {
+        console.log(e);
+        res.json({success: false});
+      });
+    };
   
     const getLinkedConstraintsRoute = (req, res) => {
       const userId = req.decoded.user.id;
@@ -29,6 +40,7 @@ module.exports = (() => {
   
     return {
       getLinkedConstraintsRoute,
-      newLinkedConstraintRoute
+      newLinkedConstraintRoute,
+      deleteLinkedConstraintRoute
     };
   })();
