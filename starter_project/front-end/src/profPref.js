@@ -1,6 +1,6 @@
-const hostName = 'localhost:2222';
+const hostName = '192.168.43.95:2222';
 const token = localStorage.getItem("token");
-const urlPost = 'https://${hostName}/constraints?token=${token}';
+const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
 require('./profPref.less');
 
@@ -8,14 +8,12 @@ function postThisShit(json, callback) {
 
   alert(json);
 
-  $.post(urlPost, json, function (data) {
-    if (data.success === true) {
-      callback(true);    
-    }
-    else {
-      callback(false);
-    }
-  },'jsonp')
+  $.ajax({
+    url: urlPost,
+    method: 'POST',
+    contentType: 'application/json',
+    data: json
+  });
 };
 
 var groupId=[], subjectId="", activityType="", motive="", dateEntered="";
