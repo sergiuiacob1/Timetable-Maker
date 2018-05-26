@@ -129,6 +129,18 @@ module.exports = (() => {
         message: "Cannot insert user without an email."
       })
     }
+      if (body.id_subjects === undefined) {
+          res.json({
+              success: false,
+              message: "Cannot insert user without subjects"
+          })
+      }
+      else if (body.id_subjects.length == 0) {
+          res.json({
+              success: false,
+              message: "Cannot insert user without subjects"
+          })
+      }
     // if(body.name === undefined){
     //   res.json({success: false, message: "Cannot insert user without a name."})
     // }
@@ -143,7 +155,8 @@ module.exports = (() => {
 
         let i;
         console.log(body);
-        for (i = 0; i < body.id_subjects.length; i++) {
+
+          for (i = 0; i < body.id_subjects.length; i++) {
           let values = {
             id_subject: body.id_subjects[i],
             id_user: user.id
@@ -257,6 +270,26 @@ module.exports = (() => {
     });
   };
 
+    const userResetPasswordRoute = (req, res) => {
+        const id = req.params.id;
+
+        getUser({id}).then((user) => {
+            if (user != 'undefined' && user) {
+                updatePassword({id: id, new_password: makePassword()});
+                res.json({
+                    success: true,
+                    message: 'Password reset'
+                });
+            }
+            else {
+                res.json({
+                    success: false,
+                    message: 'Invalid user id'
+                });
+            }
+        })
+    };
+
   const changePasswordRoute = (req, res) => {
 
     // params: id
@@ -345,6 +378,7 @@ module.exports = (() => {
     updateUserRoute,
     deleteUserRoute,
     changePasswordRoute,
-    resetPasswordRoute
+      resetPasswordRoute,
+      userResetPasswordRoute
   };
 })();
