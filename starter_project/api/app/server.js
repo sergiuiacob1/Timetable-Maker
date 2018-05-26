@@ -81,7 +81,7 @@ module.exports = (() => {
 
     apiRoutes.get('/groups', getGroupsRoute);
     apiRoutes.get('/subjects', getSubjectsRoute);
-    apiRoutes.post('subjects', addSubjectRoute);
+    apiRoutes.post('/subjects', addSubjectRoute);
 
     apiRoutes.get('/constraints', getConstraintsRoute);
     apiRoutes.post('/constraints', newConstraintRoute);

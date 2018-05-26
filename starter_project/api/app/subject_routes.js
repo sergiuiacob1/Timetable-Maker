@@ -1,6 +1,6 @@
 module.exports = (() => {
     'use strict';
-    const {getSubjects, addSubject} = require('./subject_actions');
+    const {getSubjects, newSubject} = require('./subject_actions');
     
     const getSubjectsRoute = (req, res) => {
       getSubjects().then((subjects) => {
