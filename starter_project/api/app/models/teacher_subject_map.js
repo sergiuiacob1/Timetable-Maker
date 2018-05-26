@@ -17,7 +17,6 @@ module.exports = (() => {
               }) {
 
             let whereClause = squel.expr();
-            console.log('Model user id :' + id_user)
             if (id_user) {
                 whereClause = whereClause.and("id_user = ?", id_user);
             }

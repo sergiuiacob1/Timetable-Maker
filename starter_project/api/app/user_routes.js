@@ -16,6 +16,7 @@ module.exports = (() => {
   const Mail = require('./mail_service');
 
   const updateUserInfo = (req, res) => {
+      console.log('updateUserInfo: req')
     console.log(req.body);
     const id = req.decoded.user.id;
 
@@ -24,13 +25,14 @@ module.exports = (() => {
     getUser({
       id
     }).then((user) => {
-      console.log(user);
       if (user.password === body.old_password)
         return updateUser(body).then(() => {
+            console.log('Success!')
           res.json({
             success: true
           });
         });
+        console.log('Wrong password!')
       res.json({
         success: false,
         message: 'Wrong password'
@@ -72,9 +74,6 @@ module.exports = (() => {
         delete user.password;
         return getUserSubjects(user.id).then((subjects) => {
           user.subject_ids = subjects.map(s => s.id_subject);
-          console.log("Functionback");
-          console.log(subjects);
-          console.log(user);
             if (user.is_admin == 0)
                 return user;
             else return null;
@@ -102,7 +101,6 @@ module.exports = (() => {
     getUser({
         id
       }).then((user) => {
-        console.log('Show:' + user.mail);
         delete user.password;
         res.json({
           success: true,
@@ -122,8 +120,6 @@ module.exports = (() => {
     const {
       body
     } = req;
-    console.log('PAOAKJNKJDNN');
-    console.log(body);
     body.password = makePassword();
     if (body.mail === undefined) {
       res.json({
@@ -143,10 +139,7 @@ module.exports = (() => {
               message: "Cannot insert user without subjects"
           })
       }
-    // if(body.name === undefined){
-    //   res.json({success: false, message: "Cannot insert user without a name."})
-    // }
-    console.log(body.password); //TODO: send this with SMTP
+      console.log(body.password);
     // Mail.sendMail(body.mail,'[TimetableMaker] Your user has been created','Password :' + body.password);
     newUser(body).then((result) => {
 
@@ -156,7 +149,6 @@ module.exports = (() => {
       }).then((user) => {
 
         let i;
-        console.log(body);
 
           for (i = 0; i < body.id_subjects.length; i++) {
           let values = {
@@ -245,17 +237,17 @@ module.exports = (() => {
 
   const resetPasswordRoute = (req, res) => {
     const id = req.params.id;
-
+      console.log('Password reset :' + id)
     getUser({
       id
     }).then((user) => {
-      console.log(user);
       if (typeof user != 'undefined' && user) {
         const updateSet = {
           id: id,
           new_password: makePassword()
         };
         updatePassword(updateSet);
+          //Mail.sendResetPasswordMail({mail:user.mail,password:user.password})
 
         console.log('Password reset:' + id);
         res.json({
@@ -342,6 +334,7 @@ module.exports = (() => {
     deleteUser({
       id
     }).then((resul) => {
+        console.log('User delete :' + id);
       res.json({
         success: true,
         message: 'user deleted'
