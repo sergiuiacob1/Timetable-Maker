@@ -105,7 +105,8 @@ module.exports = (() => {
       .field('*')
       .valueOf()
       .then((res) => {
-        return res;
+          console.log(res)
+          return res;
       });
   };
 

@@ -11,7 +11,7 @@ $(document).ready(function(){
 	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
 	let searchInput = ".users-management .mdl-textfield__input";
 	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
-	let errorMsg = "";
+	let errorMsg = "Auch!!! Ceva nu a mers bine!";
 	let notification = document.querySelector("#notification");
 	let removeUserId;
 	let resetUserId;
@@ -21,6 +21,8 @@ $(document).ready(function(){
 	let subjectsListUser = [];
 	let subjectsListIds = [];
 	let subjectsListUserIds = [];
+
+
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
@@ -45,18 +47,20 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notify("Error at users get");
+			notify(errorMsg);
 		}
 	});
 
 	apiAllSubjectsGet(function(response){
+
+
 		if (response === true){
 			// subjectsData = dummySubjects.subjects;
 			// renderUsers(usersData);
 		}
 
 		if (response === false){
-			notify("Error at subjects get");
+			notify(errorMsg);
 		}
 	});
 
@@ -100,11 +104,11 @@ $(document).ready(function(){
 
 			if (data.success === true){				  
 			  	callback(true);
-				notify("User successfully removed.");
+				notify("Profesor sters cu succes!");
 			}
 			else {
 			  	callback(false);
-				notify("Something went wrong! Please try again.");
+				notify(errorMsg);
 			}
 		});
 	}
@@ -126,11 +130,11 @@ $(document).ready(function(){
 
 			if (data.success === true){
 			  callback(true);
-			  notify("User successfully edited.");
+			  notify("Profesor editat cu succes");
 			}
 			else {
 			  callback(false);
-			  notify("Something went wrong! Please try again.");
+			  notify(errorMsg);
 			}
 		});		
 	}
@@ -168,14 +172,21 @@ $(document).ready(function(){
 		$.get(urlGetUsers)
 		.done(function (data) {
 
+
+			console.log(data);
 			$(".loader-bck").hide();
 			if (data.success === true){
+
 			  console.log("useri luati cu success");
 			  console.log(data);
 			  usersData = data.users;
 			  callback(true);
 			}
 			else {
+			  if (data.message === "403 Forbidden"){
+			  	$("body div").remove();
+			  	$("body").append(`<div class="forbidden">${data.message}</div>`)
+			  }
 			  callback(false);
 			}
 		});
@@ -197,12 +208,12 @@ $(document).ready(function(){
 			    $(".loader-bck").hide();
 				if (data.success === true){
 				  	callback(true);
-					notify("User successfully added.");
+					notify("Profesor adaugat cu succes!");
 				}
 				else {
 				  errorMsg = data.message;
 				  callback(false);
-				  notify("Something went wrong! Please try again.");
+				  notify(errorMsg);
 				}
 		});
 	}
@@ -288,12 +299,12 @@ $(document).ready(function(){
                     </div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
-							Save changes
+							Salveaza schimbarile
 						</a>
 					</div>
-					<div class="mdl-card__menu">
-						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect close">
-							<i class="material-icons">cancel</i>
+					<div class="mdl-card__menu close-edit">
+						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+						<i class="material-icons close" id="close">cancel</i>
 						</button>
 					</div>
 				</div>`
@@ -338,8 +349,8 @@ $(document).ready(function(){
 			$(".mdl-layout__content").scrollTop(0);
 		});
 
-		$(".close").on("click", function() {
-			$(this).parent().parent().hide();
+		$(".close-edit").on("click", function() {
+			$(this).parent().hide();
 		});
 
 		$(removeButton).on("click", function(){
@@ -395,7 +406,7 @@ $(document).ready(function(){
 							}
 					
 							if (response === false){
-								notify("Something went wrong! Please try again.");
+								notify(errorMsg);
 							}
 						});
 					}
@@ -506,7 +517,7 @@ $(document).ready(function(){
 					}
 
 					if (response === false){
-						notify("Something went wrong! Please try again.");
+						notify(errorMsg);
 					}
 				});			
 			}
@@ -523,10 +534,10 @@ $(document).ready(function(){
 		
 		apiResetUserPasswordPost({id: resetUserId}, function(response){
 			if (response === true){
-				notify("User's password successfully reseted.");
+				notify("Parola profesorului a fost resetata cu succes!");
 			}
 			else {
-				notify("Something went wrong! Please try again.");
+				notify(errorMsg);
 			}
 		});
 	});
@@ -581,6 +592,9 @@ $(document).ready(function(){
 		// const userName = $(".content-input #username");
 		const email = $(".content-input #email");
 
+
+		subjectsListIds = [];
+
 		for (let i in subjectsList){
 			subjectsListIds.push(subjectsList[i].id_subject);
 		}
@@ -610,7 +624,7 @@ $(document).ready(function(){
 							renderUsers(usersData);
 						}
 						else {
-							notify("Something went wrong! Please try again.");
+							notify(errorMsg);
 						}
 					});
 				}
@@ -679,10 +693,13 @@ $(document).ready(function(){
 
 			if (isMultiple === false){
 				subjectsList.push({val, id_subject});
+
+				console.log(subjectsList);
 				renderSubjectsList(subjectsList);
 			}
 		});
 	}
+
 
 	function renderSubjectsList(list){
 
@@ -711,6 +728,8 @@ $(document).ready(function(){
 				}
 			}
 
+			console.log(index);
+
 			if (index > -1) {
 			  	subjectsList.splice(index, 1);			  
 			}
@@ -719,6 +738,8 @@ $(document).ready(function(){
 			renderSubjectsList(subjectsList);
 		});
 	}
+
+
 
 
 	$(subjectsInput).on('input', function(){

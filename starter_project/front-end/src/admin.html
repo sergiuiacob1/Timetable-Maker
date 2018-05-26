@@ -20,14 +20,19 @@
   <header class="mdl-layout__header">
     <div class="mdl-layout__header-row">
       <!-- Title -->
-      <span class="mdl-layout-title">Admin Page</span>
+      <span class="mdl-layout-title">Pagina Administrator</span>
       <!-- Add spacer, to align navigation to the right -->
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
+<<<<<<< HEAD
         <div class="mdl-navigation__link active" id="users-management">Users Management</div>
         <div class="mdl-navigation__link" id="add-user">Add User</div>
         <div class="mdl-navigation__link" id="logout">Logout</div>
+=======
+        <div class="mdl-navigation__link" id="users-management">Management Useri</div>
+        <div class="mdl-navigation__link" id="add-user">Adauga User</div>
+>>>>>>> 20a1271d61e8c744d8ebfde45f33639054c56203
       </nav>
     </div>
   </header>
@@ -51,7 +56,7 @@
 
                                 <label class="mdl-textfield__label" for="sample-expandable">
                                         <i class="material-icons search">search</i>
-                                        Search a user
+                                        Cauta un profesor
                                     </label>
                             </div>
                         </div>
@@ -71,11 +76,15 @@
 
             <div class="add-user">
                 <div class="container">
+<<<<<<< HEAD
+=======
+                    <div class="content-title">Adauga profesor</div>
+>>>>>>> 20a1271d61e8c744d8ebfde45f33639054c56203
 
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" type="text" id="fullname" pattern="[a-zA-Z\s]+">
-                            <label class="mdl-textfield__label" for="fname">Full name</label>
+                            <label class="mdl-textfield__label" for="fname">Nume complet</label>
                         </div>
                         <p id="fullname-req"></p>
                     </div>
@@ -109,7 +118,7 @@
 
                     <div class="content-input">
                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add-newUser">
-                            Add New User
+                            Adauga profesor nou
                         </button>
                     </div>
                 </div>
@@ -125,25 +134,25 @@
     </div>
 
     <dialog class="mdl-dialog" id="dialog-remove">
-        <h5 class="mdl-dialog__title">Are you sure you want to delete this user?</h5>
+        <h5 class="mdl-dialog__title">Sunteti sigur ca doriti sa stergeti acest profesor?</h5>
         <div class="mdl-dialog__content">
         </div>
 
         <div class="mdl-dialog__actions">
-          <button type="button" class="mdl-button close-button" id="remove-user-no">No</button>
-          <button type="button" class="mdl-button" id="remove-user-yes">Yes</button>
+          <button type="button" class="mdl-button close-button" id="remove-user-no">Nu</button>
+          <button type="button" class="mdl-button" id="remove-user-yes">Da</button>
           
         </div>
     </dialog>
 
     <dialog class="mdl-dialog" id="dialog-reset">
-            <h5 class="mdl-dialog__title">Are you sure you want to reset users's password?</h5>
+            <h5 class="mdl-dialog__title">Sunteti sigur ca doriti sa resetati parola acestui profesor?</h5>
             <div class="mdl-dialog__content">
             </div>
     
             <div class="mdl-dialog__actions">
-              <button type="button" class="mdl-button close-button" id="reset-user-no">No</button>
-              <button type="button" class="mdl-button" id="reset-user-yes">Yes</button>
+              <button type="button" class="mdl-button close-button" id="reset-user-no">Nu</button>
+              <button type="button" class="mdl-button" id="reset-user-yes">Da</button>
               
             </div>
         </dialog>
@@ -153,7 +162,6 @@
         <button type="button" class="mdl-snackbar__action"></button>
     </div>
     
-
 </body>
 
 </html>

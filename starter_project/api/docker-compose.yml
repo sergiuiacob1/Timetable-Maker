@@ -8,33 +8,33 @@ services:
     volumes:
       - ./:/application
       - /application/node_modules
-    links:
-      - db:db
+#    links:
+#      - db:db
     environment:
-      - DB_HOST=db
+      - DB_HOST=89.34.92.135
       - DB_DATABASE=extension
       - DB_USER=extension_api
       - DB_PASSWORD=extension_api
       - MAIL_API_KEY
       - MAIL_DOMAIN
       - MAIL_ACCOUNT
-  db:
-    image: mysql:5.6
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_DATABASE=extension
-      - MYSQL_USER=extension_api
-      - MYSQL_PASSWORD=extension_api
-      - MYSQL_ROOT_PASSWORD=J4m432423ass
-    volumes:
-      - ./data:/var/lib/mysql
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    links:
-      - db:db
-    environment:
-      MYSQL_USERNAME: root
-      MYSQL_ROOT_PASSWORD: J4m432423ass
-    ports:
-      - "8080:80"
+#  db:
+#    image: mysql:5.6
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      - MYSQL_DATABASE=extension
+#      - MYSQL_USER=extension_api
+#      - MYSQL_PASSWORD=extension_api
+#      - MYSQL_ROOT_PASSWORD=J4m432423ass
+#    volumes:
+#      - ./data:/var/lib/mysql
+#  phpmyadmin:
+#    image: phpmyadmin/phpmyadmin
+#    links:
+#      - db:db
+#    environment:
+#      MYSQL_USERNAME: root
+#      MYSQL_ROOT_PASSWORD: J4m432423ass
+#    ports:
+#      - "8080:80"
