@@ -18,9 +18,8 @@ module.exports = (() => {
     deleteResourceRoute
   } = require('./resource_routes');
   const {getGroupsRoute} = require('./group_routes');
-  const {getSubjectsRoute} = require('./subject_routes');
+  const {getSubjectsRoute, addSubjectRoute} = require('./subject_routes');
   const {getConstraintsRoute, newConstraintRoute} = require('./constraints_routes.js');
-
 
   let serverInterface = undefined;
 
@@ -82,6 +81,7 @@ module.exports = (() => {
 
     apiRoutes.get('/groups', getGroupsRoute);
     apiRoutes.get('/subjects', getSubjectsRoute);
+    apiRoutes.post('subjects', addSubjectRoute);
 
     apiRoutes.get('/constraints', getConstraintsRoute);
     apiRoutes.post('/constraints', newConstraintRoute);
