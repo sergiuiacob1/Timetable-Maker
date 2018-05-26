@@ -45,7 +45,8 @@ module.exports = (() => {
 
   const authenticate = (req, res) => {
     const {body} = req;
-    getUser(body).then((user) => {
+    const {mail, password} = body;
+    getUser({mail, password}).then((user) => {
        console.log(user);
       if (user) {
         const token = jwt.sign({user}, secret, {
