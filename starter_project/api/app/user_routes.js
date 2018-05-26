@@ -129,6 +129,18 @@ module.exports = (() => {
         message: "Cannot insert user without an email."
       })
     }
+      if (body.id_subjects === undefined) {
+          res.json({
+              success: false,
+              message: "Cannot insert user without subjects"
+          })
+      }
+      else if (body.id_subjects.length == 0) {
+          res.json({
+              success: false,
+              message: "Cannot insert user without subjects"
+          })
+      }
     // if(body.name === undefined){
     //   res.json({success: false, message: "Cannot insert user without a name."})
     // }
@@ -143,7 +155,8 @@ module.exports = (() => {
 
         let i;
         console.log(body);
-        for (i = 0; i < body.id_subjects.length; i++) {
+
+          for (i = 0; i < body.id_subjects.length; i++) {
           let values = {
             id_subject: body.id_subjects[i],
             id_user: user.id
