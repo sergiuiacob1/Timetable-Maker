@@ -30,18 +30,17 @@ module.exports = (() => {
   };
 
   const checkAdmin = (req, res, next) => {
-    /*const id = req.decoded.user.id;
+      const id = req.decoded.user.id;
     getUser({id})
     .then((user) => {
-      if (user.admin == 1) {
+        if (user.is_admin == 1) {
           next();
       } else {
         return res.json({succes: false, message: '403 Forbidden'});
       }
     }).catch((e) => {
       return res.status(403).send({success: false, message: '403 Forbidden'});
-    });*/
-    next();
+    });
   };
 
   const authenticate = (req, res) => {
