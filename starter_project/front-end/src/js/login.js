@@ -23,11 +23,16 @@ $(document).ready(function(){
 			  token = data.token;
 			  localStorage.setItem('token', token);
 			  setTimeout(tokenExpire, 21600000); //6 * 60 * 1 min
-			  callback(true);
+			  if (data.is_admin === 1){
+			  	callback(true, true);
+			  }
+			  else{
+			  	callback(true, false);
+			  }
 			}
 			else {
 			  errorMsg = data.message;
-			  callback(false);
+			  	callback(false);
 			}
 		});	
 	}
@@ -52,11 +57,17 @@ $(document).ready(function(){
 		console.log(username);
 		console.log(password);
 
-		apiLoginPost({mail:username, password}, function(response){
+		apiLoginPost({mail:username, password}, function(response, isAdmin){
 
 
 			if (response === true){
-				$(location).attr('href', '/admin.html');
+
+				if (isAdmin === true){
+					$(location).attr('href', '/admin.html');
+				}	
+				else{
+					$(location).attr('href', '/profPref.html');
+				}
 			}
 
 			if (response === false){
