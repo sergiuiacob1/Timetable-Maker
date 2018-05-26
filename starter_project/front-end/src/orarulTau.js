@@ -18,7 +18,7 @@ require('./profPref.less');
 */
 function postThisShit(json, callback) {
 
-  alert(json);
+  
 
 /*  $.ajax({
     url: urlPost,
@@ -194,13 +194,10 @@ function start(){
   var json = JSON.stringify(object);
   
   postThisShit(json, function(response){
-      alert(response);
-      if(response === true)
-        alert("Optiune adaugata!");
-      else alert("Optiunea nu s-a adaugat. Va rugam reincercati.");
+      location.reload();
     });
     
-   location.reload();
+   
 };
 
 function addListeners(){
