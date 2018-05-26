@@ -18,7 +18,7 @@ $(document).ready(function(){
 	let usersData;
 	let subjectsData;
 	let subjectsList = [];
-	let subjectsIdList = [];
+	let subjectsListIds = [];
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
@@ -66,7 +66,7 @@ $(document).ready(function(){
 		.done(function (data) {
 
 			$(".loader-bck").hide();
-
+			
 			if (data.success === true){
 			  console.log("materii luate cu success");			  
 			  subjectsData = data.subjects;
@@ -182,26 +182,30 @@ $(document).ready(function(){
 	function apiAddUserPost(data, callback) {
 		
 		console.log(data);
-		console.log("PLA");
+
 		$(".loader-bck").show();
 
-		$.post(urlAddUser, data)
-		.done(function (data) {
 
-			$(".loader-bck").hide();
-			console.log(data);
-			if (data.success === true){
-			  	callback(true);
-				notification.MaterialSnackbar.showSnackbar({
-					message: "User successfully added."
-				});
-			}
-			else {
-			  errorMsg = data.message;
-			  callback(false);
-			  notify("Something went wrong! Please try again.");
-			}
-		});	
+		$.ajax({
+		    "type": "POST",
+		    "url": urlAddUser,
+		    "data": JSON.stringify(data),
+		    'contentType': 'application/json'
+		}).done(function (data) {
+
+			    $(".loader-bck").hide();
+				if (data.success === true){
+				  	callback(true);
+					notification.MaterialSnackbar.showSnackbar({
+						message: "User successfully added."
+					});
+				}
+				else {
+				  errorMsg = data.message;
+				  callback(false);
+				  notify("Something went wrong! Please try again.");
+				}
+		});
 	}
 
 	function getSuggestions(value){
@@ -436,6 +440,10 @@ $(document).ready(function(){
 		// const userName = $(".content-input #username");
 		const email = $(".content-input #email");
 
+		for (let i in subjectsList){
+			subjectsListIds.push(subjectsList[i].id_subject);
+		}
+
 		const cond3 = verifyInput(
 						email, 
 						/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
@@ -445,9 +453,13 @@ $(document).ready(function(){
 		// const cond2 = verifyInput(userName, /^[0-9a-zA-Z]+$/, "username-req", "Please use only letters and numbers");
 		const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, "fullname-req", "Please use only letters");
 
-		if (cond1  && cond3) {
 
-			const obj ={ fullName: $(fullName).val(), mail: $(email).val(), id_subjects: subjectsIdList};
+
+		const cond2 = subjectsListIds.length !== 0? true : false;
+
+		if (cond1 && cond2&& cond3) {
+
+			const obj ={ fullName: $(fullName).val(), mail: $(email).val(), id_subjects: subjectsListIds};
 			apiAddUserPost(obj, function(response){
 
 				if (response === true){
@@ -498,7 +510,7 @@ $(document).ready(function(){
 		$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").children().remove();
 		$(".demo-list-control.mdl-list.dropdown").show();
 
-		array.map((subj, index) =>{
+		array.map((subj, index)=>{
 
 
 			$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").append(
@@ -516,26 +528,31 @@ $(document).ready(function(){
 			let id_subject = $(this).attr("key");
 			val = val.trim();
 
-			subjectsList.push(val);
-			subjectsIdList.push(id_subject);
+			let isMultiple = false;
+			for (let i in subjectsList){
+				if (subjectsList[i].id_subject === id_subject){
+					isMultiple = true;
+					break;
+				}
+			}
 
-			console.log(subjectsList);
-			console.log(subjectsIdList);
-			renderSubjectsList(subjectsList);
+			if (isMultiple === false){
+				subjectsList.push({val, id_subject});
+				renderSubjectsList(subjectsList);
+			}
 		});
 	}
 
 	function renderSubjectsList(list){
 
-		// console.log(list);
 		$(".mdl-layout__content .page-content .add-user .subjects-list").show();
 		$(".page-content .add-user .subjects-list .list").children().remove();
 		list.map((subj, index) =>{
 
 			$(".page-content .subjects-list .list").append(
 				`<div class="mdl-chip mdl-chip--deletable">
-          			<div class="mdl-chip__text">${subj}</div>
-          			<button type="button" class="mdl-chip__action">
+          			<div class="mdl-chip__text">${subj.val}</div>
+          			<button type="button" class="mdl-chip__action" id=${subj.id_subject}>
           				<i class="material-icons">cancel</i>
           			</button>
         		</div>`
@@ -544,12 +561,20 @@ $(document).ready(function(){
 
 		$(".page-content .subjects-list .list .mdl-chip__action").on("click", function(){
 			let subj = $(this).prev().text();
-			let index = subjectsList.indexOf(subj);
-			if (index > -1) {
-			  subjectsList.splice(index, 1);
+			let id = $(this).attr("id");
+			let index = -1;
+			for ( let i in subjectsList){
+				if (subjectsList[i].id_subject === id){
+					index = i;
+					break;
+				}
 			}
 
-			
+			if (index > -1) {
+			  	subjectsList.splice(index, 1);			  
+			}
+
+			console.log(subjectsList);
 			renderSubjectsList(subjectsList);
 		});
 	}
@@ -561,7 +586,7 @@ $(document).ready(function(){
 
 		if (searchText.length !== 0){
 			const array = getSuggestions_subjects(searchText);
-			
+
 			if (array.length !== 0){
 				renderSubjects(array);
 			}
