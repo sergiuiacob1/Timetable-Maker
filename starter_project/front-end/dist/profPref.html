@@ -1,0 +1,286 @@
+   
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Adauga o ora</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="profPref.js"></script> -->
+    <!-- <link rel="stylesheet" href="profPref.css"> -->
+    <!-- Google Material Design -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-amber.min.css" />    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
+    <script type="text/javascript">
+      if(navigator.appName.indexOf("Internet Explorer")!=-1 || navigator.userAgent.match(/Trident.*rv[ :]*11\./))
+      {
+         //This user uses Internet Explorer
+         window.location = "https://www.google.com/chrome/browser/features.html?brand=CHBD&gclid=Cj0KCQjwlv_XBRDrARIsAH-iRJSzmGy1iA8AqCZRsX3axU1lGK25wUP0PSGzmDxkETC9Nuss-FckUzMaAk7HEALw_wcB&gclsrc=aw.ds&dclid=CJiMh6XAkdsCFdOVdwodpBgKgQ";
+      }
+    </script>
+  </head>  
+  
+  
+  <body>
+
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Doru salvatoru</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="profPref.html">Adauga o ora</a>
+            <a target="_blank" class="mdl-navigation__link" href="orarulTau.html">Orarul tau</a>
+ 
+          </nav>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          
+
+          <div class="boody">
+          
+              <aside class="mdl-shadow--2dp">
+                <h3>
+                  Optiuni
+                </h3>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  Activitate
+                  <select class="mdl-textfield__input" id="activitate" name="activitate">
+                    <option></option>
+                    <option value="Alte activitati">Alte activitati</option>
+                    <option value="Cerc stiintific">Cerc stiintific</option>
+                    <option value="Colocviu">Colocviu</option>
+                    <option value="Consultatii">Consultatii</option>
+                    <option value="Curs">Curs</option>
+                    <option value="Examen">Examen</option>
+                    <option value="Laborator">Laborator</option>
+                    <option value="Partial">Partial</option>
+                    <option value="Practica">Practica</option>
+                    <option value="Proiecte">Proiecte</option>
+                    <option value="Restanta">Restanta</option>
+                    <option value="Sedinta">Sedinta</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Test Practic">Test practic</option>
+                  </select>
+                </div>
+
+                <br>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  Materie
+                  <select class="mdl-textfield__input" id="materie" name="materie">
+                    <option></option>                    
+                  </select>
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="grupa">
+                  Grupa / Semian
+                  <br><br>
+                  <!--<input type="checkbox" name="grupa" value="orice">Orice grupa<br>-->
+                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+                    <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" value="orice">
+                    <span class="mdl-checkbox__label">Orice grupa</span>
+                  </label>
+                  <br>
+
+                </div>
+
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                  Frecventa  <br><br>
+                  <p>Pentru evenimente cu frecventa unica (examene, partiale, etc.) va rugam introduceti data:</p>
+                    <br> 
+                    <input type="date" id="dateInput" /><br><br>
+                </div>
+
+                <form action="/action_page.php">
+                  <label for="switch1" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                    <input type="checkbox" id="switch1" class="mdl-switch__input">
+                    <span class="mdl-switch__label">Ore si sala flexibile / Neflexibile*</span>  
+                  </label>
+                  <br>
+                  <br>
+                  
+                    <div class="mdl-textfield mdl-js-textfield">
+                                <p style="font-size: 15px">*Va rugam specificati motivul:</p>
+
+                      <textarea class="mdl-textfield__input" type="text" rows= "3" id="textarea" ></textarea>
+                      <label class="mdl-textfield__label" for="sample5"></label>
+                    </div>
+                  </form>      
+         
+          
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="sendData">Trimite</button>
+         
+        </aside>
+          
+      <div class="containerOrar">
+        <div class="ore">
+        
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="orar" style="width:90%">
+            <thead>
+              <tr>
+                  <th>Luni</th>
+                  <th>Marti</th> 
+                  <th>Miercuri</th>
+                  <th>Joi</th>
+                  <th>Vineri</th>
+                  <th>Sambata</th>
+                  <th>Duminica</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr>
+                  <td class="noColor">08:00 - 09:00</td>
+                  <td class="noColor">08:00 - 09:00</td>
+                  <td class="noColor">08:00 - 09:00</td>
+                  <td class="noColor">08:00 - 09:00</td>
+                  <td class="noColor">08:00 - 09:00</td>
+                  <td class="noColor">08:00 - 09:00</td>
+                  <td class="noColor">08:00 - 09:00</td>
+
+                </tr>
+              <tr>
+                  <td class="noColor">09:00 - 10:00</td>
+                  <td class="noColor">09:00 - 10:00</td>
+                  <td class="noColor">09:00 - 10:00</td>
+                  <td class="noColor">09:00 - 10:00</td>
+                  <td class="noColor">09:00 - 10:00</td>
+                  <td class="noColor">09:00 - 10:00</td>
+                  <td class="noColor">09:00 - 10:00</td>
+
+              </tr>
+                <tr>
+                  <td class="noColor">10:00 - 11:00</td>
+                  <td class="noColor">10:00 - 11:00</td>
+                  <td class="noColor">10:00 - 11:00</td>
+                  <td class="noColor">10:00 - 11:00</td>
+                  <td class="noColor">10:00 - 11:00</td>
+                  <td class="noColor">10:00 - 11:00</td>
+                  <td class="noColor">10:00 - 11:00</td>
+                </tr>
+              <tr>
+                  <td class="noColor">11:00 - 12:00</td>
+                  <td class="noColor">11:00 - 12:00</td>
+                  <td class="noColor">11:00 - 12:00</td>
+                  <td class="noColor">11:00 - 12:00</td>
+                  <td class="noColor">11:00 - 12:00</td>
+                  <td class="noColor">11:00 - 12:00</td>
+                  <td class="noColor">11:00 - 12:00</td>
+
+              </tr>
+                <tr>
+                  <td class="noColor">12:00 - 13:00</td>
+                  <td class="noColor">12:00 - 13:00</td>
+                  <td class="noColor">12:00 - 13:00</td>
+                  <td class="noColor">12:00 - 13:00</td>
+                  <td class="noColor">12:00 - 13:00</td>
+                  <td class="noColor">12:00 - 13:00</td>
+                  <td class="noColor">12:00 - 13:00</td>
+                </tr>
+
+              <tr>
+                  <td class="noColor">13:00 - 14:00</td>
+                  <td class="noColor">13:00 - 14:00</td>
+                  <td class="noColor">13:00 - 14:00</td>
+                  <td class="noColor">13:00 - 14:00</td>
+                  <td class="noColor">13:00 - 14:00</td>
+                  <td class="noColor">13:00 - 14:00</td>
+                  <td class="noColor">13:00 - 14:00</td>
+
+              </tr>
+                <tr>
+                  <td class="noColor">14:00 - 15:00</td>
+                  <td class="noColor">14:00 - 15:00</td>
+                  <td class="noColor">14:00 - 15:00</td>
+                  <td class="noColor">14:00 - 15:00</td>
+                  <td class="noColor">14:00 - 15:00</td>
+                  <td class="noColor">14:00 - 15:00</td>          
+                  <td class="noColor">14:00 - 15:00</td>          
+
+              </tr>
+              <tr>
+                  <td class="noColor">15:00 - 16:00</td>
+                  <td class="noColor">15:00 - 16:00</td>
+                  <td class="noColor">15:00 - 16:00</td>
+                  <td class="noColor">15:00 - 16:00</td>
+                  <td class="noColor">15:00 - 16:00</td>
+                  <td class="noColor">15:00 - 16:00</td>
+                  <td class="noColor">15:00 - 16:00</td>
+              </tr>
+              <tr>
+                  <td class="noColor">16:00 - 17:00</td>
+                  <td class="noColor">16:00 - 17:00</td>
+                  <td class="noColor">16:00 - 17:00</td>
+                  <td class="noColor">16:00 - 17:00</td>
+                  <td class="noColor">16:00 - 17:00</td>
+                  <td class="noColor">16:00 - 17:00</td>
+                  <td class="noColor">16:00 - 17:00</td>
+
+
+              </tr>
+              <tr>
+                  <td class="noColor">17:00 - 18:00</td>
+                  <td class="noColor">17:00 - 18:00</td>
+                  <td class="noColor">17:00 - 18:00</td>
+                  <td class="noColor">17:00 - 18:00</td>
+                  <td class="noColor">17:00 - 18:00</td>
+                  <td class="noColor">17:00 - 18:00</td>
+                  <td class="noColor">17:00 - 18:00</td>
+              </tr>
+
+              <tr>
+                  <td class="noColor">18:00 - 19:00</td>
+                  <td class="noColor">18:00 - 19:00</td>
+                  <td class="noColor">18:00 - 19:00</td>
+                  <td class="noColor">18:00 - 19:00</td>
+                  <td class="noColor">18:00 - 19:00</td>
+                  <td class="noColor">18:00 - 19:00</td>
+                  <td class="noColor">18:00 - 19:00</td>
+              </tr>
+              <tr>
+                <td class="noColor">19:00 - 20:00</td>
+                <td class="noColor">19:00 - 20:00</td>
+                <td class="noColor">19:00 - 20:00</td>
+                <td class="noColor">19:00 - 20:00</td>
+                <td class="noColor">19:00 - 20:00</td>
+                <td class="noColor">19:00 - 20:00</td>
+                <td class="noColor">19:00 - 20:00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> 
+
+            <div class="sali">
+
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="sali" style="width:90%">
+            <tbody>
+              
+              </tbody>
+              </table>
+            </div>
+            </div>
+         </div>
+
+
+        </div>
+      </main>
+    </div>
+  
+    
+
+    
+  <script type="text/javascript" src="profPref.js?f2577dfc88356ed499e8"></script></body>
+</html>

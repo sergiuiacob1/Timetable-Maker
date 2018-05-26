@@ -20,6 +20,7 @@ module.exports = (() => {
   const {getGroupsRoute} = require('./group_routes');
   const {getSubjectsRoute, addSubjectRoute} = require('./subject_routes');
   const {getConstraintsRoute, newConstraintRoute} = require('./constraints_routes.js');
+  const {getLinkedConstraintsRoute, newLinkedConstraintRoute} = require('./linked_constraints_routes.js');
 
   let serverInterface = undefined;
 

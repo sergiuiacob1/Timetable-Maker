@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- <script type="text/javascript" src="./parsley.js"></script> --> 
+  
+
+  <title>Admin Page </title>
+</head>
+
+<body>
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">Admin Page</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <div class="mdl-navigation__link" id="users-management">Users Management</div>
+        <div class="mdl-navigation__link" id="add-user">Add User</div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mdl-layout__content no-scroll">
+    
+      
+    
+    <div class="page-content">
+        <div class="users-management">
+            <div class="container">
+           
+                <div class="content-title">Users Management Page</div>
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col" id="left-side">
+                        <!-- Expandable Textfield -->
+                        <div class="mdl-textfield mdl-js-textfield">
+                            
+                            <!-- <i class="material-icons" style="float: left">search</i> -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label search-input">
+                                <input class="mdl-textfield__input" type="text" id="sample6">
+
+                                <label class="mdl-textfield__label" for="sample-expandable">
+                                        <i class="material-icons search">search</i>
+                                        Search a user
+                                    </label>
+                            </div>
+                        </div>
+
+                        <ul class="mdl-list" id="lista-useri">    
+                            
+                        </ul>
+                    </div>
+
+                    <div class="mdl-cell mdl-cell--6-col" id="right-side">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+            <div class="add-user">
+                <div class="container">
+                    <div class="content-title">Add User</div>
+
+                    <div class="content-input">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="fullname" pattern="[a-zA-Z\s]+">
+                            <label class="mdl-textfield__label" for="fname">Full name</label>
+                        </div>
+                        <p id="fullname-req"></p>
+                    </div>
+
+                    <div class="content-input">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="email" id="email">
+                            <label class="mdl-textfield__label" for="fname">Email</label>
+                        </div>
+                        <p id="email-req"></p>
+                    </div>
+                      <div class="subjects-list"> 
+                        
+                        <div class="list">
+                        
+                        </div>
+                      </div>
+                  
+
+                    <div class="content-input">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="subjects">
+                            <label class="mdl-textfield__label" for="fname">Adauga materii profesor</label>
+                        </div>
+                        <p id="subjects-req"></p>
+                    </div>
+
+                    <div class="content-dropdown">
+                      <ul class="demo-list-control mdl-list dropdown"></ul>
+                    </div>
+
+                    <div class="content-input">
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored add-newUser">
+                            Add New User
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+      
+        </div>
+    </main>
+  </div>
+
+    <div class="loader-bck">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active loader"></div>
+    </div>
+
+    <dialog class="mdl-dialog" id="dialog-remove">
+        <h5 class="mdl-dialog__title">Are you sure you want to delete this user?</h5>
+        <div class="mdl-dialog__content">
+        </div>
+
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button close-button" id="remove-user-no">No</button>
+          <button type="button" class="mdl-button" id="remove-user-yes">Yes</button>
+          
+        </div>
+    </dialog>
+
+    <dialog class="mdl-dialog" id="dialog-reset">
+            <h5 class="mdl-dialog__title">Are you sure you want to reset users's password?</h5>
+            <div class="mdl-dialog__content">
+            </div>
+    
+            <div class="mdl-dialog__actions">
+              <button type="button" class="mdl-button close-button" id="reset-user-no">No</button>
+              <button type="button" class="mdl-button" id="reset-user-yes">Yes</button>
+              
+            </div>
+        </dialog>
+
+    <div id="notification" class="mdl-snackbar mdl-js-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button type="button" class="mdl-snackbar__action"></button>
+    </div>
+    
+
+<script type="text/javascript" src="admin.js?f2577dfc88356ed499e8"></script></body>
+
+</html>
