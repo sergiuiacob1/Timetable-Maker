@@ -4,7 +4,8 @@ module.exports = (() => {
     const {getConstraints, addConstraint} = require('./constraints_actions.js');
   
     const getConstraintsRoute = (req, res) => {
-      getConstraints().then((constraints) => {
+      const userId = req.decoded.user.id;
+      getConstraints({userId}).then((constraints) => {
         console.log(constraints);
         res.json({success: true, constraints});
       }).catch((e) => {
@@ -15,7 +16,10 @@ module.exports = (() => {
     };
 
     const newConstraintRoute = (req, res) => {
-      addConstraint(req).then(() => {
+      const userId = req.decoded.user.id;
+      req.body.userId = userId;
+
+      addConstraint(req.body).then(() => {
         res.json({success: true, message: "Added constraint"});
       }).catch((e) => {
         console.log(e);

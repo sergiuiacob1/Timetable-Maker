@@ -15,6 +15,7 @@ module.exports = (() => {
         id,
         startDate,
         endDate,
+        userId,
         room
       }) {
         let whereClause = squel.expr();
@@ -30,6 +31,9 @@ module.exports = (() => {
         }
         if (room) {
             whereClause = whereClause.and("room = ?", room);
+        }
+        if (userId) {
+          whereClause = whereClause.and('user_id', userId);
         }
        
         this.query = this.query.where(whereClause);

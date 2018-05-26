@@ -53,9 +53,7 @@ module.exports = (() => {
     // app.post('/resources/update', updateResourceRoute);
     // app.post('/resources/remove', deleteResourceRoute);
 
-    app.get('/constraints', getConstraintsRoute);
-    app.post('/constraints', newConstraintRoute);
-
+    
     const apiRoutes = express.Router();
     const adminRoutes = express.Router();
 
@@ -84,7 +82,9 @@ module.exports = (() => {
 
     apiRoutes.get('/groups', getGroupsRoute);
     apiRoutes.get('/subjects', getSubjectsRoute);
-    
+
+    apiRoutes.get('/constraints', getConstraintsRoute);
+    apiRoutes.post('/constraints', newConstraintRoute);
     
     app.use('/api', apiRoutes);
 
