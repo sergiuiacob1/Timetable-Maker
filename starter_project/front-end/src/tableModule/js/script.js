@@ -1,6 +1,6 @@
 
 
-var dummyData = { "ore_seminarii_luni":[
+var Luni = { "Luni":[
     {
         "data_start":"8:00",
         "data_end":"10:00",
@@ -26,11 +26,208 @@ var dummyData = { "ore_seminarii_luni":[
         "data_end":"20:00",
         "nume_event":"Seminar Matematica"
     }
+    ]
+};
 
+var Marti = { "Marti":[
+    {
+        "data_start":"9:00",
+        "data_end":"11:00",
+        "nume_event":"Curs IP"
+    },
+    {
+        "data_start":"13:00",
+        "data_end":"15:00",
+        "nume_event":"Curs Mate"
+    },
+    {
+        "data_start":"16:00",
+        "data_end":"18:00",
+        "nume_event":"Seminar AG"
+    },
+    {
+        "data_start":"18:00",
+        "data_end":"18:30",
+        "nume_event":"Seminar RN"
+    },
+    {
+        "data_start":"19:00",
+        "data_end":"20:00",
+        "nume_event":"Seminar Retele de Calculatoare"
+    }
+    ]
+}; 
+
+var Miercuri = { "Miercuri":[
+    {
+        "data_start":"8:00",
+        "data_end":"10:00",
+        "nume_event":"Curs Logica"
+    },
+    {
+        "data_start":"10:00",
+        "data_end":"12:00",
+        "nume_event":"Curs IP"
+    },
+    {
+        "data_start":"13:00",
+        "data_end":"15:00",
+        "nume_event":"Seminar ACSO"
+    },
+    {
+        "data_start":"16:00",
+        "data_end":"17:30",
+        "nume_event":"Seminar Engleza"
+    },
+    {
+        "data_start":"18:00",
+        "data_end":"20:00",
+        "nume_event":"Seminar Matematica"
+    }
+    ]
+}; 
+
+var Joi = { "Joi":[
+    {
+        "data_start":"8:00",
+        "data_end":"10:00",
+        "nume_event":"Curs Logica"
+    },
+    {
+        "data_start":"10:00",
+        "data_end":"12:00",
+        "nume_event":"Curs IP"
+    },
+    {
+        "data_start":"13:00",
+        "data_end":"15:00",
+        "nume_event":"Seminar ACSO"
+    },
+    {
+        "data_start":"16:00",
+        "data_end":"17:30",
+        "nume_event":"Seminar Engleza"
+    },
+    {
+        "data_start":"18:00",
+        "data_end":"20:00",
+        "nume_event":"Seminar Matematica"
+    }
+    ]
+}; 
+
+var Vineri = { "Vineri":[
+    {
+        "data_start":"8:00",
+        "data_end":"10:00",
+        "nume_event":"Curs Logica"
+    },
+    {
+        "data_start":"10:00",
+        "data_end":"12:00",
+        "nume_event":"Curs IP"
+    },
+    {
+        "data_start":"13:00",
+        "data_end":"15:00",
+        "nume_event":"Seminar ACSO"
+    },
+    {
+        "data_start":"16:00",
+        "data_end":"17:30",
+        "nume_event":"Seminar Engleza"
+    },
+    {
+        "data_start":"18:00",
+        "data_end":"20:00",
+        "nume_event":"Seminar Matematica"
+    }
     ]
 }; 
 
 
+setTimeout(function(){
+
+    Luni.Luni.map((seminar, index)=>{
+        $('.events .events-group .Luni').append(
+
+            `<li class="single-event"  data-start=${seminar.data_start} 
+                 data-end=${seminar.data_end}
+                 data-event="event-2"
+                 data-content=${seminar.nume_event}
+             >
+                <a href="#0">
+                    <em class="event-name">${seminar.nume_event}</em>
+                </a>
+            </li>
+        `);
+    })
+
+    Marti.Marti.map((seminar, index)=>{
+        $('.events .events-group .Marti').append(
+
+            `<li class="single-event"  data-start=${seminar.data_start} 
+                 data-end=${seminar.data_end}
+                 data-event="event-2"
+                 data-content=${seminar.nume_event}
+             >
+                <a href="#0">
+                    <em class="event-name">${seminar.nume_event}</em>
+                </a>
+            </li>
+        `);
+    })
+
+    Miercuri.Miercuri.map((seminar, index)=>{
+        $('.events .events-group .Miercuri').append(
+
+            `<li class="single-event"  data-start=${seminar.data_start} 
+                 data-end=${seminar.data_end}
+                 data-event="event-2"
+                 data-content=${seminar.nume_event}
+             >
+                <a href="#0">
+                    <em class="event-name">${seminar.nume_event}</em>
+                </a>
+            </li>
+        `);
+    })
+
+    Joi.Joi.map((seminar, index)=>{
+        $('.events .events-group .Joi').append(
+
+            `<li class="single-event"  data-start=${seminar.data_start} 
+                 data-end=${seminar.data_end}
+                 data-event="event-2"
+                 data-content=${seminar.nume_event}
+             >
+                <a href="#0">
+                    <em class="event-name">${seminar.nume_event}</em>
+                </a>
+            </li>
+        `);
+    })
+
+    Vineri.Vineri.map((seminar, index)=>{
+        $('.events .events-group .Vineri').append(
+
+            `<li class="single-event"  data-start=${seminar.data_start} 
+                 data-end=${seminar.data_end}
+                 data-event="event-2"
+                 data-content=${seminar.nume_event}
+             >
+                <a href="#0">
+                    <em class="event-name">${seminar.nume_event}</em>
+                </a>
+            </li>
+        `);
+    })
+
+    mainJs();
+},1000);
+
+
+//script for generation the position and color for timetable----------------------------------------------------------------
 function mainJs(){
 
     var transitionEnd = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend';
@@ -413,24 +610,24 @@ function mainJs(){
         });
     }
 }
+//--------------------------------------------Script for dropdown table--------------------------------------------
 
+function DropDownConstrangeri() {
+    document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    if (openDropdown.classList.contains('show')) {
+    openDropdown.classList.remove('show');
+    }
+    }
+    }
+    }
     
-
-setTimeout(function(){
-
-    dummyData.ore_seminarii_luni.map((seminar, index)=>{
-        $('.events ul .events-group .day').append(
-
-            `<li class="single-event"  data-start=${seminar.data_start} 
-                 data-end=${seminar.data_end}
-                 data-event="event-2"
-                 data-content=${seminar.nume_event}
-             >
-                <a href="#0">
-                    <em class="event-name">${seminar.nume_event}</em>
-                </a>
-            </li>
-        `);
-    })
-    mainJs();
-},1000);
