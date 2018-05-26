@@ -18,13 +18,15 @@ $(document).ready(function(){
 	let usersData;
 	let subjectsData;
 	let subjectsList = [];
+	let subjectsIdList = [];
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
 	const urlGetUsers= `http://${hostName}/api/admin/users?token=${token}`;
-	const urlPostEditUser= `http://${hostName}/endPointName`;
+	
+	const  urlGetSubjects = `http://${hostName}/api/subjects?token=${token}`;
 	// const dummyUsers = require('./dummyUsers.json'); 
-	const dummySubjects = require('./dummySubjects.json');
+	// const dummySubjects = require('./dummySubjects.json');
 
 	$(".mdl-layout__content .page-content .add-user").hide();
 	$(".mdl-layout__content.no-scroll").css("overflow", "hidden");
@@ -47,7 +49,7 @@ $(document).ready(function(){
 
 	apiAllSubjectsGet(function(response){
 		if (response === true){
-			subjectsData = dummySubjects.subjects;
+			// subjectsData = dummySubjects.subjects;
 			// renderUsers(usersData);
 		}
 
@@ -60,27 +62,27 @@ $(document).ready(function(){
 
 		$(".loader-bck").show();
 
-		// $.get(urlGetSubjects)
-		// .done(function (data) {
+		$.get(urlGetSubjects)
+		.done(function (data) {
 
-		// 	$(".loader-bck").hide();
-		// 	if (data.success === true){
-		// 	  console.log("materii luate cu success");
-		// 	  console.log(data);
-		// 	  subjectsData = data.users;
-		// 	  callback(true);
-		// 	}
-		// 	else {
-		// 	  callback(false);
-		// 	}
-		// });
-
-		setTimeout(function(){
 			$(".loader-bck").hide();
 
+			if (data.success === true){
+			  console.log("materii luate cu success");			  
+			  subjectsData = data.subjects;
+			  callback(true);
+			}
+			else {
+			  callback(false);
+			}
+		});
+
+		// setTimeout(function(){
+		// 	$(".loader-bck").hide();
+
 			
-			callback(true);
-		}, 1000);
+		// 	callback(true);
+		// }, 1000);
 	}
 
 	function apiSendRemoveUserPost(data, callback){
@@ -178,14 +180,16 @@ $(document).ready(function(){
 	}
 
 	function apiAddUserPost(data, callback) {
-		// console.log(data);
+		
+		console.log(data);
+		console.log("PLA");
 		$(".loader-bck").show();
 
 		$.post(urlAddUser, data)
 		.done(function (data) {
 
 			$(".loader-bck").hide();
-			// console.log(data);
+			console.log(data);
 			if (data.success === true){
 			  	callback(true);
 				notification.MaterialSnackbar.showSnackbar({
@@ -423,8 +427,6 @@ $(document).ready(function(){
 			$(".mdl-layout__content.no-scroll").css("overflow", "auto");	
 		}
 		$(pageContent + " ." + linkId).show();		
-
-
 		
 	});
 
@@ -445,7 +447,7 @@ $(document).ready(function(){
 
 		if (cond1  && cond3) {
 
-			const obj ={ fullName: $(fullName).val(), mail: $(email).val()};
+			const obj ={ fullName: $(fullName).val(), mail: $(email).val(), id_subjects: subjectsIdList};
 			apiAddUserPost(obj, function(response){
 
 				if (response === true){
@@ -481,26 +483,28 @@ $(document).ready(function(){
 	}
 
 	function getSuggestions_subjects(value){
+
 		const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
-      
+      	
+      	// console.log(subjectsData);
         return inputLength <= 1 ? [] : subjectsData.filter(subj =>
-          subj.toLowerCase().slice(0, inputLength) === inputValue
+          subj.name.toLowerCase().slice(0, inputLength) === inputValue
         );
 	}
+
 	function renderSubjects(array){
 
 		$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").children().remove();
 		$(".demo-list-control.mdl-list.dropdown").show();
 
-		console.log(array);
 		array.map((subj, index) =>{
 
 
 			$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").append(
-					`<li class="mdl-list__item" key=${index}>
+					`<li class="mdl-list__item" key=${subj.id}>
                         <span class="mdl-list__item-primary-content">
-                        ${subj}
+                        ${subj.name}
                         </span>
                      </li>`
             );
@@ -509,16 +513,21 @@ $(document).ready(function(){
 		$(".dropdown .mdl-list__item").on("click", function(){
 
 			let val = $(this).children("span").text();
+			let id_subject = $(this).attr("key");
 			val = val.trim();
-			
+
 			subjectsList.push(val);
+			subjectsIdList.push(id_subject);
+
+			console.log(subjectsList);
+			console.log(subjectsIdList);
 			renderSubjectsList(subjectsList);
 		});
 	}
 
 	function renderSubjectsList(list){
 
-		console.log(list);
+		// console.log(list);
 		$(".mdl-layout__content .page-content .add-user .subjects-list").show();
 		$(".page-content .add-user .subjects-list .list").children().remove();
 		list.map((subj, index) =>{
@@ -542,8 +551,6 @@ $(document).ready(function(){
 
 			
 			renderSubjectsList(subjectsList);
-
-
 		});
 	}
 
@@ -554,8 +561,6 @@ $(document).ready(function(){
 
 		if (searchText.length !== 0){
 			const array = getSuggestions_subjects(searchText);
-
-			console.log(array);
 			
 			if (array.length !== 0){
 				renderSubjects(array);
