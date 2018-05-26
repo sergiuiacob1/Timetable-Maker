@@ -9,8 +9,8 @@ module.exports = (() => {
   const {getRoomsRoute} = require('./room_routes');
   const {authenticate, register, checkAuthenticated, forgot, checkAdmin} = require('./authentication');
   const {updateUserInfo, getUserRoute, getAllUsers,
-      showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute, changePasswordRoute, resetPasswordRoute
-  } = require('./user_routes');
+      showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute, changePasswordRoute, resetPasswordRoute, userResetPasswordRoute
+  } = require('./user_routes')
   const {
     newResourceRoute,
     getResourcesRoute,
@@ -69,6 +69,7 @@ module.exports = (() => {
     apiRoutes.get('/resources/get', getResourcesRoute);
     apiRoutes.post('/resources/update', updateResourceRoute);
     apiRoutes.post('/resources/remove', deleteResourceRoute);
+      apiRoutes.post('/users/:id/reset', userResetPasswordRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
       apiRoutes.post('/users/:id/changepassword', changePasswordRoute);

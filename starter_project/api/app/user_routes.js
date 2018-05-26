@@ -270,6 +270,26 @@ module.exports = (() => {
     });
   };
 
+    const userResetPasswordRoute = (req, res) => {
+        const id = req.params.id;
+
+        getUser({id}).then((user) => {
+            if (user != 'undefined' && user) {
+                updatePassword({id: id, new_password: makePassword()});
+                res.json({
+                    success: true,
+                    message: 'Password reset'
+                });
+            }
+            else {
+                res.json({
+                    success: false,
+                    message: 'Invalid user id'
+                });
+            }
+        })
+    };
+
   const changePasswordRoute = (req, res) => {
 
     // params: id
@@ -358,6 +378,7 @@ module.exports = (() => {
     updateUserRoute,
     deleteUserRoute,
     changePasswordRoute,
-    resetPasswordRoute
+      resetPasswordRoute,
+      userResetPasswordRoute
   };
 })();
