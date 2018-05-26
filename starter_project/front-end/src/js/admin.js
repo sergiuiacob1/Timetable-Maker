@@ -11,7 +11,7 @@ $(document).ready(function(){
 	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
 	let searchInput = ".users-management .mdl-textfield__input";
 	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
-	let errorMsg = "";
+	let errorMsg = "Auch!!! Ceva nu a mers bine!";
 	let notification = document.querySelector("#notification");
 	let removeUserId;
 	let resetUserId;
@@ -19,6 +19,8 @@ $(document).ready(function(){
 	let subjectsData;
 	let subjectsList = [];
 	let subjectsListIds = [];
+
+
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
@@ -43,7 +45,7 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notify("Something went wrong! Please try again.");
+			notify(errorMsg);
 		}
 	});
 
@@ -56,7 +58,7 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notify("Something went wrong! Please try again.");
+			notify(errorMsg);
 		}
 	});
 
@@ -99,11 +101,11 @@ $(document).ready(function(){
 
 			if (data.success === true){				  
 			  	callback(true);
-				notify("User successfully removed.");
+				notify("Profesor sters cu succes!");
 			}
 			else {
 			  	callback(false);
-				notify("Something went wrong! Please try again.");
+				notify(errorMsg);
 			}
 		});
 	}
@@ -126,11 +128,11 @@ $(document).ready(function(){
 
 			if (data.success === true){
 			  callback(true);
-			  notify("User successfully edited.");
+			  notify("Profesor editat cu succes");
 			}
 			else {
 			  callback(false);
-			  notify("Something went wrong! Please try again.");
+			  notify(errorMsg);
 			}
 		});		
 	}
@@ -206,13 +208,13 @@ $(document).ready(function(){
 				if (data.success === true){
 				  	callback(true);
 					notification.MaterialSnackbar.showSnackbar({
-						message: "User successfully added."
+						message: "Profesor adaugat cu succes!"
 					});
 				}
 				else {
 				  errorMsg = data.message;
 				  callback(false);
-				  notify("Something went wrong! Please try again.");
+				  notify(errorMsg);
 				}
 		});
 	}
@@ -258,7 +260,7 @@ $(document).ready(function(){
 			$(".mdl-cell.mdl-cell--6-col#right-side").append(
 				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none" userId="${user.id}">
 					<div class="mdl-card__title">
-						<h2 class="mdl-card__title-text">Edit User</h2>
+						<h2 class="mdl-card__title-text">Editeaza profesor</h2>
 					</div>
 					<div class="mdl-card__supporting-text">
 						<div class="mdl-textfield mdl-js-textfield">
@@ -273,7 +275,7 @@ $(document).ready(function(){
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
-							Save changes
+							Salveaza schimbarile
 						</a>
 					</div>
 					<div class="mdl-card__menu close-edit">
@@ -332,7 +334,7 @@ $(document).ready(function(){
 							"Please use only letters"
 						);
 			
-			console.log(cond1, cond2);
+			// console.log(cond1, cond2);
 			if (cond1 && cond2) {
 
 				const obj = {fullName: $(fullName).val(), mail: $(mail).val(), id};
@@ -348,7 +350,7 @@ $(document).ready(function(){
 							}
 					
 							if (response === false){
-								notify("Something went wrong! Please try again.");
+								notify(errorMsg);
 							}
 						});
 					}
@@ -378,7 +380,7 @@ $(document).ready(function(){
 					}
 
 					if (response === false){
-						notify("Something went wrong! Please try again.");
+						notify(errorMsg);
 					}
 				});			
 			}
@@ -395,10 +397,10 @@ $(document).ready(function(){
 		
 		apiResetUserPasswordPost({id: resetUserId}, function(response){
 			if (response === true){
-				notify("User's password successfully reseted.");
+				notify("Parola profesorului a fost resetata cu succes!");
 			}
 			else {
-				notify("Something went wrong! Please try again.");
+				notify(errorMsg);
 			}
 		});
 	});
@@ -449,6 +451,9 @@ $(document).ready(function(){
 		// const userName = $(".content-input #username");
 		const email = $(".content-input #email");
 
+
+		subjectsListIds = [];
+
 		for (let i in subjectsList){
 			subjectsListIds.push(subjectsList[i].id_subject);
 		}
@@ -478,7 +483,7 @@ $(document).ready(function(){
 							renderUsers(usersData);
 						}
 						else {
-							notify("Something went wrong! Please try again.");
+							notify(errorMsg);
 						}
 					});
 				}
@@ -547,10 +552,13 @@ $(document).ready(function(){
 
 			if (isMultiple === false){
 				subjectsList.push({val, id_subject});
+
+				console.log(subjectsList);
 				renderSubjectsList(subjectsList);
 			}
 		});
 	}
+
 
 	function renderSubjectsList(list){
 
@@ -579,6 +587,8 @@ $(document).ready(function(){
 				}
 			}
 
+			console.log(index);
+
 			if (index > -1) {
 			  	subjectsList.splice(index, 1);			  
 			}
@@ -587,6 +597,8 @@ $(document).ready(function(){
 			renderSubjectsList(subjectsList);
 		});
 	}
+
+
 
 
 	$(subjectsInput).on('input', function(){
