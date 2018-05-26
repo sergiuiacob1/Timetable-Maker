@@ -110,7 +110,20 @@ module.exports = (() => {
       .then((res) => {
         return res;
       });
-  }
+  };
+
+    const getUserSubjects = (userId) => {
+        return new TeacherSubjectMap()
+            .field('id_subject')
+            .where({userId})
+            .valueOf()
+            .then((res) => {
+                console.log(userId);
+                console.log('Entry subject:')
+                console.log(res)
+                return res;
+            });
+    };
 
   const deleteUser = ({
     id
@@ -127,7 +140,7 @@ module.exports = (() => {
           return res;
         });
     }
-  }
+  };
 
   return {
     getUser,
@@ -136,6 +149,7 @@ module.exports = (() => {
     getUsers,
     deleteUser,
       updatePassword,
-      newTeacherSubjectMap
+      newTeacherSubjectMap,
+      getUserSubjects
   };
 })();

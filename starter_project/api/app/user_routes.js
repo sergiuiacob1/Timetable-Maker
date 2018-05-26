@@ -9,7 +9,8 @@ module.exports = (() => {
     getUsers,
     deleteUser,
       updatePassword,
-      newTeacherSubjectMap
+      newTeacherSubjectMap,
+      getUserSubjects
   } = require('./user_actions');
   const Mail = require('./mail_service');
 
@@ -64,14 +65,23 @@ module.exports = (() => {
   // for admin
 
   const getAllUsers = (req, res) => {
+
     getUsers().then((users) => {
-      users.map((user) => {
+        Promise.all(users.map((user) => {
         delete user.password;
-        return user;
-      })
-      res.json({
-        success: true,
-        users
+            return getUserSubjects(user.id).then((subjects) => {
+                user.subject_ids = subjects.map(s => s.id_subject);
+                console.log("Functionback");
+                console.log(subjects);
+                console.log(user);
+                return user;
+            });
+            // return user;
+        })).then((users) => {
+            res.json({
+                success: true,
+                users
+            });
       });
     }).catch((e) => {
       console.log(e);
@@ -122,6 +132,7 @@ module.exports = (() => {
     //   res.json({success: false, message: "Cannot insert user without a name."})
     // }
     console.log(body.password); //TODO: send this with SMTP
+      // Mail.sendMail(body.mail,'[TimetableMaker] Your user has been created','Password :' + body.password);
     newUser(body).then((result) => {
 
         getUser({mail: body.mail, password: body.password}).then((user) => {
