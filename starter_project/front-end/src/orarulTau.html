@@ -49,34 +49,39 @@
       <main class="mdl-layout__content">
         <div class="page-content">
           <!-- orarul -->
-          
-          <table id="tabl" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
-            <thead>
-              <tr>
-                <th class="mdl-data-table__cell--non-numeric"></th>
-                <th class="mdl-data-table__cell--non-numeric">Materie</th>
-                <th class="mdl-data-table__cell--non-numeric">Sali</th>
-                <th class="mdl-data-table__cell--non-numeric">Grupe</th>
-                <th class="mdl-data-table__cell--non-numeric">Data</th>
-                <th class="mdl-data-table__cell--non-numeric">Ziua</th>
-                <th class="mdl-data-table__cell--non-numeric">Ore</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- <tr>
-                <td class="mdl-data-table__cell--non-numeric">20</td>
-                <td class="mdl-data-table__cell--non-numeric">MatLab</td>
-                <td class="mdl-data-table__cell--non-numeric">c410,c411,c412</td>
-                <td class="mdl-data-table__cell--non-numeric">b1,b3</td>
-                <td class="mdl-data-table__cell--non-numeric">saptamanal</td>
-                <td class="mdl-data-table__cell--non-numeric">luni</td>
-                <td class="mdl-data-table__cell--non-numeric">08 - 09,09 - 10,10 - 11,11 - 12,12 - 13, 13 - 14,14 - 15,15 - 16,16 - 17, 17 - 18,18 - 19,19 - 20</td>
-              </tr> -->
-            </tbody>
-          </table>
-          
-        </div>
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Alipiti orele</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+      
+              <table id="tabl" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="mdl-data-table__cell--non-numeric"></th>
+                    <th class="mdl-data-table__cell--non-numeric">Materie</th>
+                    <th class="mdl-data-table__cell--non-numeric">Sali</th>
+                    <th class="mdl-data-table__cell--non-numeric">Grupe</th>
+                    <th class="mdl-data-table__cell--non-numeric">Data</th>
+                    <th class="mdl-data-table__cell--non-numeric">Ziua</th>
+                    <th class="mdl-data-table__cell--non-numeric">Ore</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td class="mdl-data-table__cell--non-numeric">20</td>
+                    <td class="mdl-data-table__cell--non-numeric">MatLab</td>
+                    <td class="mdl-data-table__cell--non-numeric">c410,c411,c412</td>
+                    <td class="mdl-data-table__cell--non-numeric">b1,b3</td>
+                    <td class="mdl-data-table__cell--non-numeric">saptamanal</td>
+                    <td class="mdl-data-table__cell--non-numeric">luni</td>
+                    <td class="mdl-data-table__cell--non-numeric">08 - 09,09 - 10,10 - 11,11 - 12,12 - 13, 13 - 14,14 - 15,15 - 16,16 - 17, 17 - 18,18 - 19,19 - 20</td>
+                  </tr> -->
+                </tbody>
+              </table>
+
+               <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="cacat">
+      
           <div class="mdl-card__supporting-text">
   
             <p>Selectati zilele saptamanii in care sa se alipeasca orele</p>
@@ -120,11 +125,30 @@
                   </label>
                   <br>
                   <br>
-                  </form>  
+                  </form> 
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="sendData2">Trimite</button> 
+                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteData">Sterge optiunile</button>
           </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="sendData2">Trimite</button>
+          </div>
+            </div>
+          
+          </div>
+       
 
+
+           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+             <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Optiuni alipite</h2>
+              </div>
+          <div class="mdl-card__supporting-text">
+  
+              
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteLinkedData">Sterge optiunile</button>
           </div>
+          
+          </div>
+          </div>
+
       </main>
     </div>
   
