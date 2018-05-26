@@ -86,6 +86,9 @@ module.exports = (() => {
 
     apiRoutes.get('/constraints', getConstraintsRoute);
     apiRoutes.post('/constraints', newConstraintRoute);
+
+    apiRoutes.get('/linked_constraints', getLinkedConstraintsRoute);
+    apiRoutes.post('/linked_constraints', newLinkedConstraintRoute);
     
     app.use('/api', apiRoutes);
 
