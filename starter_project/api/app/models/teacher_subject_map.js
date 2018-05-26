@@ -17,10 +17,15 @@ module.exports = (() => {
               }) {
 
             let whereClause = squel.expr();
+            console.log('Model user id :' + id_user)
+            if (id_user) {
+                whereClause = whereClause.and("id_user = ?", id_user);
+            }
 
             if (id_user && id_subject) {
                 whereClause = whereClause.and("id_user = ?", id_user).and("id_subject = ?", id_subject);
             }
+
 
             this.query = this.query.where(whereClause);
             return this;

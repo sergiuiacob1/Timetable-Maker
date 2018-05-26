@@ -33,6 +33,10 @@
             }
         };
 
+        sendResetPasswordMail(mail, password) {
+            this.sendMail(mail, '[TimetableMaker] Your password has been reset.', '\tTimetable password has been reset. \n \tYour new password is:\n ' + password + ' \n \tYou can now log in');
+        };
+
     };
   
     return new MailService(config);
