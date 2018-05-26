@@ -15,13 +15,10 @@ var allsubjects;
 const urlPost = `http://${hostName}/api/linked_constraints?token=${token}`;
 const urlDelete = `http://${hostName}/api/delete_constraints?token=${token}`;
 const urlDeleteLinked = `http://${hostName}/api/delete_linked_constraints?token=${token}`;
-
+ 
 require('./profPref.less');
 
 function postThisShit(json, callback) {
-
-  
-
   $.ajax({
     url: urlPost,
     method: 'POST',
@@ -38,6 +35,7 @@ function deleteThisShit(json, callback){
     data: json
   });
 };
+
 function deleteThisLinkedShit(json, callback){
   $.ajax({
     url: urlDeleteLinked,
@@ -134,6 +132,8 @@ function getUnlinkedConstraints(){
     if (result.success !== true)
       return;
     for(var i=0;i<result.constraints.length;i++){
+		var days='';
+		var hours='';
       for(var j=0;j<result.constraints[i].possibleIntervals.length;j++)
       {
         // debugger;
@@ -141,7 +141,12 @@ function getUnlinkedConstraints(){
         // for (k = )
         if(result.constraints[i].possibleIntervals[j].intervals.length !== 0)
         {
-          $("#tabl tbody").append(`
+          days= days+'<li>'+getDayName(result.constraints[i].possibleIntervals[j].days)+'</li>';
+		  hours=hours+'<li>'+result.constraints[i].possibleIntervals[j].intervals+'</li>';
+        }
+      }
+	  
+	  $("#tabl tbody").append(`
           <tr data-id=${result.constraints[i].id}>
           <td>
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -153,14 +158,22 @@ function getUnlinkedConstraints(){
             <td class="mdl-data-table__cell--non-numeric">${roomName(result.constraints[i].roomIds)}</td>
             <td class="mdl-data-table__cell--non-numeric">${groupName(result.constraints[i].groupIds)}</td>
             <td class="mdl-data-table__cell--non-numeric">${result.constraints[i].date}</td>
-            <td class="mdl-data-table__cell--non-numeric">${getDayName(result.constraints[i].possibleIntervals[j].days)}</td>
-            <td class="mdl-data-table__cell--non-numeric">${result.constraints[i].possibleIntervals[j].intervals}</td>
+            <td class="mdl-data-table__cell--non-numeric"><ul>${days}</ul></td>
+            <td class="mdl-data-table__cell--non-numeric"><ul>${hours}</ul></td>
           </tr>`);
-        }
-      }
     }
   });
 };
+
+function getLinkedConstraints(){
+	var url='http://'+hostName+'/api/linkedconstraints?token='+token;
+	var pos;
+	$.get(`${url}`).done(function(result){
+		if(result.success !== true) return;
+		
+	});
+}
+
 
 function getRows(){
     var table = document.getElementById("tabl");
@@ -168,7 +181,6 @@ function getRows(){
       if ($(row).find('input')[0].checked === true) {
       // if(row.className=="is-selected"){
           rows.push($(row).attr('data-id'));
-          alert($(row).attr('data-id'));
       }
   }
 };
@@ -218,6 +230,7 @@ function start(){
     
    
 };
+
 var delRows = [];
 var delLinkedRows = [];
 
@@ -271,7 +284,7 @@ function addListeners(){
 
   var sendButton = document.getElementById("sendData2");
   sendButton.addEventListener('click', start);
-
+  
   var deleteButton = document.getElementById("deleteData");
   deleteButton.addEventListener('click', sterge);
 
