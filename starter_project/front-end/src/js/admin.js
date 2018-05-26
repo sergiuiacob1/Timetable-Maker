@@ -9,7 +9,7 @@ $(document).ready(function(){
 	let removeButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.remove-button";
 	let sendEditedButton = ".save-changes-button";
 	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
-	let searchInput = ".users-management .mdl-textfield__input";
+	let searchInput = ".add-user .users-management .mdl-textfield__input";
 	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
 	let errorMsg = "";
 	let notification = document.querySelector("#notification");
@@ -18,6 +18,7 @@ $(document).ready(function(){
 	let usersData;
 	let subjectsData;
 	let subjectsList = [];
+	let subjectsListUser = [];
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
@@ -41,7 +42,7 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notify("Something went wrong! Please try again.");
+			notify("Error at users get");
 		}
 	});
 
@@ -52,7 +53,7 @@ $(document).ready(function(){
 		}
 
 		if (response === false){
-			notify("Something went wrong! Please try again.");
+			notify("Error at subjects get");
 		}
 	});
 
@@ -188,9 +189,7 @@ $(document).ready(function(){
 			// console.log(data);
 			if (data.success === true){
 			  	callback(true);
-				notification.MaterialSnackbar.showSnackbar({
-					message: "User successfully added."
-				});
+				notify("User successfully added.");
 			}
 			else {
 			  errorMsg = data.message;
@@ -211,39 +210,45 @@ $(document).ready(function(){
 
 	function renderUsers(array){
 
-		$(".users-management .container .mdl-list").children().remove();
-		$(".mdl-cell.mdl-cell--6-col#right-side").children().remove();
+		$("#left-side .mdl-list").children().remove();
+		$("#right-side").children().remove();
+
+
+		subjectsListUser = [];
+		array.map((user, index)=>{
+			subjectsListUser.push([]);
+		});
 
 		
 		array.map((user, index)=>{
 
-			$(".users-management .container .mdl-list").append(
-					  	`<li class="mdl-list__item mdl-list__item--two-line" id="user${index}" key=${index}>
-                        	<span class="mdl-list__item-primary-content">
-                                <i class="material-icons mdl-list__item-avatar">person</i>
-								<span>Full Name: ${user.fullName}</span>
-								<span class="mdl-list__item-sub-title">Email: ${user.mail}</span>
-							</span>
-								
-						</li>
-						<div class="user-buttons" id="user${index}" userId="${user.id}">
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
-								Edit
-							</button>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored remove-button">
-								Remove
-							</button>
-							<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored reset-button">
-								Reset Password
-							</button><br><br>
-						</div>`
+			$("#left-side #lista-useri").append(
+				`<li class="mdl-list__item mdl-list__item--two-line" id="user${index}" key=${index}>
+					<span class="mdl-list__item-primary-content">
+						<i class="material-icons mdl-list__item-avatar">person</i>
+						<span>Full Name: ${user.fullName}</span>
+						<span class="mdl-list__item-sub-title">Email: ${user.mail}</span>
+					</span>
+						
+				</li>
+				<div class="user-buttons" id="buttons-user${index}" userId="${user.id}">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
+						Edit
+					</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored remove-button">
+						Remove
+					</button>
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored reset-button">
+						Reset Password
+					</button><br><br>
+				</div>`
 			);
-			$(".mdl-cell.mdl-cell--6-col#right-side").append(
-				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="user${index}" style="display: none" userId="${user.id}">
-					<div class="mdl-card__title">
+			$("#right-side").append(
+				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="panel-user${index}" style="display: none;" userId="${user.id}">
+					<div class="mdl-card__title" style="margin: 0 auto;">
 						<h2 class="mdl-card__title-text">Edit User</h2>
 					</div>
-					<div class="mdl-card__supporting-text">
+					<div class="content-input">
 						<div class="mdl-textfield mdl-js-textfield">
 							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}" pattern="[a-zA-Z\\s]+">
 						</div>
@@ -254,24 +259,62 @@ $(document).ready(function(){
 						</div>
                         <p id="edit-email-req-${user.id}"></p>
 					</div>
+					<div id="subjects-list-${index}" class="subjects-style">
+                        <div id="list-${index}">
+                        </div>
+					</div>
+					<div class="content-input">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="subjects-${index}">
+                            <label class="mdl-textfield__label" for="fname">Add subjects</label>
+                        </div>
+                        <p id="subjects-req-${index}"></p>
+					</div>
+					<div id="content-dropdown-${index}" class="content-dropdown-style">
+                      <ul class="demo-list-control mdl-list dropdown"></ul>
+                    </div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
 							Save changes
 						</a>
 					</div>
 					<div class="mdl-card__menu">
-						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-						<i class="material-icons close">cancel</i>
+						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect close">
+							<i class="material-icons">cancel</i>
 						</button>
 					</div>
 				</div>`
 			);
+			$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();
+			$(`#subjects-${index}`).on('input', function(){
+
+				const searchText = $(`#subjects-${index}`).val();
+
+				if (searchText.length !== 0){
+					const array = getSuggestions_subjects(searchText);
+		
+					console.log("sugestiile de materii");
+					console.log(array);
+					
+					if (array.length !== 0){
+						renderSubjectsUser(array, index);
+					}
+					else{
+						$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();	
+					}
+				}
+				else{
+					$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();
+				}
+				
+			});
 		});
 
 		componentHandler.upgradeDom();
 
 		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {	
-			$(`.user-buttons#${$(this).attr("id")}`).toggle();	
+			console.log($(this).attr("id"));
+			$(`.user-buttons#buttons-${$(this).attr("id")}`).toggle();	
 		});
 
 		$(".mdl-textfield__input").on("input", function() {
@@ -281,12 +324,13 @@ $(document).ready(function(){
 
 		$(".edit-button").on("click", function() {
 			$(".mdl-cell.mdl-cell--6-col#right-side").children().hide();
-			$(`.mdl-cell.mdl-cell--6-col#right-side #${$(this).parent().attr("id")}`).toggle();
+			console.log(`.mdl-cell.mdl-cell--6-col#right-side #panel-${$(this).parent().prev().attr("id")}`);
+			$(`.mdl-cell.mdl-cell--6-col#right-side #panel-${$(this).parent().prev().attr("id")}`).toggle();
 			$(".mdl-layout__content").scrollTop(0);
 		});
 
 		$(".close").on("click", function() {
-			$(this).parent().parent().parent().hide();
+			$(this).parent().parent().hide();
 		});
 
 		$(removeButton).on("click", function(){
@@ -343,6 +387,70 @@ $(document).ready(function(){
 			resetUserId = $(this).parent().attr("userId");
 			$("dialog#dialog-reset").show();
 		});
+
+		function renderSubjectsUser(array, user){
+
+			$(`#content-dropdown-${user} .demo-list-control.mdl-list.dropdown`).children().remove();
+			$(`#content-dropdown-${user} .demo-list-control.mdl-list.dropdown`).show();
+	
+			console.log("Vectorul de materii user");
+			console.log(array);
+			array.map((subj, index) =>{
+	
+	
+				$(`#content-dropdown-${user} .demo-list-control.mdl-list.dropdown`).append(
+					`<li class="mdl-list__item" key=${index}>
+						<span class="mdl-list__item-primary-content">
+							${subj}
+						</span>
+					</li>`
+				);
+				console.log("introdus materiile");
+			});
+	
+			$(`#content-dropdown-${user} .dropdown .mdl-list__item`).on("click", function(){
+	
+				let val = $(this).children("span").text();
+				val = val.trim();
+				
+				console.log(user);
+				console.log(subjectsListUser);
+				subjectsListUser[user].push(val);
+				console.log("adaugat materie la lista");
+				renderSubjectsListUser(subjectsListUser, user);
+			});
+		}
+	
+		function renderSubjectsListUser(list, user){
+	
+			console.log(list[user]);
+			$(`#subjects-list-${user}`).show();
+			$(`#subjects-list-${user} #list-${user}`).children().remove();
+			list[user].map((subj, index) =>{
+	
+				$(`#subjects-list-${user} #list-${user}`).append(
+					`<div class="mdl-chip mdl-chip--deletable">
+						  <div class="mdl-chip__text">${subj}</div>
+						  <button type="button" class="mdl-chip__action">
+							  <i class="material-icons">cancel</i>
+						  </button>
+					</div>`
+				);
+			});
+	
+			$(`#subjects-list-${user} #list-${user} .mdl-chip__action`).on("click", function(){
+				let subj = $(this).prev().text();
+				let index = subjectsListUser[user].indexOf(subj);
+				if (index > -1) {
+				  subjectsListUser[user].splice(index, 1);
+				}
+	
+				
+				renderSubjectsListUser(subjectsListUser, user);
+	
+	
+			});
+		}
 	}
 
 	$("button#remove-user-yes").on("click", function(){
@@ -424,7 +532,9 @@ $(document).ready(function(){
 		}
 		$(pageContent + " ." + linkId).show();		
 
-
+		var current = document.getElementsByClassName("active");
+		current[0].className = current[0].className.replace(" active", "");
+		this.className += " active";
 		
 	});
 
@@ -491,7 +601,7 @@ $(document).ready(function(){
 	function renderSubjects(array){
 
 		$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").children().remove();
-		$(".demo-list-control.mdl-list.dropdown").show();
+		$(".add-user .demo-list-control.mdl-list.dropdown").show();
 
 		console.log(array);
 		array.map((subj, index) =>{
@@ -506,7 +616,7 @@ $(document).ready(function(){
             );
 		});
 
-		$(".dropdown .mdl-list__item").on("click", function(){
+		$(".add-user .dropdown .mdl-list__item").on("click", function(){
 
 			let val = $(this).children("span").text();
 			val = val.trim();

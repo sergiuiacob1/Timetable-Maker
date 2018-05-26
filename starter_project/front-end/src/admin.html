@@ -25,8 +25,9 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <div class="mdl-navigation__link" id="users-management">Users Management</div>
+        <div class="mdl-navigation__link active" id="users-management">Users Management</div>
         <div class="mdl-navigation__link" id="add-user">Add User</div>
+        <div class="mdl-navigation__link" id="logout">Logout</div>
       </nav>
     </div>
   </header>
@@ -38,8 +39,6 @@
     <div class="page-content">
         <div class="users-management">
             <div class="container">
-           
-                <div class="content-title">Users Management Page</div>
 
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col" id="left-side">
@@ -72,7 +71,6 @@
 
             <div class="add-user">
                 <div class="container">
-                    <div class="content-title">Add User</div>
 
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
@@ -89,7 +87,7 @@
                         </div>
                         <p id="email-req"></p>
                     </div>
-                      <div class="subjects-list"> 
+                      <div class="subjects-list subjects-style"> 
                         
                         <div class="list">
                         
@@ -100,12 +98,12 @@
                     <div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
                             <input class="mdl-textfield__input" type="text" id="subjects">
-                            <label class="mdl-textfield__label" for="fname">Adauga materii profesor</label>
+                            <label class="mdl-textfield__label" for="fname">Add subjects</label>
                         </div>
                         <p id="subjects-req"></p>
                     </div>
 
-                    <div class="content-dropdown">
+                    <div class="content-dropdown content-dropdown-style">
                       <ul class="demo-list-control mdl-list dropdown"></ul>
                     </div>
 
