@@ -11,23 +11,41 @@ var allrooms;
 var allgroups;
 var allsubjects;
 
-/*
-const urlPost = `http://${hostName}/api/constraints?token=${token}`;
+
+const urlPost = `http://${hostName}/api/linked_constraints?token=${token}`;
+const urlDelete = `http://${hostName}/api/delete_constraints?token=${token}`;
+const urlDeleteLinked = `http://${hostName}/api/delete_linked_constraints?token=${token}`;
 
 require('./profPref.less');
-*/
+
 function postThisShit(json, callback) {
 
   
 
-/*  $.ajax({
+  $.ajax({
     url: urlPost,
     method: 'POST',
     contentType: 'application/json',
     data: json
-  });*/
+  });
 };
 
+function deleteThisShit(json, callback){
+  $.ajax({
+    url: urlDelete,
+    method: 'POST',
+    contentType: 'application/json',
+    data: json
+  });
+};
+function deleteThisLinkedShit(json, callback){
+  $.ajax({
+    url: urlDeleteLinked,
+    method: 'POST',
+    contentType: 'application/json',
+    data: json
+  });
+};
 
 
 function getSubjectsShow(){
@@ -150,6 +168,7 @@ function getRows(){
       if ($(row).find('input')[0].checked === true) {
       // if(row.className=="is-selected"){
           rows.push($(row).attr('data-id'));
+          alert($(row).attr('data-id'));
       }
   }
 };
@@ -190,7 +209,7 @@ function start(){
   var object = {};
   object["ids"] = rows;
   object["days"] = days;
-  object["window"] = windows;
+  object["win"] = windows;
   var json = JSON.stringify(object);
   
   postThisShit(json, function(response){
@@ -199,11 +218,65 @@ function start(){
     
    
 };
+var delRows = [];
+var delLinkedRows = [];
+
+function sterge(){
+   var table = document.getElementById("tabl");
+    for (var i = 1, row; row = table.rows[i]; i++){
+      if ($(row).find('input')[0].checked === true) {
+      // if(row.className=="is-selected"){
+          delRows.push($(row).attr('data-id'));
+          document.getElementById("tabl").deleteRow(i);
+          i--;
+      }
+
+  }
+  for(var i = 0; i < delRows.length; i++){
+    
+      var object = {};
+      object["id"] = delRows[i];
+      var json = JSON.stringify(object);
+      
+      deleteThisShit(json, function(response){
+          if(i==(delRows.length-1))
+            location.reload();
+        });
+    }
+};
+function stergeLinked(){
+   var table = document.getElementById("tabl2");
+    for (var i = 1, row; row = table.rows[i]; i++){
+      if ($(row).find('input')[0].checked === true) {
+      // if(row.className=="is-selected"){
+          delLinkedRows.push($(row).attr('data-id'));
+          document.getElementById("tabl2").deleteRow(i);
+          i--;
+      }
+  }
+  for(var i = 0; i < delLinkedRows.length; i++){
+    
+      var object = {};
+      object["id"] = delLinkedRows[i];
+      var json = JSON.stringify(object);
+      
+      deleteThisLinkedShit(json, function(response){
+          if(i==(delLinkedRows.length-1))
+            location.reload();
+        });
+    }
+};
 
 function addListeners(){
 
   var sendButton = document.getElementById("sendData2");
   sendButton.addEventListener('click', start);
+
+  var deleteButton = document.getElementById("deleteData");
+  deleteButton.addEventListener('click', sterge);
+
+   var deleteButton = document.getElementById("deleteLinkedData");
+  deleteButton.addEventListener('click', stergeLinked);
 }
 
   getSubjectsShow();
