@@ -1,7 +1,18 @@
 module.exports = (() => {
     'use strict';
   
-    const {getConstraints, addConstraint} = require('./constraints_actions.js');
+    const {getConstraints, addConstraint, deleteConstraint} = require('./constraints_actions.js');
+
+    const deleteConstraintRoute = (req, res) => {
+      const id = req.body.id;
+      deleteConstraint({id}).then((constraint) => {
+        console.log (constraint);
+        res.json({success: true, message: "Deleted constraint"});
+      }).catch((e) => {
+        console.log(e);
+        res.json({success: false});
+      });
+    };
   
     const getConstraintsRoute = (req, res) => {
       const userId = req.decoded.user.id;
@@ -29,6 +40,7 @@ module.exports = (() => {
   
     return {
       getConstraintsRoute,
-      newConstraintRoute
+      newConstraintRoute,
+      deleteConstraintRoute
     };
   })();
