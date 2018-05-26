@@ -15,19 +15,6 @@ module.exports = (() => {
   } = require('./user_actions');
   const Mail = require('./mail_service');
 
-    function checkId(id) {
-        if (!Number.isInteger(id)) {
-            return false;
-        }
-        getUser({id}).then((user) => {
-            if (user != 'undefined' && user) {
-                return false;
-            }
-            else
-                return true;
-        });
-    }
-
   const updateUserInfo = (req, res) => {
       console.log('updateUserInfo: req')
     console.log(req.body);
@@ -207,7 +194,7 @@ module.exports = (() => {
       body
     } = req;
 
-      if (!checkId(id)) {
+      if (isNaN(id)) {
           res.json({
               success: false,
               message: 'user doesnt exist'
