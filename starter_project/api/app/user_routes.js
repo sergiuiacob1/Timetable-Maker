@@ -75,13 +75,15 @@ module.exports = (() => {
           console.log("Functionback");
           console.log(subjects);
           console.log(user);
-          return user;
+            if (user.is_admin == 0)
+                return user;
+            else return null;
         });
         // return user;
       })).then((users) => {
         res.json({
           success: true,
-          users
+            users: users.filter(e => e !== null)
         });
       });
     }).catch((e) => {

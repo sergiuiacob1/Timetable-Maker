@@ -60,7 +60,7 @@ module.exports = (() => {
         });
       }
       else {
-        res.json({ success: false, message: 'Authentication failed. User not found.' });
+          res.json({success: false, message: 'Authentication failed. Invalid user or password combination'});
       }
     }).catch((e) => {
       console.log(e);
