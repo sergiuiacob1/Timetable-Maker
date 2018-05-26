@@ -1,4 +1,4 @@
-const hostName = '192.168.43.95:2222';
+const hostName = 'localhost:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
