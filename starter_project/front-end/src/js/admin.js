@@ -40,23 +40,24 @@ $(document).ready(function(){
 
 	$(".loader-bck").hide();
 	
-	apiAllUsersGet(function(response){
-
-		if (response === true){
-			renderUsers(usersData);
-		}
-
-		if (response === false){
-			notify(errorMsg);
-		}
-	});
-
+	
 	apiAllSubjectsGet(function(response){
 
 
 		if (response === true){
 			// subjectsData = dummySubjects.subjects;
 			// renderUsers(usersData);
+
+			apiAllUsersGet(function(response){
+
+				if (response === true){
+					renderUsers(usersData);
+				}
+
+				if (response === false){
+					notify(errorMsg);
+				}
+			});
 		}
 
 		if (response === false){
