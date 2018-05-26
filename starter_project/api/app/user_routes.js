@@ -8,12 +8,15 @@ module.exports = (() => {
     updateUser,
     getUsers,
     deleteUser,
-      updatePassword,
-      newTeacherSubjectMap
+    updatePassword,
+    newTeacherSubjectMap,
+    deleteSubject,
+      getUserSubjects
   } = require('./user_actions');
   const Mail = require('./mail_service');
 
   const updateUserInfo = (req, res) => {
+    console.log(req.body);
     const id = req.decoded.user.id;
 
     const body = req.body;
@@ -63,14 +66,23 @@ module.exports = (() => {
   // for admin
 
   const getAllUsers = (req, res) => {
+
     getUsers().then((users) => {
-      users.map((user) => {
+        Promise.all(users.map((user) => {
         delete user.password;
-        return user;
-      })
-      res.json({
-        success: true,
-        users
+            return getUserSubjects(user.id).then((subjects) => {
+                user.subject_ids = subjects.map(s => s.id_subject);
+                console.log("Functionback");
+                console.log(subjects);
+                console.log(user);
+                return user;
+            });
+            // return user;
+        })).then((users) => {
+            res.json({
+                success: true,
+                users
+            });
       });
     }).catch((e) => {
       console.log(e);
@@ -108,6 +120,8 @@ module.exports = (() => {
     const {
       body
     } = req;
+    console.log('PAOAKJNKJDNN');
+    console.log(body);
     body.password = makePassword();
     if (body.mail === undefined) {
       res.json({
@@ -119,23 +133,31 @@ module.exports = (() => {
     //   res.json({success: false, message: "Cannot insert user without a name."})
     // }
     console.log(body.password); //TODO: send this with SMTP
+      // Mail.sendMail(body.mail,'[TimetableMaker] Your user has been created','Password :' + body.password);
     newUser(body).then((result) => {
 
-        getUser({mail: body.mail, password: body.password}).then((user) => {
+      getUser({
+        mail: body.mail,
+        password: body.password
+      }).then((user) => {
 
-            let i;
-            for (i = 0; i < body.id_subjects.length; i++) {
-                let values = {id_subject: body.id_subjects[i], id_user: user.id};
-                newTeacherSubjectMap(values).then((relation) => {
-                    console.log('Added relation from ' + values.id_subject + ' to ' + values.id_user);
-                });
-            }
+        let i;
+        console.log(body);
+        for (i = 0; i < body.id_subjects.length; i++) {
+          let values = {
+            id_subject: body.id_subjects[i],
+            id_user: user.id
+          };
+          newTeacherSubjectMap(values).then((relation) => {
+            console.log('Added relation from ' + values.id_subject + ' to ' + values.id_user);
+          });
+        }
 
-            res.json({
-                success: true,
-                message: 'user insert'
-            });
+        res.json({
+          success: true,
+          message: 'user insert'
         });
+      });
 
 
 
@@ -265,6 +287,21 @@ module.exports = (() => {
       res.json({
         success: true,
         message: 'user deleted'
+      });
+    }).catch((e) => {
+      console.log("eroarea e", e);
+      res.json({
+        success: false,
+        message: e
+      })
+    });
+
+    deleteSubject({
+      id_user: id
+    }).then(() => {
+      res.json({
+        success: true,
+        message: 'subject deleted'
       });
     }).catch((e) => {
       console.log("eroarea e", e);

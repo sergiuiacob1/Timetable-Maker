@@ -1,7 +1,7 @@
 module.exports = (() => {
   'use strict';
   const User = require('./models/user');
-    const TeacherSubjectMap = require('./models/teacher_subject_map');
+  const TeacherSubjectMap = require('./models/teacher_subject_map');
 
   const newUser = ({
     password,
@@ -21,19 +21,19 @@ module.exports = (() => {
       });
   };
 
-    const newTeacherSubjectMap = ({
-                                      id_user,
-                                      id_subject
-                                  }) => {
-        return new TeacherSubjectMap()
-            .insert()
-            .set('id_user', id_user)
-            .set('id_subject', id_subject)
-            .valueOf()
-            .then(() => {
-                return true;
-            });
-    };
+  const newTeacherSubjectMap = ({
+    id_user,
+    id_subject
+  }) => {
+    return new TeacherSubjectMap()
+      .insert()
+      .set('id_user', id_user)
+      .set('id_subject', id_subject)
+      .valueOf()
+      .then(() => {
+        return true;
+      });
+  };
 
   const getUser = ({
     id,
@@ -110,7 +110,20 @@ module.exports = (() => {
       .then((res) => {
         return res;
       });
-  }
+  };
+
+    const getUserSubjects = (userId) => {
+        return new TeacherSubjectMap()
+            .field('id_subject')
+            .where({userId})
+            .valueOf()
+            .then((res) => {
+                console.log(userId);
+                console.log('Entry subject:')
+                console.log(res)
+                return res;
+            });
+    };
 
   const deleteUser = ({
     id
@@ -127,6 +140,22 @@ module.exports = (() => {
           return res;
         });
     }
+  };
+
+  const deleteSubject = ({
+    id_user
+  }) => {
+    if (id_user) {
+      return new TeacherSubjectMap()
+        .delete()
+        .where({
+          id_user
+        })
+        .valueOf()
+        .then(() => {
+          return true;
+        });
+    }
   }
 
   return {
@@ -136,6 +165,8 @@ module.exports = (() => {
     getUsers,
     deleteUser,
       updatePassword,
-      newTeacherSubjectMap
+      newTeacherSubjectMap,
+      getUserSubjects,
+    deleteSubject
   };
 })();
