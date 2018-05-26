@@ -10,6 +10,10 @@ module.exports = (() => {
             return res;
         });
     };
+
+    const addConstraint = (request) => {
+        console.log(JSON.stringify(request));
+    }
   
     return {
         getConstraints,

@@ -22,14 +22,17 @@ function generateHtmlPlugins (templateDir) {
 }
 
 const htmlPlugins = generateHtmlPlugins('./src/')
-console.log(htmlPlugins);
+// console.log(htmlPlugins);
 
 module.exports = {
+  mode: 'development',
   devtool: 'inline-sourcemap',
   context: __dirname,
   entry: {
-    app: './src/index.js',
-    login: './src/login.js'
+    profPref: './src/js/profPref.js',
+    app: './src/js/index.js',
+    login: './src/js/login.js',
+    admin: './src/js/admin.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

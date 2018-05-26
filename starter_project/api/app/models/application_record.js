@@ -28,6 +28,13 @@ module.exports = (() => {
       return this;
     }
 
+    delete() {
+      this.query = squel
+        .delete()
+        .from(this.table);
+      return this;
+    }
+
     valueOf() {
       if (this.__value) return this.__value;
       console.log(this.query.toString());
