@@ -69,15 +69,12 @@ module.exports = (() => {
   const updateUser = ({
     id,
     mail,
-    fullName,
-    old_password,
-    new_password
+    fullName
   }) => {
     return new User()
       .update()
       .set('mail', mail)
       .set('fullName', fullName)
-      .set('password', new_password)
       .where({
         id
       })
