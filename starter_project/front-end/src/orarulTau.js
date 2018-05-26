@@ -1,4 +1,5 @@
-const hostName = '192.168.43.95:2222';
+$(document).ready(function() {
+const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
 
 var mon, tue, wed, thu, fri, sat, sun;
@@ -54,7 +55,7 @@ function getGroupsShow(){
   $.get(`${url}`).done(function(result){
     if (result.success !== true)
       return;
-    allgroups=result;
+    allgroups=result.groups;
   });
 };
 
@@ -66,10 +67,16 @@ function subName(id){
 function roomName(ids){
   var roomNames =[];
   var pos =0;
-  for(var i=0;i<ids.length;i++)
+  for(var i = 0;i < ids.length; i++)
   {
-    if(allrooms.rooms[i].id == ids[pos])
-    {roomNames.push(allrooms.rooms[i].name); pos++;}
+    for (var j = 0; j < allrooms.length; ++j) {
+      const room = allrooms[j];
+      if (room.id === ids[i]) {
+        roomNames.push(room.name);
+        break;
+      }
+    }
+    
   }
   return roomNames;
 };
@@ -78,15 +85,32 @@ function groupName(ids){
   var groupNames=[];
   var pos=0;
   for(var i=0;i<ids.length;i++){
-    if(allgroups.groups[i].id == ids[pos])
-    {groupNames.push(allgroups.groups[i].name);pos++;}
+    for (var j = 0; j < allgroups.length; ++j) {
+      const group = allgroups[j];
+      if (group.id === ids[i]) {
+        groupNames.push(group.name);
+        break;
+      }
+    }
   }
   return groupNames;
 };
 
+function getDayName(day) {
+  var days = {
+    '1': 'Luni',
+    '2': 'Marti',
+    '3': 'Miercuri',
+    '4': 'Joi',
+    '5': 'Vineri',
+    '6': 'Sambata',
+    '0': 'Duminica',
+  }
+  return days[day];
+}
 
 function getUnlinkedConstraints(){
-  var url = 'http://'+hostName+'/api/rooms?token=' + token;
+  var url = 'http://'+hostName+'/api/constraints?token=' + token;
   var pos;
   $.get(`${url}`).done(function(result){
     if (result.success !== true)
@@ -94,28 +118,38 @@ function getUnlinkedConstraints(){
     for(var i=0;i<result.constraints.length;i++){
       for(var j=0;j<result.constraints[i].possibleIntervals.length;j++)
       {
+        // debugger;
+        console.log(result.constraints[i].possibleIntervals[j].intervals.length);
+        // for (k = )
         if(result.constraints[i].possibleIntervals[j].intervals.length !== 0)
         {
-          $("#tabl tbody").append('<tr><td class="mdl-data-table__cell--non-numeric">' + result.constraints[i].id + '</td><td class="mdl-data-table__cell--non-numeric">' + subName(result.constraints[i].subjectId) + '</td><td class="mdl-data-table__cell--non-numeric">'+roomName(result.constraints[i].roomIds)+'</td><td class="mdl-data-table__cell--non-numeric">'+groupName(result.constraints[i].groupIds)+'</td><td class="mdl-data-table__cell--non-numeric">'+result.constraints[i].date+'</td><td class="mdl-data-table__cell--non-numeric">'+result.constraints[i].possibleIntervals[j].days+'</td><td class="mdl-data-table__cell--non-numeric">'+result.constraints[i].possibleIntervals[j].intervals+'</td></tr>');
+          $("#tabl tbody").append(`
+          <tr data-id=${result.constraints[i].id}>
+          <td>
+          <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+  <input type="checkbox" class="mdl-checkbox__input">
+  <span class="mdl-checkbox__label"></span>
+</label>
+</td>
+            <td class="mdl-data-table__cell--non-numeric">${subName(result.constraints[i].subjectId)}</td>
+            <td class="mdl-data-table__cell--non-numeric">${roomName(result.constraints[i].roomIds)}</td>
+            <td class="mdl-data-table__cell--non-numeric">${groupName(result.constraints[i].groupIds)}</td>
+            <td class="mdl-data-table__cell--non-numeric">${result.constraints[i].date}</td>
+            <td class="mdl-data-table__cell--non-numeric">${getDayName(result.constraints[i].possibleIntervals[j].days)}</td>
+            <td class="mdl-data-table__cell--non-numeric">${result.constraints[i].possibleIntervals[j].intervals}</td>
+          </tr>`);
         }
       }
     }
   });
 };
 
-$(document).ready(function() {
-  getSubjectsShow();
-//  getRoomsShow();
-  getGroupsShow();
-  getUnlinkedConstraints();
-  addListeners();
-});     
-
 function getRows(){
     var table = document.getElementById("tabl");
-    for (var i = 0, row; row = table.rows[i]; i++){
-      if(row.className=="is-selected"){
-          rows.push(row.cells[1].innerHTML);
+    for (var i = 1, row; row = table.rows[i]; i++){
+      if ($(row).find('input')[0].checked === true) {
+      // if(row.className=="is-selected"){
+          rows.push($(row).attr('data-id'));
       }
   }
 };
@@ -174,3 +208,11 @@ function addListeners(){
   var sendButton = document.getElementById("sendData2");
   sendButton.addEventListener('click', start);
 }
+
+  getSubjectsShow();
+  getRoomsShow();
+  getGroupsShow();
+  setTimeout(getUnlinkedConstraints, 1000);
+  addListeners();
+
+});

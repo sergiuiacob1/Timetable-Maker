@@ -1,4 +1,4 @@
-const hostName = '192.168.43.95:2222';
+const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
@@ -8,11 +8,15 @@ function postThisShit(json, callback) {
 
   alert(json);
 
+  debugger;
   $.ajax({
     url: urlPost,
     method: 'POST',
     contentType: 'application/json',
     data: json
+  }).done(function(res) {
+    console.log(res);
+    callback();
   });
 };
 
@@ -25,7 +29,7 @@ var timp = [];
 
 function reset(){
    
-   location.reload();
+  //  location.reload();
 
 };
 function cSwap(){
@@ -42,7 +46,7 @@ function getSubject(){
 function getGroup(){
   
     $('#grupa input[type=checkbox]:checked').each(function(index, value) {
-        groupId.push($(this).attr("value"));
+        groupId.push($(this).attr("value") * 1);
     });
 };
 
@@ -109,7 +113,9 @@ function getRooms(){
   for (var i = 0, row; row = table.rows[i]; i++) 
      for (var j = 0, col; col = row.cells[j]; j++) 
        if(col.className == "redColor"){
-         roomIds.push(col.innerHTML);
+        //  console.log(col);
+        //  debugger;
+         roomIds.push($(col).attr('data-id') * 1);
        } 
 };
 
@@ -132,7 +138,7 @@ function send(){
     var object = {};
     object["subjectId"] = subjectId;
     object["roomIds"] = roomIds;
-    object["groupId"] = groupId;
+    object["groupIds"] = groupId;
     object["activity"] = activityType;
     object["date"] = dateEntered;
     object["possibleIntervals"] = [{"days":"1", "intervals":timp[0]}, {"days":"2", "intervals":timp[1]}, {"days":"3", "intervals":timp[2]}, {"days":"4", "intervals":timp[3]}, {"days":"5", "intervals":timp[4]}, {"days":"6", "intervals":timp[5]}, {"days":"0", "intervals":timp[6]}];
@@ -186,7 +192,7 @@ function getRoomsShow(){
       pos = Math.ceil((i+1)/3);
       if(i%3 == 0)
         $('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
-      $("#tr"+pos).append('<td class="noColor">'+result.rooms[i].name+'</td>');
+      $("#tr"+pos).append(`<td data-id=${result.rooms[i].id} class="noColor">`+result.rooms[i].name+'</td>');
       addListeners();
     }
   });

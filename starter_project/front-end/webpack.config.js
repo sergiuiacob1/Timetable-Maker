@@ -32,7 +32,8 @@ module.exports = {
     profPref: './src/profPref.js',
     app: './src/js/index.js',
     login: './src/js/login.js',
-    admin: './src/js/admin.js'
+    admin: './src/js/admin.js',
+    orarulTau: './src/orarulTau.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
