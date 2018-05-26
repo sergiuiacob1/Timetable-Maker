@@ -9,7 +9,7 @@ $(document).ready(function(){
 	let removeButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.remove-button";
 	let sendEditedButton = ".save-changes-button";
 	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
-	let searchInput = ".add-user .users-management .mdl-textfield__input";
+	let searchInput = ".users-management .mdl-textfield__input";
 	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
 	let errorMsg = "";
 	let notification = document.querySelector("#notification");
@@ -20,6 +20,7 @@ $(document).ready(function(){
 	let subjectsList = [];
 	let subjectsListUser = [];
 	let subjectsListIds = [];
+	let subjectsListUserIds = [];
 
 	const hostName = '0.0.0.0:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
@@ -71,6 +72,7 @@ $(document).ready(function(){
 			if (data.success === true){
 			  console.log("materii luate cu success");			  
 			  subjectsData = data.subjects;
+			  console.log(subjectsData);
 			  callback(true);
 			}
 			else {
@@ -112,13 +114,12 @@ $(document).ready(function(){
 		const urlPostEditUser= `http://${hostName}/api/admin/users/${data.id}/update?token=${token}`;
 		$(".loader-bck").show();
 
-		const obj={
-			fullName: data.fullName,
-			mail: data.mail
-		};
-
-		$.post(urlPostEditUser, obj)
-		.done(function (data) {
+		$.ajax({
+		    "type": "POST",
+		    "url": urlPostEditUser,
+		    "data": JSON.stringify(data),
+		    'contentType': 'application/json'
+		}).done(function (data) {
 
 			console.log(data);
 			$(".loader-bck").hide();
@@ -220,12 +221,17 @@ $(document).ready(function(){
 		$("#left-side .mdl-list").children().remove();
 		$("#right-side").children().remove();
 
-
 		subjectsListUser = [];
 		array.map((user, index)=>{
 			subjectsListUser.push([]);
+			for (let i in user.subject_ids) {
+				for (let j in subjectsData) {
+					if (user.subject_ids[i] === subjectsData[j].id) {
+						subjectsListUser[index].push({val: subjectsData[j].name, id_subject: subjectsData[j].id});
+					}
+				}
+			}
 		});
-
 		
 		array.map((user, index)=>{
 
@@ -251,7 +257,7 @@ $(document).ready(function(){
 				</div>`
 			);
 			$("#right-side").append(
-				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="panel-user${index}" style="display: none;" userId="${user.id}">
+				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="panel-user${index}" style="display: none;" userId="${user.id}" userIndex="${index}">
 					<div class="mdl-card__title" style="margin: 0 auto;">
 						<h2 class="mdl-card__title-text">Edit User</h2>
 					</div>
@@ -299,9 +305,6 @@ $(document).ready(function(){
 
 				if (searchText.length !== 0){
 					const array = getSuggestions_subjects(searchText);
-		
-					console.log("sugestiile de materii");
-					console.log(array);
 					
 					if (array.length !== 0){
 						renderSubjectsUser(array, index);
@@ -320,7 +323,6 @@ $(document).ready(function(){
 		componentHandler.upgradeDom();
 
 		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {	
-			console.log($(this).attr("id"));
 			$(`.user-buttons#buttons-${$(this).attr("id")}`).toggle();	
 		});
 
@@ -331,8 +333,8 @@ $(document).ready(function(){
 
 		$(".edit-button").on("click", function() {
 			$(".mdl-cell.mdl-cell--6-col#right-side").children().hide();
-			console.log(`.mdl-cell.mdl-cell--6-col#right-side #panel-${$(this).parent().prev().attr("id")}`);
 			$(`.mdl-cell.mdl-cell--6-col#right-side #panel-${$(this).parent().prev().attr("id")}`).toggle();
+			renderSubjectsListUser(subjectsListUser, $(this).parent().prev().attr("key"));
 			$(".mdl-layout__content").scrollTop(0);
 		});
 
@@ -348,10 +350,21 @@ $(document).ready(function(){
 		$(sendEditedButton).on('click', function(){
 
 			const id =  $(this).parent().parent().attr("userId");
+			console.log(id);
+			const user = $(this).parent().parent().attr("userIndex");
 
 			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`);
 			// const userName = $(".mdl-textfield__input#edit-userName").val();
 			const mail = $(`.mdl-textfield__input#edit-email-${id}`);
+
+			subjectsListUserIds = [];
+			// for (let i in subjectsListUser[user]){
+			// 	subjectsListUserIds.push(subjectsListUser[user][i].id_subject);
+			// }
+			subjectsListUserIds = subjectsListUser[user].map(s => s.id_subject);
+			console.log(subjectsListUserIds);
+
+			const cond3 = subjectsListUserIds.length !== 0 ? true : false;
 
 			const cond2 = verifyInput(
 							mail, 
@@ -366,10 +379,10 @@ $(document).ready(function(){
 							"Please use only letters"
 						);
 			
-			console.log(cond1, cond2);
-			if (cond1 && cond2) {
+			if (cond1 && cond2 && cond3) {
 
-				const obj = {fullName: $(fullName).val(), mail: $(mail).val(), id};
+				const obj = {fullName: $(fullName).val(), mail: $(mail).val(), id_subjects: subjectsListUserIds, id: id};
+				console.log(obj);
 
 				apiSendEditedPost(obj, function(response){
 		
@@ -406,9 +419,9 @@ $(document).ready(function(){
 	
 	
 				$(`#content-dropdown-${user} .demo-list-control.mdl-list.dropdown`).append(
-					`<li class="mdl-list__item" key=${index}>
+					`<li class="mdl-list__item" key=${subj.id}>
 						<span class="mdl-list__item-primary-content">
-							${subj}
+							${subj.name}
 						</span>
 					</li>`
 				);
@@ -418,27 +431,35 @@ $(document).ready(function(){
 			$(`#content-dropdown-${user} .dropdown .mdl-list__item`).on("click", function(){
 	
 				let val = $(this).children("span").text();
+				let id_subject = $(this).attr("key") * 1;
 				val = val.trim();
 				
-				console.log(user);
-				console.log(subjectsListUser);
-				subjectsListUser[user].push(val);
-				console.log("adaugat materie la lista");
-				renderSubjectsListUser(subjectsListUser, user);
+				let isMultiple = false;
+				for (let i in subjectsListUser[user]){
+					if (subjectsListUser[user][i].id_subject === id_subject){
+						isMultiple = true;
+						break;
+					}
+				}
+
+				if (isMultiple === false){
+					subjectsListUser[user].push({val, id_subject});
+					renderSubjectsListUser(subjectsListUser, user);
+				}
 			});
 		}
 	
 		function renderSubjectsListUser(list, user){
 	
-			console.log(list[user]);
+			// console.log(list[user]);
 			$(`#subjects-list-${user}`).show();
 			$(`#subjects-list-${user} #list-${user}`).children().remove();
 			list[user].map((subj, index) =>{
 	
 				$(`#subjects-list-${user} #list-${user}`).append(
 					`<div class="mdl-chip mdl-chip--deletable">
-						  <div class="mdl-chip__text">${subj}</div>
-						  <button type="button" class="mdl-chip__action">
+						  <div class="mdl-chip__text">${subj.val}</div>
+						  <button type="button" class="mdl-chip__action" id=${subj.id_subject}>
 							  <i class="material-icons">cancel</i>
 						  </button>
 					</div>`
@@ -447,10 +468,19 @@ $(document).ready(function(){
 	
 			$(`#subjects-list-${user} #list-${user} .mdl-chip__action`).on("click", function(){
 				let subj = $(this).prev().text();
-				let index = subjectsListUser[user].indexOf(subj);
+				let id = $(this).attr("id") * 1;
+				let index = -1;
+				for ( let i in subjectsListUser[user]){
+					if (subjectsListUser[user][i].id_subject === id){
+						index = i;
+						break;
+					}
+				}
 				if (index > -1) {
 				  subjectsListUser[user].splice(index, 1);
 				}
+
+				console.log(subjectsListUser[user]);
 	
 				
 				renderSubjectsListUser(subjectsListUser, user);
