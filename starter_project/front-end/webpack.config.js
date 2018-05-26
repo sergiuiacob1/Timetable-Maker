@@ -22,16 +22,18 @@ function generateHtmlPlugins (templateDir) {
 }
 
 const htmlPlugins = generateHtmlPlugins('./src/')
-console.log(htmlPlugins);
 
 module.exports = {
+  mode: 'development',
   devtool: 'inline-sourcemap',
   context: __dirname,
   entry: {
-    app: './src/index.js',
-    login: './src/login.js',
-    // material: './src/node_modules/material-design-lite/dist/material.min.js',
-    resources: './src/resources.js'
+    profPref: './src/js/profPref.js',
+    app: './src/js/index.js',
+    login: './src/js/login.js',
+    admin: './src/js/admin.js',
+    resources: './src/js/resources.js',
+    resourcesNew: './src/js/resourcesNew.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -44,8 +46,6 @@ module.exports = {
     watchOptions: { aggregateTimeout: 300, poll: 1000 },
     headers: {
       'Access-Control-Allow-Origin': '*'
-      // "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      // "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
     }
   },
   module: {
@@ -66,14 +66,6 @@ module.exports = {
           loader: 'css-loader' // translates CSS into CommonJS
         }, {
           loader: 'less-loader' // compiles Less to CSS
-        }]
-      },
-      {
-        test: /\.css$/,
-        use: [{
-          loader: 'style-loader' // creates style nodes from JS strings
-        }, {
-          loader: 'css-loader' // translates CSS into CommonJS
         }]
       }
     ]

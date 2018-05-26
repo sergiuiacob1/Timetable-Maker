@@ -18,23 +18,19 @@ var getAllResources = function () {
 var newResource = function ({ type, name, capacity, dependencies }) {
     // Returns a JSON with success status
 
-    return new Promise((resolve, refuse) => {
         fetch(url + "/resources/add", {
             method: "POST",
-            body: {
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({title:"watt", body:{
                 "type": type,
                 "name": name,
                 "capacity": capacity,
-                "dependencies": dependencies
-            },
+                "dependencies": dependencies}
+            }),
             mode: "cors"
-        }).then((result) => {
-            resolve(result);
-        }, (err) => {
-            console.log(err);
-            refuse(err);
         });
-    });
 }
 
 var updateResource = function ({ id, type, name, capacity, dependencies }) {

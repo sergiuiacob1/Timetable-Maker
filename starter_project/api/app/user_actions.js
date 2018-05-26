@@ -2,24 +2,36 @@ module.exports = (() => {
   'use strict';
   const User = require('./models/user');
 
-  const newUser = ({password, mail, name}) => {
+  const newUser = ({
+    password,
+    mail,
+    userName,
+    fullName
+  }) => {
     return new User()
       .insert()
       .set('password', password)
       .set('mail', mail)
-      .set('name', name)
+      .set('userName', userName)
+      .set('fullName', fullName)
       .valueOf()
       .then(() => {
         return true;
       });
   };
 
-  const getUser = ({id, password, mail}) => {
+  const getUser = ({
+    id,
+    password,
+    mail
+  }) => {
 
-    if (id){
+    if (id) {
       return new User()
         .field('*')
-        .where({id})
+        .where({
+          id
+        })
         .valueOf()
         .then((res) => {
           return res[0];
@@ -27,23 +39,29 @@ module.exports = (() => {
     }
     console.log(mail, password);
     return new User()
-    .field('*')
-    .where({
-      mail, password
-    }).valueOf()
-    .then((res) => {
-      console.log("ASDASDAS" + JSON.stringify(res));
-      if (res.length > 1)
-        return null;
-      return res[0];
-    });
+      .field('*')
+      .where({
+        mail,
+        password
+      }).valueOf()
+      .then((res) => {
+        if (res.length > 1)
+          return null;
+        return res[0];
+      });
   };
 
-  const updateUser = ({id, mail, name, old_password, new_password}) => {
+  const updateUser = ({
+    id,
+    mail,
+    fullName,
+    old_password,
+    new_password
+  }) => {
     return new User()
       .update()
-      // .set('mail', mail)
-      .set('name', name)
+      .set('mail', mail)
+      .set('fullName', fullName)
       .set('password', new_password)
       .where({
         id
@@ -52,11 +70,56 @@ module.exports = (() => {
       .then((res) => {
         return true;
       });
+  };
+
+  const updatePassword = ({
+    id,
+    new_password
+  }) => {
+    return new User()
+      .update()
+      .set('password', new_password)
+      .where({
+        id
+      })
+      .valueOf()
+      .then((res) => {
+        return true;
+      });
+  };
+
+  const getUsers = () => {
+    return new User()
+      .field('*')
+      .valueOf()
+      .then((res) => {
+        return res;
+      });
+  }
+
+  const deleteUser = ({
+    id
+  }) => {
+    console.log(id);
+    if (id) {
+      return new User()
+        .delete()
+        .where({
+          id
+        })
+        .valueOf()
+        .then((res) => {
+          return res;
+        });
+    }
   }
 
   return {
     getUser,
     newUser,
-    updateUser
+    updateUser,
+    getUsers,
+    deleteUser,
+    updatePassword
   };
 })();
