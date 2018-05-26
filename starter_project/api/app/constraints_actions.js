@@ -2,6 +2,18 @@ module.exports = (() => {
     'use strict';
     const Constraint = require('./models/constraint.js');
 
+    const deleteConstraint = ({id}) => {
+      if (id) {
+        return new Constraint()
+          .delete()
+          .where({id})
+          .valueOf()
+          .then((res) => {
+            return res;
+          });
+      }
+    }
+
     const getConstraints = ({userId}) => {
       if (userId) {
         return new Constraint()
@@ -51,6 +63,7 @@ module.exports = (() => {
   
     return {
         getConstraints,
-        addConstraint
+        addConstraint,
+        deleteConstraint
     };
   })();
