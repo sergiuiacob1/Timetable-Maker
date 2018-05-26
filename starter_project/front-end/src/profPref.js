@@ -1,4 +1,4 @@
-const hostName = 'localhost:2222';
+const hostName = '192.168.43.95:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
@@ -21,17 +21,12 @@ var hour = [];
 var days = [];
 var roomIds = [];
 var important = false;
+var timp = [];
 
 function reset(){
-   hour = [];
-   days = [];
-   roomIds = [];
-   important = false;
-   groupId=[];
-   subjectId="";
-   activityType = "";
-   motive="";
-   dateEntered="";
+   
+   location.reload();
+
 };
 function cSwap(){
   if(this.className == "noColor")
@@ -71,13 +66,41 @@ function getDate(){
 
 function getTime(){
   var table = document.getElementById("orar");
-  
-  for (var i = 0, row; row = table.rows[i]; i++) 
-     for (var j = 0, col; col = row.cells[j]; j++) 
-       if(col.className == "redColor"){
-         hour.push(col.innerHTML);
-         days.push(($(col).parent().children().index($(col))+1) %7);
-       } 
+ // var timp=[];
+  var luni=[],marti=[],miercuri=[],joi=[],vineri=[],sambata=[],duminica=[];
+  for(var i=0,row; row=table.rows[i];i++)
+    for(var j=0, col;col=row.cells[j];j++)
+      {if(col.className == "redColor"){
+        if(j==0)
+          luni.push(col.innerHTML);
+          else
+          if(j==1)
+            marti.push(col.innerHTML);
+            else
+            if(j==2)
+              miercuri.push(col.innerHTML);
+              else
+              if(j==3)
+                joi.push(col.innerHTML);
+                else
+                if(j==4)
+                  vineri.push(col.innerHTML);
+                  else
+                  if(j==5)
+                    sambata.push(col.innerHTML);
+                    else
+                    if(j==6)
+                      duminica.push(col.innerHTML);
+          }
+                      
+      }
+      timp.push(luni);
+      timp.push(marti);
+      timp.push(miercuri);
+      timp.push(joi);
+      timp.push(vineri);
+      timp.push(sambata);
+      timp.push(duminica);
 };
 
 function getRooms(){
@@ -112,7 +135,7 @@ function send(){
     object["groupId"] = groupId;
     object["activity"] = activityType;
     object["date"] = dateEntered;
-    object["possibleIntervals"] = {days, hour};
+    object["possibleIntervals"] = [{"days":"1", "intervals":timp[0]}, {"days":"2", "intervals":timp[1]}, {"days":"3", "intervals":timp[2]}, {"days":"4", "intervals":timp[3]}, {"days":"5", "intervals":timp[4]}, {"days":"6", "intervals":timp[5]}, {"days":"0", "intervals":timp[6]}];
     object["important"] = important;
     object["motive"]= motive;
     var json = JSON.stringify(object);
@@ -145,7 +168,7 @@ function openTab(tabName) {
 
 
 function getSubjectsShow(){
-  var url = 'http://0.0.0.0:2222/api/subjects?token=' + token;
+  var url = 'http://'+hostName+'/api/subjects?token=' + token;
   $.get(`${url}`).done(function (result){
     for(var i=0;i<result.subjects.length;i++){
       $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
@@ -156,7 +179,7 @@ function getSubjectsShow(){
 
 
 function getRoomsShow(){
-  var url = 'http://0.0.0.0:2222/api/rooms?token=' + token;
+  var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
   $.get(`${url}`).done(function(result){
     for(var i=0;i<result.rooms.length;i++){
@@ -170,7 +193,7 @@ function getRoomsShow(){
 };
 
 function getGroupsShow(){
-  var url = 'http://0.0.0.0:2222/api/groups?token=' + token;
+  var url = 'http://'+hostName+'/api/groups?token=' + token;
   $.get(`${url}`).done(function(result){
     for(var i=0;i<result.groups.length;i++){
       $("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');

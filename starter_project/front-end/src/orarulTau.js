@@ -1,4 +1,6 @@
-var token;
+const hostName = '192.168.43.95:2222';
+const token = localStorage.getItem("token");
+
 var mon, tue, wed, thu, fri, sat, sun;
 var windows = false;
 var rows = [];
@@ -28,7 +30,7 @@ function postThisShit(json, callback) {
 
 
 function getSubjectsShow(){
-  var url = 'http://89.34.92.135:2222/api/subjects?token=' + token;
+  var url = 'http://'+hostName+'/api/subjects?token=' + token;
   $.get(`${url}`).done(function (result){
     if (result.success !== true)
       return;
@@ -38,7 +40,7 @@ function getSubjectsShow(){
 
 
 function getRoomsShow(){
-  var url = 'http://89.34.92.135:2222/api/rooms?token=' + token;
+  var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
   $.get(`${url}`).done(function(result){
     if (result.success !== true)
@@ -48,7 +50,7 @@ function getRoomsShow(){
 };
 
 function getGroupsShow(){
-  var url = 'http://89.34.92.135:2222/api/groups?token=' + token;
+  var url = 'http://'+hostName+'/api/groups?token=' + token;
   $.get(`${url}`).done(function(result){
     if (result.success !== true)
       return;
@@ -84,7 +86,7 @@ function groupName(ids){
 
 
 function getUnlinkedConstraints(){
-  var url = 'http://89.34.92.135:2222/api/rooms?token=' + token;
+  var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
   $.get(`${url}`).done(function(result){
     if (result.success !== true)
