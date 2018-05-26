@@ -267,9 +267,9 @@ $(document).ready(function(){
 							Save changes
 						</a>
 					</div>
-					<div class="mdl-card__menu">
+					<div class="mdl-card__menu close-edit">
 						<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-						<i class="material-icons close">cancel</i>
+						<i class="material-icons close" id="close">cancel</i>
 						</button>
 					</div>
 				</div>`
@@ -293,8 +293,8 @@ $(document).ready(function(){
 			$(".mdl-layout__content").scrollTop(0);
 		});
 
-		$(".close").on("click", function() {
-			$(this).parent().parent().parent().hide();
+		$(".close-edit").on("click", function() {
+			$(this).parent().hide();
 		});
 
 		$(removeButton).on("click", function(){
