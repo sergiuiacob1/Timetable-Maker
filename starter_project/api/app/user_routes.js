@@ -14,6 +14,7 @@ module.exports = (() => {
   const Mail = require('./mail_service');
 
   const updateUserInfo = (req, res) => {
+      console.log(req.body);
     const id = req.decoded.user.id;
 
     const body = req.body;
@@ -108,6 +109,8 @@ module.exports = (() => {
     const {
       body
     } = req;
+      console.log('PAOAKJNKJDNN');
+      console.log(body);
     body.password = makePassword();
     if (body.mail === undefined) {
       res.json({
@@ -124,6 +127,7 @@ module.exports = (() => {
         getUser({mail: body.mail, password: body.password}).then((user) => {
 
             let i;
+            console.log(body);
             for (i = 0; i < body.id_subjects.length; i++) {
                 let values = {id_subject: body.id_subjects[i], id_user: user.id};
                 newTeacherSubjectMap(values).then((relation) => {
