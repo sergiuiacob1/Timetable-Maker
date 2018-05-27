@@ -1,6 +1,7 @@
 module.exports = (() => {
   'use strict';
   const User = require('./models/user');
+  const TeacherSubjectMap = require('./models/teacher_subject_map');
 
   const newUser = ({
     password,
@@ -14,6 +15,20 @@ module.exports = (() => {
       .set('mail', mail)
       .set('userName', userName)
       .set('fullName', fullName)
+      .valueOf()
+      .then(() => {
+        return true;
+      });
+  };
+
+  const newTeacherSubjectMap = ({
+    id_user,
+    id_subject
+  }) => {
+    return new TeacherSubjectMap()
+      .insert()
+      .set('id_user', id_user)
+      .set('id_subject', id_subject)
       .valueOf()
       .then(() => {
         return true;
@@ -54,15 +69,12 @@ module.exports = (() => {
   const updateUser = ({
     id,
     mail,
-    fullName,
-    old_password,
-    new_password
+    fullName
   }) => {
     return new User()
       .update()
       .set('mail', mail)
       .set('fullName', fullName)
-      .set('password', new_password)
       .where({
         id
       })
@@ -93,9 +105,23 @@ module.exports = (() => {
       .field('*')
       .valueOf()
       .then((res) => {
-        return res;
+          console.log(res)
+          return res;
       });
-  }
+  };
+
+    const getUserSubjects = (userId) => {
+        return new TeacherSubjectMap()
+            .field('id_subject')
+            .where({id_user: userId})
+            .valueOf()
+            .then((res) => {
+                console.log(userId);
+                console.log('Entry subject:')
+                console.log(res)
+                return res;
+            });
+    };
 
   const deleteUser = ({
     id
@@ -112,6 +138,22 @@ module.exports = (() => {
           return res;
         });
     }
+  };
+
+  const deleteSubject = ({
+    id_user
+  }) => {
+    if (id_user) {
+      return new TeacherSubjectMap()
+        .delete()
+        .where({
+          id_user
+        })
+        .valueOf()
+        .then(() => {
+          return true;
+        });
+    }
   }
 
   return {
@@ -120,6 +162,9 @@ module.exports = (() => {
     updateUser,
     getUsers,
     deleteUser,
-    updatePassword
+      updatePassword,
+      newTeacherSubjectMap,
+      getUserSubjects,
+    deleteSubject
   };
 })();
