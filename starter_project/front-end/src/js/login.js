@@ -48,7 +48,7 @@ $(document).ready(function(){
 
 		if (username.length === 0 || password.length === 0) {
 			if (errorMsg === false) {
-				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Please provide credentials!").addClass("error-msg"));
+				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Introduceti credentialele!").addClass("error-msg"));
 				$(".mdl-textfield").addClass("is-invalid");
 				errorMsg = true;
 			}
