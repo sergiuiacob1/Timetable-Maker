@@ -66,7 +66,6 @@ var important = false;
 var timp = [];
 
 function reset(){
-
   //  location.reload();
 
 };
@@ -82,7 +81,6 @@ function getSubject(){
 };
 
 function getGroup(){
-
     $('#grupa input[type=checkbox]:checked').each(function(index, value) {
         groupId.push($(this).attr("value") * 1);
     });
@@ -134,7 +132,6 @@ function getTime(){
                     if(j==6)
                       duminica.push(col.innerHTML);
           }
-
       }
       timp.push(luni);
       timp.push(marti);
@@ -167,7 +164,6 @@ function send(){
   getText();
   getTime();
   getRooms();
-
   if (important && motive==""){
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
     reset();
@@ -213,7 +209,6 @@ function getSubjectsShow(){
   $.get(`${url}`).done(function (result){
     for(var i=0;i<result.subjects.length;i++){
       $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
-
     }
   });
 };
