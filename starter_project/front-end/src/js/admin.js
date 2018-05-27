@@ -251,49 +251,51 @@ $(document).ready(function(){
 				`<li class="mdl-list__item mdl-list__item--two-line" id="user${index}" key=${index}>
 					<span class="mdl-list__item-primary-content">
 						<i class="material-icons mdl-list__item-avatar">person</i>
-						<span>Full Name: ${user.fullName}</span>
-						<span class="mdl-list__item-sub-title">Email: ${user.mail}</span>
+						<span>${user.fullName}</span>
+						<span class="mdl-list__item-sub-title">${user.mail}</span>
 					</span>
 						
 				</li>
 				<div class="user-buttons" id="buttons-user${index}" userId="${user.id}">
 					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
-						Edit
+						Modifica
 					</button>
 					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored remove-button">
-						Remove
+						Sterge
 					</button>
 					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored reset-button">
-						Reset Password
+						Reseteaza parola
 					</button><br><br>
 				</div>`
 			);
 			$("#right-side").append(
-				`<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="panel-user${index}" style="display: none;" userId="${user.id}" userIndex="${index}">
+				`<div class="edit-box" id="panel-user${index}" style="display: none;" userId="${user.id}" userIndex="${index}">
 					<div class="mdl-card__title" style="margin: 0 auto;">
-						<h2 class="mdl-card__title-text">Edit User</h2>
+						<h2 class="mdl-card__title-text edit-box-title">Modifica utilizator</h2>
 					</div>
 					<div class="content-input">
 						<div class="mdl-textfield mdl-js-textfield">
-							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}" pattern="[a-zA-Z\\s]+">
+							<input class="mdl-textfield__input" type="text" value="${user.fullName}" id="edit-fullName-${user.id}" pattern="[a-zA-Z\\s-]+">
+                            <label class="mdl-textfield__label" for="fname">Nume complet</label>
 						</div>
-                        <p id="edit-fullName-req-${user.id}"></p>
+                        <p class="input-req" id="edit-fullName-req-${user.id}"></p>
 
 						<div class="mdl-textfield mdl-js-textfield">
 							<input class="mdl-textfield__input" type="email" value="${user.mail}" id="edit-email-${user.id}">
+                            <label class="mdl-textfield__label" for="fname">Email</label>
 						</div>
-                        <p id="edit-email-req-${user.id}"></p>
+                        <p class="input-req" id="edit-email-req-${user.id}"></p>
 					</div>
-					<div id="subjects-list-${index}" class="subjects-style">
-                        <div id="list-${index}">
+					<div class="subjects-style" id="subjects-list-${index}">
+                        <div class="list" id="list-${index}">
                         </div>
 					</div>
 					<div class="content-input">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" id="subjects-${index}">
-                            <label class="mdl-textfield__label" for="fname">Add subjects</label>
+                            <input class="mdl-textfield__input" type="text" id="edit-subjects-${user.id}">
+                            <label class="mdl-textfield__label" for="fname">Adauga subiecte</label>
                         </div>
-                        <p id="subjects-req-${index}"></p>
+                        <p class="input-req" id="edit-subjects-req-${user.id}"></p>
 					</div>
 					<div id="content-dropdown-${index}" class="content-dropdown-style">
                       <ul class="demo-list-control mdl-list dropdown"></ul>
@@ -311,9 +313,9 @@ $(document).ready(function(){
 				</div>`
 			);
 			$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();
-			$(`#subjects-${index}`).on('input', function(){
+			$(`#edit-subjects-${user.id}`).on('input', function(){
 
-				const searchText = $(`#subjects-${index}`).val();
+				const searchText = $(`#edit-subjects-${user.id}`).val();
 
 				if (searchText.length !== 0){
 					const array = getSuggestions_subjects(searchText);
@@ -368,6 +370,7 @@ $(document).ready(function(){
 			const fullName = $(`.mdl-textfield__input#edit-fullName-${id}`);
 			// const userName = $(".mdl-textfield__input#edit-userName").val();
 			const mail = $(`.mdl-textfield__input#edit-email-${id}`);
+			const subjects = $(`.mdl-textfield__input#edit-subjects-${id}`);
 
 			subjectsListUserIds = [];
 			// for (let i in subjectsListUser[user]){
@@ -376,19 +379,24 @@ $(document).ready(function(){
 			subjectsListUserIds = subjectsListUser[user].map(s => s.id_subject);
 			console.log(subjectsListUserIds);
 
-			const cond3 = subjectsListUserIds.length !== 0 ? true : false;
+			const cond3 = verifyInput(
+							subjects,
+							subjectsListUserIds.length !== 0 ? /[\s\S]*/ : /(?!)/,
+							`edit-subjects-req-${id}`,
+							"Adaugati cel putin o materie"
+						);
 
 			const cond2 = verifyInput(
 							mail, 
 							/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
 							`edit-email-req-${id}`,
-							"Please enter a valid email address"
+							"Introduceti o adresa de email valida"
 						);
 			const cond1 = verifyInput(
 							fullName, 
-							/^[a-zA-Z\s]+$/, 
+							/^[a-zA-Z\s-]+$/, 
 							`edit-fullName-req-${id}`, 
-							"Please use only letters"
+							"Folositi doar litere separate prin spatiu sau '-'"
 						);
 			
 			if (cond1 && cond2 && cond3) {
@@ -607,6 +615,7 @@ $(document).ready(function(){
 		const fullName = $(".content-input #fullname");
 		// const userName = $(".content-input #username");
 		const email = $(".content-input #email");
+		const subjects = $(".content-input #subjects");
 
 
 		subjectsListIds = [];
@@ -614,21 +623,31 @@ $(document).ready(function(){
 		for (let i in subjectsList){
 			subjectsListIds.push(subjectsList[i].id_subject);
 		}
-
+					 
 		const cond3 = verifyInput(
+						subjects,
+						subjectsListIds.length !== 0 ? /[\s\S]*/ : /(?!)/,
+						"subjects-req",
+						"Adaugati cel putin o materie"
+					);
+
+		const cond2 = verifyInput(
 						email, 
 						/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
 					 	"email-req",
-					 	 "Please enter a valid email address"
-		 			);
-		// const cond2 = verifyInput(userName, /^[0-9a-zA-Z]+$/, "username-req", "Please use only letters and numbers");
-		const cond1 = verifyInput(fullName, /^[a-zA-Z\s]+$/, "fullname-req", "Please use only letters");
+					 	"Introduceti o adresa de email valida"
+					);
 
+		const cond1 = verifyInput(
+						fullName, 
+						/^[a-zA-Z\s-]+$/, 
+						"fullname-req", 
+						"Folositi doar litere separate prin spatiu sau '-'"
+					);
 
+		// const cond2 = subjectsListIds.length !== 0 ? true : false;
 
-		const cond2 = subjectsListIds.length !== 0? true : false;
-
-		if (cond1 && cond2&& cond3) {
+		if (cond1 && cond2 && cond3) {
 
 			const obj ={ fullName: $(fullName).val(), mail: $(email).val(), id_subjects: subjectsListIds};
 			apiAddUserPost(obj, function(response){
