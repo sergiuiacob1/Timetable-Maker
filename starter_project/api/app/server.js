@@ -19,8 +19,8 @@ module.exports = (() => {
   } = require('./resource_routes');
   const {getGroupsRoute} = require('./group_routes');
   const {getSubjectsRoute, addSubjectRoute} = require('./subject_routes');
-  const {getConstraintsRoute, newConstraintRoute} = require('./constraints_routes.js');
-  const {getLinkedConstraintsRoute, newLinkedConstraintRoute} = require('./linked_constraints_routes.js');
+  const {getConstraintsRoute, newConstraintRoute, deleteConstraintRoute} = require('./constraints_routes.js');
+  const {getLinkedConstraintsRoute, newLinkedConstraintRoute, deleteLinkedConstraintRoute} = require('./linked_constraints_routes.js');
 
   let serverInterface = undefined;
 
@@ -88,9 +88,11 @@ module.exports = (() => {
 
     apiRoutes.get('/constraints', getConstraintsRoute);
     apiRoutes.post('/constraints', newConstraintRoute);
+    apiRoutes.post('/delete_constraints', deleteConstraintRoute);
 
     apiRoutes.get('/linked_constraints', getLinkedConstraintsRoute);
     apiRoutes.post('/linked_constraints', newLinkedConstraintRoute);
+    apiRoutes.post('/delete_linked_constraints', deleteLinkedConstraintRoute);
     
     app.use('/api', apiRoutes);
 
