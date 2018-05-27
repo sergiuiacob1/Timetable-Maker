@@ -207,10 +207,6 @@ module.exports = (() => {
       id: id,
       fullName: body.fullName
     }).then((result) => {
-      res.json({
-        success: true,
-        message: 'user updated'
-      });
 
       deleteSubject({
         id_user: id
@@ -234,6 +230,11 @@ module.exports = (() => {
         return;
       });
 
+    }).then(() => {
+        res.json({
+            success: true,
+            message: 'user updated'
+        });
     }).catch((e) => {
       console.log("eroarea e", e);
       res.json({
