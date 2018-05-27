@@ -20,19 +20,19 @@ $(document).ready(function(){
 			console.log(data);
 
 			if (data.success === true){
-			  token = data.token;
-			  localStorage.setItem('token', token);
-			  setTimeout(tokenExpire, 21600000); //6 * 60 * 1 min
-			  if (data.is_admin === 1){
-			  	callback(true, true);
-			  }
-			  else{
-			  	callback(true, false);
-			  }
+				token = data.token;
+				localStorage.setItem('token', token);
+				setTimeout(tokenExpire, 21600000); //6 * 60 * 1 min
+				if (data.is_admin === 1){
+					callback(true, true);
+				}
+				else{
+					callback(true, false);
+				}
 			}
 			else {
-			  errorMsg = data.message;
-			  	callback(false);
+				errorMsg = data.message;
+				callback(false);
 			}
 		});	
 	}
@@ -47,10 +47,9 @@ $(document).ready(function(){
 		const password = $("#login-form #password-input").val();
 
 		if (username.length === 0 || password.length === 0) {
-			if (errorMsg === false) {
+			if (!($("#login-form").next().hasClass("error-msg"))) {
 				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Introduceti credentialele!").addClass("error-msg"));
 				$(".mdl-textfield").addClass("is-invalid");
-				errorMsg = true;
 			}
 			return;
 		}
@@ -62,7 +61,6 @@ $(document).ready(function(){
 
 
 			if (response === true){
-
 				if (isAdmin === true){
 					$(location).attr('href', '/admin.html');
 				}	
@@ -72,8 +70,10 @@ $(document).ready(function(){
 			}
 
 			if (response === false){
-				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
-				$(".mdl-textfield").addClass("is-invalid");
+				if (!($("#login-form").next().hasClass("error-msg"))) {
+					$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
+					$(".mdl-textfield").addClass("is-invalid");
+				}
 			}
 		});
 	}
@@ -84,9 +84,8 @@ $(document).ready(function(){
 
 	$(".mdl-textfield__input").on("input", function() {
 		$(".error-msg").remove();
-		errorMsg = false;
+		$(".mdl-textfield").removeClass("is-invalid");
 	});
-
 
 	$('html').bind('keypress', function(e){
      	if(e.keyCode == 13){
