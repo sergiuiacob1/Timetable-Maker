@@ -29,7 +29,6 @@ $(document).ready(function(){
 			  callback(true);
 			}
 			else {
-			  
 			  $(".errorMsg").append(`<div>${data.message}</div>`);
 			  callback(false);
 			}
@@ -53,7 +52,7 @@ $(document).ready(function(){
 		let cond3;
 
 		if ( $(newPass).val().length !== 0 && $(confirmNewPass).val().length !== 0){
-			
+
 			if ($(newPass).val() === $(confirmNewPass).val()){
 				cond2 = cond3 = true;
 			}
