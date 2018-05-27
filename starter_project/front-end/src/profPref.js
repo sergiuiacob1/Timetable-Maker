@@ -4,6 +4,46 @@ const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
 require('./profPref.less');
 
+function populateTable() {
+
+  var tableArray = [];
+  tableArray.push(["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
+  tableArray.push(["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"]);
+
+  var orar = document.getElementById("orar");
+//populate header
+  var thead = document.createElement("thead");
+    var tr = document.createElement("tr");
+  for (var j = 0; j < 7; j++) {
+     var th = document.createElement("th");
+     var txt = document.createTextNode(tableArray[0][j]);
+     th.appendChild(txt);
+     tr.appendChild(th);
+  }
+  thead.appendChild(tr);
+  orar.appendChild(thead);
+//populate header
+
+//populate body
+  var tbody = document.createElement("tbody");
+  var lineIndex = 0;
+  for (var i = 1 ; i < tableArray[1].length; i++) {
+   var tr = document.createElement("tr");
+   for (var j = 0; j < tableArray[0].length; j++) {
+     var td = document.createElement("td");
+     var txt = document.createTextNode(tableArray[1][lineIndex]);
+     td.appendChild(txt);
+     tr.appendChild(td);
+    }
+  lineIndex++;
+  tbody.appendChild(tr);
+  orar.appendChild(tbody);
+  }
+//populate body
+};
+
+
+
 function postThisShit(json, callback) {
 
   debugger;
@@ -26,7 +66,7 @@ var important = false;
 var timp = [];
 
 function reset(){
-   
+
   //  location.reload();
 
 };
@@ -42,7 +82,7 @@ function getSubject(){
 };
 
 function getGroup(){
-  
+
     $('#grupa input[type=checkbox]:checked').each(function(index, value) {
         groupId.push($(this).attr("value") * 1);
     });
@@ -54,11 +94,11 @@ function getActivity(){
 
 function getImportant(){
   var checkbox = document.getElementById("switch1");
-  important = checkbox.checked;    
+  important = checkbox.checked;
 };
 
 function getText(){
-  if ($.trim($("textarea").val()) != "") 
+  if ($.trim($("textarea").val()) != "")
     motive = $("textarea").val();
 };
 function getDate(){
@@ -94,7 +134,7 @@ function getTime(){
                     if(j==6)
                       duminica.push(col.innerHTML);
           }
-                      
+
       }
       timp.push(luni);
       timp.push(marti);
@@ -107,14 +147,14 @@ function getTime(){
 
 function getRooms(){
   var table = document.getElementById("sali");
-  
-  for (var i = 0, row; row = table.rows[i]; i++) 
-     for (var j = 0, col; col = row.cells[j]; j++) 
+
+  for (var i = 0, row; row = table.rows[i]; i++)
+     for (var j = 0, col; col = row.cells[j]; j++)
        if(col.className == "redColor"){
         //  console.log(col);
         //  debugger;
          roomIds.push($(col).attr('data-id') * 1);
-       } 
+       }
 };
 
 function send(){
@@ -127,7 +167,7 @@ function send(){
   getText();
   getTime();
   getRooms();
-  
+
   if (important && motive==""){
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
     reset();
@@ -143,11 +183,11 @@ function send(){
     object["important"] = important;
     object["motive"]= motive;
     var json = JSON.stringify(object);
-    
+
     postThisShit(json, function(response){
 		location.reload();
     });
-    
+
     reset();
   }
 };
@@ -156,9 +196,9 @@ function openTab(tabName) {
   var i;
   var x = document.getElementsByClassName("tab");
   for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none"; 
+    x[i].style.display = "none";
   }
-  document.getElementById(tabName).style.display = "block";       
+  document.getElementById(tabName).style.display = "block";
 };
 
 
@@ -173,7 +213,7 @@ function getSubjectsShow(){
   $.get(`${url}`).done(function (result){
     for(var i=0;i<result.subjects.length;i++){
       $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
-      
+
     }
   });
 };
@@ -207,6 +247,7 @@ $(document).ready(function() {
   getRoomsShow();
   getGroupsShow();
   addListeners();
+  populateTable();
 });
 
 function addListeners(){
