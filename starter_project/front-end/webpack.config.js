@@ -33,7 +33,8 @@ module.exports = {
     app: './src/js/index.js',
     login: './src/js/login.js',
     admin: './src/js/admin.js',
-    orarulTau: './src/js/orarulTau.js'
+    orarulTau: './src/js/orarulTau.js',
+    profil: './src/js/profil.js'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

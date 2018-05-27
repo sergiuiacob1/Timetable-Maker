@@ -1,5 +1,5 @@
 $(document).ready(function() {
-const hostName = '89.34.92.135:2222';
+const hostName = '0.0.0.0:2222';
 const token = localStorage.getItem("token");
 
 var mon, tue, wed, thu, fri, sat, sun;
@@ -10,61 +10,24 @@ var days = [];
 var allrooms;
 var allgroups;
 var allsubjects;
-var allconstraints;
 
-const urlPost = `http://${hostName}/api/linked_constraints?token=${token}`;
-const urlDelete = `http://${hostName}/api/delete_constraints?token=${token}`;
-const urlDeleteLinked = `http://${hostName}/api/delete_linked_constraints?token=${token}`;
- 
-require('./../less/profPref.less');
+/*
+const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
+require('./profPref.less');
+*/
 function postThisShit(json, callback) {
-  $.ajax({
+
+  
+
+/*  $.ajax({
     url: urlPost,
     method: 'POST',
     contentType: 'application/json',
     data: json
-  }).done(function(data){
-      if (data.success === true){
-        callback(true);
-      }
-      else{
-        callback(false);
-      }
-  });
+  });*/
 };
 
-function deleteThisShit(json, callback){
-  $.ajax({
-    url: urlDelete,
-    method: 'POST',
-    contentType: 'application/json',
-    data: json
-  }).done(function(data){
-      if (data.success === true){
-        callback(true);
-      }
-      else{
-        callback(false);
-      }
-  });
-};
-
-function deleteThisLinkedShit(json, callback){
-  $.ajax({
-    url: urlDeleteLinked,
-    method: 'POST',
-    contentType: 'application/json',
-    data: json
-  }).done(function(data){
-    if (data.success === true){
-      callback(true);
-    }
-    else{
-      callback(false);
-    }
-  });
-};
 
 
 function getSubjectsShow(){
@@ -73,7 +36,6 @@ function getSubjectsShow(){
     if (result.success !== true)
       return;
     allsubjects=result;
-	getRoomsShow();
   });
 };
 
@@ -85,7 +47,6 @@ function getRoomsShow(){
     if (result.success !== true)
       return;
     allrooms=result.rooms;
-	getGroupsShow();
   });
 };
 
@@ -95,7 +56,6 @@ function getGroupsShow(){
     if (result.success !== true)
       return;
     allgroups=result.groups;
-	getUnlinkedConstraints();
   });
 };
 
@@ -155,10 +115,7 @@ function getUnlinkedConstraints(){
   $.get(`${url}`).done(function(result){
     if (result.success !== true)
       return;
-	allconstraints=result;
     for(var i=0;i<result.constraints.length;i++){
-    var days='';
-    var hours='';
       for(var j=0;j<result.constraints[i].possibleIntervals.length;j++)
       {
         // debugger;
@@ -166,12 +123,7 @@ function getUnlinkedConstraints(){
         // for (k = )
         if(result.constraints[i].possibleIntervals[j].intervals.length !== 0)
         {
-          days= days+'<li>'+getDayName(result.constraints[i].possibleIntervals[j].days)+'</li>';
-      hours=hours+'<li>'+result.constraints[i].possibleIntervals[j].intervals+'</li>';
-        }
-      }
-    
-    $("#tabl tbody").append(`
+          $("#tabl tbody").append(`
           <tr data-id=${result.constraints[i].id}>
           <td>
           <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
@@ -183,58 +135,14 @@ function getUnlinkedConstraints(){
             <td class="mdl-data-table__cell--non-numeric">${roomName(result.constraints[i].roomIds)}</td>
             <td class="mdl-data-table__cell--non-numeric">${groupName(result.constraints[i].groupIds)}</td>
             <td class="mdl-data-table__cell--non-numeric">${result.constraints[i].date}</td>
-            <td class="mdl-data-table__cell--non-numeric"><ul>${days}</ul></td>
-            <td class="mdl-data-table__cell--non-numeric"><ul>${hours}</ul></td>
+            <td class="mdl-data-table__cell--non-numeric">${getDayName(result.constraints[i].possibleIntervals[j].days)}</td>
+            <td class="mdl-data-table__cell--non-numeric">${result.constraints[i].possibleIntervals[j].intervals}</td>
           </tr>`);
+        }
+      }
     }
-	getLinkedConstraints();
   });
 };
-
-function iswindow(check){
-	var fereastra = {
-    '1': 'Da',
-    '0': 'Nu'
-  }
-  return fereastra[check];
-};
-
-function getsubfromcons(id){
-	for(var i=0;i<allconstraints.constraints.length;i++)
-		if(allconstraints.constraints[i].id == id)
-			return subName(allconstraints.constraints[i].subjectId);
-};
-
-function getLinkedConstraints(){
-	var url='http://'+hostName+'/api/linked_constraints?token='+token;
-	$.get(`${url}`).done(function(result){
-		if(result.success !== true) return;
-		for(var i=0;i<result.constraints.length;i++)
-		{
-			var numeZile=[];
-			for(var j=0;j<result.constraints[i].days.length;j++)
-			{numeZile.push(getDayName(result.constraints[i].days[j]));}
-			
-			var numeMaterii=[];
-			for(var j=0;j<result.constraints[i].ids.length;j++)
-			{numeMaterii.push(getsubfromcons(result.constraints[i].ids[j]));}
-			$("#tabl2 tbody").append(
-			`<tr  data-id=${result.constraints[i].id}>
-				<td>
-					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
-						<input type="checkbox" class="mdl-checkbox__input">
-						<span class="mdl-checkbox__label"></span>
-					</label>
-				</td>
-				<td class="mdl-data-table__cell--non-numeric">${numeZile}</td>
-				<td class="mdl-data-table__cell--non-numeric">${numeMaterii}</td>
-				<td class="mdl-data-table__cell--non-numeric">${iswindow(result.constraints[i].win)}</td>
-			</tr>`);
-		}
-		addListeners();
-	});
-};
-
 
 function getRows(){
     var table = document.getElementById("tabl");
@@ -248,12 +156,12 @@ function getRows(){
 
 function getDays(){
   mon = document.getElementById("luni").checked;
-  tue = document.getElementById("marti").checked;
-  wed = document.getElementById("miercuri").checked;
-  thu = document.getElementById("joi").checked;
-  fri = document.getElementById("vineri").checked;
-  sat = document.getElementById("sambata").checked;
-  sun = document.getElementById("duminica").checked;
+    tue = document.getElementById("marti").checked;
+    wed = document.getElementById("miercuri").checked;
+    thu = document.getElementById("joi").checked;
+    fri = document.getElementById("vineri").checked;
+    sat = document.getElementById("sambata").checked;
+    sun = document.getElementById("duminica").checked;
   if(mon)
     days.push(1);
   if(tue)
@@ -282,96 +190,26 @@ function start(){
   var object = {};
   object["ids"] = rows;
   object["days"] = days;
-  object["win"] = windows;
+  object["window"] = windows;
   var json = JSON.stringify(object);
   
   postThisShit(json, function(response){
-      if(response){
-        alert("Optiune adaugata!");
-        location.reload();
-      }else{
-        alert("Auleu buba!");
-        location.reload();
-      }
+      location.reload();
     });
     
    
-};
-
-var delRows = [];
-var delLinkedRows = [];
-
-function sterge(){
-  delRows = [];
-   var table = document.getElementById("tabl");
-    for (var i = 1, row; row = table.rows[i]; i++){
-      if ($(row).find('input')[0].checked === true) {
-      // if(row.className=="is-selected"){
-          delRows.push($(row).attr('data-id'));
-          document.getElementById("tabl").deleteRow(i);
-          i--;
-      }
-
-  }
-  for(var i = 0; i < delRows.length; i++){
-    
-      var object = {};
-      object["id"] = delRows[i];
-      var json = JSON.stringify(object);
-      console.log("im ere");
-      deleteThisShit(json, function(response){
-          if(i==(delRows.length-1))
-          {
-            if(response){
-              alert("Optiuni sterse cu succes!");
-            }else{
-              alert("Auleu buba");
-            }
-          }
-        });
-    }
-};
-function stergeLinked(){
-   var table = document.getElementById("tabl2");
-    for (var i = 1, row; row = table.rows[i]; i++){
-      if ($(row).find('input')[0].checked === true) {
-          delLinkedRows.push($(row).attr('data-id'));
-          document.getElementById("tabl2").deleteRow(i);
-          i--;
-      }
-  }
-  for(var i = 0; i < delLinkedRows.length; i++){
-    
-	
-      var object = {};
-      object["id"] = delLinkedRows[i];
-      var json = JSON.stringify(object);
-      
-      deleteThisLinkedShit(json, function(response){
-          if(i==(delLinkedRows.length-1))
-          {
-            if(response){
-              alert("Optiuni sterse cu succes!");
-            }else{
-              alert("Auleu buba");
-            }
-          }
-        });
-    }
 };
 
 function addListeners(){
 
   var sendButton = document.getElementById("sendData2");
   sendButton.addEventListener('click', start);
-  
-  var deleteButton = document.getElementById("deleteData");
-  deleteButton.addEventListener('click', sterge);
-
-   var deleteButton = document.getElementById("deleteLinkedData");
-  deleteButton.addEventListener('click', stergeLinked);
 }
 
   getSubjectsShow();
+  getRoomsShow();
+  getGroupsShow();
+  setTimeout(getUnlinkedConstraints, 1000);
+  addListeners();
 
 });
