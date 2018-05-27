@@ -130,8 +130,9 @@ $(document).ready(function(){
 			$(".loader-bck").hide();
 
 			if (data.success === true){
-			  callback(true);
 			  notify("Profesor editat cu succes");
+			  console.log("profesor editat cu succes");
+			  callback(true);
 			}
 			else {
 			  callback(false);
@@ -179,7 +180,6 @@ $(document).ready(function(){
 			if (data.success === true){
 
 			  console.log("useri luati cu success");
-			  console.log(data);
 			  usersData = data.users;
 			  callback(true);
 			}
@@ -400,16 +400,22 @@ $(document).ready(function(){
 		
 					if (response === true){
 
+						console.log("Profesor editat cu succes 2")
 						$(searchInput).val("");
-						apiAllUsersGet(function(response){
-							if (response === true){
-								renderUsers(usersData);
-							}
-					
-							if (response === false){
-								notify(errorMsg);
-							}
-						});
+
+						setTimeout( function(){
+
+									apiAllUsersGet(function(response){
+										console.log("ADadasda");
+										if (response === true){
+											renderUsers(usersData);
+										}
+								
+										if (response === false){
+											notify(errorMsg);
+										}
+									}) 
+						}, 500);
 					}
 				});
 			}
@@ -567,6 +573,15 @@ $(document).ready(function(){
 	$(navLinkButton).on('click', function() {
 
 		const linkId = $(this).attr("id");
+
+		console.log(linkId);
+
+		if (linkId === "logout"){
+
+			localStorage.removeItem("token");
+			$(location).attr('href', '/login.html');
+			return;
+		}
 
 		$(".mdl-layout__content .page-content .users-management").hide();
 		$(".mdl-layout__content .page-content .add-user").hide();
@@ -739,8 +754,6 @@ $(document).ready(function(){
 			renderSubjectsList(subjectsList);
 		});
 	}
-
-
 
 
 	$(subjectsInput).on('input', function(){

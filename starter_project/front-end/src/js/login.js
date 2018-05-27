@@ -37,7 +37,8 @@ $(document).ready(function(){
 		});	
 	}
 
-	$('#login-button').on('click', function() {
+	function handleLoginClick(){
+
 
 		$('#login-form .error-msg').remove();
 		let loginBtn = $('#login-button');
@@ -74,12 +75,22 @@ $(document).ready(function(){
 				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
 				$(".mdl-textfield").addClass("is-invalid");
 			}
-
 		});
+	}
+
+	$('#login-button').on('click', function(){
+		handleLoginClick();
 	});
 
 	$(".mdl-textfield__input").on("input", function() {
 		$(".error-msg").remove();
 		errorMsg = false;
+	});
+
+
+	$('html').bind('keypress', function(e){
+     	if(e.keyCode == 13){
+        	 handleLoginClick();
+     	}
 	});
 });
