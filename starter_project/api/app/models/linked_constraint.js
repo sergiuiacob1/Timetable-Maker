@@ -5,10 +5,10 @@ module.exports = (() => {
     const { Extension } = require('./../../config/pools.js');
     const ApplicationRecord = require('./application_record.js');
   
-    class Constraint extends ApplicationRecord {
+    class LinkedConstraint extends ApplicationRecord {
       constructor() {
         console.log(Extension);
-        super(Extension, "constraints");
+        super(Extension, "linked_constraints");
       }
   
       where({
@@ -41,6 +41,6 @@ module.exports = (() => {
       }
     }
   
-    return Constraint;
+    return LinkedConstraint;
   })();
   

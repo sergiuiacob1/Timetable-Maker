@@ -158,6 +158,8 @@ Main Components
   width: 70%;
   max-width: 300px;
   box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.2);
+  border: 2px solid black;
+  border-radius: 2px;
   margin-right: 20px;
   -webkit-transition: opacity .2s, background .2s;
   transition: opacity .2s, background .2s;
@@ -603,4 +605,52 @@ Main Components
 .cd-schedule.modal-is-open .cover-layer {
   opacity: 1;
   visibility: visible;
+}
+
+
+
+
+/*HTML and CSS style for conflict analyzer*/
+
+footer{
+  font-family: "Source Sans Pro", sans-serif;
+}
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #410966;
+  color: white;
+}
+
+.button {
+  background-color: #410966;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-size:14px;
+  border-radius:3px;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.button:hover{
+  background-color: #6812a1;
 }
