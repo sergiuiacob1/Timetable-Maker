@@ -44,6 +44,46 @@ function populateTable() {
 
 
 
+function populateTable() {
+
+  var tableArray = [];
+  tableArray.push(["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
+  tableArray.push(["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"]);
+
+  var orar = document.getElementById("orar");
+//populate header
+  var thead = document.createElement("thead");
+    var tr = document.createElement("tr");
+  for (var j = 0; j < 7; j++) {
+     var th = document.createElement("th");
+     var txt = document.createTextNode(tableArray[0][j]);
+     th.appendChild(txt);
+     tr.appendChild(th);
+  }
+  thead.appendChild(tr);
+  orar.appendChild(thead);
+//populate header
+
+//populate body
+  var tbody = document.createElement("tbody");
+  var lineIndex = 0;
+  for (var i = 1 ; i < tableArray[1].length; i++) {
+   var tr = document.createElement("tr");
+   for (var j = 0; j < tableArray[0].length; j++) {
+     var td = document.createElement("td");
+     var txt = document.createTextNode(tableArray[1][lineIndex]);
+     td.appendChild(txt);
+     tr.appendChild(td);
+    }
+  lineIndex++;
+  tbody.appendChild(tr);
+  orar.appendChild(tbody);
+  }
+//populate body
+};
+
+
+
 function postThisShit(json, callback) {
 
   debugger;
