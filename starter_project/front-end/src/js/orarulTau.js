@@ -16,7 +16,7 @@ const urlPost = `http://${hostName}/api/linked_constraints?token=${token}`;
 const urlDelete = `http://${hostName}/api/delete_constraints?token=${token}`;
 const urlDeleteLinked = `http://${hostName}/api/delete_linked_constraints?token=${token}`;
  
-require('./profPref.less');
+require('./../less/profPref.less');
 
 function postThisShit(json, callback) {
   $.ajax({

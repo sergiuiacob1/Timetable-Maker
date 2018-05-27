@@ -31,6 +31,7 @@ function populateTable() {
    var tr = document.createElement("tr");
    for (var j = 0; j < tableArray[0].length; j++) {
      var td = document.createElement("td");
+     td.className = "noColor";
      var txt = document.createTextNode(tableArray[1][lineIndex]);
      td.appendChild(txt);
      tr.appendChild(td);
@@ -238,11 +239,11 @@ function getGroupsShow(){
 };
 
 $(document).ready(function() {
+  populateTable();
   getSubjectsShow();
   getRoomsShow();
   getGroupsShow();
   addListeners();
-  populateTable();
 });
 
 function addListeners(){
