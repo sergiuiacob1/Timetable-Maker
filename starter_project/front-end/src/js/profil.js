@@ -13,7 +13,7 @@ $(document).ready(function(){
 	function apiChangeUserPasswordPost(data, callback){
 
 		// const urlPostChangePassword = `http://${hostName}/api/users/${data.id}/changepassword?token=${token}`;
-		const urlPostChangePassword = `http://${hostName}/api/users/14/changepassword?token=${token}`;
+		const urlPostChangePassword = `http://${hostName}/api/users/changepassword?token=${token}`;
 		console.log(data);
 
 		$(".loader-bck").show();
