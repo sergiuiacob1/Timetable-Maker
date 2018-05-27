@@ -1,6 +1,6 @@
 module.exports = (() => {
     'use strict';
-    const {getSubjects} = require('./subject_actions');
+    const {getSubjects, newSubject} = require('./subject_actions');
     
     const getSubjectsRoute = (req, res) => {
       getSubjects().then((subjects) => {
@@ -10,8 +10,18 @@ module.exports = (() => {
         res.json({success: false});
       });
     };
+
+    const addSubjectRoute = (req, res) => {
+      newSubject(req.body).then(() => {
+        res.json({success: true, message: "Added subject"});
+      }).catch((e) => {
+        console.log(e);
+        res.json({success: false});
+      });
+    };
   
     return {
-      getSubjectsRoute
+      getSubjectsRoute,
+      addSubjectRoute
     };
   })();

@@ -1,16 +1,14 @@
 {
-	subjectId, roomIds[], groupId, activity: 'Curs', frequency, date,
+	subjectId, roomIds[], groupId[], activity: 'Curs', date,
 	possibleIntervals: [
 		{
 			day: 0,
-			interval: '10-11'
+			interval: ['10 - 11', '11 - 12']
 		},
 		{
-			day: 0,
-			interval: '11-12'
+			day: 1,
+			interval: ['11 - 12']
 		}
 	]
 	important, motive
 }
-
-

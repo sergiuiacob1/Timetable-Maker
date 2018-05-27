@@ -1,11 +1,11 @@
 module.exports = (() => {
     'use strict';
   
-    const {getConstraints, addConstraint} = require('./constraints_actions.js');
+    const {getLinkedConstraints, addLinkedConstraint} = require('./linked_constraints_actions.js');
   
-    const getConstraintsRoute = (req, res) => {
+    const getLinkedConstraintsRoute = (req, res) => {
       const userId = req.decoded.user.id;
-      getConstraints({userId}).then((constraints) => {
+      getLinkedConstraints({userId}).then((constraints) => {
         console.log(constraints);
         res.json({success: true, constraints});
       }).catch((e) => {
@@ -15,11 +15,11 @@ module.exports = (() => {
 
     };
 
-    const newConstraintRoute = (req, res) => {
+    const newLinkedConstraintRoute = (req, res) => {
       const userId = req.decoded.user.id;
       req.body.userId = userId;
 
-      addConstraint(req.body).then(() => {
+      addLinkedConstraint(req.body).then(() => {
         res.json({success: true, message: "Added constraint"});
       }).catch((e) => {
         console.log(e);
@@ -28,7 +28,7 @@ module.exports = (() => {
     };
   
     return {
-      getConstraintsRoute,
-      newConstraintRoute
+      getLinkedConstraintsRoute,
+      newLinkedConstraintRoute
     };
   })();

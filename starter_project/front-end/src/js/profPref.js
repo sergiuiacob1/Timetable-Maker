@@ -1,34 +1,34 @@
-const hostName = 'localhost:2222';
+const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
-const urlPost = 'https://${hostName}/constraints?token=${token}';
+const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
 require('../less/profPref.less');
 
 function postThisShit(json, callback) {
 
-  alert(json);
-
-  $.post(urlPost, json, function (data) {
-    if (data.success === true) {
-      callback(true);    
-    }
-    else {
-      callback(false);
-    }
-  },'jsonp')
+  debugger;
+  $.ajax({
+    url: urlPost,
+    method: 'POST',
+    contentType: 'application/json',
+    data: json
+  }).done(function(res) {
+    console.log(res);
+    callback();
+  });
 };
 
-var groupId="", subjectId="", frequency="", activityType="", motive="", dateEntered="";
+var groupId=[], subjectId="", activityType="", motive="", dateEntered="";
 var hour = [];
 var days = [];
 var roomIds = [];
 var important = false;
+var timp = [];
 
 function reset(){
-   hour = [];
-   days = [];
-   roomIds = [];
-   important = false;
+   
+  //  location.reload();
+
 };
 function cSwap(){
   if(this.className == "noColor")
@@ -37,24 +37,24 @@ function cSwap(){
     this.className = "noColor";
 };
 
-function getSubject(selectedSubject){
-  subjectId = selectedSubject;
+function getSubject(){
+  subjectId = document.getElementById("materie").value;
 };
 
-function getGroup(selectedGroup){
-  groupId = selectedGroup;
+function getGroup(){
+  
+    $('#grupa input[type=checkbox]:checked').each(function(index, value) {
+        groupId.push($(this).attr("value") * 1);
+    });
 };
 
-function getFrequency(selectedFrequency){
-  frequency = selectedFrequency;
+function getActivity(){
+  activityType = document.getElementById("activitate").value;
 };
-function getActivity(selectedActivity){
-  activityType = selectedActivity;
-};
-function setImportant(value){
-  if (!important)
-    important = true;
-  else important = false;
+
+function getImportant(){
+  var checkbox = document.getElementById("switch1");
+  important = checkbox.checked;    
 };
 
 function getText(){
@@ -68,13 +68,41 @@ function getDate(){
 
 function getTime(){
   var table = document.getElementById("orar");
-  
-  for (var i = 0, row; row = table.rows[i]; i++) 
-     for (var j = 0, col; col = row.cells[j]; j++) 
-       if(col.className == "redColor"){
-         hour.push(col.innerHTML);
-         days.push(($(col).parent().children().index($(col))+1) %7);
-       } 
+ // var timp=[];
+  var luni=[],marti=[],miercuri=[],joi=[],vineri=[],sambata=[],duminica=[];
+  for(var i=0,row; row=table.rows[i];i++)
+    for(var j=0, col;col=row.cells[j];j++)
+      {if(col.className == "redColor"){
+        if(j==0)
+          luni.push(col.innerHTML);
+          else
+          if(j==1)
+            marti.push(col.innerHTML);
+            else
+            if(j==2)
+              miercuri.push(col.innerHTML);
+              else
+              if(j==3)
+                joi.push(col.innerHTML);
+                else
+                if(j==4)
+                  vineri.push(col.innerHTML);
+                  else
+                  if(j==5)
+                    sambata.push(col.innerHTML);
+                    else
+                    if(j==6)
+                      duminica.push(col.innerHTML);
+          }
+                      
+      }
+      timp.push(luni);
+      timp.push(marti);
+      timp.push(miercuri);
+      timp.push(joi);
+      timp.push(vineri);
+      timp.push(sambata);
+      timp.push(duminica);
 };
 
 function getRooms(){
@@ -83,39 +111,41 @@ function getRooms(){
   for (var i = 0, row; row = table.rows[i]; i++) 
      for (var j = 0, col; col = row.cells[j]; j++) 
        if(col.className == "redColor"){
-         roomIds.push(col.innerHTML);
+        //  console.log(col);
+        //  debugger;
+         roomIds.push($(col).attr('data-id') * 1);
        } 
 };
 
 function send(){
-  getText();
+
+  getActivity();
+  getSubject();
+  getGroup();
   getDate();
+  getImportant();
+  getText();
   getTime();
   getRooms();
   
-  if (important && (motive==""))
+  if (important && motive==""){
     alert("Va rugam introduceti un motiv(bun) pentru care orele si salile selectate nu sunt flexibile!");
-  else
-  if ((frequency === 0) && (dateEntered == ""))
-   alert("Va rugam introduceti o data!");
+    reset();
+  }
   else{
     var object = {};
     object["subjectId"] = subjectId;
     object["roomIds"] = roomIds;
-    object["groupId"] = groupId;
+    object["groupIds"] = groupId;
     object["activity"] = activityType;
-    object["frequency"] = frequency;
     object["date"] = dateEntered;
-    object["possibleIntervals"] = {days, hour};
+    object["possibleIntervals"] = [{"days":"1", "intervals":timp[0]}, {"days":"2", "intervals":timp[1]}, {"days":"3", "intervals":timp[2]}, {"days":"4", "intervals":timp[3]}, {"days":"5", "intervals":timp[4]}, {"days":"6", "intervals":timp[5]}, {"days":"0", "intervals":timp[6]}];
     object["important"] = important;
     object["motive"]= motive;
     var json = JSON.stringify(object);
     
     postThisShit(json, function(response){
-      alert(response);
-      if(response === true)
-        alert("Optiune adaugata!");
-      else alert("Optiunea nu s-a adaugat. Va rugam reincercati.");
+		location.reload();
     });
     
     reset();
@@ -139,42 +169,42 @@ function openTab(tabName) {
 
 
 function getSubjectsShow(){
-	var url = 'http://0.0.0.0:2222/api/subjects?token=' + token;
-	$.get(`${url}`).done(function (result){
-		for(var i=0;i<result.subjects.length;i++){
-			$("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
-			
-		}
-	});
+  var url = 'http://'+hostName+'/api/subjects?token=' + token;
+  $.get(`${url}`).done(function (result){
+    for(var i=0;i<result.subjects.length;i++){
+      $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
+      
+    }
+  });
 };
 
 
 function getRoomsShow(){
-	var url = 'http://0.0.0.0:2222/api/rooms?token=' + token;
-	var pos;
-	$.get(`${url}`).done(function(result){
-		for(var i=0;i<result.rooms.length;i++){
+  var url = 'http://'+hostName+'/api/rooms?token=' + token;
+  var pos;
+  $.get(`${url}`).done(function(result){
+    for(var i=0;i<result.rooms.length;i++){
       pos = Math.ceil((i+1)/3);
-			if(i%3 == 0)
-				$('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
-      $("#tr"+pos).append('<td class="noColor">'+result.rooms[i].name+'</td>');
+      if(i%3 == 0)
+        $('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
+      $("#tr"+pos).append(`<td data-id=${result.rooms[i].id} class="noColor">`+result.rooms[i].name+'</td>');
       addListeners();
-		}
+    }
   });
 };
 
 function getGroupsShow(){
-	var url = 'http://0.0.0.0:2222/api/groups?token=' + token;
-	$.get(`${url}`).done(function(result){
-		for(var i=0;i<result.groups.length;i++){
-			$("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
-		}
-	});
+  var url = 'http://'+hostName+'/api/groups?token=' + token;
+  $.get(`${url}`).done(function(result){
+    for(var i=0;i<result.groups.length;i++){
+      $("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
+    }
+  });
 };
 
 $(document).ready(function() {
-	getSubjectsShow();
-	getRoomsShow();
+  getSubjectsShow();
+  getRoomsShow();
   getGroupsShow();
   addListeners();
 });
