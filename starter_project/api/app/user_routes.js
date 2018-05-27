@@ -303,29 +303,40 @@ module.exports = (() => {
       console.log(user)
       if (typeof user != 'undefined' && user) {
 
-        if (!req.body.new_password)
-          res.json({
-            success: false,
-            message: 'please give a new password'
-          });
+          if (req.body.old_password != user.password) {
+              res.json({
+                  success: false,
+                  message: 'Authentication failed. invalid password'
+              });
+          }
+          else {
+              if (!req.body.new_password)
+                  res.json({
+                      success: false,
+                      message: 'please give a new password'
+                  });
+              else {
+                  if (req.body.new_password.length < 6)
+                      res.json({
+                          success: false,
+                          message: 'password is too short'
+                      });
+                  else {
+                      const updateSet = {
+                          id: id,
+                          new_password: req.body.new_password
+                      };
+                      updatePassword(updateSet);
 
-        if (req.body.new_password.length < 6)
-          res.json({
-            success: false,
-            message: 'password is too short'
-          });
+                      console.log('Update:' + id);
+                      res.json({
+                          success: true,
+                          message: 'user update'
+                      });
+                  }
 
-        const updateSet = {
-          id: id,
-          new_password: req.body.new_password
-        };
-        updatePassword(updateSet);
-
-        console.log('Update:' + id);
-        res.json({
-          success: true,
-          message: 'user update'
-        });
+              }
+          }
       } else {
         res.json({
           success: false,
