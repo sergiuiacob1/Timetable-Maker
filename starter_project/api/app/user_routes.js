@@ -35,13 +35,13 @@ module.exports = (() => {
         console.log('Wrong password!')
       res.json({
         success: false,
-        message: 'Wrong password'
+          message: 'Parola incorecta'
       });
     }).catch((e) => {
       console.log(e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       });
     })
   };
@@ -60,7 +60,7 @@ module.exports = (() => {
       console.log(e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       });
     })
   };
@@ -89,7 +89,7 @@ module.exports = (() => {
       console.log(e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       });
     });
   };
@@ -111,7 +111,7 @@ module.exports = (() => {
         console.log(e);
         res.json({
           success: false,
-          message: e
+            message: 'A aparut o eroare. Incercati mai tarziu'
         });
       });
   };
@@ -124,19 +124,19 @@ module.exports = (() => {
     if (body.mail === undefined) {
       res.json({
         success: false,
-        message: "Cannot insert user without an email."
+          message: "Email invalid"
       })
     }
       if (body.id_subjects === undefined) {
           res.json({
               success: false,
-              message: "Cannot insert user without subjects"
+              message: "Trebuie adaugata cel putin o materie"
           })
       }
       else if (body.id_subjects.length == 0) {
           res.json({
               success: false,
-              message: "Cannot insert user without subjects"
+              message: "Trebuie adaugata cel putin o materie"
           })
       }
       console.log(body.password);
@@ -162,7 +162,7 @@ module.exports = (() => {
 
         res.json({
           success: true,
-          message: 'user insert'
+            message: 'Utilizator inregistrat cu succes'
         });
       });
 
@@ -172,7 +172,7 @@ module.exports = (() => {
       console.log("eroarea e", e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       })
     });
   };
@@ -197,7 +197,7 @@ module.exports = (() => {
       if (isNaN(id)) {
           res.json({
               success: false,
-              message: 'user doesnt exist'
+              message: 'Utilizatorul nu exista'
           });
       }
 
@@ -225,7 +225,7 @@ module.exports = (() => {
         console.log("eroarea la delete e", e);
         res.json({
           success: false,
-          message: e
+            message: 'A aparut o eroare. Incercati mai tarziu'
         })
         return;
       });
@@ -239,7 +239,7 @@ module.exports = (() => {
       console.log("eroarea e", e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       })
     })
   };
@@ -261,33 +261,33 @@ module.exports = (() => {
         console.log('Password reset:' + id);
         res.json({
           success: true,
-          message: 'password reset'
+            message: 'Parola a fost resetata cu succes'
         });
       } else {
         console.log('Failed password reset');
         res.json({
           success: false,
-          message: 'invalid user id'
+            message: 'Utilizatorul nu exista'
         });
       }
     });
   };
 
     const userResetPasswordRoute = (req, res) => {
-        const id = req.params.id;
+        const id = req.decoded.user.id;
 
         getUser({id}).then((user) => {
             if (user != 'undefined' && user) {
                 updatePassword({id: id, new_password: makePassword()});
                 res.json({
                     success: true,
-                    message: 'Password reset'
+                    message: 'Parola a fost resetata cu succes'
                 });
             }
             else {
                 res.json({
                     success: false,
-                    message: 'Invalid user id'
+                    message: 'Utilizatorul nu exista'
                 });
             }
         })
@@ -296,7 +296,7 @@ module.exports = (() => {
   const changePasswordRoute = (req, res) => {
 
     // params: id
-    const id = req.params.id;
+      const id = req.decoded.user.id
     getUser({
       id
     }).then((user) => {
@@ -306,20 +306,20 @@ module.exports = (() => {
           if (req.body.old_password != user.password) {
               res.json({
                   success: false,
-                  message: 'Authentication failed. invalid password'
+                  message: 'Autentificare esuata: parola incorecta'
               });
           }
           else {
               if (!req.body.new_password)
                   res.json({
                       success: false,
-                      message: 'please give a new password'
+                      message: 'Va rugam introduceti o noua parola'
                   });
               else {
                   if (req.body.new_password.length < 6)
                       res.json({
                           success: false,
-                          message: 'password is too short'
+                          message: 'Parola aleasa este prea scurta'
                       });
                   else {
                       const updateSet = {
@@ -331,7 +331,7 @@ module.exports = (() => {
                       console.log('Update:' + id);
                       res.json({
                           success: true,
-                          message: 'user update'
+                          message: 'Parola a fost schimbata cu succes'
                       });
                   }
 
@@ -340,7 +340,7 @@ module.exports = (() => {
       } else {
         res.json({
           success: false,
-          message: 'invalid user id'
+            message: 'Utilizatorul nu exista'
         });
       }
 
@@ -357,13 +357,13 @@ module.exports = (() => {
         console.log('User delete :' + id);
       res.json({
         success: true,
-        message: 'user deleted'
+          message: 'Utilizatorul a fost sters cu succes'
       });
     }).catch((e) => {
       console.log("eroarea e", e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       })
     });
 
@@ -372,13 +372,13 @@ module.exports = (() => {
     }).then(() => {
       res.json({
         success: true,
-        message: 'subject deleted'
+          message: 'Materia a fost scoasa cu succes'
       });
     }).catch((e) => {
       console.log("eroarea e", e);
       res.json({
         success: false,
-        message: e
+          message: 'A aparut o eroare. Incercati mai tarziu'
       })
     });
     console.log('Delete:' + id);
