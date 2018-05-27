@@ -24,9 +24,10 @@ public abstract class WebPage {
         PageFactory.initElements(driver,this);
     }
 
-    public boolean IsThisElementDisplayed(WebElement element) {
+    public static boolean IsThisElementDisplayed(WebElement element) {
         return element.isDisplayed();
     }
+    public static boolean isThisElementEnabled(WebElement element) { return element.isEnabled(); }
 
     //Cu aceasta functie vom face verificarea ca o pagina WEB s-a si deschid intr-adevar atunci cand ne-am asteptat. Pentru acesta, comparam titlul paginii la care ne asteptam cu
     //cel al paginii deschise la momentul curent de catre Selenium.
