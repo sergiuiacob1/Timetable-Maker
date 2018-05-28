@@ -9,16 +9,19 @@ module.exports = (() => {
     class Subject extends ApplicationRecord {
       constructor() {
         console.log(Extension);
-        super(Extension, "subjects");
+        super(Extension, "subjects", "teacher_subject_map", "subjects.id = teacher_subject_map.id_subject");
       }
   
       where({
-        id
+        id, userId
       }) {
         let whereClause = squel.expr();
   
         if (id) {
           whereClause = whereClause.and("id = ?", id);
+        }
+        if (userId) {
+          whereClause = whereClause.and('id_user = ?', userId)
         }
         this.query = this.query.where(whereClause);
         return this;
