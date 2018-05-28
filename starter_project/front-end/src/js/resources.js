@@ -73,7 +73,7 @@ $(document).ready(() => {
         capacityContainer.appendChild(capacityImg);
         capacityContainer.appendChild(capacity);
 
-        document.getElementsByClassName("container")[0].appendChild(body);
+        document.getElementsByClassName("container-resurse")[0].appendChild(body);
 
         return body;
     }
