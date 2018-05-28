@@ -233,7 +233,7 @@ module.exports = (() => {
     }).then(() => {
         res.json({
             success: true,
-            message: 'user updated'
+            message: 'Utilizatorul a fost actualizat cu succes'
         });
     }).catch((e) => {
       console.log("eroarea e", e);

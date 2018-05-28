@@ -14,7 +14,7 @@ module.exports = (() => {
         console.log('decoded');
         console.log(decoded);
         if (err) {
-          return res.json({ success: false, message: 'Failed to authenticate token.' });
+            return res.json({success: false, message: 'Token invalid'});
         } else {
           req.decoded = decoded;
           next();
@@ -24,7 +24,7 @@ module.exports = (() => {
     } else {
       return res.status(403).send({
         success: false,
-        message: 'No token provided.'
+          message: 'Nu exista un token'
       });
     }
   };
@@ -36,10 +36,10 @@ module.exports = (() => {
         if (user.is_admin == 1) {
           next();
       } else {
-        return res.json({succes: false, message: '403 Forbidden'});
+            return res.json({succes: false, message: '403 Interzis'});
       }
     }).catch((e) => {
-      return res.status(403).send({success: false, message: '403 Forbidden'});
+        return res.status(403).send({success: false, message: '403 Interzis'});
     });
   };
 
@@ -61,7 +61,7 @@ module.exports = (() => {
         });
       }
       else {
-          res.json({success: false, message: 'Authentication failed. Invalid user or password combination'});
+          res.json({success: false, message: 'Autentificare esuata. Utilizator/parola invalida'});
       }
     }).catch((e) => {
       console.log(e);
