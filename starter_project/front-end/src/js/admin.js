@@ -609,7 +609,9 @@ $(document).ready(function(){
 
 		if (linkId === "data-export"){
 			console.log("data-exportadasda de aici");
-			$(location).attr('href', "");
+			const urlExport = `http://${hostName}/api/export/?token=${token}`;
+			//$(location).attr('href', urlExport);
+			window.open(urlExport, '_blank');
 			return;
 		}
 
