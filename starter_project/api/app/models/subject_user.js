@@ -6,10 +6,10 @@ module.exports = (() => {
     const { Extension } = require('./../../config/pools.js');
     const ApplicationRecord = require('./application_record.js');
   
-    class Subject extends ApplicationRecord {
+    class SubjectUser extends ApplicationRecord {
       constructor() {
         console.log(Extension);
-        super(Extension, "subjects");
+        super(Extension, "subjects", "teacher_subject_map", "subjects.id = teacher_subject_map.id_subject");
       }
   
       where({
@@ -28,6 +28,6 @@ module.exports = (() => {
       }
     }
   
-    return Subject;
+    return SubjectUser;
   })();
   

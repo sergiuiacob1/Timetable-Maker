@@ -30,7 +30,7 @@ $(document).ready(function(){
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
 	const urlGetUsers= `http://${hostName}/api/admin/users?token=${token}`;
 	
-	const  urlGetSubjects = `http://${hostName}/api/subjects?token=${token}`;
+	const  urlGetSubjects = `http://${hostName}/api/all_subjects?token=${token}`;
 	// const dummyUsers = require('./dummyUsers.json'); 
 	// const dummySubjects = require('./dummySubjects.json');
 
@@ -187,7 +187,7 @@ $(document).ready(function(){
 			  callback(true);
 			}
 			else {
-			  if (data.message === "403 Forbidden"){
+			  if (data.message === "403 Interzis"){
 			  	$("body div").remove();
 			  	$("body").append(`<div class="forbidden">${data.message}</div>`)
 			  }

@@ -140,7 +140,7 @@ module.exports = (() => {
           })
       }
       console.log(body.password);
-    // Mail.sendMail(body.mail,'[TimetableMaker] Your user has been created','Password :' + body.password);
+      Mail.sendMail(body.mail, '[TimetableMaker] Your user has been created', 'Password :' + body.password);
     newUser(body).then((result) => {
 
       getUser({
@@ -256,7 +256,7 @@ module.exports = (() => {
           new_password: makePassword()
         };
         updatePassword(updateSet);
-          //Mail.sendResetPasswordMail({mail:user.mail,password:user.password})
+          Mail.sendResetPasswordMail({mail: user.mail, password: user.password})
 
         console.log('Password reset:' + id);
         res.json({
