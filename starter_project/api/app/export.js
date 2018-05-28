@@ -1,10 +1,11 @@
 module.exports = (() => {
     'use strict';
 
-    const {getGroups}   = require('./group_actions');
-    const {getRooms}    = require('./room_actions');
-    const {getUsers}    = require('./user_actions.js');
-    const {getSubjects} = require('./subject_actions.js');
+    const {getGroups}       = require('./group_actions');
+    const {getRooms}        = require('./room_actions');
+    const {getUsers}        = require('./user_actions.js');
+    const {getSubjects}     = require('./subject_actions.js');
+    const {getConstraints}  = require('./constraints_actions.js');
 
     var result = {
         csvStr : ""
@@ -62,12 +63,38 @@ module.exports = (() => {
     }
 
     function sendCsv(res) {
-        // res.setHeader('Content-type', "application/force-download");
-        // res.setHeader('Content-disposition', 
-        //               'attachment;filename=db_export.csv');
+        res.setHeader('Content-type', "application/force-download");
+        res.setHeader('Content-disposition', 'attachment; filename=db_export.csv');
 
         res.send( result.csvStr );
     }
+
+    // function gatherConstraints(roups, rooms, users, subjects) {
+        
+    //     let promiseArray = new Array();
+
+    //     for(var i = 0; i < users.length; ++i) {
+    //         console.log(users[i]["id"]);
+    //         var id = users[i]["id"];
+    //         promiseArray.push(new Promise( () => {
+    //             getConstraints({id}).then((constraints) => {
+    //                 // return constraints;
+    //             }).catch((e) => {
+    //                 console.log(e);
+    //             });
+    //         } ));
+    //     }
+
+    //     console.log(promiseArray);
+
+    //     Promise.all(promiseArray).then((values) => {
+    //         console.log("why")
+    //         console.log(values);
+    //     }).catch((e) => {
+    //         console.log(e);
+    //     });
+
+    // }
 
     const exportDb = (req, res) => {
         getGroups().then((groups) => {
@@ -79,8 +106,7 @@ module.exports = (() => {
                     getSubjects().then((subjects) => {
                         
                         buildCSV(groups, rooms, users, subjects);
-
-
+                        // gatherConstraints(groups, rooms, users, subjects);
                         sendCsv(res);
 
                     }).catch((e) => {
