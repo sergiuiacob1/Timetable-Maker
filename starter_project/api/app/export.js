@@ -74,17 +74,45 @@ module.exports = (() => {
     function getIdentifier(dbRes, nameKey, idKey, id) {
 
         for(var i = 0; i < dbRes.length; ++i) {
-            if(dbRes[idKey] === id)
+
+            if(dbRes[i][idKey] === id)
             {
-                return dbRes[idKey][nameKey];
+                return dbRes[i][nameKey];
             }
         }
 
         return "";
     }
 
-    function buildConstraints(groups, rooms, users, subjects) {
-        addSection("Constrangeri", ["user", "subiect", "data", "frecventa"]);
+    function extractDataArray(arr, dbResp, nameKey, idKey){
+        var obj = JSON.parse(arr);
+        var str = '';
+        for(var it = 0; it < obj.length; ++it) {
+            str += getIdentifier(dbResp, nameKey, idKey, obj[it]);
+            if(it < obj.length -1)
+            {
+                str += ' ';
+            }
+        }
+        return str;
+    }
+
+    function buildConstraints(groups, rooms, users, subjects, constraints) {
+        addSection("Constrangeri", ["user", "subiect", "sali", "grupe", "intervale posibile"]);
+
+        for(var i = 0; i < constraints.length; ++i) {
+            addField(result, getIdentifier(users, "fullName", "id", constraints[i]["user_id"]));
+            addField(result, getIdentifier(subjects, "name", "id", constraints[i]["subject_id"]));
+
+            addField(result, extractDataArray(constraints[i]["room_ids"], rooms, "name", "id"));
+            addField(result, extractDataArray(constraints[i]["group_ids"], groups, "name", "id"));
+
+            addField(result, constraints[i]["possible_intervals"]);
+
+            endFieldLine(result);
+        }
+
+
     }
 
     const exportDb = (req, res) => {
