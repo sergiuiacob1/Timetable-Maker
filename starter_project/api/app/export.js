@@ -25,7 +25,6 @@ module.exports = (() => {
     function addSection(name, arr) {
         addField(result, name);
         endFieldLine(result);
-        endFieldLine(result);
 
         for(var i = 0; i < arr.length; i++)
         {
@@ -45,20 +44,19 @@ module.exports = (() => {
             endFieldLine(result);
         }
         endFieldLine(result);
-        endFieldLine(result);
     }
 
     function buildCSV(groups, rooms, users, subjects, constraints) {
-        addSection("Grupe", ["nume", "capacitate"]);
+        addSection("GRUPE", ["nume", "capacitate"]);
         addDataFromDb(groups, ["name", "number"]);
 
-        addSection("Sali", ["id", "nume", "capacitate"]);
+        addSection("SALI", ["id", "nume", "capacitate"]);
         addDataFromDb(rooms, ["id", "name", "capacity"]);
 
-        addSection("Utilizatori", ["nume", "user", "e-mail"]);
-        addDataFromDb(users, ["name", "userName", "mail"]);
+        addSection("UTILIZATORI", ["nume", "user", "e-mail"]);
+        addDataFromDb(users, ["fullName", "userName", "mail"]);
 
-        addSection("Subiecte", ["nume", "prescurtare", "data", "frecventa"]);
+        addSection("SUBIECTE", ["nume", "prescurtare", "data", "frecventa"]);
         addDataFromDb(subjects, ["name", "short", "date", "frequency"]);
 
         buildConstraints(groups, rooms, users, subjects, constraints);
@@ -98,21 +96,25 @@ module.exports = (() => {
     }
 
     function buildConstraints(groups, rooms, users, subjects, constraints) {
-        addSection("Constrangeri", ["user", "subiect", "sali", "grupe", "intervale posibile"]);
+        addSection("CONSTRANGERI", ["user", "subiect", "sali", "grupe", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
 
         for(var i = 0; i < constraints.length; ++i) {
+            
+            var obj = JSON.parse(constraints[i]["possible_intervals"]);
+            console.log(obj);
+            
             addField(result, getIdentifier(users, "fullName", "id", constraints[i]["user_id"]));
             addField(result, getIdentifier(subjects, "name", "id", constraints[i]["subject_id"]));
 
             addField(result, extractDataArray(constraints[i]["room_ids"], rooms, "name", "id"));
             addField(result, extractDataArray(constraints[i]["group_ids"], groups, "name", "id"));
 
-            addField(result, constraints[i]["possible_intervals"]);
+            for(var it = 0; it < obj.length; ++it) {
+                addField(result, obj[it]["intervals"]); 
+            }
 
             endFieldLine(result);
         }
-
-
     }
 
     const exportDb = (req, res) => {
