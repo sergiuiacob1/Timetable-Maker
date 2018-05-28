@@ -1,9 +1,19 @@
 module.exports = (() => {
     'use strict';
-    const {getSubjects, newSubject} = require('./subject_actions');
+    const {getSubjects, getUserSubjects, newSubject} = require('./subject_actions');
+
+
+    const getAllSubjectsRoute = (req, res) => {
+      getSubjects().then((subjects) => {
+        res.json({success: true, subjects});
+      }).catch((e) => {
+        console.log(e);
+        res.json({success: false});
+      });
+    };
     
     const getSubjectsRoute = (req, res) => {
-      getSubjects({userId: req.decoded.user.id}).then((subjects) => {
+      getUserSubjects(req.decoded.user.id).then((subjects) => {
         res.json({success: true, subjects});
       }).catch((e) => {
         console.log(e);
@@ -22,6 +32,7 @@ module.exports = (() => {
   
     return {
       getSubjectsRoute,
+      getAllSubjectsRoute,
       addSubjectRoute
     };
   })();
