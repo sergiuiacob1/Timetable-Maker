@@ -3,7 +3,7 @@ module.exports = (() => {
     const {getSubjects, newSubject} = require('./subject_actions');
     
     const getSubjectsRoute = (req, res) => {
-      getSubjects().then((subjects) => {
+      getSubjects({userId: req.decoded.user.id}).then((subjects) => {
         res.json({success: true, subjects});
       }).catch((e) => {
         console.log(e);

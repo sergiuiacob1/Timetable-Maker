@@ -27,7 +27,17 @@ module.exports = (() => {
       }
     };
 
-    const getSubjects = () => {
+    const getSubjects = ({userId}) => {
+      console.log(userId);
+      if (userId) {
+        return new Subject()
+          .field('*')
+          .where({userId})
+          .valueOf()
+          .then((res) => {
+            return res;
+          });
+      }
       return new Subject()
         .field('*')
         .valueOf()
