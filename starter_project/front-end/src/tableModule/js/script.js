@@ -1,29 +1,76 @@
-
+var Constrangeri={ "Constrangeri":[
+     {
+         "data_start":"8:00",
+         "data_end":"10:00",
+         "zi":"Luni",
+         "nume_event":"Curs IP",
+         "nume_prof":"Adrian Iftene",
+         "sala_event":"C112"
+     },
+     {
+        "data_start":"8:00",
+        "data_end":"10:00",
+        "zi":"Luni",
+        "nume_event":"Curs ACSO",
+        "nume_prof":"Vlad Radulescu",
+        "sala_event":"C112"
+    },
+    {
+        "data_start":"8:00",
+        "data_end":"10:00",
+        "zi":"Luni",
+        "nume_event":"Curs Matlab",
+        "nume_prof":"Florin Iacob",
+        "sala_event":"C112"
+    },
+    {
+        "data_start":"11:00",
+        "data_end":"13:00",
+        "zi":"Joi",
+        "nume_event":"Curs Algoritmi Genetici",
+        "sala_event":"C2",
+        "nume_prof":"Breaban Mihalea"
+    },
+    {
+        "data_start":"11:00",
+        "data_end":"13:00",
+        "zi":"Joi",
+        "nume_event":"Curs Probabilitati si Statistica",
+        "sala_event":"C2",
+        "nume_prof":"Olariu E. Florentin"
+    }
+]   
+};
 
 var Luni = { "Luni":[
     {
         "data_start":"8:00",
         "data_end":"10:00",
+        "sala_event":"C413",
         "nume_event":"Curs Logica"
     },
     {
         "data_start":"10:00",
         "data_end":"12:00",
+        "sala_event":"C412",
         "nume_event":"Curs IP"
     },
     {
         "data_start":"13:00",
         "data_end":"15:00",
+        "sala_event":"C411",
         "nume_event":"Seminar ACSO"
     },
     {
         "data_start":"16:00",
         "data_end":"17:30",
+        "sala_event":"C905",
         "nume_event":"Seminar Engleza"
     },
     {
         "data_start":"18:00",
         "data_end":"20:00",
+        "sala_event":"C907",
         "nume_event":"Seminar Matematica"
     }
     ]
@@ -33,27 +80,32 @@ var Marti = { "Marti":[
     {
         "data_start":"9:00",
         "data_end":"11:00",
+        "sala_event":"C114",
         "nume_event":"Curs IP"
     },
     {
         "data_start":"13:00",
         "data_end":"15:00",
+        "sala_event":"C2",
         "nume_event":"Curs Mate"
     },
     {
         "data_start":"16:00",
         "data_end":"18:00",
+        "sala_event":"C401",
         "nume_event":"Seminar AG"
     },
     {
         "data_start":"18:00",
-        "data_end":"18:30",
+        "data_end":"19:30",
+        "sala_event":"C409",
         "nume_event":"Seminar RN"
     },
     {
         "data_start":"19:00",
         "data_end":"20:00",
-        "nume_event":"Seminar Retele de Calculatoare"
+        "sala_event":"C309",
+        "nume_event":"Seminar ACSO"
     }
     ]
 }; 
@@ -62,26 +114,31 @@ var Miercuri = { "Miercuri":[
     {
         "data_start":"8:00",
         "data_end":"10:00",
-        "nume_event":"Curs Logica"
+        "sala_event":"C2",
+        "nume_event":"Curs Baze de date"
     },
     {
         "data_start":"10:00",
         "data_end":"12:00",
+        "sala_event":"C112",
         "nume_event":"Curs IP"
     },
     {
         "data_start":"13:00",
-        "data_end":"15:00",
-        "nume_event":"Seminar ACSO"
+        "data_end":"16:00",
+        "sala_event":"C413",
+        "nume_event":"Seminar IC"
     },
     {
         "data_start":"16:00",
         "data_end":"17:30",
+        "sala_event":"C907",
         "nume_event":"Seminar Engleza"
     },
     {
         "data_start":"18:00",
         "data_end":"20:00",
+        "sala_event":"C507",
         "nume_event":"Seminar Matematica"
     }
     ]
@@ -91,27 +148,32 @@ var Joi = { "Joi":[
     {
         "data_start":"8:00",
         "data_end":"10:00",
+        "sala_event":"C309",
         "nume_event":"Curs Logica"
     },
     {
         "data_start":"10:00",
         "data_end":"12:00",
+        "sala_event":"C411",
         "nume_event":"Curs IP"
     },
     {
         "data_start":"13:00",
         "data_end":"15:00",
-        "nume_event":"Seminar ACSO"
+        "sala_event":"C409",
+        "nume_event":"Seminar Data Mining"
     },
     {
         "data_start":"16:00",
         "data_end":"17:30",
-        "nume_event":"Seminar Engleza"
+        "sala_event":"C210",
+        "nume_event":"Seminar Grafica pe calculator"
     },
     {
         "data_start":"18:00",
         "data_end":"20:00",
-        "nume_event":"Seminar Matematica"
+        "sala_event":"C403",
+        "nume_event":"Seminar Didactica Informaticii"
     }
     ]
 }; 
@@ -120,26 +182,31 @@ var Vineri = { "Vineri":[
     {
         "data_start":"8:00",
         "data_end":"10:00",
-        "nume_event":"Curs Logica"
+        "sala_event":"C112",
+        "nume_event":"Curs Matlab"
     },
     {
         "data_start":"10:00",
         "data_end":"12:00",
-        "nume_event":"Curs IP"
+        "sala_event":"C403",
+        "nume_event":"Curs Practica SGBD"
     },
     {
         "data_start":"13:00",
         "data_end":"15:00",
-        "nume_event":"Seminar ACSO"
+        "sala_event":"C112",
+        "nume_event":"Seminar Cloud Computing"
     },
     {
         "data_start":"16:00",
         "data_end":"17:30",
+        "sala_event":"C907",
         "nume_event":"Seminar Engleza"
     },
     {
         "data_start":"18:00",
         "data_end":"20:00",
+        "sala_event":"C907",
         "nume_event":"Seminar Matematica"
     }
     ]
@@ -157,7 +224,10 @@ setTimeout(function(){
                  data-content=${seminar.nume_event}
              >
                 <a href="#0">
-                    <em class="event-name">${seminar.nume_event}</em>
+                    <em class="event-name">
+                    ${seminar.nume_event}<br>
+                    ${seminar.sala_event}                                            
+                    </em>
                 </a>
             </li>
         `);
@@ -172,7 +242,10 @@ setTimeout(function(){
                  data-content=${seminar.nume_event}
              >
                 <a href="#0">
-                    <em class="event-name">${seminar.nume_event}</em>
+                <em class="event-name">
+                ${seminar.nume_event}<br>
+                ${seminar.sala_event}                                            
+                </em>
                 </a>
             </li>
         `);
@@ -187,7 +260,10 @@ setTimeout(function(){
                  data-content=${seminar.nume_event}
              >
                 <a href="#0">
-                    <em class="event-name">${seminar.nume_event}</em>
+                <em class="event-name">
+                ${seminar.nume_event}<br>
+                ${seminar.sala_event}                                            
+                </em>
                 </a>
             </li>
         `);
@@ -202,7 +278,10 @@ setTimeout(function(){
                  data-content=${seminar.nume_event}
              >
                 <a href="#0">
-                    <em class="event-name">${seminar.nume_event}</em>
+                <em class="event-name">
+                ${seminar.nume_event}<br>
+                ${seminar.sala_event}                                            
+                </em>
                 </a>
             </li>
         `);
@@ -217,11 +296,31 @@ setTimeout(function(){
                  data-content=${seminar.nume_event}
              >
                 <a href="#0">
-                    <em class="event-name">${seminar.nume_event}</em>
+                <em class="event-name">
+                ${seminar.nume_event}<br>
+                ${seminar.sala_event}                                            
+                </em>
                 </a>
             </li>
         `);
     })
+    //--------------------------------------------Script for table generation-------------------------------------------
+
+
+    Constrangeri.Constrangeri.map((i, index)=>{
+        $('.conflicts').append(`
+            <tr>
+            <td>${i.zi}</td>
+            <td>${i.data_start}-${i.data_end}</td>
+            <td>${i.sala_event}</td>
+            <td>${i.nume_event}</td>
+            <td>${i.nume_prof}</td>
+            <td><button class="button" onclick="location.href='www.orarfinal.ro'" type="button" >Alegere profesor</button></td>
+            </tr>
+          
+        `);
+    })
+
 
     mainJs();
 },1000);
@@ -610,24 +709,5 @@ function mainJs(){
         });
     }
 }
-//--------------------------------------------Script for dropdown table--------------------------------------------
 
-function DropDownConstrangeri() {
-    document.getElementById("myDropdown").classList.toggle("show");
-    }
-
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-    openDropdown.classList.remove('show');
-    }
-    }
-    }
-    }
     
