@@ -5,7 +5,7 @@ module.exports = (() => {
     const {getRooms}        = require('./room_actions');
     const {getUsers}        = require('./user_actions.js');
     const {getSubjects}     = require('./subject_actions.js');
-    const {getConstraints}  = require('./constraints_actions.js');
+    const {getAllConstraints}  = require('./constraints_actions.js');
 
     var result = {
         csvStr : ""
@@ -48,7 +48,7 @@ module.exports = (() => {
         endFieldLine(result);
     }
 
-    function buildCSV(groups, rooms, users, subjects) {
+    function buildCSV(groups, rooms, users, subjects, constraints) {
         addSection("Grupe", ["nume", "capacitate"]);
         addDataFromDb(groups, ["name", "number"]);
 
@@ -60,6 +60,8 @@ module.exports = (() => {
 
         addSection("Subiecte", ["nume", "prescurtare", "data", "frecventa"]);
         addDataFromDb(subjects, ["name", "short", "date", "frequency"]);
+
+        buildConstraints(groups, rooms, users, subjects, constraints);
     }
 
     function sendCsv(res) {
@@ -69,32 +71,21 @@ module.exports = (() => {
         res.send( result.csvStr );
     }
 
-    // function gatherConstraints(roups, rooms, users, subjects) {
-        
-    //     let promiseArray = new Array();
+    function getIdentifier(dbRes, nameKey, idKey, id) {
 
-    //     for(var i = 0; i < users.length; ++i) {
-    //         console.log(users[i]["id"]);
-    //         var id = users[i]["id"];
-    //         promiseArray.push(new Promise( () => {
-    //             getConstraints({id}).then((constraints) => {
-    //                 // return constraints;
-    //             }).catch((e) => {
-    //                 console.log(e);
-    //             });
-    //         } ));
-    //     }
+        for(var i = 0; i < dbRes.length; ++i) {
+            if(dbRes[idKey] === id)
+            {
+                return dbRes[idKey][nameKey];
+            }
+        }
 
-    //     console.log(promiseArray);
+        return "";
+    }
 
-    //     Promise.all(promiseArray).then((values) => {
-    //         console.log("why")
-    //         console.log(values);
-    //     }).catch((e) => {
-    //         console.log(e);
-    //     });
-
-    // }
+    function buildConstraints(groups, rooms, users, subjects) {
+        addSection("Constrangeri", ["user", "subiect", "data", "frecventa"]);
+    }
 
     const exportDb = (req, res) => {
         getGroups().then((groups) => {
@@ -105,9 +96,15 @@ module.exports = (() => {
                     
                     getSubjects().then((subjects) => {
                         
-                        buildCSV(groups, rooms, users, subjects);
-                        // gatherConstraints(groups, rooms, users, subjects);
-                        sendCsv(res);
+                        getAllConstraints().then((constraints) => {
+
+                            buildCSV(groups, rooms, users, subjects, constraints);
+                            sendCsv(res);
+                
+                        }).catch((e) => {
+                            console.log(e);
+                        });
+
 
                     }).catch((e) => {
                         console.log(e);
