@@ -130,7 +130,7 @@ $(document).ready(function(){
 			$(".loader-bck").hide();
 
 			if (data.success === true){
-			  notify("Profesor editat cu succes");
+			  notify("Profesor editat cu succes!");
 			  console.log("profesor editat cu succes");
 			  callback(true);
 			}
@@ -313,6 +313,22 @@ $(document).ready(function(){
 				</div>`
 			);
 			$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();
+			
+			$(`#panel-user${index}`).on("click", function(event) {
+				if (!event.target.matches(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`) &&
+					$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).has(event.target).length === 0 &&
+					!event.target.matches(`#edit-subjects-${user.id}`)) {
+					$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();
+				}
+			});	
+
+			$(`#edit-subjects-${user.id}`).on("focus", function(){
+				const searchText = $(`#edit-subjects-${user.id}`).val();
+
+				if (searchText.length !== 0){
+					$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).show();
+				}
+			});
 			$(`#edit-subjects-${user.id}`).on('input', function(){
 
 				const searchText = $(`#edit-subjects-${user.id}`).val();
@@ -774,6 +790,22 @@ $(document).ready(function(){
 		});
 	}
 
+	$(".add-user .container").on("click", function(event) {
+		if (!event.target.matches(".add-user .demo-list-control.mdl-list.dropdown") &&
+			$(".add-user .demo-list-control.mdl-list.dropdown").has(event.target).length === 0 &&
+			!event.target.matches("#subjects")) {
+				$(".add-user .demo-list-control.mdl-list.dropdown").hide();
+		}
+	});	
+
+	$(subjectsInput).on("focus", function(){
+		const searchText = $(subjectsInput).val();
+
+		if (searchText.length !== 0){
+			$(".add-user .demo-list-control.mdl-list.dropdown").show();
+		}
+	});
+
 
 	$(subjectsInput).on('input', function(){
 
@@ -786,11 +818,11 @@ $(document).ready(function(){
 				renderSubjects(array);
 			}
 			else{
-				$(".demo-list-control.mdl-list.dropdown").hide();	
+				$(".add-user .demo-list-control.mdl-list.dropdown").hide();	
 			}
 		}
 		else{
-			$(".demo-list-control.mdl-list.dropdown").hide();
+			$(".add-user .demo-list-control.mdl-list.dropdown").hide();
 		}
 		
 	});
