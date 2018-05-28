@@ -1,8 +1,8 @@
 $(document).ready(() => {
     require("../less/resources.less");
 
-    // const url = "http://89.34.92.135:2222";
-    const url = "http://0.0.0.0:2222";
+    const url = "http://89.34.92.135:2222";
+    // const url = "http://0.0.0.0:2222";
     const token = localStorage.getItem("token");
 
     let resources = [];
