@@ -42,6 +42,15 @@ module.exports = (() => {
       //       return res;
       //   });
     };
+    
+    const getAllConstraints = () => {
+      return new Constraint()
+        .field('*')
+        .valueOf()
+        .then((res) => {
+          return res;
+        });
+    };
 
     const addConstraint = ({userId, subjectId, roomIds, groupIds, date, possibleIntervals, important, motive}) => {
         return new Constraint()
@@ -64,6 +73,7 @@ module.exports = (() => {
     return {
         getConstraints,
         addConstraint,
-        deleteConstraint
+        deleteConstraint,
+        getAllConstraints
     };
   })();
