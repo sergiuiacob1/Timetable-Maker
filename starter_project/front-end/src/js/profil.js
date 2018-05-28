@@ -7,7 +7,7 @@ $(document).ready(function(){
 
 	let token = localStorage.getItem("token");
 	let logoutButton = ".mdl-navigation__link";
-	let changePassButton = ".mdl-button#changePass"
+	let changePassButton = ".mdl-button#change-pass"
 	let errorMsg = "Auch!!! Ceva nu a mers bine!";
 
 	function apiChangeUserPasswordPost(data, callback){
@@ -22,14 +22,14 @@ $(document).ready(function(){
 		.done(function (data) {
 
 			console.log(data);
-			$(".errorMsg div").hide();
+			$(".error-msg div").hide();
 			$(".loader-bck").hide();
 			if (data.success === true){
 			  console.log("parola user schimbata cu succes");
 			  callback(true);
 			}
 			else {
-			  $(".errorMsg").append(`<div>${data.message}</div>`);
+			  $(".error-msg").append(`<div>${data.message}</div>`);
 			  callback(false);
 			}
 		});
@@ -43,26 +43,32 @@ $(document).ready(function(){
 	});
 
 	$(changePassButton).on("click", function(){
-		const oldPass = $(".content-input #oldPass");
-		const newPass = $(".content-input #newPass");
-		const confirmNewPass = $(".content-input #confirmNewPass");
+		const oldPass = $(".content-input #old-pass");
+		const newPass = $(".content-input #new-pass");
+		const confirmNewPass = $(".content-input #confirm-new-pass");
 
-		let cond1 = $(oldPass).val().length !== 0;
-		let cond2;
-		let cond3;
+		const cond3 = verifyInput(
+						confirmNewPass,
+						($(confirmNewPass).val().length === 0 || $(confirmNewPass).val() !== $(newPass).val()) ? /(?!)/ : /[\s\S]*/,
+						"confirm-new-pass-req",
+						// $(confirmNewPass).val() !== $(newPass).val() ? "Parola nu este aceeasi" : "Confirmati noua parola"
+						$(confirmNewPass).val().length === 0 ? "Confirmati noua parola" : "Parola nu este aceeasi"
+					);
 
-		if ( $(newPass).val().length !== 0 && $(confirmNewPass).val().length !== 0){
+		const cond2 = verifyInput(
+						newPass, 
+						($(newPass).val().length === 0 || $(newPass).val() === $(oldPass).val()) ? /(?!)/ : /[\s\S]*/,
+						"new-pass-req",
+						// $(newPass).val() === $(oldPass).val() ? "Noua parola trebuie sa fie diferita de cea veche" : "Introduceti noua parola"
+						$(newPass).val().length === 0 ? "Introduceti noua parola" : "Noua parola trebuie sa fie diferita de cea veche"
+					);
 
-			if ($(newPass).val() === $(confirmNewPass).val()){
-				cond2 = cond3 = true;
-			}
-			else{
-				cond2 = cond3 = false;	
-			}
-		}
-		else{
-			cond2 = cond3 = false;	
-		}
+		const cond1 = verifyInput(
+						oldPass, 
+						$(oldPass).val().length === 0 ? /(?!)/ : /[\s\S]*/,
+						"old-pass-req", 
+						"Introduceti vechea parola"
+					);
 
 		if (cond1 && cond2 && cond3){
 
@@ -81,6 +87,18 @@ $(document).ready(function(){
 			})
 		}
 	});
+
+	function verifyInput(inputText, pattern, alertElem, alertMsg) {
+		if (inputText.val().match(pattern)) {
+			$("#" + alertElem).empty();
+			return true;
+		} else {
+			$("#" + alertElem).text(alertMsg);
+			$("#" + alertElem).prev().addClass("is-invalid");
+			inputText.focus();
+			return false;
+		}
+	}
 
 	function notify(_message) {
 		notification.MaterialSnackbar.showSnackbar({
