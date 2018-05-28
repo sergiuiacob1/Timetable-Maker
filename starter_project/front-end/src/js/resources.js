@@ -1,8 +1,8 @@
 $(document).ready(() => {
     require("../less/resources.less");
 
-    const url = "http://89.34.92.135:2222";
-    // const url = "http://0.0.0.0:2222";
+    // const url = "http://89.34.92.135:2222";
+    const url = "http://0.0.0.0:2222";
     const token = localStorage.getItem("token");
 
     let resources = [];
@@ -43,10 +43,10 @@ $(document).ready(() => {
         id.className = "id";
 
         moreMenu.innerHTML = "more_vert";
-        classImage.innerHTML = json["type"];
+        classImage.innerHTML = "settings";
         titleImg.innerHTML = "title";
         title.innerHTML = json["name"];
-        typeImg.innerHTML = "add_box";
+        typeImg.innerHTML = "widgets";
         type.innerHTML = json["type"];
         capacityImg.innerHTML = "person";
         capacity.innerHTML = json["capacity"];
@@ -156,8 +156,8 @@ $(document).ready(() => {
         body.className = "card moreMenu"
         id.className = "id";
 
-        updateButton.innerHTML = "Edit";
-        deleteButton.innerHTML = "Delete";
+        updateButton.innerHTML = "Editează";
+        deleteButton.innerHTML = "Şterge";
         id.innerHTML = resId;
 
         updateButton.addEventListener("click", event => {
@@ -412,12 +412,14 @@ $(document).ready(() => {
     const getAllResources = () => {
         getResources()
             .then((result) => {
-                result["resources"].forEach(item => {
-                    resources.push({
-                        "resource": item,
-                        "card": createCard(item)
-                    })
-                });
+                if (result["resources"] !== []) {
+                    result["resources"].forEach(item => {
+                        resources.push({
+                            "resource": item,
+                            "card": createCard(item)
+                        })
+                    });
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -425,15 +427,10 @@ $(document).ready(() => {
     }
 
     const updateAllResources = () => {
-        const container = document.getElementsByClassName("container")[0];
-        const elements = container.childNodes;
-
-        // TODO: Fix delete items before GET
-        for (let element of elements) {
-            if (/card add/.test(element.className) === false) {
-                container.removeChild(element);
-            }
+        for (let element of resources) {
+            element["card"].parentNode.removeChild(element["card"]);
         }
+        resources = [];
         getAllResources();
     }
 
