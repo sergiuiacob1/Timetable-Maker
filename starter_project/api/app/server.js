@@ -67,10 +67,10 @@ module.exports = (() => {
     apiRoutes.get('/resources/get', getResourcesRoute);
     apiRoutes.post('/resources/update', updateResourceRoute);
     apiRoutes.post('/resources/remove', deleteResourceRoute);
-      apiRoutes.post('/users/:id/reset', userResetPasswordRoute);
+      apiRoutes.post('/users/reset', userResetPasswordRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
-      apiRoutes.post('/users/:id/changepassword', changePasswordRoute);
+      apiRoutes.post('/users/changepassword', changePasswordRoute);
     adminRoutes.post('/users/:id/update', updateUserRoute);
       adminRoutes.post('/users/:id/reset', resetPasswordRoute);
     adminRoutes.post('/users/:id/delete', deleteUserRoute);

@@ -42,8 +42,8 @@ body {
 	text-align: center;
 }
 
-#fullname-req, #username-req, #email-req{
-	color: red;
+.input-req {
+	color: #d50000;
 	margin-top: -10px;
 }
 
@@ -93,13 +93,16 @@ dialog{
 }
 
 
-.demo-card-wide.mdl-card {
-	width: 100%;
+.edit-box {
 	border: 2px solid #3F51B5;
-  }
+    position: relative;
+}
+
+.edit-box-title {
+	margin: 0 auto;
+}
 
 .search-input .mdl-textfield__input {
-	
 	padding-top: 20px;
 }
 
@@ -140,6 +143,8 @@ dialog{
 	margin-top: -35px;
 	text-align: center;
 	margin-bottom: 35px;
+	position: relative;
+	z-index: 10;
 }
 
 .content-dropdown-style li:hover{
