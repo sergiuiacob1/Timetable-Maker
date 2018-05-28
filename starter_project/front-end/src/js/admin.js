@@ -608,6 +608,12 @@ $(document).ready(function(){
 			return;
 		}
 
+		if (linkId === "data-export"){
+			console.log("data-exportadasda de aici");
+			$(location).attr('href', "");
+			return;
+		}
+
 		$(".mdl-layout__content .page-content .users-management").hide();
 		$(".mdl-layout__content .page-content .add-user").hide();
 		
