@@ -427,7 +427,7 @@ $(document).ready(function(){
 						console.log("Profesor editat cu succes 2")
 						$(searchInput).val("");
 
-						setTimeout( function(){
+						setTimeout(function(){
 
 									apiAllUsersGet(function(response){
 										console.log("ADadasda");
@@ -666,18 +666,22 @@ $(document).ready(function(){
 		if (cond1 && cond2 && cond3) {
 
 			const obj ={ fullName: $(fullName).val(), mail: $(email).val(), id_subjects: subjectsListIds};
+
 			apiAddUserPost(obj, function(response){
 
 				if (response === true){
-					apiAllUsersGet(function(response){
-						if (response === true){
-							// usersData = dummyUsers;
-							renderUsers(usersData);
-						}
-						else {
-							notify(errorMsg);
-						}
-					});
+
+					setTimeout(function(){
+						apiAllUsersGet(function(response){
+							if (response === true){
+								// usersData = dummyUsers;
+								renderUsers(usersData);
+							}
+							else {
+								notify(errorMsg);
+							}
+						});
+					}, 500);
 				}
 			});
 		}
