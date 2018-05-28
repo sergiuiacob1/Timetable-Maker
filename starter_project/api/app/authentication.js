@@ -30,22 +30,23 @@ module.exports = (() => {
   };
 
   const checkAdmin = (req, res, next) => {
-    /*const {body} = req;
-    getUser(body)
+      const id = req.decoded.user.id;
+    getUser({id})
     .then((user) => {
-      console.log("Admin middleware:");
-      console.log(user);
-      if (user.isAdmin) {
+        if (user.is_admin == 1) {
           next();
+      } else {
+        return res.json({succes: false, message: '403 Forbidden'});
       }
-      return res.json({success: false, message: "403 Forbidden"});
-    });*/
-    next();
+    }).catch((e) => {
+      return res.status(403).send({success: false, message: '403 Forbidden'});
+    });
   };
 
   const authenticate = (req, res) => {
     const {body} = req;
-    getUser(body).then((user) => {
+    const {mail, password} = body;
+    getUser({mail, password}).then((user) => {
        console.log(user);
       if (user) {
         const token = jwt.sign({user}, secret, {
@@ -55,11 +56,12 @@ module.exports = (() => {
         res.json({
           success: true,
           message: 'Enjoy your token!',
+            is_admin: user.is_admin,
           token: token
         });
       }
       else {
-        res.json({ success: false, message: 'Authentication failed. User not found.' });
+          res.json({success: false, message: 'Authentication failed. Invalid user or password combination'});
       }
     }).catch((e) => {
       console.log(e);

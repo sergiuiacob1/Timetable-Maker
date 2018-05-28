@@ -2,7 +2,8 @@ $(document).ready(function(){
 
 	require('../less/login.less');
 
-	const hostName = '0.0.0.0:2222';
+	// const hostName = '0.0.0.0:2222';
+	const hostName = '89.34.92.135:2222';
 	const urlLogin= `http://${hostName}/authenticate`;
 	let token = undefined;
 	let errorMsg = false;
@@ -20,19 +21,25 @@ $(document).ready(function(){
 			console.log(data);
 
 			if (data.success === true){
-			  token = data.token;
-			  localStorage.setItem('token', token);
-			  setTimeout(tokenExpire, 21600000); //6 * 60 * 1 min
-			  callback(true);
+				token = data.token;
+				localStorage.setItem('token', token);
+				setTimeout(tokenExpire, 21600000); //6 * 60 * 1 min
+				if (data.is_admin === 1){
+					callback(true, true);
+				}
+				else{
+					callback(true, false);
+				}
 			}
 			else {
-			  errorMsg = data.message;
-			  callback(false);
+				errorMsg = data.message;
+				callback(false);
 			}
 		});	
 	}
 
-	$('#login-button').on('click', function() {
+	function handleLoginClick(){
+
 
 		$('#login-form .error-msg').remove();
 		let loginBtn = $('#login-button');
@@ -41,10 +48,9 @@ $(document).ready(function(){
 		const password = $("#login-form #password-input").val();
 
 		if (username.length === 0 || password.length === 0) {
-			if (errorMsg === false) {
-				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Please provide credentials!").addClass("error-msg"));
+			if (!($("#login-form").next().hasClass("error-msg"))) {
+				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html("Introduceti credentialele!").addClass("error-msg"));
 				$(".mdl-textfield").addClass("is-invalid");
-				errorMsg = true;
 			}
 			return;
 		}
@@ -52,23 +58,39 @@ $(document).ready(function(){
 		console.log(username);
 		console.log(password);
 
-		apiLoginPost({mail:username, password}, function(response){
+		apiLoginPost({mail:username, password}, function(response, isAdmin){
 
 
 			if (response === true){
-				$(location).attr('href', '/admin.html');
+				if (isAdmin === true){
+					$(location).attr('href', '/admin.html');
+				}	
+				else{
+					$(location).attr('href', '/profPref.html');
+				}
 			}
 
 			if (response === false){
-				$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
-				$(".mdl-textfield").addClass("is-invalid");
+				if (!($("#login-form").next().hasClass("error-msg"))) {
+					$("#login-form").after($("<div style=\"margin: 0 auto\"></div>").html(errorMsg).addClass("error-msg"));		
+					$(".mdl-textfield").addClass("is-invalid");
+				}
 			}
-
 		});
+	}
+
+	$('#login-button').on('click', function(){
+		handleLoginClick();
 	});
 
 	$(".mdl-textfield__input").on("input", function() {
 		$(".error-msg").remove();
-		errorMsg = false;
+		$(".mdl-textfield").removeClass("is-invalid");
+	});
+
+	$('html').bind('keypress', function(e){
+     	if(e.keyCode == 13){
+        	 handleLoginClick();
+     	}
 	});
 });

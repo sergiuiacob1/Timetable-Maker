@@ -1,22 +1,22 @@
 module.exports = (() => {
     'use strict';
   
-    const {getConstraints, addConstraint, deleteConstraint} = require('./constraints_actions.js');
+    const {getLinkedConstraints, addLinkedConstraint, deleteLinkedConstraint} = require('./linked_constraints_actions.js');
 
-    const deleteConstraintRoute = (req, res) => {
+    const deleteLinkedConstraintRoute = (req, res) => {
       const id = req.body.id;
-      deleteConstraint({id}).then((constraint) => {
-        console.log (constraint);
-        res.json({success: true, message: "Deleted constraint"});
+      deleteLinkedConstraint({id}).then((linkedConstraint) => {
+        console.log (linkedConstraint);
+        res.json({success: true, message: "Deleted linked constraint"});
       }).catch((e) => {
         console.log(e);
         res.json({success: false});
       });
     };
   
-    const getConstraintsRoute = (req, res) => {
+    const getLinkedConstraintsRoute = (req, res) => {
       const userId = req.decoded.user.id;
-      getConstraints({userId}).then((constraints) => {
+      getLinkedConstraints({userId}).then((constraints) => {
         console.log(constraints);
         res.json({success: true, constraints});
       }).catch((e) => {
@@ -26,11 +26,11 @@ module.exports = (() => {
 
     };
 
-    const newConstraintRoute = (req, res) => {
+    const newLinkedConstraintRoute = (req, res) => {
       const userId = req.decoded.user.id;
       req.body.userId = userId;
 
-      addConstraint(req.body).then(() => {
+      addLinkedConstraint(req.body).then(() => {
         res.json({success: true, message: "Added constraint"});
       }).catch((e) => {
         console.log(e);
@@ -39,8 +39,8 @@ module.exports = (() => {
     };
   
     return {
-      getConstraintsRoute,
-      newConstraintRoute,
-      deleteConstraintRoute
+      getLinkedConstraintsRoute,
+      newLinkedConstraintRoute,
+      deleteLinkedConstraintRoute
     };
   })();

@@ -9,8 +9,8 @@ module.exports = (() => {
   const {getRoomsRoute} = require('./room_routes');
   const {authenticate, register, checkAuthenticated, forgot, checkAdmin} = require('./authentication');
   const {updateUserInfo, getUserRoute, getAllUsers,
-      showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute, changePasswordRoute, resetPasswordRoute
-  } = require('./user_routes');
+      showUserRoute, insertUserRoute, updateUserRoute, deleteUserRoute, changePasswordRoute, resetPasswordRoute, userResetPasswordRoute
+  } = require('./user_routes')
   const {
     newResourceRoute,
     getResourcesRoute,
@@ -18,9 +18,9 @@ module.exports = (() => {
     deleteResourceRoute
   } = require('./resource_routes');
   const {getGroupsRoute} = require('./group_routes');
-  const {getSubjectsRoute} = require('./subject_routes');
-  const {getConstraintsRoute, newConstraintRoute} = require('./constraints_routes.js');
-
+  const {getSubjectsRoute, addSubjectRoute} = require('./subject_routes');
+  const {getConstraintsRoute, newConstraintRoute, deleteConstraintRoute} = require('./constraints_routes.js');
+  const {getLinkedConstraintsRoute, newLinkedConstraintRoute, deleteLinkedConstraintRoute} = require('./linked_constraints_routes.js');
 
   let serverInterface = undefined;
 
@@ -49,9 +49,7 @@ module.exports = (() => {
     app.post('/register', register);
     app.post('/forgot', forgot);
 
-    app.get('/constraints', getConstraintsRoute);
-    app.post('/constraints', newConstraintRoute);
-
+    
     const apiRoutes = express.Router();
     const adminRoutes = express.Router();
 
@@ -65,9 +63,10 @@ module.exports = (() => {
     apiRoutes.get('/resources/get', getResourcesRoute);
     apiRoutes.post('/resources/update', updateResourceRoute);
     apiRoutes.post('/resources/remove', deleteResourceRoute);
+      apiRoutes.post('/users/reset', userResetPasswordRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
-      apiRoutes.post('/users/:id/changepassword', changePasswordRoute);
+      apiRoutes.post('/users/changepassword', changePasswordRoute);
     adminRoutes.post('/users/:id/update', updateUserRoute);
       adminRoutes.post('/users/:id/reset', resetPasswordRoute);
     adminRoutes.post('/users/:id/delete', deleteUserRoute);
@@ -80,7 +79,16 @@ module.exports = (() => {
 
     apiRoutes.get('/groups', getGroupsRoute);
     apiRoutes.get('/subjects', getSubjectsRoute);
-    
+
+    apiRoutes.post('/subjects', addSubjectRoute);
+
+    apiRoutes.get('/constraints', getConstraintsRoute);
+    apiRoutes.post('/constraints', newConstraintRoute);
+    apiRoutes.post('/delete_constraints', deleteConstraintRoute);
+
+    apiRoutes.get('/linked_constraints', getLinkedConstraintsRoute);
+    apiRoutes.post('/linked_constraints', newLinkedConstraintRoute);
+    apiRoutes.post('/delete_linked_constraints', deleteLinkedConstraintRoute);
     
     app.use('/api', apiRoutes);
 

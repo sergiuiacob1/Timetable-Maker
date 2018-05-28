@@ -1,0 +1,171 @@
+   
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Orarul Tau</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="orarulTau.js"></script> -->
+    <!-- <link rel="stylesheet" href="profPref.css"> -->
+    <!-- Google Material Design -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-amber.min.css" />    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    
+    <script type="text/javascript">
+      if(navigator.appName.indexOf("Internet Explorer")!=-1 || navigator.userAgent.match(/Trident.*rv[ :]*11\./))
+      {
+         //This user uses Internet Explorer
+         window.location = "https://www.google.com/chrome/browser/features.html?brand=CHBD&gclid=Cj0KCQjwlv_XBRDrARIsAH-iRJSzmGy1iA8AqCZRsX3axU1lGK25wUP0PSGzmDxkETC9Nuss-FckUzMaAk7HEALw_wcB&gclsrc=aw.ds&dclid=CJiMh6XAkdsCFdOVdwodpBgKgQ";
+      }
+    </script>
+  </head>  
+  
+  
+  <body>
+
+    <!-- Always shows a header, even in smaller screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title">Gestioneaza-ti orarul</span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a target="_blank" class="mdl-navigation__link" href="profPref.html">Adauga o optiune</a>
+            <a class="mdl-navigation__link" href="orarulTau.html">Orarul tau</a>
+ 			<a target="_blank" class="mdl-navigation__link" href="profil.html">Profilul tau</a>
+          </nav>
+        </div>
+      </header>
+      <main class="mdl-layout__content">
+        <div class="page-content">
+          <!-- orarul -->
+           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Alipiti orele</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+      
+              <table id="tabl" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="mdl-data-table__cell--non-numeric"></th>
+                    <th class="mdl-data-table__cell--non-numeric">Materie</th>
+                    <th class="mdl-data-table__cell--non-numeric">Sali</th>
+                    <th class="mdl-data-table__cell--non-numeric">Grupe</th>
+                    <th class="mdl-data-table__cell--non-numeric">Data</th>
+                    <th class="mdl-data-table__cell--non-numeric">Ziua</th>
+                    <th class="mdl-data-table__cell--non-numeric">Ore</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td class="mdl-data-table__cell--non-numeric">20</td>
+                    <td class="mdl-data-table__cell--non-numeric">MatLab</td>
+                    <td class="mdl-data-table__cell--non-numeric">c410,c411,c412</td>
+                    <td class="mdl-data-table__cell--non-numeric">b1,b3</td>
+                    <td class="mdl-data-table__cell--non-numeric">saptamanal</td>
+                    <td class="mdl-data-table__cell--non-numeric">luni</td>
+                    <td class="mdl-data-table__cell--non-numeric">08 - 09,09 - 10,10 - 11,11 - 12,12 - 13, 13 - 14,14 - 15,15 - 16,16 - 17, 17 - 18,18 - 19,19 - 20</td>
+                  </tr> -->
+                </tbody>
+              </table>
+
+               <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="cacat">
+      
+          <div class="mdl-card__supporting-text">
+  
+            <p>Selectati zilele saptamanii in care sa se alipeasca orele</p>
+                         <form action="/action_page.php">
+
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="luni">
+                <input type="checkbox" id="luni" class="mdl-checkbox__input" value="1">
+                <span class="mdl-checkbox__label">Luni</span>
+              </label>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="marti">
+                <input type="checkbox" id="marti" class="mdl-checkbox__input" value="2">
+                <span class="mdl-checkbox__label">Marti</span>
+              </label>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="miercuri">
+                <input type="checkbox" id="miercuri" class="mdl-checkbox__input" value="3">
+                <span class="mdl-checkbox__label">Miercuri</span>
+              </label>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="joi">
+                <input type="checkbox" id="joi" class="mdl-checkbox__input" value="4">
+                <span class="mdl-checkbox__label">Joi</span>
+              </label>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="vineri">
+                <input type="checkbox" id="vineri" class="mdl-checkbox__input" value="5">
+                <span class="mdl-checkbox__label">Vineri</span>
+              </label>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="sambata">
+                <input type="checkbox" id="sambata" class="mdl-checkbox__input" value="6">
+                <span class="mdl-checkbox__label">Sambata</span>
+              </label>
+              <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="duminica">
+                <input type="checkbox" id="duminica" class="mdl-checkbox__input" value="0">
+                <span class="mdl-checkbox__label">Duminica</span>
+              </label>
+            </form>
+            <br>
+            <br>
+             <form action="/action_page.php">
+                  <label for="switch1" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                    <input type="checkbox" id="switch1" class="mdl-switch__input">
+                    <span class="mdl-switch__label">Fara fereastra / Cu fereastra</span>  
+                  </label>
+                  <br>
+                  <br>
+                  </form> 
+                        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="sendData2">Trimite</button> 
+                         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteData">Sterge optiunile</button>
+          </div>
+          </div>
+            </div>
+          
+          </div>
+       
+
+
+           <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+             <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Optiuni alipite</h2>
+              </div>
+          <div class="mdl-card__supporting-text">
+			<table id="tabl2" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" style="width:100%">
+                <thead>
+                  <tr>
+                    <th class="mdl-data-table__cell--non-numeric"></th>
+                    <th class="mdl-data-table__cell--non-numeric">Ziua</th>
+					<th class="mdl-data-table__cell--non-numeric">Materiile</th>
+					<th class="mdl-data-table__cell--non-numeric">Fereastra</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+              
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="deleteLinkedData">Sterge optiunile alipite</button>
+          </div>
+          
+          </div>
+          </div>
+
+      </main>
+    </div>
+  
+    
+
+    
+  </body>
+</html>
