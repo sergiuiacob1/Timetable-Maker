@@ -32,7 +32,7 @@ function populateTable() {
 //populate body
   var tbody = document.createElement("tbody");
   var lineIndex = 0;
-  for (var i = 1 ; i < tableArray[1].length; i++) {
+  for (var i = 0 ; i < tableArray[1].length; i++) {
    var tr = document.createElement("tr");
    for (var j = 0; j < tableArray[0].length; j++) {
      var td = document.createElement("td");
