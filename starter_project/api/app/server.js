@@ -48,10 +48,6 @@ module.exports = (() => {
     app.post('/authenticate', authenticate);
     app.post('/register', register);
     app.post('/forgot', forgot);
-    // app.post('/resources/add', newResourceRoute);
-    // app.get('/resources/get', getResourcesRoute);
-    // app.post('/resources/update', updateResourceRoute);
-    // app.post('/resources/remove', deleteResourceRoute);
 
     
     const apiRoutes = express.Router();

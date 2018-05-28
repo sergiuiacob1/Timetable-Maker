@@ -22,7 +22,6 @@ function generateHtmlPlugins (templateDir) {
 }
 
 const htmlPlugins = generateHtmlPlugins('./src/')
-// console.log(htmlPlugins);
 
 module.exports = {
   mode: 'development',
@@ -33,6 +32,7 @@ module.exports = {
     app: './src/js/index.js',
     login: './src/js/login.js',
     admin: './src/js/admin.js',
+    resources: './src/js/resources.js',
     orarulTau: './src/js/orarulTau.js',
     profil: './src/js/profil.js'
   },
@@ -42,7 +42,12 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
-    port: 9000
+    port: 9000,
+    historyApiFallback: true,
+    watchOptions: { aggregateTimeout: 300, poll: 1000 },
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
   },
   module: {
     rules: [
