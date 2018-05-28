@@ -1,12 +1,13 @@
 module.exports = (() => {
     'use strict';
 
-    const {getGroups}       = require('./group_actions');
-    const {getRooms}        = require('./room_actions');
-    const {getUsers}        = require('./user_actions.js');
-    const {getSubjects}     = require('./subject_actions.js');
-    const {getAllConstraints}  = require('./constraints_actions.js');
-
+    const {getGroups}           = require('./group_actions');
+    const {getRooms}            = require('./room_actions');
+    const {getUsers}            = require('./user_actions.js');
+    const {getSubjects}         = require('./subject_actions.js');
+    const {getAllConstraints}   = require('./constraints_actions.js');
+    const {getResources}        = require('./resource_actions.js');
+    
     var result = {
         csvStr : ""
     };
@@ -46,7 +47,7 @@ module.exports = (() => {
         endFieldLine(result);
     }
 
-    function buildCSV(groups, rooms, users, subjects, constraints) {
+    function buildCSV(groups, rooms, users, subjects, constraints, resources) {
         addSection("GRUPE", ["nume", "capacitate"]);
         addDataFromDb(groups, ["name", "number"]);
 
@@ -59,6 +60,9 @@ module.exports = (() => {
         addSection("SUBIECTE", ["nume", "prescurtare", "data", "frecventa"]);
         addDataFromDb(subjects, ["name", "short", "date", "frequency"]);
 
+        addSection("RESURSE", ["tip", "nume", "capacitate"]);
+        addDataFromDb(resources, ["type", "name", "capacity"]);
+
         buildConstraints(groups, rooms, users, subjects, constraints);
     }
 
@@ -66,7 +70,8 @@ module.exports = (() => {
         res.setHeader('Content-type', "application/force-download");
         res.setHeader('Content-disposition', 'attachment; filename=db_export.csv');
 
-        res.send( result.csvStr );
+        res.send(result.csvStr);
+        result.csvStr = "";
     }
 
     function getIdentifier(dbRes, nameKey, idKey, id) {
@@ -126,14 +131,22 @@ module.exports = (() => {
                     
                     getSubjects().then((subjects) => {
                         
-                        getAllConstraints().then((constraints) => {
+                        getResources("").then((resources) => {
 
-                            buildCSV(groups, rooms, users, subjects, constraints);
-                            sendCsv(res);
-                
+                            getAllConstraints().then((constraints) => {
+
+                                buildCSV(groups, rooms, users, subjects, constraints, resources);
+                                sendCsv(res);
+                    
+                            }).catch((e) => {
+                                console.log(e);
+                            });
+
                         }).catch((e) => {
                             console.log(e);
                         });
+
+                       
 
 
                     }).catch((e) => {
