@@ -46,9 +46,9 @@ $(document).ready(() => {
         classImage.innerHTML = "settings";
         titleImg.innerHTML = "title";
         title.innerHTML = json["name"];
-        typeImg.innerHTML = "widgets";
+        typeImg.innerHTML = "settings";
         type.innerHTML = json["type"];
-        capacityImg.innerHTML = "person";
+        capacityImg.innerHTML = "widgets";
         capacity.innerHTML = json["capacity"];
         id.innerHTML = json["id"];
 
