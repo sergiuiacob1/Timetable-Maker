@@ -1,7 +1,13 @@
 $(document).ready(function() {
+
+
+  require("../less/profPref.less");
+  $(".loader-bck").hide();
 // const hostName = '0.0.0.0:2222';
 const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
+
+let logoutButton = ".mdl-navigation__link#logout";
 
 var mon, tue, wed, thu, fri, sat, sun;
 var windows = false;
@@ -33,7 +39,10 @@ function postThisShit(json, callback) {
 
 function getSubjectsShow(){
   var url = 'http://'+hostName+'/api/subjects?token=' + token;
+
+  $(".loader-bck").show();
   $.get(`${url}`).done(function (result){
+    $(".loader-bck").hide();
     if (result.success !== true)
       return;
     allsubjects=result;
@@ -44,7 +53,10 @@ function getSubjectsShow(){
 function getRoomsShow(){
   var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
+
+  $(".loader-bck").show();
   $.get(`${url}`).done(function(result){
+    $(".loader-bck").hide();
     if (result.success !== true)
       return;
     allrooms=result.rooms;
@@ -53,7 +65,9 @@ function getRoomsShow(){
 
 function getGroupsShow(){
   var url = 'http://'+hostName+'/api/groups?token=' + token;
+  $(".loader-bck").show();
   $.get(`${url}`).done(function(result){
+    $(".loader-bck").hide();
     if (result.success !== true)
       return;
     allgroups=result.groups;
@@ -113,7 +127,10 @@ function getDayName(day) {
 function getUnlinkedConstraints(){
   var url = 'http://'+hostName+'/api/constraints?token=' + token;
   var pos;
+  $(".loader-bck").show();
   $.get(`${url}`).done(function(result){
+
+    $(".loader-bck").hide();
     if (result.success !== true)
       return;
     for(var i=0;i<result.constraints.length;i++){
@@ -206,6 +223,12 @@ function addListeners(){
   var sendButton = document.getElementById("sendData2");
   sendButton.addEventListener('click', start);
 }
+
+
+$(logoutButton).on("click", function(){
+    $(location).attr('href', '/login.html');
+    localStorage.removeItem("token");
+});
 
   getSubjectsShow();
   getRoomsShow();

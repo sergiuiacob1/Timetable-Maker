@@ -3,7 +3,11 @@ const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
+let logoutButton = ".mdl-navigation__link#logout";
+
 require('../less/profPref.less');
+
+$(".loader-bck").hide();
 
 function populateTable() {
 
@@ -47,6 +51,8 @@ function populateTable() {
 
 
 function postThisShit(json, callback) {
+
+  $(".loader-bck").show();
   $.ajax({
     url: urlPost,
     method: 'POST',
@@ -54,6 +60,7 @@ function postThisShit(json, callback) {
     data: json
   }).done(function(res) {
     console.log(res);
+    $(".loader-bck").hide();
     callback();
   });
 };
@@ -238,6 +245,13 @@ function getGroupsShow(){
 };
 
 $(document).ready(function() {
+
+  $(logoutButton).on("click", function(){
+    $(location).attr('href', '/login.html');
+    localStorage.removeItem("token");
+  });
+
+
   populateTable();
   getSubjectsShow();
   getRoomsShow();
