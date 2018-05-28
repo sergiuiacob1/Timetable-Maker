@@ -17,14 +17,20 @@ $(document).ready(function() {
   const urlDeleteLinked = `http://${hostName}/api/delete_linked_constraints?token=${token}`;
    
   require('./../less/profPref.less');
+
+  $(".loader-bck").hide();
   
   function postThisShit(json, callback) {
+
+      $(".loader-bck").show();
     $.ajax({
       url: urlPost,
       method: 'POST',
       contentType: 'application/json',
       data: json
     }).done(function(data){
+
+        $(".loader-bck").hide();
         if (data.success === true){
           callback(true);
         }
@@ -35,12 +41,16 @@ $(document).ready(function() {
   };
   
   function deleteThisShit(json, callback){
+
+      $(".loader-bck").show();
     $.ajax({
       url: urlDelete,
       method: 'POST',
       contentType: 'application/json',
       data: json
     }).done(function(data){
+
+        $(".loader-bck").hide();
         if (data.success === true){
           callback(true);
         }
@@ -51,6 +61,7 @@ $(document).ready(function() {
   };
   
   function deleteThisLinkedShit(json, callback){
+      $(".loader-bck").show();
     $.ajax({
       url: urlDeleteLinked,
       method: 'POST',
@@ -58,6 +69,8 @@ $(document).ready(function() {
       data: json
     }).done(function(data){
       if (data.success === true){
+
+        $(".loader-bck").hide();
         callback(true);
       }
       else{
@@ -68,8 +81,11 @@ $(document).ready(function() {
   
   
   function getSubjectsShow(){
+
+      $(".loader-bck").show();
     var url = 'http://'+hostName+'/api/subjects?token=' + token;
     $.get(`${url}`).done(function (result){
+        $(".loader-bck").hide();
       if (result.success !== true)
         return;
       allsubjects=result;
@@ -81,7 +97,9 @@ $(document).ready(function() {
   function getRoomsShow(){
     var url = 'http://'+hostName+'/api/rooms?token=' + token;
     var pos;
+      $(".loader-bck").show();
     $.get(`${url}`).done(function(result){
+      $(".loader-bck").hide();
       if (result.success !== true)
         return;
       allrooms=result.rooms;
@@ -90,8 +108,10 @@ $(document).ready(function() {
   };
   
   function getGroupsShow(){
+      $(".loader-bck").show();
     var url = 'http://'+hostName+'/api/groups?token=' + token;
     $.get(`${url}`).done(function(result){
+        $(".loader-bck").hide();
       if (result.success !== true)
         return;
       allgroups=result.groups;
@@ -152,7 +172,9 @@ $(document).ready(function() {
   function getUnlinkedConstraints(){
     var url = 'http://'+hostName+'/api/constraints?token=' + token;
     var pos;
+      $(".loader-bck").show();
     $.get(`${url}`).done(function(result){
+        $(".loader-bck").hide();
       if (result.success !== true)
         return;
     allconstraints=result;
@@ -204,7 +226,9 @@ $(document).ready(function() {
   
   function getLinkedConstraints(){
     var url='http://'+hostName+'/api/linked_constraints?token='+token;
+      $(".loader-bck").show();
     $.get(`${url}`).done(function(result){
+        $(".loader-bck").hide();
       if(result.success !== true) return;
       for(var i=0;i<result.constraints.length;i++)
       {
