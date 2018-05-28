@@ -3,7 +3,8 @@ $(document).ready(function(){
 	require('../less/profil.less');
 
 	$(".loader-bck").hide();
-	const hostName = '0.0.0.0:2222';
+	// const hostName = '0.0.0.0:2222';
+	const hostName = '89.34.92.135:2222';
 
 	let token = localStorage.getItem("token");
 	let logoutButton = ".mdl-navigation__link";

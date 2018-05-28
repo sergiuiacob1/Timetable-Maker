@@ -24,7 +24,8 @@ $(document).ready(function(){
 
 
 
-	const hostName = '0.0.0.0:2222';
+	// const hostName = '0.0.0.0:2222';
+	const hostName = '89.34.92.135:2222';
 	const urlAddUser = `http://${hostName}/api/admin/users?token=${token}`;
 	const urlGetUsers= `http://${hostName}/api/admin/users?token=${token}`;
 	

@@ -2,7 +2,8 @@ $(document).ready(function(){
 
 	require('../less/login.less');
 
-	const hostName = '0.0.0.0:2222';
+	// const hostName = '0.0.0.0:2222';
+	const hostName = '89.34.92.135:2222';
 	const urlLogin= `http://${hostName}/authenticate`;
 	let token = undefined;
 	let errorMsg = false;
