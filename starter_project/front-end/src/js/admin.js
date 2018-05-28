@@ -280,7 +280,8 @@ $(document).ready(function(){
                             <label class="mdl-textfield__label" for="fname">Nume complet</label>
 						</div>
                         <p class="input-req" id="edit-fullName-req-${user.id}"></p>
-
+					</div>
+					<div class="content-input">
 						<div class="mdl-textfield mdl-js-textfield">
 							<input class="mdl-textfield__input" type="email" value="${user.mail}" id="edit-email-${user.id}">
                             <label class="mdl-textfield__label" for="fname">Email</label>
@@ -296,11 +297,11 @@ $(document).ready(function(){
                             <input class="mdl-textfield__input" type="text" id="edit-subjects-${user.id}">
                             <label class="mdl-textfield__label" for="fname">Adauga subiecte</label>
                         </div>
+						<div id="content-dropdown-${index}" class="content-dropdown-style">
+						  <ul class="demo-list-control mdl-list dropdown"></ul>
+						</div>
                         <p class="input-req" id="edit-subjects-req-${user.id}"></p>
 					</div>
-					<div id="content-dropdown-${index}" class="content-dropdown-style">
-                      <ul class="demo-list-control mdl-list dropdown"></ul>
-                    </div>
 					<div class="mdl-card__actions mdl-card--border">
 						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
 							Salveaza schimbarile
@@ -323,14 +324,7 @@ $(document).ready(function(){
 				}
 			});	
 
-			$(`#edit-subjects-${user.id}`).on("focus", function(){
-				const searchText = $(`#edit-subjects-${user.id}`).val();
-
-				if (searchText.length !== 0){
-					$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).show();
-				}
-			});
-			$(`#edit-subjects-${user.id}`).on('input', function(){
+			$(`#edit-subjects-${user.id}`).on("focus click input", function(){
 
 				const searchText = $(`#edit-subjects-${user.id}`).val();
 
@@ -358,7 +352,7 @@ $(document).ready(function(){
 		});
 
 		$(".mdl-textfield__input").on("input", function() {
-			$(".is-focused .mdl-textfield__input").parent().next().empty();
+			$(".is-focused .mdl-textfield__input").parent().parent().find(".input-req").empty();
 			// console.log("input");
 		});
 
@@ -472,6 +466,9 @@ $(document).ready(function(){
 			});
 	
 			$(`#content-dropdown-${user} .dropdown .mdl-list__item`).on("click", function(){
+
+				$(this).parent().parent().next().empty();
+				$(this).parent().parent().prev().removeClass("is-invalid");
 	
 				let val = $(this).children("span").text();
 				let id_subject = $(this).attr("key") * 1;
@@ -699,7 +696,7 @@ $(document).ready(function(){
 			return true;
 		} else {
 			$("#" + alertElem).text(alertMsg);
-			$("#" + alertElem).prev().addClass("is-invalid");
+			$("#" + alertElem).parent().children(":first-child").addClass("is-invalid");
 			inputText.focus();
 			return false;
 		}
@@ -717,23 +714,23 @@ $(document).ready(function(){
 	}
 
 	function renderSubjects(array){
-
-		$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").children().remove();
-		$(".add-user .demo-list-control.mdl-list.dropdown").show();
+		$(".content-dropdown .demo-list-control.mdl-list.dropdown").children().remove();
+		$(".content-dropdown .demo-list-control.mdl-list.dropdown").show();
 
 		array.map((subj, index)=>{
-
-
-			$(".add-user .container .content-dropdown .demo-list-control.mdl-list.dropdown").append(
-					`<li class="mdl-list__item" key=${subj.id}>
-                        <span class="mdl-list__item-primary-content">
-                        ${subj.name}
-                        </span>
-                     </li>`
+			$(".content-dropdown .demo-list-control.mdl-list.dropdown").append(
+				`<li class="mdl-list__item" key=${subj.id}>
+					<span class="mdl-list__item-primary-content">
+					${subj.name}
+					</span>
+				</li>`
             );
 		});
 
-		$(".add-user .dropdown .mdl-list__item").on("click", function(){
+		$(".content-dropdown .dropdown .mdl-list__item").on("click", function(){
+
+			$(this).parent().parent().next().empty();
+			$(this).parent().parent().prev().removeClass("is-invalid");
 
 			let val = $(this).children("span").text();
 			let id_subject = $(this).attr("key");
@@ -796,24 +793,14 @@ $(document).ready(function(){
 	}
 
 	$(".add-user .container").on("click", function(event) {
-		if (!event.target.matches(".add-user .demo-list-control.mdl-list.dropdown") &&
-			$(".add-user .demo-list-control.mdl-list.dropdown").has(event.target).length === 0 &&
+		if (!event.target.matches(".content-dropdown .demo-list-control.mdl-list.dropdown") &&
+			$(".content-dropdown .demo-list-control.mdl-list.dropdown").has(event.target).length === 0 &&
 			!event.target.matches("#subjects")) {
-				$(".add-user .demo-list-control.mdl-list.dropdown").hide();
+				$(".content-dropdown .demo-list-control.mdl-list.dropdown").hide();
 		}
 	});	
 
-	$(subjectsInput).on("focus", function(){
-		const searchText = $(subjectsInput).val();
-
-		if (searchText.length !== 0){
-			$(".add-user .demo-list-control.mdl-list.dropdown").show();
-		}
-	});
-
-
-	$(subjectsInput).on('input', function(){
-
+	$(subjectsInput).on("focus click input", function(){
 		const searchText = $(subjectsInput).val();
 
 		if (searchText.length !== 0){
@@ -823,11 +810,11 @@ $(document).ready(function(){
 				renderSubjects(array);
 			}
 			else{
-				$(".add-user .demo-list-control.mdl-list.dropdown").hide();	
+				$(".content-dropdown .demo-list-control.mdl-list.dropdown").hide();	
 			}
 		}
 		else{
-			$(".add-user .demo-list-control.mdl-list.dropdown").hide();
+			$(".content-dropdown .demo-list-control.mdl-list.dropdown").hide();
 		}
 		
 	});
