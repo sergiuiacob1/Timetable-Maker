@@ -32,7 +32,7 @@ public abstract class Test {
     //Aceasta functie deschide browser-ul Chrome
     public void openBrowser() {
         //pentru ca Selenium sa poata deschide browser-ul Chrome, este nevoie de un driver (chromedriver.exe) care este inclus in folder-ul proiectului
-        System.setProperty("webdriver.chrome.driver", resourceBundle.getString("PATH_TO_CHROMEDRIVER")); //se seteaza calea spre Chrome driver. Este cea specificata in fisierul config.properties
+        System.setProperty("webdriver.chrome.driver", resourceBundle.getString("PATH_TO_CHROMEDRIVER_LINUX")); //se seteaza calea spre Chrome driver. Este cea specificata in fisierul config.properties
         driver = new ChromeDriver(); //se creaza o noua instanta a driver-ului Selenium care va rula folosind Chrome.
         driver.manage().window().setSize(new Dimension(1920,1080)); //setam browser-ul in full screen
         //definim un waiter cu ajutorul caruia vom face ca Selenium sa astepte un numar de secunde inainte de a-si continua executia

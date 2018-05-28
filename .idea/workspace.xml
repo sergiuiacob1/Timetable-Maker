@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb80aa3b-2491-4e6f-9340-bd3cb10d9199" name="Default" comment="Modified driver property to maximize.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/pages/user/UserProfilePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/database/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/database/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/database/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/database/controllers/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/LoginPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/LoginPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminAddUserPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminAddUserPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminHomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminHomePage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/user/UserHomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/user/UserHomePage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminAddUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminAddUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminEditUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminEditUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminRemoveUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminRemoveUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminResetPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminResetPassword.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/login/user/TestLoginUserFail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/login/user/TestLoginUserFail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/Test.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -43,19 +18,32 @@
       <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="451">
+            <state relative-caret-position="780">
               <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestLoginUserFail.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestLoginUserFail.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
+            <state relative-caret-position="-220">
               <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tests/Test.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="34" column="106" selection-start-line="34" selection-start-column="106" selection-end-line="34" selection-end-column="106" />
+              <folding>
+                <element signature="e#2638#2639#0" expanded="true" />
+                <element signature="e#2706#2707#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -66,18 +54,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="372">
               <caret line="124" selection-start-line="124" selection-end-line="124" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestLoginAdminSuccess.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/admin/TestLoginAdminSuccess.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="600">
-              <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -191,7 +167,6 @@
         <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/testAdminAddUser.java" />
         <option value="$PROJECT_DIR$/src/test/java/database/Database.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/ui/TestLoginPageUI.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/Test.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/login/admin/TestLoginAdminSuccess.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java" />
         <option value="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" />
@@ -208,6 +183,7 @@
         <option value="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/Test.java" />
       </list>
     </option>
   </component>
@@ -585,14 +561,11 @@
       <workItem from="1527161228460" duration="114000" />
       <workItem from="1527324983251" duration="16521000" />
       <workItem from="1527442036675" duration="7392000" />
-      <workItem from="1527500805012" duration="17371000" />
+      <workItem from="1527500805012" duration="17779000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestAdminAddUser_testAdminAddUser - 2018.05.28 at 19h 12m 01s.xml">
-      <configuration name="TestAdminAddUser.testAdminAddUser" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="TestAdminAddUser_testAdminAddUser - 2018.05.28 at 19h 13m 25s.xml">
       <configuration name="TestAdminAddUser.testAdminAddUser" configurationId="JUnit" />
     </history-entry>
@@ -620,9 +593,12 @@
     <history-entry file="TestAdminResetPassword - 2018.05.28 at 19h 22m 39s.xml">
       <configuration name="TestAdminResetPassword" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="TestLoginUserFail_testLoginUserFail - 2018.05.28 at 19h 50m 44s.xml">
+      <configuration name="TestLoginUserFail.testLoginUserFail" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55887000" />
+    <option name="totallyTimeSpent" value="56295000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -638,8 +614,8 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Run" order="3" weight="0.25925925" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32897604" />
+      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.25925925" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32897604" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26385927" />
@@ -917,16 +893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="57" selection-start-line="57" selection-end-line="57" />
-          <folding>
-            <element signature="e#2706#2707#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/database/controllers/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="472">
@@ -1094,19 +1060,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-220">
+          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
+        <state relative-caret-position="780">
           <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
-          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+          <caret line="34" column="106" selection-start-line="34" selection-start-column="106" selection-end-line="34" selection-end-column="106" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#2638#2639#0" expanded="true" />
+            <element signature="e#2706#2707#0" expanded="true" />
           </folding>
         </state>
       </provider>
