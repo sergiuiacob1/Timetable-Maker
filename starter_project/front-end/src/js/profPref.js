@@ -47,8 +47,6 @@ function populateTable() {
 
 
 function postThisShit(json, callback) {
-
-  debugger;
   $.ajax({
     url: urlPost,
     method: 'POST',
