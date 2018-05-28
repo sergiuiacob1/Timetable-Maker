@@ -1,6 +1,7 @@
 $(document).ready(function(){
 
 	require('../less/admin.less');
+	require('./resources.js');
 
 	let token = localStorage.getItem("token");
 	let navLinkButton = ".mdl-navigation__link";
@@ -34,6 +35,7 @@ $(document).ready(function(){
 	// const dummySubjects = require('./dummySubjects.json');
 
 	$(".mdl-layout__content .page-content .add-user").hide();
+	$(".mdl-layout__content .page-content .resurse").hide();
 	$(".mdl-layout__content.no-scroll").css("overflow", "hidden");
 	$(".mdl-layout__content .page-content .add-user .subjects-list").hide();
 	
@@ -607,6 +609,7 @@ $(document).ready(function(){
 
 		$(".mdl-layout__content .page-content .users-management").hide();
 		$(".mdl-layout__content .page-content .add-user").hide();
+		$(".mdl-layout__content .page-content .resurse").hide();
 		
 
 		if (linkId === "users-management"){
@@ -616,6 +619,7 @@ $(document).ready(function(){
 		else{
 			$(".mdl-layout__content.no-scroll").css("overflow", "auto");	
 		}
+
 		$(pageContent + " ." + linkId).show();		
 
 		var current = document.getElementsByClassName("active");
