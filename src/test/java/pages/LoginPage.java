@@ -75,7 +75,7 @@ public class LoginPage extends WebPage {
     public AdminHomePage goToAdminHomepage() { return PageFactory.initElements(driver,AdminHomePage.class); }
 
     public String getFailLoginErrorMessage() {
-        return failLoginErrorLabel.getText().toString();
+        return failLoginErrorLabel.getText();
     }
 
     public WebElement getLoginButton() {

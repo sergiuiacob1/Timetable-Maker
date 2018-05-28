@@ -44,7 +44,7 @@ public class TestLoginUserFail extends Test {
         Assert.assertTrue("Error label is not displayed!", WebPage.IsThisElementDisplayed(loginPage.getFailLoginErrorLabel()));
         Assert.assertEquals("Error message is not as expected! Expected: " +
                         resourceBundle.getString("LOGIN_INCOMPLETE_ERROR_MESSAGE") + ";\n" +
-                        "Actual: " + loginPage.getPaswordLabel() + ";\n",
+                        "Actual: " + loginPage.getFailLoginErrorMessage() + ";\n",
                 loginPage.getFailLoginErrorMessage(), resourceBundle.getString("LOGIN_INCOMPLETE_ERROR_MESSAGE"));
     }
 
@@ -57,7 +57,7 @@ public class TestLoginUserFail extends Test {
         Assert.assertTrue("Error label is not displayed!", WebPage.IsThisElementDisplayed(loginPage.getFailLoginErrorLabel()));
         Assert.assertEquals("Error message is not as expected! Expected: " +
                           resourceBundle.getString("LOGIN_FAIL_ERROR_MESSAGE") + ";\n" +
-                          "Actual: " + loginPage.getPaswordLabel() + ";\n",
+                          "Actual: " + loginPage.getFailLoginErrorMessage() + ";\n",
                 loginPage.getFailLoginErrorMessage(), resourceBundle.getString("LOGIN_FAIL_ERROR_MESSAGE"));
     }
 

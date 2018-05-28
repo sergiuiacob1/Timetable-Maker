@@ -59,41 +59,59 @@ public class TestAdminRemoveUser extends Test {
         adminHomePage.clickAddUserButton();
         System.out.println("R12. Add button has been pressed. Now opening Admin Add User Page.");
         adminAddUserPage = adminHomePage.goToAdminAddUserPage();
+        adminAddUserPage = new AdminAddUserPage(driver);
         waitForElementToBeVisible(adminAddUserPage.getNameField());
     }
 
     private void completeFormAndSubmit() {
+        System.out.println("S13. Insert into name field: " + nameInput);
         adminAddUserPage.insertName(nameInput);
+
+        System.out.println("S14. Insert into email field: " + emailInput);
         adminAddUserPage.insertEmail(emailInput);
+
+        System.out.println("S15. Insert into subject field: " + subjectInput);
         adminAddUserPage.insertSubject(subjectInput);
+
+        System.out.println("S16. Pick first subject.");
         adminAddUserPage.clickSubjectButton();
+
+        System.out.println("S17. Click submit button.");
         adminAddUserPage.clickSubmit();
     }
 
     private void goToUsersManagement() {
+        System.out.println("S18. Click user management button.");
         adminAddUserPage.clickUserManagementButton();
         adminHomePage = adminAddUserPage.goToAdminHomePage();
         waitForElementToBeVisible(adminHomePage.getAddUserButton());
+        System.out.println("R18. User management page is now open.");
     }
 
     private void manageUserExistence() {
         UserController userController = new UserController();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             Assert.assertTrue("User does not exist in the database!", userController.userExistsInDatabase(emailInput));
 
+            System.out.println("S19. Search new user. Type into search bar: " + nameInput);
             adminHomePage.insertSearchText(nameInput);
 
+            System.out.println("S20. Click first user displayed.");
             waitForElementToBeVisible(adminHomePage.getFirstUserSection());
             adminHomePage.clickFirstUser();
 
+            System.out.println("S21. Press remove button.");
             waitForElementToBeVisible(adminHomePage.getRemoveButton());
             adminHomePage.clickRemoveButton();
+            System.out.println("R21. A remove popup is now displayed.");
 
+            System.out.println("S22. Click yes button.");
             waitForElementToBeVisible(adminHomePage.getRemovePopup());
             adminHomePage.clickRemovePopupYesButton();
+            System.out.println("R22. Remove popup is no longer displayed.");
 
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             Assert.assertFalse("User is still in the database after pressing Remove button!", userController.userExistsInDatabase(emailInput));
             userController.deleteUserFromDatabase(emailInput);
         } catch (SQLException e) {
@@ -110,7 +128,7 @@ public class TestAdminRemoveUser extends Test {
 
     private void managePasswordField() {
         System.out.println("S7. Insert password");
-        loginPage.insertUsername(resourceBundle.getString("ADMIN_PASSWORD"));
+        loginPage.insertPassword(resourceBundle.getString("ADMIN_PASSWORD"));
     }
 
     private void managePageTransition() {

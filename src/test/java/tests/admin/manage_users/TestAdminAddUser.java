@@ -3,12 +3,14 @@ package tests.admin.manage_users;
 import database.Database;
 import database.controllers.UserController;
 import org.junit.Assert;
+import org.openqa.selenium.support.PageFactory;
 import pages.LoginPage;
 import pages.WebPage;
 import pages.admin.AdminAddUserPage;
 import pages.admin.AdminHomePage;
 import tests.Test;
 
+import java.awt.print.PageFormat;
 import java.sql.SQLException;
 
 public class TestAdminAddUser extends Test {
@@ -56,16 +58,27 @@ public class TestAdminAddUser extends Test {
         System.out.println("R11. Add user button is displayed.");
         System.out.println("S12. Click Add user button.");
         adminHomePage.clickAddUserButton();
-        System.out.println("R12. Add button has been pressed. Now opening Admin Add User Page.");
+        System.out.println("R12. Add user button has been pressed. Now opening Admin Add User Page.");
         adminAddUserPage = adminHomePage.goToAdminAddUserPage();
-        waitForElementToBeVisible(adminAddUserPage.getNameField());
+        adminAddUserPage = new AdminAddUserPage(driver);
+
+        waitForElementToBeVisible(adminAddUserPage.getSubmitButton());
     }
 
     private void completeFormAndSubmit() {
+        System.out.println("S13. Insert into name field: " + nameInput);
         adminAddUserPage.insertName(nameInput);
+
+        System.out.println("S14. Insert into email field: " + emailInput);
         adminAddUserPage.insertEmail(emailInput);
+
+        System.out.println("S15. Insert into subject field: " + subjectInput);
         adminAddUserPage.insertSubject(subjectInput);
+
+        System.out.println("S16. Pick first subject.");
         adminAddUserPage.clickSubjectButton();
+
+        System.out.println("S17. Click submit button.");
         adminAddUserPage.clickSubmit();
     }
 
@@ -73,8 +86,10 @@ public class TestAdminAddUser extends Test {
         UserController userController = new UserController();
         try {
             Thread.sleep(1000);
+            System.out.println("S18. Checking user existence in database.");
             Assert.assertTrue("User does not exist in the database!", userController.userExistsInDatabase(emailInput));
             userController.deleteUserFromDatabase(emailInput);
+            System.out.println("R18. User has been added into database. Rollbacking database...");
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -89,7 +104,7 @@ public class TestAdminAddUser extends Test {
 
     private void managePasswordField() {
         System.out.println("S7. Insert password");
-        loginPage.insertUsername(resourceBundle.getString("ADMIN_PASSWORD"));
+        loginPage.insertPassword(resourceBundle.getString("ADMIN_PASSWORD"));
     }
 
     private void managePageTransition() {

@@ -59,39 +59,61 @@ public class TestAdminResetPassword extends Test {
         adminHomePage.clickAddUserButton();
         System.out.println("R12. Add button has been pressed. Now opening Admin Add User Page.");
         adminAddUserPage = adminHomePage.goToAdminAddUserPage();
+        adminAddUserPage = new AdminAddUserPage(driver);
         waitForElementToBeVisible(adminAddUserPage.getNameField());
     }
 
     private void completeFormAndSubmit() {
+        System.out.println("S13. Insert into name field: " + nameInput);
         adminAddUserPage.insertName(nameInput);
+
+        System.out.println("S14. Insert into email field: " + emailInput);
         adminAddUserPage.insertEmail(emailInput);
+
+        System.out.println("S15. Insert into subject field: " + subjectInput);
         adminAddUserPage.insertSubject(subjectInput);
+
+        System.out.println("S16. Pick first subject.");
         adminAddUserPage.clickSubjectButton();
+
+        System.out.println("S17. Click submit button.");
         adminAddUserPage.clickSubmit();
     }
 
     private void goToUsersManagement() {
+        System.out.println("S18. Click user management button.");
         adminAddUserPage.clickUserManagementButton();
         adminHomePage = adminAddUserPage.goToAdminHomePage();
         waitForElementToBeVisible(adminHomePage.getAddUserButton());
+        System.out.println("R18. User management page is now open.");
     }
 
     private void manageUserPassword() {
         UserController userController = new UserController();
         String oldPassword="a", newPassword="a";
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             Assert.assertTrue("User does not exist in the database!", userController.userExistsInDatabase(emailInput));
             oldPassword = userController.getUserPassword(emailInput);
+
+            System.out.println("S19. Search new user. Type into search bar: " + nameInput);
             adminHomePage.insertSearchText(nameInput);
 
+            System.out.println("S20. Click first user displayed.");
             waitForElementToBeVisible(adminHomePage.getFirstUserSection());
             adminHomePage.clickFirstUser();
 
+            System.out.println("S21. Click reset password button.");
             waitForElementToBeVisible(adminHomePage.getResetPasswordButton());
             adminHomePage.clickResetPasswordButton();
+            System.out.println("R21. A reset password popup is displayed.");
 
-            Thread.sleep(3000);
+            System.out.println("S22. Click yes button.");
+            waitForElementToBeVisible(adminHomePage.getResetPasswordPopup());
+            adminHomePage.clickResetPasswordPopupYesButton();
+            System.out.println("R22. Reset password popup is no longer displayed.");
+
+            Thread.sleep(1000);
 
             newPassword = userController.getUserPassword(emailInput);
 
@@ -111,7 +133,7 @@ public class TestAdminResetPassword extends Test {
 
     private void managePasswordField() {
         System.out.println("S7. Insert password");
-        loginPage.insertUsername(resourceBundle.getString("ADMIN_PASSWORD"));
+        loginPage.insertPassword(resourceBundle.getString("ADMIN_PASSWORD"));
     }
 
     private void managePageTransition() {

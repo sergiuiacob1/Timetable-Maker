@@ -2,11 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb80aa3b-2491-4e6f-9340-bd3cb10d9199" name="Default" comment="Modified driver property to maximize.">
-      <change afterPath="$PROJECT_DIR$/src/test/java/tests/ui/TestLoginPageUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/pages/user/UserProfilePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/pages/WebPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/WebPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/tests/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/database/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/database/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/database/controllers/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/database/controllers/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/LoginPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/LoginPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminAddUserPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminAddUserPage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminHomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/admin/AdminHomePage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/pages/user/UserHomePage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/pages/user/UserHomePage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminAddUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminAddUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminEditUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminEditUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminRemoveUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminRemoveUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminResetPassword.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/admin/manage_users/TestAdminResetPassword.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/tests/login/user/TestLoginUserFail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/tests/login/user/TestLoginUserFail.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -22,8 +43,20 @@
       <file leaf-file-name="config.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="595">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="451">
+              <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestLoginUserFail.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -31,8 +64,8 @@
       <file leaf-file-name="TestAdminAddUser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="65" column="25" selection-start-line="65" selection-start-column="25" selection-end-line="65" selection-end-column="25" />
+            <state relative-caret-position="372">
+              <caret line="124" selection-start-line="124" selection-end-line="124" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,8 +76,8 @@
       <file leaf-file-name="TestLoginAdminSuccess.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/admin/TestLoginAdminSuccess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+            <state relative-caret-position="600">
+              <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -52,17 +85,15 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginPage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/pages/LoginPage.java">
+      <file leaf-file-name="AdminAddUserPage.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+            <state relative-caret-position="358">
+              <caret line="19" column="186" selection-start-line="19" selection-start-column="186" selection-end-line="19" selection-end-column="186" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1402#1403#0" expanded="true" />
-                <element signature="e#1438#1439#0" expanded="true" />
-                <element signature="e#1993#1994#0" expanded="true" />
-                <element signature="e#2027#2028#0" expanded="true" />
+                <element signature="e#1359#1360#0" expanded="true" />
+                <element signature="e#1396#1397#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,8 +102,8 @@
       <file leaf-file-name="TestAdminResetPassword.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="135" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="135" selection-end-column="5" />
+            <state relative-caret-position="1020">
+              <caret line="51" selection-start-line="51" selection-end-line="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -80,32 +111,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestUserChangePassword.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java">
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="400">
+              <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestAdminEditUser.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TestAdminEditUser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="91" column="33" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/database/controllers/UserController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="512">
-              <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
+            <state relative-caret-position="1530">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -116,8 +135,8 @@
       <file leaf-file-name="TestAdminRemoveUser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="428">
-              <caret line="96" column="35" lean-forward="true" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
+            <state relative-caret-position="2020">
+              <caret line="101" column="43" selection-start-line="96" selection-start-column="12" selection-end-line="101" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -128,29 +147,15 @@
       <file leaf-file-name="AdminHomePage.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="69" column="38" lean-forward="true" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
+            <state relative-caret-position="1400">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1292#1293#0" expanded="true" />
-                <element signature="e#1338#1339#0" expanded="true" />
-                <element signature="e#1410#1411#0" expanded="true" />
-                <element signature="e#1444#1445#0" expanded="true" />
-                <element signature="e#1279#1280#0" expanded="true" />
-                <element signature="e#1316#1317#0" expanded="true" />
-                <element signature="e#1471#1472#0" expanded="true" />
-                <element signature="e#1811#1812#0" expanded="true" />
-                <element signature="e#1844#1845#0" expanded="true" />
-                <element signature="e#1965#1966#0" expanded="true" />
-                <element signature="e#2006#2007#0" expanded="true" />
-                <element signature="e#1761#1762#0" expanded="true" />
-                <element signature="e#1805#1806#0" expanded="true" />
-                <element signature="e#2155#2156#0" expanded="true" />
-                <element signature="e#2206#2207#0" expanded="true" />
-                <element signature="e#2248#2249#0" expanded="true" />
-                <element signature="e#2289#2290#0" expanded="true" />
-                <element signature="e#2300#2301#0" expanded="true" />
-                <element signature="e#2343#2344#0" expanded="true" />
+                <element signature="e#2360#2361#0" expanded="true" />
+                <element signature="e#3505#3506#0" expanded="true" />
+                <element signature="e#3546#3547#0" expanded="true" />
+                <element signature="e#3596#3597#0" expanded="true" />
+                <element signature="e#3638#3639#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,7 +177,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/example/LoginPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/example/UserHomePage.java" />
         <option value="$PROJECT_DIR$/src/test/java/example/TestLoginFunctionality.java" />
@@ -187,21 +191,23 @@
         <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/testAdminAddUser.java" />
         <option value="$PROJECT_DIR$/src/test/java/database/Database.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/ui/TestLoginPageUI.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java" />
-        <option value="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/Test.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/login/admin/TestLoginAdminSuccess.java" />
         <option value="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserSuccess.java" />
         <option value="$PROJECT_DIR$/src/test/java/pages/LoginPage.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java" />
         <option value="$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
-        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java" />
         <option value="$PROJECT_DIR$/src/test/java/database/controllers/UserController.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pages/user/UserProfilePage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserSuccess.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java" />
+        <option value="$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java" />
+        <option value="$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/config.properties" />
       </list>
     </option>
   </component>
@@ -353,42 +359,24 @@
               <item name="login" type="462c0819:PsiDirectoryNode" />
               <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="timetableMakerTesting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Timetable-Maker" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="ui" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="timetableMakerTesting" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Timetable-Maker" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/drivers/db/mysql-connector-java-8.0.11" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RunDashboard">
@@ -403,23 +391,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestLoginAdminSuccess.testLoginAdminSuccess">
+  <component name="RunManager" selected="JUnit.TestLoginUserFail.testLoginUserFail">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
-    <configuration name="TestLoginAdminSuccess.testLoginAdminSuccess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestAdminAddUser.testAdminAddUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="timetable-maker-testing" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="tests.login.admin.*" />
+          <option name="PATTERN" value="tests.admin.manage_users.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="tests.login.admin" />
-      <option name="MAIN_CLASS_NAME" value="tests.login.admin.TestLoginAdminSuccess" />
-      <option name="METHOD_NAME" value="testLoginAdminSuccess" />
+      <option name="PACKAGE_NAME" value="tests.admin.manage_users" />
+      <option name="MAIN_CLASS_NAME" value="tests.admin.manage_users.TestAdminAddUser" />
+      <option name="METHOD_NAME" value="testAdminAddUser" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -430,19 +418,88 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="TestLoginFunctionality.testLoginFunctionality" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestAdminEditUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="timetable-maker-testing" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="example.pages.*" />
+          <option name="PATTERN" value="tests.admin.manage_users.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="example.tests" />
-      <option name="MAIN_CLASS_NAME" value="example.tests.TestLoginFunctionality" />
-      <option name="METHOD_NAME" value="testLoginFunctionality" />
+      <option name="PACKAGE_NAME" value="tests.admin.manage_users" />
+      <option name="MAIN_CLASS_NAME" value="tests.admin.manage_users.TestAdminEditUser" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestAdminRemoveUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="timetable-maker-testing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.admin.manage_users.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests.admin.manage_users" />
+      <option name="MAIN_CLASS_NAME" value="tests.admin.manage_users.TestAdminRemoveUser" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestAdminResetPassword" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="timetable-maker-testing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.admin.manage_users.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests.admin.manage_users" />
+      <option name="MAIN_CLASS_NAME" value="tests.admin.manage_users.TestAdminResetPassword" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="TestLoginUserFail.testLoginUserFail" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="timetable-maker-testing" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.login.user.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="tests.login.user" />
+      <option name="MAIN_CLASS_NAME" value="tests.login.user.TestLoginUserFail" />
+      <option name="METHOD_NAME" value="testLoginUserFail" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -492,13 +549,19 @@
       <listeners />
     </configuration>
     <list>
-      <item itemvalue="JUnit.TestLoginFunctionality.testLoginFunctionality" />
-      <item itemvalue="JUnit.TestLoginAdminSuccess.testLoginAdminSuccess" />
+      <item itemvalue="JUnit.TestAdminAddUser.testAdminAddUser" />
+      <item itemvalue="JUnit.TestAdminEditUser" />
+      <item itemvalue="JUnit.TestAdminRemoveUser" />
+      <item itemvalue="JUnit.TestAdminResetPassword" />
+      <item itemvalue="JUnit.TestLoginUserFail.testLoginUserFail" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestLoginAdminSuccess.testLoginAdminSuccess" />
-        <item itemvalue="JUnit.TestLoginFunctionality.testLoginFunctionality" />
+        <item itemvalue="JUnit.TestLoginUserFail.testLoginUserFail" />
+        <item itemvalue="JUnit.TestAdminResetPassword" />
+        <item itemvalue="JUnit.TestAdminRemoveUser" />
+        <item itemvalue="JUnit.TestAdminEditUser" />
+        <item itemvalue="JUnit.TestAdminAddUser.testAdminAddUser" />
       </list>
     </recent_temporary>
   </component>
@@ -521,44 +584,45 @@
       <workItem from="1526996902206" duration="2659000" />
       <workItem from="1527161228460" duration="114000" />
       <workItem from="1527324983251" duration="16521000" />
-      <workItem from="1527442036675" duration="7176000" />
+      <workItem from="1527442036675" duration="7392000" />
+      <workItem from="1527500805012" duration="17371000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.19 at 23h 35m 36s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
+    <history-entry file="TestAdminAddUser_testAdminAddUser - 2018.05.28 at 19h 12m 01s.xml">
+      <configuration name="TestAdminAddUser.testAdminAddUser" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.19 at 23h 37m 24s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
+    <history-entry file="TestAdminAddUser_testAdminAddUser - 2018.05.28 at 19h 13m 25s.xml">
+      <configuration name="TestAdminAddUser.testAdminAddUser" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.21 at 11h 20m 10s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.21 at 11h 27m 31s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.21 at 11h 28m 46s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.21 at 11h 41m 52s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestLoginFunctionality_testLoginFunctionality - 2018.05.22 at 17h 09m 48s.xml">
-      <configuration name="TestLoginFunctionality.testLoginFunctionality" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="TestLoginAdminSuccess_testLoginAdminSuccess - 2018.05.27 at 20h 35m 36s.xml">
+    <history-entry file="TestLoginAdminSuccess_testLoginAdminSuccess - 2018.05.28 at 19h 16m 40s.xml">
       <configuration name="TestLoginAdminSuccess.testLoginAdminSuccess" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestLoginAdminSuccess_testLoginAdminSuccess - 2018.05.27 at 20h 40m 59s.xml">
-      <configuration name="TestLoginAdminSuccess.testLoginAdminSuccess" configurationId="JUnit" />
+    <history-entry file="TestAdminEditUser_testAdminEditUser - 2018.05.28 at 19h 16m 59s.xml">
+      <configuration name="TestAdminEditUser.testAdminEditUser" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="TestLoginAdminSuccess_testLoginAdminSuccess - 2018.05.27 at 20h 42m 05s.xml">
-      <configuration name="TestLoginAdminSuccess.testLoginAdminSuccess" configurationId="JUnit" />
+    <history-entry file="TestAdminEditUser_testAdminEditUser - 2018.05.28 at 19h 18m 46s.xml">
+      <configuration name="TestAdminEditUser.testAdminEditUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestAdminAddUser_testAdminAddUser - 2018.05.28 at 19h 19m 27s.xml">
+      <configuration name="TestAdminAddUser.testAdminAddUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestAdminAddUser_testAdminAddUser - 2018.05.28 at 19h 21m 32s.xml">
+      <configuration name="TestAdminAddUser.testAdminAddUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestAdminEditUser - 2018.05.28 at 19h 22m 02s.xml">
+      <configuration name="TestAdminEditUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestAdminRemoveUser - 2018.05.28 at 19h 22m 20s.xml">
+      <configuration name="TestAdminRemoveUser" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="TestAdminResetPassword - 2018.05.28 at 19h 22m 39s.xml">
+      <configuration name="TestAdminResetPassword" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38300000" />
+    <option name="totallyTimeSpent" value="55887000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -574,11 +638,11 @@
       <window_info anchor="right" id="Maven Projects" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Run" order="3" visible="true" weight="0.25925925" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.25925925" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32897604" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26119402" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26385927" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -604,14 +668,12 @@
     <MESSAGE value="Modified driver property to maximize." />
     <option name="LAST_COMMIT_MESSAGE" value="Modified driver property to maximize." />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="59" selection-start-line="34" selection-start-column="59" selection-end-line="34" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/example/tests/TestLoginFunctionality.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="629">
@@ -804,13 +866,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/TestLoginFail.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/TestLoginSuccess.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/example/pages/LoginPage.java">
@@ -844,51 +899,18 @@
     <entry file="file://$PROJECT_DIR$/src/test/java/database/controllers/Controller.java" />
     <entry file="file://$PROJECT_DIR$/src/test/java/database/Database.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="73" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="73" />
+        <state relative-caret-position="660">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/ui/TestLoginPageUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="55" column="15" lean-forward="true" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="54" column="38" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1187#1188#0" expanded="true" />
-            <element signature="e#1232#1233#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="11" column="41" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#298#299#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pages/WebPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="44" lean-forward="true" selection-start-line="14" selection-start-column="44" selection-end-line="14" selection-end-column="80" />
+        <state relative-caret-position="440">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -897,25 +919,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tests/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+        <state relative-caret-position="418">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
+          <folding>
+            <element signature="e#2706#2707#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/database/controllers/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="72" column="33" selection-start-line="72" selection-start-column="33" selection-end-line="72" selection-end-column="33" />
+        <state relative-caret-position="472">
+          <caret line="66" column="32" lean-forward="true" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserSuccess.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/ui/TestLoginPageUI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+        <state relative-caret-position="1100">
+          <caret line="55" column="15" lean-forward="true" selection-start-line="55" selection-start-column="15" selection-end-line="55" selection-end-column="15" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -924,22 +949,118 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/pages/LoginPage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
+        <state relative-caret-position="432">
+          <caret line="35" column="5" selection-start-line="30" selection-start-column="4" selection-end-line="35" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1402#1403#0" expanded="true" />
-            <element signature="e#1438#1439#0" expanded="true" />
-            <element signature="e#1993#1994#0" expanded="true" />
-            <element signature="e#2027#2028#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pages/user/UserProfilePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#470#471#0" expanded="true" />
+            <element signature="e#513#514#0" expanded="true" />
+            <element signature="e#544#545#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
+            <element signature="e#723#724#0" expanded="true" />
+            <element signature="e#1287#1288#0" expanded="true" />
+            <element signature="e#1334#1335#0" expanded="true" />
+            <element signature="e#1428#1429#0" expanded="true" />
+            <element signature="e#1484#1485#0" expanded="true" />
+            <element signature="e#1515#1516#0" expanded="true" />
+            <element signature="e#1587#1588#0" expanded="true" />
+            <element signature="e#1634#1635#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="131" column="75" selection-start-line="131" selection-start-column="75" selection-end-line="131" selection-end-column="75" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pages/user/UserHomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserSuccess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="52" column="87" selection-start-line="52" selection-start-column="72" selection-end-line="52" selection-end-column="87" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/admin/TestLoginAdminSuccess.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="41" column="33" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+        <state relative-caret-position="600">
+          <caret line="36" column="30" selection-start-line="36" selection-start-column="30" selection-end-line="36" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1400">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2360#2361#0" expanded="true" />
+            <element signature="e#3505#3506#0" expanded="true" />
+            <element signature="e#3546#3547#0" expanded="true" />
+            <element signature="e#3596#3597#0" expanded="true" />
+            <element signature="e#3638#3639#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/pages/admin/AdminAddUserPage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="19" column="186" selection-start-line="19" selection-start-column="186" selection-end-line="19" selection-end-column="186" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1359#1360#0" expanded="true" />
+            <element signature="e#1396#1397#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1530">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -948,91 +1069,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminRemoveUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="428">
-          <caret line="96" column="35" lean-forward="true" selection-start-line="96" selection-start-column="35" selection-end-line="96" selection-end-column="35" />
+        <state relative-caret-position="2020">
+          <caret line="101" column="43" selection-start-line="96" selection-start-column="12" selection-end-line="101" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/user/TestUserChangePassword.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/pages/admin/AdminHomePage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="69" column="38" lean-forward="true" selection-start-line="69" selection-start-column="38" selection-end-line="69" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1292#1293#0" expanded="true" />
-            <element signature="e#1338#1339#0" expanded="true" />
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="e#1444#1445#0" expanded="true" />
-            <element signature="e#1279#1280#0" expanded="true" />
-            <element signature="e#1316#1317#0" expanded="true" />
-            <element signature="e#1471#1472#0" expanded="true" />
-            <element signature="e#1811#1812#0" expanded="true" />
-            <element signature="e#1844#1845#0" expanded="true" />
-            <element signature="e#1965#1966#0" expanded="true" />
-            <element signature="e#2006#2007#0" expanded="true" />
-            <element signature="e#1761#1762#0" expanded="true" />
-            <element signature="e#1805#1806#0" expanded="true" />
-            <element signature="e#2155#2156#0" expanded="true" />
-            <element signature="e#2206#2207#0" expanded="true" />
-            <element signature="e#2248#2249#0" expanded="true" />
-            <element signature="e#2289#2290#0" expanded="true" />
-            <element signature="e#2300#2301#0" expanded="true" />
-            <element signature="e#2343#2344#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminResetPassword.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="135" column="5" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="135" selection-end-column="5" />
+        <state relative-caret-position="1020">
+          <caret line="51" selection-start-line="51" selection-end-line="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="20" column="36" lean-forward="true" selection-start-line="20" selection-start-column="36" selection-end-line="20" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="595">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="451">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminAddUser.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/tests/login/user/TestLoginUserFail.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="65" column="25" selection-start-line="65" selection-start-column="25" selection-end-line="65" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/database/controllers/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="512">
-          <caret line="51" lean-forward="true" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/tests/admin/manage_users/TestAdminEditUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="91" column="33" selection-start-line="91" selection-start-column="33" selection-end-line="91" selection-end-column="33" />
+        <state relative-caret-position="500">
+          <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1096,7 +1168,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

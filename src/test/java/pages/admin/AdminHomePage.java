@@ -7,52 +7,52 @@ import pages.WebPage;
 
 public class AdminHomePage extends WebPage {
 
-    @FindBy()
+    @FindBy(css = "#logout")
     private WebElement logoutButton;
 
-    @FindBy()
+    @FindBy(css = "#add-user")
     private WebElement addUserButton;
 
-    @FindBy()
+    @FindBy(css = "#buttons-user0 > button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.edit-button")
     private WebElement editUserButton;
 
-    @FindBy()
+    @FindBy(css = "#sample6")
     private WebElement searchBar;
 
     @FindBy()
     private WebElement searchButton;
 
-    @FindBy()
+    @FindBy(css = "#buttons-user0 > button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.remove-button")
     private WebElement removeButton;
 
-    @FindBy()
+    @FindBy(css = "#user0 > span")
     private WebElement firstUserSection;
 
-    @FindBy()
+    @FindBy(css = "#dialog-remove")
     private WebElement removePopup;
 
-    @FindBy()
+    @FindBy(css = "#remove-user-yes")
     private WebElement removePopupYesButton;
 
-    @FindBy()
+    @FindBy(css = "#buttons-user0 > button.mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button")
     private WebElement resetPasswordButton;
 
-    @FindBy()
+    @FindBy(css = "#dialog-reset")
     private WebElement resetPasswordPopup;
 
-    @FindBy()
+    @FindBy(css = "#reset-user-yes")
     private WebElement resetPasswordPopupYesButton;
 
-    @FindBy()
+    @FindBy(css = "#panel-user0")
     private WebElement editPopup;
 
-    @FindBy()
+    @FindBy(css = "#edit-fullName-")
     private WebElement editPopupNameField;
 
-    @FindBy()
+    @FindBy(css = "#edit-email-")
     private WebElement editPopupEmailField;
 
-    @FindBy()
+    @FindBy(css = "#panel-user0 > div.mdl-card__actions.mdl-card--border > a > span")
     private WebElement editPopupConfirmButton;
 
     public void insertTextEditPopupNameField(String input) {
@@ -95,8 +95,6 @@ public class AdminHomePage extends WebPage {
         firstUserSection.click();
     }
 
-    public AdminAddUserPage goToAdminAddUserPage() { return PageFactory.initElements(driver,AdminAddUserPage.class); }
-
     public void clickLogoutButton() {
         logoutButton.click();
     }
@@ -136,4 +134,18 @@ public class AdminHomePage extends WebPage {
     public void clickResetPasswordButton() {
         resetPasswordButton.click();
     }
+
+    public WebElement getEditPopupNameField() {
+        return editPopupNameField;
+    }
+
+    public WebElement getEditPopupEmailField() {
+        return editPopupEmailField;
+    }
+
+    public void clickEditUserButton() {
+        editUserButton.click();
+    }
+
+    public AdminAddUserPage goToAdminAddUserPage() { return PageFactory.initElements(driver,AdminAddUserPage.class); }
 }

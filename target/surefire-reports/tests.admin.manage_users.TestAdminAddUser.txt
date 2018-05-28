@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: tests.admin.manage_users.TestAdminAddUser
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.775 sec

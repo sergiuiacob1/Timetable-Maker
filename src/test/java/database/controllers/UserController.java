@@ -55,4 +55,15 @@ public class UserController {
         return resultSet.getString(1);
     }
 
+    public int getUserId(String userEmail) throws SQLException {
+        Connection con = Database.getConnection();
+        String sql = "SELECT id from users where mail = ?";
+        PreparedStatement preparedStatement = con.prepareStatement(sql);
+        preparedStatement.setString(1,userEmail);
+        ResultSet resultSet =preparedStatement.executeQuery();
+
+        resultSet.next();
+
+        return resultSet.getInt(1);
+    }
 }
