@@ -4,7 +4,7 @@ module.exports = (() => {
   const squel = require('squel');
 
   class ApplicationRecord {
-    constructor(db, table) {
+    constructor(db, table, table2, onCond) {
       this.db = db;
       this.table = table;
       
@@ -12,6 +12,9 @@ module.exports = (() => {
 
       this.query = squel.select()
         .from(table);
+      if (table2 && onCond) {
+        this.query = this.query.join(table2, null, onCond);
+      }
     }
 
     update() {

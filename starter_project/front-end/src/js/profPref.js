@@ -3,7 +3,11 @@ const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
 
+let logoutButton = ".mdl-navigation__link#logout";
+
 require('../less/profPref.less');
+
+$(".loader-bck").hide();
 
 function populateTable() {
 
@@ -28,7 +32,7 @@ function populateTable() {
 //populate body
   var tbody = document.createElement("tbody");
   var lineIndex = 0;
-  for (var i = 1 ; i < tableArray[1].length; i++) {
+  for (var i = 0 ; i < tableArray[1].length; i++) {
    var tr = document.createElement("tr");
    for (var j = 0; j < tableArray[0].length; j++) {
      var td = document.createElement("td");
@@ -47,6 +51,8 @@ function populateTable() {
 
 
 function postThisShit(json, callback) {
+
+  $(".loader-bck").show();
   $.ajax({
     url: urlPost,
     method: 'POST',
@@ -54,6 +60,7 @@ function postThisShit(json, callback) {
     data: json
   }).done(function(res) {
     console.log(res);
+    $(".loader-bck").hide();
     callback();
   });
 };
@@ -206,7 +213,9 @@ function openTab(tabName) {
 
 function getSubjectsShow(){
   var url = 'http://'+hostName+'/api/subjects?token=' + token;
+    $(".loader-bck").show();
   $.get(`${url}`).done(function (result){
+      $(".loader-bck").hide();
     for(var i=0;i<result.subjects.length;i++){
       $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
     }
@@ -217,7 +226,9 @@ function getSubjectsShow(){
 function getRoomsShow(){
   var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
+    $(".loader-bck").show();
   $.get(`${url}`).done(function(result){
+      $(".loader-bck").hide();
     for(var i=0;i<result.rooms.length;i++){
       pos = Math.ceil((i+1)/3);
       if(i%3 == 0)
@@ -230,7 +241,10 @@ function getRoomsShow(){
 
 function getGroupsShow(){
   var url = 'http://'+hostName+'/api/groups?token=' + token;
-  $.get(`${url}`).done(function(result){
+
+    $(".loader-bck").show();
+    $.get(`${url}`).done(function(result){
+      $(".loader-bck").hide();
     for(var i=0;i<result.groups.length;i++){
       $("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
     }
@@ -238,6 +252,13 @@ function getGroupsShow(){
 };
 
 $(document).ready(function() {
+
+  $(logoutButton).on("click", function(){
+    $(location).attr('href', '/login.html');
+    localStorage.removeItem("token");
+  });
+
+
   populateTable();
   getSubjectsShow();
   getRoomsShow();
