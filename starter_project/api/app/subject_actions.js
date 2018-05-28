@@ -1,6 +1,7 @@
 module.exports = (() => {
     'use strict';
     const Subject = require('./models/subject');
+    const SubjectUser = require('./models/subject_user');
   
     const newSubject = ({name, short, date, frequency}) => {
       return new Subject()
@@ -27,7 +28,21 @@ module.exports = (() => {
       }
     };
 
+    const getUserSubjects = (userId) => {
+      console.log(userId);
+      if (userId) {
+        return new SubjectUser()
+          .field('*')
+          .where({userId})
+          .valueOf()
+          .then((res) => {
+            return res;
+          });
+      }
+    }
+
     const getSubjects = () => {
+      
       return new Subject()
         .field('*')
         .valueOf()
@@ -39,6 +54,7 @@ module.exports = (() => {
     return {
       getSubject,
       getSubjects,
+      getUserSubjects,
       newSubject
     };
   })();

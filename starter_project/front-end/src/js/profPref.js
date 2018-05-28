@@ -213,7 +213,9 @@ function openTab(tabName) {
 
 function getSubjectsShow(){
   var url = 'http://'+hostName+'/api/subjects?token=' + token;
+    $(".loader-bck").show();
   $.get(`${url}`).done(function (result){
+      $(".loader-bck").hide();
     for(var i=0;i<result.subjects.length;i++){
       $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
     }
@@ -224,7 +226,9 @@ function getSubjectsShow(){
 function getRoomsShow(){
   var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
+    $(".loader-bck").show();
   $.get(`${url}`).done(function(result){
+      $(".loader-bck").hide();
     for(var i=0;i<result.rooms.length;i++){
       pos = Math.ceil((i+1)/3);
       if(i%3 == 0)
@@ -237,7 +241,10 @@ function getRoomsShow(){
 
 function getGroupsShow(){
   var url = 'http://'+hostName+'/api/groups?token=' + token;
-  $.get(`${url}`).done(function(result){
+
+    $(".loader-bck").show();
+    $.get(`${url}`).done(function(result){
+      $(".loader-bck").hide();
     for(var i=0;i<result.groups.length;i++){
       $("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
     }
