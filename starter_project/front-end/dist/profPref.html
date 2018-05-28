@@ -25,7 +25,7 @@
          window.location = "https://www.google.com/chrome/browser/features.html?brand=CHBD&gclid=Cj0KCQjwlv_XBRDrARIsAH-iRJSzmGy1iA8AqCZRsX3axU1lGK25wUP0PSGzmDxkETC9Nuss-FckUzMaAk7HEALw_wcB&gclsrc=aw.ds&dclid=CJiMh6XAkdsCFdOVdwodpBgKgQ";
       }
     </script>
-  <link href="profPref.css?a8454013561fcf2dbc08" rel="stylesheet"></head>  
+  <link href="profPref.css?dbffd211359acf86bcb7" rel="stylesheet"></head>  
   
   
   <body>
@@ -40,9 +40,10 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="profPref.html">Adauga o optiune</a>
+            <a class="mdl-navigation__link active" href="profPref.html">Adauga o optiune</a>
             <a target="_blank" class="mdl-navigation__link" href="orarulTau.html">Orarul tau</a>
-			<a target="_blank" class="mdl-navigation__link" href="profil.html">Profilul tau</a>
+			      <a target="_blank" class="mdl-navigation__link" href="profil.html">Profilul tau</a>
+            <a class="mdl-navigation__link" id="logout">Logout</a>
           </nav>
         </div>
       </header>
@@ -90,10 +91,7 @@
                   Grupa / Semian
                   <br><br>
                   <!--<input type="checkbox" name="grupa" value="orice">Orice grupa<br>-->
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-                    <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" value="orice">
-                    <span class="mdl-checkbox__label">Orice grupa</span>
-                  </label>
+
                   <br>
 
                 </div>
@@ -146,9 +144,14 @@
         </div>
       </main>
     </div>
-  
-    
 
-    
-  <script type="text/javascript" src="profPref.js?a8454013561fcf2dbc08"></script></body>
+            <div class="loader-bck">
+                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active loader"></div>
+            </div>
+
+            <div id="notification" class="mdl-snackbar mdl-js-snackbar">
+              <div class="mdl-snackbar__text"></div>
+              <button type="button" class="mdl-snackbar__action"></button>
+            </div>
+  <script type="text/javascript" src="profPref.js?dbffd211359acf86bcb7"></script></body>
 </html>

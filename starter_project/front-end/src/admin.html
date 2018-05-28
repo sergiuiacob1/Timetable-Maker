@@ -27,7 +27,8 @@
       <nav class="mdl-navigation mdl-layout--large-screen-only">
 
 
-        <div class="mdl-navigation__link active" id="users-management">Management Useri</div>
+        <div class="mdl-navigation__link active" id="users-management">Gestiune utilizatori</div>
+        <div class="mdl-navigation__link" id="resurse">Resurse</div>
         <div class="mdl-navigation__link" id="add-user">Adauga User</div>
         <div class="mdl-navigation__link" id="data-export">Exporta date</div>
         <div class="mdl-navigation__link" id="logout">Logout</div>
@@ -74,6 +75,20 @@
             </div>
         </div>
 
+
+          <div class="resurse">
+            <div class="container-resurse">
+                <div class="card add">
+                    <div class="menu menu-center">
+                        <i class="material-icons md-48 grey">add_box</i>
+                    </div>
+                    <div class="menu menu-center">
+                        <span>Adaugă resursă</span>
+                    </div>
+                </div>
+            </div>
+          </div>
+
             <div class="add-user">
                 <div class="container">
                     <div class="content-input">
@@ -104,11 +119,12 @@
                             <input class="mdl-textfield__input" type="text" id="subjects">
                             <label class="mdl-textfield__label" for="fname">Adauga subiecte</label>
                         </div>
-                        <p class="input-req" id="subjects-req"></p>
-                    </div>
 
-                    <div class="content-dropdown content-dropdown-style">
-                      <ul class="demo-list-control mdl-list dropdown"></ul>
+                        <div class="content-dropdown content-dropdown-style">
+                            <ul class="demo-list-control mdl-list dropdown"></ul>
+                        </div>
+                        
+                        <p class="input-req" id="subjects-req"></p>
                     </div>
 
                     <div class="content-input">

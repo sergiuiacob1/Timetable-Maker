@@ -7,7 +7,7 @@ $(document).ready(function(){
 	const hostName = '89.34.92.135:2222';
 
 	let token = localStorage.getItem("token");
-	let logoutButton = ".mdl-navigation__link";
+	let logoutButton = ".mdl-navigation__link#logout";
 	let changePassButton = ".mdl-button#change-pass"
 	let errorMsg = "Auch!!! Ceva nu a mers bine!";
 
@@ -40,7 +40,7 @@ $(document).ready(function(){
 
 	$(logoutButton).on("click", function(){
 		$(location).attr('href', '/login.html');
-		// localStorage.removeItem("token");
+		localStorage.removeItem("token");
 	});
 
 	$(changePassButton).on("click", function(){

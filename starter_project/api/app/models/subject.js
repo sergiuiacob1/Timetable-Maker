@@ -13,12 +13,15 @@ module.exports = (() => {
       }
   
       where({
-        id
+        id, userId
       }) {
         let whereClause = squel.expr();
   
         if (id) {
           whereClause = whereClause.and("id = ?", id);
+        }
+        if (userId) {
+          whereClause = whereClause.and('id_user = ?', userId)
         }
         this.query = this.query.where(whereClause);
         return this;

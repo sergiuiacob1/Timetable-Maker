@@ -1,0 +1,165 @@
+ * {
+    box-sizing: border-box;
+ }
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.container-resurse {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2em 10em;
+}
+
+.card {
+    position: relative;
+    border: 1px solid #eee;
+    border-bottom: 1px solid #aaa;
+    padding: 0 2em;
+    margin: 1em;
+    background: #fff;
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        overflow: hidden;
+
+        input {
+            margin: 0.5em 0;
+            width: 100%;
+        }
+        
+        input:not(.mdl-button) {
+            border: 0px;
+            border-bottom: 1px solid #aaa;
+            padding: 1em;
+            background: #fff;
+        }
+
+        button {
+            margin: 0.5em 0 2em 0;
+            width: 100%;
+        }
+    }
+
+    h1 {
+        font-weight: lighter;
+    }
+
+    .menu {
+        display: flex;
+        padding: 1.5em 0;
+    }
+    
+    .menu-left {
+        align-content: center;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    
+    .menu-center {
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .menu-right {
+        align-content: center;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .spacing {
+        i {
+            margin-right: 1em;
+        }
+        
+        span {
+            width: 12em;
+            height: 1.2em;
+        }
+    }
+
+    .nospacing {
+        padding: 0em;
+    }
+
+    .red-button {
+        background: #b71c1c !important;
+    }    
+
+    .id {
+        display: none;
+    }
+}
+
+.card.add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    cursor: pointer;
+
+    padding: 6.1em;
+    border: 1px solid #aaa;
+    border-style: dashed;
+
+    span {
+        color: #aaa;
+    }
+}
+
+.card.form {
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
+
+    a {
+        display: none;
+    }
+}
+
+.card.moreMenu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    top: 48px;
+}
+
+.overlay {
+    z-index: 999;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.material-icons.grey {
+    color: #aaa;
+}
+
+.material-icons.blue {
+    color: #3F51B5;
+}
+
+.material-icons.md-24 {
+    font-size: 24px;
+}
+
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+.material-icons.md-96 {
+    font-size: 96px;
+}

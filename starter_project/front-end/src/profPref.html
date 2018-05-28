@@ -40,9 +40,10 @@
           <div class="mdl-layout-spacer"></div>
           <!-- Navigation. We hide it in small screens. -->
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <a class="mdl-navigation__link" href="profPref.html">Adauga o optiune</a>
+            <a class="mdl-navigation__link active" href="profPref.html">Adauga o optiune</a>
             <a target="_blank" class="mdl-navigation__link" href="orarulTau.html">Orarul tau</a>
-			<a target="_blank" class="mdl-navigation__link" href="profil.html">Profilul tau</a>
+			      <a target="_blank" class="mdl-navigation__link" href="profil.html">Profilul tau</a>
+            <a class="mdl-navigation__link" id="logout">Logout</a>
           </nav>
         </div>
       </header>
@@ -90,10 +91,7 @@
                   Grupa / Semian
                   <br><br>
                   <!--<input type="checkbox" name="grupa" value="orice">Orice grupa<br>-->
-                  <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
-                    <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" value="orice">
-                    <span class="mdl-checkbox__label">Orice grupa</span>
-                  </label>
+
                   <br>
 
                 </div>
@@ -146,9 +144,14 @@
         </div>
       </main>
     </div>
-  
-    
 
-    
+            <div class="loader-bck">
+                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active loader"></div>
+            </div>
+
+            <div id="notification" class="mdl-snackbar mdl-js-snackbar">
+              <div class="mdl-snackbar__text"></div>
+              <button type="button" class="mdl-snackbar__action"></button>
+            </div>
   </body>
 </html>
