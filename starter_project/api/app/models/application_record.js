@@ -13,7 +13,7 @@ module.exports = (() => {
       this.query = squel.select()
         .from(table);
       if (table2 && onCond) {
-        this.query = this.query.join(table2, onCond);
+        this.query = this.query.join(table2, null, onCond);
       }
     }
 
