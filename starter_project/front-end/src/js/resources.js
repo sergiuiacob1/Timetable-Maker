@@ -97,11 +97,11 @@ $(document).ready(() => {
         submitButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
         cancelButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored red-button";
 
-        title.innerHTML = "Adaugă resursă";
+        title.innerHTML = "Adauga resursa";
         typeLabel.innerHTML = "Tip";
         nameLabel.innerHTML = "Nume";
         capacityLabel.innerHTML = "Capacitate";
-        submitButton.value = "Adaugă";
+        submitButton.value = "Adauga";
         cancelButton.innerHTML = "Anulare";
 
         form.action = "";
@@ -163,8 +163,8 @@ $(document).ready(() => {
         deleteButton.className = "mdl-button mdl-js-button";
         id.className = "id";
 
-        updateButton.innerHTML = "Editează";
-        deleteButton.innerHTML = "Șterge";
+        updateButton.innerHTML = "Editeaza";
+        deleteButton.innerHTML = "Sterge";
         id.innerHTML = resId;
 
         updateButton.addEventListener("click", event => {
@@ -206,11 +206,11 @@ $(document).ready(() => {
         submitButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
         cancelButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored red-button";
 
-        title.innerHTML = "Editează resursă";
+        title.innerHTML = "Editeaza resursa";
         typeLabel.innerHTML = "Tip";
         nameLabel.innerHTML = "Nume";
         capacityLabel.innerHTML = "Capacitate";
-        submitButton.value = "Editează";
+        submitButton.value = "Editeaza";
         cancelButton.innerHTML = "Anulare";
         id.innerHTML = resId;
 
