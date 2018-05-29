@@ -1,4 +1,7 @@
 // const hostName = '0.0.0.0:2222';
+
+
+
 const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
@@ -252,6 +255,11 @@ function getGroupsShow(){
 };
 
 $(document).ready(function() {
+
+  if (localStorage.getItem("token") == null){
+    $(location).attr('href', '/login.html');
+    return;
+  }
 
   $(logoutButton).on("click", function(){
     $(location).attr('href', '/login.html');

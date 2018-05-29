@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+
+
+	if (localStorage.getItem("token") == null){
+		$(location).attr('href', '/login.html');
+		return;
+	}
+
 	require('../less/admin.less');
 	require('./resources.js');
 

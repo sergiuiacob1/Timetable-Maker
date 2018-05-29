@@ -1,4 +1,12 @@
 $(document).ready(function() {
+
+
+
+  if (localStorage.getItem("token") == null){
+		$(location).attr('href', '/login.html');
+		return;
+	}
+
   const hostName = '89.34.92.135:2222';
   const token = localStorage.getItem("token");
   
