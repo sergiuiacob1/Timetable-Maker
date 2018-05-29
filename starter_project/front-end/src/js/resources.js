@@ -278,7 +278,7 @@ $(document).ready(() => {
         submitButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored red-button";
         cancelButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
 
-        title.innerHTML = "Sunteți sigur?";
+        title.innerHTML = "Sunteti sigur?";
         submitButton.value = "Da";
         cancelButton.innerHTML = "Nu";
         id.innerHTML = resId;
