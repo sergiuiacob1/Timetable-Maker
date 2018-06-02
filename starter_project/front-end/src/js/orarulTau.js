@@ -1,4 +1,19 @@
 $(document).ready(function() {
+
+
+
+  if (localStorage.getItem("token") == null){
+		$(location).attr('href', '/login.html');
+		return;
+  }
+  
+  let logoutButton = ".mdl-navigation__link#logout";
+  
+  $(logoutButton).on("click", function(){
+		$(location).attr('href', '/login.html');
+		localStorage.removeItem("token");
+	});
+
   const hostName = '89.34.92.135:2222';
   const token = localStorage.getItem("token");
   

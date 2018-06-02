@@ -11,11 +11,13 @@
                 this.domain  = config.domain;
                 this.account = config.account;
                 this.mailgun = new Mailgun({apiKey: config.key, domain: config.domain});
+                this.url     = 'http://89.34.92.135/login.html';
+                this.acceptedMails = [this.account, 'medvichi.stefan@gmail.com'];
             } 
         }
 
         sendMail (mail, subject, message) {
-            if (mail) {
+            if (mail && this.acceptedMails.indexOf(mail) > -1) {
                 var data = {
                       from: this.account,
                       to: mail,
@@ -35,7 +37,8 @@
 
         sendResetPasswordMail({mail, password}) {
             console.log(mail)
-            this.sendMail(mail, '[TimetableMaker] Your password has been reset.', 'Timetable password has been reset. <br> Your new password is:<br><b>' + password + '</b><br>You can now log in');
+            this.sendMail(mail, `[TimetableMaker] Resetare Parola`, `Parola contului dumneavoastra a fost resetata. <br> Noua parola este:<br> <b>${password}</b>
+            <br>Puteti accesa contul <a href="${this.url}">aici</a>.`);
         };
 
     };

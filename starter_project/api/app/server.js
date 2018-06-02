@@ -21,6 +21,7 @@ module.exports = (() => {
   const {getSubjectsRoute, getAllSubjectsRoute, addSubjectRoute} = require('./subject_routes');
   const {getConstraintsRoute, newConstraintRoute, deleteConstraintRoute} = require('./constraints_routes.js');
   const {getLinkedConstraintsRoute, newLinkedConstraintRoute, deleteLinkedConstraintRoute} = require('./linked_constraints_routes.js');
+  const {exportDb} = require('./export.js');
 
   let serverInterface = undefined;
 
@@ -91,6 +92,8 @@ module.exports = (() => {
     apiRoutes.post('/linked_constraints', newLinkedConstraintRoute);
     apiRoutes.post('/delete_linked_constraints', deleteLinkedConstraintRoute);
     
+    apiRoutes.get('/export', exportDb);
+
     app.use('/api', apiRoutes);
 
     const start = (port) => {

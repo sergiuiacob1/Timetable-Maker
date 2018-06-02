@@ -1,15 +1,10 @@
  * {
-    /*font-family: Roboto;*/
     box-sizing: border-box;
  }
 
 body {
     padding: 0;
     margin: 0;
-}
-
-h1 {
-    font-weight: normal;
 }
 
 .container-resurse {
@@ -33,47 +28,26 @@ h1 {
         justify-content: flex-start;
         overflow: hidden;
 
-        input,
-        button {
+        input {
             margin: 0.5em 0;
             width: 100%;
+        }
+        
+        input:not(.mdl-button) {
             border: 0px;
             border-bottom: 1px solid #aaa;
             padding: 1em;
-        }
-
-        input[type="submit"] {
-            background: #3F51B5;
-            color: #fff;
-            border: 0px;
+            background: #fff;
         }
 
         button {
-            border: 0px;
-            color: #fff;
-            background: rgb(187, 19, 19);
-            margin-bottom: 1em;
-
-            &:hover {
-                background: rgb(187, 19, 19);
-            }
-        }
-    }
-
-    button {
-        background: #fff;
-        padding: 1em;
-        color: #E4BC2E;
-        border: 0px;
-        transition: .3s cubic-bezier(.25,.8,.5,1),color 1ms;
-
-        &:hover {
-            background: #fff3e0;
+            margin: 0.5em 0 2em 0;
+            width: 100%;
         }
     }
 
     h1 {
-        font-weight: normal;
+        font-weight: lighter;
     }
 
     .menu {
@@ -113,10 +87,10 @@ h1 {
     .nospacing {
         padding: 0em;
     }
-    
-    .title {
-        color: #3F51B5;
-    }
+
+    .red-button {
+        background: #b71c1c !important;
+    }    
 
     .id {
         display: none;
@@ -140,7 +114,7 @@ h1 {
 }
 
 .card.form {
-    border-radius: 10px;
+    box-shadow: 0 9px 46px 8px rgba(0, 0, 0, 0.14), 0 11px 15px -7px rgba(0, 0, 0, 0.12), 0 24px 38px 3px rgba(0, 0, 0, 0.2);
 
     a {
         display: none;
@@ -167,7 +141,7 @@ h1 {
     top: 0;
     justify-content: center;
     align-items: center;
-    background: rgba(170, 170, 170, 0.5);
+    background: rgba(0, 0, 0, 0.1);
 }
 
 .material-icons.grey {

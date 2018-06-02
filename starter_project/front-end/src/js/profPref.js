@@ -1,4 +1,7 @@
 // const hostName = '0.0.0.0:2222';
+
+
+
 const hostName = '89.34.92.135:2222';
 const token = localStorage.getItem("token");
 const urlPost = `http://${hostName}/api/constraints?token=${token}`;
@@ -32,7 +35,7 @@ function populateTable() {
 //populate body
   var tbody = document.createElement("tbody");
   var lineIndex = 0;
-  for (var i = 1 ; i < tableArray[1].length; i++) {
+  for (var i = 0 ; i < tableArray[1].length; i++) {
    var tr = document.createElement("tr");
    for (var j = 0; j < tableArray[0].length; j++) {
      var td = document.createElement("td");
@@ -252,6 +255,11 @@ function getGroupsShow(){
 };
 
 $(document).ready(function() {
+
+  if (localStorage.getItem("token") == null){
+    $(location).attr('href', '/login.html');
+    return;
+  }
 
   $(logoutButton).on("click", function(){
     $(location).attr('href', '/login.html');

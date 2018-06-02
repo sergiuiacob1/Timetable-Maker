@@ -46,9 +46,9 @@ $(document).ready(() => {
         classImage.innerHTML = "settings";
         titleImg.innerHTML = "title";
         title.innerHTML = json["name"];
-        typeImg.innerHTML = "widgets";
+        typeImg.innerHTML = "settings";
         type.innerHTML = json["type"];
-        capacityImg.innerHTML = "person";
+        capacityImg.innerHTML = "widgets";
         capacity.innerHTML = json["capacity"];
         id.innerHTML = json["id"];
 
@@ -94,13 +94,14 @@ $(document).ready(() => {
 
         bodyOverlay.classList = "overlay menu menu-center"
         body.className = "card form";
-        submitButton.className = "button";
+        submitButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
+        cancelButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored red-button";
 
-        title.innerHTML = "Adaugă resursă";
+        title.innerHTML = "Adauga resursa";
         typeLabel.innerHTML = "Tip";
         nameLabel.innerHTML = "Nume";
         capacityLabel.innerHTML = "Capacitate";
-        submitButton.value = "Adaugă";
+        submitButton.value = "Adauga";
         cancelButton.innerHTML = "Anulare";
 
         form.action = "";
@@ -109,6 +110,10 @@ $(document).ready(() => {
         name.type = "text";
         capacity.type = "number";
         submitButton.type = "submit";
+
+        type.placeholder = "Laptop";
+        name.placeholder = "Asus";
+        capacity.placeholder = "10";
 
         submitButton.addEventListener("click", event => {
             event.preventDefault();
@@ -154,10 +159,12 @@ $(document).ready(() => {
         const id = document.createElement("a");
 
         body.className = "card moreMenu"
+        updateButton.className = "mdl-button mdl-js-button";
+        deleteButton.className = "mdl-button mdl-js-button";
         id.className = "id";
 
-        updateButton.innerHTML = "Editează";
-        deleteButton.innerHTML = "Şterge";
+        updateButton.innerHTML = "Editeaza";
+        deleteButton.innerHTML = "Sterge";
         id.innerHTML = resId;
 
         updateButton.addEventListener("click", event => {
@@ -179,6 +186,7 @@ $(document).ready(() => {
     }
 
     const createUpdateCard = (resId) => {
+        const resource = resources.find(item => item["resource"]["id"] === resId);
         const bodyOverlay = document.createElement("div");
         const body = document.createElement("div");
         const title = document.createElement("h1");
@@ -195,13 +203,14 @@ $(document).ready(() => {
 
         bodyOverlay.classList = "overlay menu menu-center"
         body.className = "card form";
-        submitButton.className = "button";
+        submitButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
+        cancelButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored red-button";
 
-        title.innerHTML = "Editează resursă";
+        title.innerHTML = "Editeaza resursa";
         typeLabel.innerHTML = "Tip";
         nameLabel.innerHTML = "Nume";
         capacityLabel.innerHTML = "Capacitate";
-        submitButton.value = "Editează";
+        submitButton.value = "Editeaza";
         cancelButton.innerHTML = "Anulare";
         id.innerHTML = resId;
 
@@ -211,6 +220,10 @@ $(document).ready(() => {
         name.type = "text";
         capacity.type = "number";
         submitButton.type = "submit";
+
+        type.placeholder = resource["resource"]["type"];
+        name.placeholder = resource["resource"]["name"];
+        capacity.placeholder = resource["resource"]["capacity"];
 
         submitButton.addEventListener("click", event => {
             event.preventDefault();
@@ -262,9 +275,10 @@ $(document).ready(() => {
 
         bodyOverlay.classList = "overlay menu menu-center"
         body.className = "card form";
-        submitButton.className = "button";
+        submitButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored red-button";
+        cancelButton.className = "mdl-button mdl-js-button mdl-button--raised mdl-button--colored";
 
-        title.innerHTML = "Ştergere resursă";
+        title.innerHTML = "Sunteti sigur?";
         submitButton.value = "Da";
         cancelButton.innerHTML = "Nu";
         id.innerHTML = resId;

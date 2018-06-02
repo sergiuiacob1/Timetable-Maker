@@ -1,5 +1,12 @@
 $(document).ready(function(){
 
+
+
+	if (localStorage.getItem("token") == null){
+		$(location).attr('href', '/login.html');
+		return;
+	}
+
 	require('../less/admin.less');
 	require('./resources.js');
 
@@ -604,6 +611,14 @@ $(document).ready(function(){
 
 			localStorage.removeItem("token");
 			$(location).attr('href', '/login.html');
+			return;
+		}
+
+		if (linkId === "data-export"){
+			console.log("data-exportadasda de aici");
+			const urlExport = `http://${hostName}/api/export/?token=${token}`;
+			//$(location).attr('href', urlExport);
+			window.open(urlExport, '_blank');
 			return;
 		}
 

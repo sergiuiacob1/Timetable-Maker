@@ -139,8 +139,9 @@ module.exports = (() => {
               message: "Trebuie adaugata cel putin o materie"
           })
       }
-      console.log(body.password);
-      Mail.sendMail(body.mail, '[TimetableMaker] Your user has been created', 'Password :' + body.password);
+      Mail.sendMail(body.mail, '[TimetableMaker] Cont Utilizator', `Un cont nou de utilizator a fost creat pentru aplicatia de orar. <br>
+      Puteti accesa contul <a href="${Mail.url}">aici</a>. <br> Parola dumneavoastra este: <b>${body.password}</b><br>
+      Din motive de securitate, schimbati parola imediat ce intrati in posesia contului.`);
     newUser(body).then((result) => {
 
       getUser({
@@ -248,7 +249,7 @@ module.exports = (() => {
           new_password: makePassword()
         };
         updatePassword(updateSet);
-          Mail.sendResetPasswordMail({mail: user.mail, password: user.password})
+        Mail.sendResetPasswordMail({mail: user.mail, password: updateSet.new_password})
 
         console.log('Password reset:' + id);
         res.json({
