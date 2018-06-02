@@ -54,7 +54,7 @@ module.exports = (() => {
       delete user.password;
       res.json({
         success: true,
-        user
+        user: user
       });
     }).catch((e) => {
       console.log(e);
