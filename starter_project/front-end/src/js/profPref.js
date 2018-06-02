@@ -194,15 +194,26 @@ function send(){
     object["possibleIntervals"] = [{"days":"1", "intervals":timp[0]}, {"days":"2", "intervals":timp[1]}, {"days":"3", "intervals":timp[2]}, {"days":"4", "intervals":timp[3]}, {"days":"5", "intervals":timp[4]}, {"days":"6", "intervals":timp[5]}, {"days":"0", "intervals":timp[6]}];
     object["important"] = important;
     object["motive"]= motive;
+    if (subjectId === '' || roomIds.length === 0 || groupId.length === 0) {
+      $('.prof-warning')[0].showModal();
+      return;
+    }
     var json = JSON.stringify(object);
 
     postThisShit(json, function(response){
-		location.reload();
+      $('.prof-success')[0].showModal();
     });
 
     reset();
   }
 };
+
+$('.success-okay').on('click', function() {
+  location.reload();
+});
+$('.warning-okay').on('click', function() {
+  $('.prof-warning')[0].close();
+});
 
 function openTab(tabName) {
   var i;
