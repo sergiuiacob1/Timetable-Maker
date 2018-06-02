@@ -2,6 +2,12 @@ module.exports = (() => {
   'use strict';
 
   const resource = require('./models/resource');
+    const {
+        getRoom,
+        getRooms,
+        newRoom
+    } = require('./room_actions');
+
   const {
     newResource,
     getResources,
@@ -15,20 +21,28 @@ module.exports = (() => {
     const name = req.body.name;
     const capacity = req.body.capacity;
 
-    if (type || name || capacity) {
-      newResource({ type, name, capacity })
-        .then((result) => {
-          console.log(result);
-          res.json({ success: result });
-        })
-        .catch((e) => {
-          console.log(e);
-          res.json({ success: false, message: 'An error occured!' });
-        })
-    }
-    else {
-      res.json({ success: false, message: 'Resource type, name and capacity must be provided.' });
-    }
+      if (type.toLowerCase() == 'sala') {
+          newRoom({name: name, capacity: capacity}).then((rezult) => {
+              if (typeof rezult != 'undefined' && rezult)
+                  res.json({success: true, message: 'Resursa de tip sala a fost inserata'});
+              else
+                  res.json({success: false, message: 'Request invalid. Resursa nu a fost adaugata'});
+          });
+      }
+      else if (type || name || capacity) {
+          newResource({ type, name, capacity })
+              .then((result) => {
+                  console.log(result);
+                  res.json({ success: result });
+              })
+              .catch((e) => {
+                  console.log(e);
+                  res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
+              })
+      }
+      else {
+          res.json({success: false, message: 'Tipul resursei, numele si capacitatea trebuie specificate'});
+      }
   };
 
   const getResourcesRoute = (req, res) => {
@@ -39,7 +53,7 @@ module.exports = (() => {
       })
       .catch((e) => {
         console.log(e);
-        res.json({ success: false, message: 'An error occured!' });
+          res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
       })
   };
 
@@ -55,11 +69,11 @@ module.exports = (() => {
           });
       }
       else {
-        res.json({ success: false, message: "Element not found" });
+          res.json({success: false, message: 'Resursa nu a fost gasita'});
       }
     }).catch((e) => {
       console.log(e);
-      res.json({ success: false, message: 'An error occurred' });
+        res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
     })
   }
 
@@ -74,11 +88,11 @@ module.exports = (() => {
           res.json({ success: result });
         }).catch((e) => {
           console.log(e);
-          res.json({ success: false, message: 'An error occured!' });
+          res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
         })
     }
     else {
-      res.json({ success: false, message: 'Resource id must be provided.' });
+        res.json({success: false, message: 'Id-ul resursei trebuie specificat'});
     }
   };
 
