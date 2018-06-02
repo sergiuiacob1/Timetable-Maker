@@ -36,13 +36,13 @@ function populateTable() {
     th.appendChild(txt);
     tr.appendChild(th);
 
-    for (var j = 1; j < 8; j++) {
+    for (var j = 0; j < 7; j++) {
      var th = document.createElement("th");
-        var txt = document.createTextNode(tableArray[0][j - 1]);
+        var txt = document.createTextNode(tableArray[0][j]);
         var inCheck = document.createElement("input");
         inCheck.type = "checkbox";
-        inCheck.name = tableArray[0][j - 1];
-        inCheck.value = j - 1;
+        inCheck.name = tableArray[0][j];
+        inCheck.value = j;
         inCheck.className = "day-checker";
 
         th.appendChild(inCheck);
