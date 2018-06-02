@@ -20,17 +20,32 @@ function populateTable() {
   tableArray.push(["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
   if (hoursSelected === 1)
     tableArray.push(["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"]);
-  else 
+  else
     tableArray.push(["08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"]);
 
   var orar = document.getElementById("orar");
   $('#orar').empty();
+
 //populate header
   var thead = document.createElement("thead");
     var tr = document.createElement("tr");
-  for (var j = 0; j < 7; j++) {
+
+
+    var th = document.createElement("th");
+    var txt = document.createTextNode("Selection");
+    th.appendChild(txt);
+    tr.appendChild(th);
+
+    for (var j = 0; j < 7; j++) {
      var th = document.createElement("th");
-     var txt = document.createTextNode(tableArray[0][j]);
+        var txt = document.createTextNode(tableArray[0][j]);
+        var inCheck = document.createElement("input");
+        inCheck.type = "checkbox";
+        inCheck.name = tableArray[0][j];
+        inCheck.value = j;
+        inCheck.className = "day-checker";
+
+        th.appendChild(inCheck);
      th.appendChild(txt);
      tr.appendChild(th);
   }
@@ -43,17 +58,46 @@ function populateTable() {
   var lineIndex = 0;
   for (var i = 0 ; i < tableArray[1].length; i++) {
    var tr = document.createElement("tr");
-   for (var j = 0; j < tableArray[0].length; j++) {
-     var td = document.createElement("td");
-     td.className = "noColor";
+      for (var j = 0; j < tableArray[0].length + 1; j++) {
+          var td = document.createElement("td");
+          td.className = "noColor";
+          $(td).attr('data-value', j - 1);
+          if (j == 0) {
+              var inCheck = document.createElement("input");
+              inCheck.type = "checkbox";
+              inCheck.name = "rowChecker_" + i;
+              inCheck.value = j;
+              inCheck.className = "hour-checker";
+              td.className = "";
+              td.appendChild(inCheck);
+              tr.appendChild(td);
+          }
+          else {
      var txt = document.createTextNode(tableArray[1][lineIndex]);
      td.appendChild(txt);
      tr.appendChild(td);
+          }
     }
   lineIndex++;
   tbody.appendChild(tr);
   orar.appendChild(tbody);
   }
+
+    $('.hour-checker').on('click', function () {
+        if (this.checked === true)
+            $(this).parents('tr').find('.noColor').click();
+        else
+            $(this).parents('tr').find('.redColor').click();
+    });
+
+    $('.day-checker').on('click', function () {
+        console.log($(this).val());
+        var val = $(this).val() * 1;
+        if (this.checked === true)
+            $('.ore').find(`td[data-value=${val}].noColor`).click()
+        else
+            $('.ore').find(`td[data-value=${val}].redColor`).click()
+    });
 //populate body
 };
 
@@ -194,15 +238,26 @@ function send(){
     object["possibleIntervals"] = [{"days":"1", "intervals":timp[0]}, {"days":"2", "intervals":timp[1]}, {"days":"3", "intervals":timp[2]}, {"days":"4", "intervals":timp[3]}, {"days":"5", "intervals":timp[4]}, {"days":"6", "intervals":timp[5]}, {"days":"0", "intervals":timp[6]}];
     object["important"] = important;
     object["motive"]= motive;
+    if (subjectId === '' || roomIds.length === 0 || groupId.length === 0) {
+      $('.prof-warning')[0].showModal();
+      return;
+    }
     var json = JSON.stringify(object);
 
     postThisShit(json, function(response){
-		location.reload();
+      $('.prof-success')[0].showModal();
     });
 
     reset();
   }
 };
+
+$('.success-okay').on('click', function() {
+  location.reload();
+});
+$('.warning-okay').on('click', function() {
+  $('.prof-warning')[0].close();
+});
 
 function openTab(tabName) {
   var i;
@@ -287,7 +342,7 @@ function getRoomsShow(){
       $(".loader-bck").hide();
 
       addRooms();
-    
+
   });
 };
 
@@ -350,6 +405,13 @@ $(document).ready(function() {
   getRoomsShow();
   getGroupsShow();
   addListeners();
+  $('.motiv-fix').hide();
+
+  $('#switch1').on('change', function() {
+    debugger;
+    if (this.checked === true) $('.motiv-fix').show();
+    else $('.motiv-fix').hide();
+  });
 });
 
 function addListeners(){

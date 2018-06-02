@@ -104,14 +104,18 @@
                 </div>
 
                 <form action="/action_page.php">
-                  <label for="switch1" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
+                  <label for="switch1" class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect">
+                      <input type="checkbox" id="switch1" class="mdl-checkbox__input">
+                      <span class="mdl-checkbox__label">Ore fixe</span>
+                    </label>
+                    <br>
+                    <br>
+                  <!-- <label for="switch1" class="mdl-switch mdl-js-switch mdl-js-ripple-effect">
                     <input type="checkbox" id="switch1" class="mdl-switch__input">
                     <span class="mdl-switch__label">Ore si sala flexibile / Neflexibile*</span>  
-                  </label>
-                  <br>
-                  <br>
+                  </label> -->
                   
-                    <div class="mdl-textfield mdl-js-textfield">
+                    <div class="mdl-textfield mdl-js-textfield motiv-fix">
                                 <p style="font-size: 15px">*Va rugam specificati motivul:</p>
 
                       <textarea class="mdl-textfield__input" type="text" rows= "3" id="textarea" ></textarea>
@@ -126,9 +130,11 @@
           
       <div class="containerOrar">
         <div class="ore">
+
             <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="orar" style="width:90%">
               <!--populateTable() from profPref.js-->
             </table>
+
         </div> 
 
             <div class="sali">
@@ -153,5 +159,29 @@
               <div class="mdl-snackbar__text"></div>
               <button type="button" class="mdl-snackbar__action"></button>
             </div>
+            
+            <dialog class="mdl-dialog prof-warning">
+              <h4 class="mdl-dialog__title">Campuri lipsa</h4>
+              <div class="mdl-dialog__content">
+                <p>
+                  Trebuie sa completati toate campurile pentru a trimite optiunea.
+                </p>
+              </div>
+              <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button warning-okay">Okay</button>
+              </div>
+            </dialog>
+
+            <dialog class="mdl-dialog prof-success">
+                <h4 class="mdl-dialog__title">Succes</h4>
+                <div class="mdl-dialog__content">
+                  <p>
+                    Optiunea a fost adaugat cu succes.
+                  </p>
+                </div>
+                <div class="mdl-dialog__actions">
+                  <button type="button" class="mdl-button success-okay">Okay</button>
+                </div>
+              </dialog>
   </body>
 </html>

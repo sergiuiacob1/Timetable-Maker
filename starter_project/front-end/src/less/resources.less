@@ -11,14 +11,14 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    padding: 2em 10em;
+    padding: 2em 4em;
 }
 
 .card {
     position: relative;
     border: 1px solid #eee;
     border-bottom: 1px solid #aaa;
-    padding: 0 2em;
+    padding: 0 1em;
     margin: 1em;
     background: #fff;
     
@@ -52,7 +52,7 @@ body {
 
     .menu {
         display: flex;
-        padding: 1.5em 0;
+        padding: 0.5em 0;
     }
     
     .menu-left {
@@ -71,6 +71,7 @@ body {
         align-content: center;
         align-items: center;
         justify-content: flex-end;
+        cursor: pointer;
     }
 
     .spacing {
@@ -104,7 +105,7 @@ body {
     align-content: center;
     cursor: pointer;
 
-    padding: 6.1em;
+    padding: 5.2em;
     border: 1px solid #aaa;
     border-style: dashed;
 
@@ -128,7 +129,12 @@ body {
     margin: 0;
     padding: 0;
     top: 48px;
+    z-index: 10;
 }
+
+    .card.moreMenu .mdl-button {
+        margin: 0;
+    }
 
 .overlay {
     z-index: 999;
@@ -158,6 +164,10 @@ body {
 
 .material-icons.md-48 {
     font-size: 48px;
+}
+
+.material-icons.md-72 {
+    font-size: 72px;
 }
 
 .material-icons.md-96 {

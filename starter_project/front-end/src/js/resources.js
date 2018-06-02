@@ -30,7 +30,7 @@ $(document).ready(() => {
         moreMenuContainer.classList = "menu menu-right";
         moreMenu.classList = "material-icons more";
         classImageContainer.classList = "menu menu-center nospacing";
-        classImage.classList = "material-icons md-96 grey";
+        classImage.classList = "material-icons md-72 grey";
         titleContainer.classList = "menu menu-left spacing";
         titleImg.classList = "material-icons md-24 blue";
         title.className = "grey";
@@ -111,9 +111,9 @@ $(document).ready(() => {
         capacity.type = "number";
         submitButton.type = "submit";
 
-        type.placeholder = "Laptop";
-        name.placeholder = "Asus";
-        capacity.placeholder = "10";
+        type.placeholder = "ex. Laptop";
+        name.placeholder = "ex. Asus";
+        capacity.placeholder = "ex. 10";
 
         submitButton.addEventListener("click", event => {
             event.preventDefault();
@@ -221,9 +221,9 @@ $(document).ready(() => {
         capacity.type = "number";
         submitButton.type = "submit";
 
-        type.placeholder = resource["resource"]["type"];
-        name.placeholder = resource["resource"]["name"];
-        capacity.placeholder = resource["resource"]["capacity"];
+        type.value = resource["resource"]["type"];
+        name.value = resource["resource"]["name"];
+        capacity.value = resource["resource"]["capacity"];
 
         submitButton.addEventListener("click", event => {
             event.preventDefault();
