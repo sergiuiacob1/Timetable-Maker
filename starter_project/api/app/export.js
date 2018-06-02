@@ -1,217 +1,244 @@
 module.exports = (() => {
     'use strict';
+    const {getUsers} = require('./user_actions.js');
 
-    const {getGroups}           = require('./group_actions');
-    const {getRooms}            = require('./room_actions');
-    const {getUsers}            = require('./user_actions.js');
-    const {getSubjects}         = require('./subject_actions.js');
-    const {getAllConstraints, getConstraints}   = require('./constraints_actions.js');
-    const {getResources}        = require('./resource_actions.js');
-    
-    var result = {
-        csvStr : ""
-    };
+    class ExportableData {
 
-    const CSV_SEPARATOR = ';';
-
-    var userID = undefined;
-
-    function addField(csvString, fieldValue) {
-        csvString.csvStr += fieldValue;
-        csvString.csvStr += CSV_SEPARATOR;
-    }
-
-    function endFieldLine(csvString) {
-        csvString.csvStr += '\n';
-    }
-
-    function addSection(name, arr) {
-        addField(result, name);
-        endFieldLine(result);
-
-        for(var i = 0; i < arr.length; i++)
-        {
-            addField(result, arr[i]);
+        constructor(querriableArr, req, res) {
+            this.csvStr = "";
+            this.name = "";
+            this.groups = [];
+            this.users = [];
+            this.rooms = [];
+            this.subjects = [];
+            this.constraints = [];
+            this.queriableArr = querriableArr;
+            this.id = querriableArr[0];
+            this.count = 0;
+            this.req = req;
+            this.res = res;
         }
 
-        endFieldLine(result);
-    }
-
-    function addDataFromDb(dbRes, dbId) {
-        for(var i = 0; i < dbRes.length; i++)
-        {
-            for(var j = 0; j < dbId.length; j++)
-            {
-                addField(result, dbRes[i][dbId[j]]);
-            }
-            endFieldLine(result);
-        }
-        endFieldLine(result);
-    }
-
-    function buildCSV(groups, rooms, users, subjects, constraints, resources) {
-        addSection("GRUPE", ["nume", "capacitate"]);
-        addDataFromDb(groups, ["name", "number"]);
-
-        addSection("SALI", ["id", "nume", "capacitate"]);
-        addDataFromDb(rooms, ["id", "name", "capacity"]);
-
-        addSection("UTILIZATORI", ["nume", "user", "e-mail"]);
-        addDataFromDb(users, ["fullName", "userName", "mail"]);
-
-        addSection("SUBIECTE", ["nume", "prescurtare", "data", "frecventa"]);
-        addDataFromDb(subjects, ["name", "short", "date", "frequency"]);
-
-        addSection("RESURSE", ["tip", "nume", "capacitate"]);
-        addDataFromDb(resources, ["type", "name", "capacity"]);
-        if(!userID)
-            buildConstraints(groups, rooms, users, subjects, constraints);
-        else
-            buildConstraintsForOneUser(groups, rooms, users, subjects, constraints);
-    }
-
-
-    function sendCsv(res) {
-        res.setHeader('Content-type', "application/force-download");
-        res.setHeader('Content-disposition', 'attachment; filename=db_export.csv');
-
-        res.send(result.csvStr);
-        result.csvStr = "";
-        userID = undefined;
-    }
-
-    function getIdentifier(dbRes, nameKey, idKey, id) {
-
-        for(var i = 0; i < dbRes.length; ++i) {
-            console.log(dbRes[i][idKey], id)
-            if(dbRes[i][idKey] === id)
-            {
-                return dbRes[i][nameKey];
-            }
+        name() {
+            return this.name;
         }
 
-        return "";
-    }
-
-    function extractDataArray(arr, dbResp, nameKey, idKey){
-        var obj = arr;
-        if(!userID)
-            obj = JSON.parse(arr);
+        setName(name) {
+            this.name = name[0]["fullName"];
+        }
         
-        var str = '';
-        for(var it = 0; it < obj.length; ++it) {
-            str += getIdentifier(dbResp, nameKey, idKey, obj[it]);
-            if(it < obj.length -1)
-            {
-                str += ' ';
+        users() {
+            return this.users;
+        }
+
+        setUsers(userArray) {
+            this.users = userArray;
+        }
+
+        groups() {
+            return this.groups;
+        }
+
+        setGroups(groups) {
+            this.groups = new Map();
+
+            for(var i = 0; i < groups.length; ++i) {
+                console.log(groups[i]["id"], groups[i]["name"]);
+                this.groups[ groups[i]["id"] ] = groups[i]["name"];
             }
         }
-        return str;
-    }
 
-    function buildConstraints(groups, rooms, users, subjects, constraints) {
-        addSection("CONSTRANGERI", ["user", "subiect", "sali", "grupe", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
+        rooms() {
+            return this.rooms;
+        }
 
-        for(var i = 0; i < constraints.length; ++i) {
-            console.log("zzz", constraints[i])
-            var obj = JSON.parse(constraints[i]["possible_intervals"]);
-            console.log(obj);
+        setRooms(rooms) {
+            this.rooms = new Map();
+
+            for(var i = 0; i < rooms.length; ++i) {
+                console.log(rooms[i]["id"], rooms[i]["name"]);
+                this.rooms[ rooms[i]["id"] ] = rooms[i]["name"];
+            }
+        }
+
+        subjects() {
+            return this.subjects;
+        }
+
+        setSubjects(subjects) {
+            this.subjects = subjects;
+        }
+
+        constraints() {
+            return this.constraints;
+        }
+
+        setConstraints(constraints) {
+            this.constraints = constraints;
+        }
+
+        findUserName() {
+            var queryString = "SELECT fullName FROM users WHERE id = " + this.id;
+            this.query(queryString, this.findUsersSubjects, this.setName)
+        }
+
+        findUsersSubjects() {
+            var queryString = "SELECT s.name FROM subjects s JOIN teacher_subject_map t on t.id_subject = s.id and t.id_user = " + this.id;
+            this.query(queryString, this.findConstraintsForUser, this.setSubjects);  
+        }
+        
+        findConstraintsForUser() {
+            var queryString = "SELECT u.fullName, s.name, c.room_ids, c.group_ids,c.possible_intervals\
+            FROM users u \
+            JOIN constraints c on c.user_id = u.id \
+            JOIN subjects s on s.id = c.subject_id \
+            WHERE u.id = " + this.id;
             
-            addField(result, getIdentifier(users, "fullName", "id", constraints[i]["user_id"]));
-            addField(result, getIdentifier(subjects, "name", "id", constraints[i]["subject_id"]));
-
-            addField(result, extractDataArray(constraints[i]["room_ids"], rooms, "name", "id"));
-            addField(result, extractDataArray(constraints[i]["group_ids"], groups, "name", "id"));
-
-            for(var it = 0; it < obj.length; ++it) {
-                addField(result, obj[it]["intervals"]); 
-            }
-
-            endFieldLine(result);
+            this.query(queryString, this.findRoomNames, this.setConstraints);
         }
-    }
 
-    function buildConstraintsForOneUser(groups, rooms, users, subjects, constraints) {
-        addSection("CONSTRANGERI", ["user", "subiect", "sali", "grupe", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
+        findRoomNames() {
+            var queryString = "SELECT id, name from rooms";
+            this.query(queryString, this.findGroupNames, this.setRooms);
+        }
 
-        for(var i = 0; i < constraints.length; ++i) {
-            console.log("zzz", constraints[i])
-            var obj = constraints[i]["possibleIntervals"];
-            console.log(obj);
+        findGroupNames() {
+            var queryString = "SELECT id, an, name from groups";
+            this.query(queryString, this.exportData, this.setGroups);
+        }
+
+        addField(val) {
+            this.csvStr += val;
+            this.csvStr += ";";
+        }
+
+        endFieldLine() {
+            this.csvStr += '\n';
+        }
+
+        exportData() {
+            console.log(this.name)
             
-            addField(result, getIdentifier(users, "fullName", "id", constraints[i]["roomIds"]));
-            addField(result, getIdentifier(subjects, "name", "id", constraints[i]["subjectIds"]));
+            console.log(this.subjects)
+            
+            console.log(this.constraints)   
+            
+            console.log(this.rooms)
 
-            addField(result, extractDataArray(constraints[i]["roomIds"], rooms, "name", "id"));
-            addField(result, extractDataArray(constraints[i]["groupIds"], groups, "name", "id"));
+            console.log(this.groups)
 
-            for(var it = 0; it < obj.length; ++it) {
-                addField(result, obj[it]["intervals"]); 
+            this.addField(this.name);
+            this.endFieldLine();
+            this.endFieldLine();
+
+            for(var i = 0; i < this.subjects.length; ++i) {
+                this.addField(this.subjects[i]["name"]);
+                this.endFieldLine();
             }
+            this.endFieldLine();
 
-            endFieldLine(result);
+            for(var i = 0; i < this.constraints.length; ++i) {
+                            
+                this.addField(this.constraints[i]["name"]);
+                this.endFieldLine();
+
+                this.parseMap(this.constraints[i]["group_ids"], this.groups);
+                this.parseMap(this.constraints[i]["room_ids"], this.rooms);
+
+                this.addField(this.constraints[i]["possible_intervals"]);
+                this.endFieldLine();
+                this.endFieldLine();
+            }
+            
+            console.log(this.csvStr);
+            this.addNext();
         }
+
+        parseMap(map, arr) {
+            var obj = JSON.parse(map);
+            for(var j = 0; j < obj.length; ++j) {
+                this.addField(arr[obj[j]]);
+            }
+            this.endFieldLine();
+        }
+
+        query(queryStr, callback, setter) {
+            const squel = require('squel');
+            const { Extension } = require('../config/pools.js');
+            
+            Extension.query(queryStr).then( (result) => {
+                let boundCallback = callback.bind(this);
+                let boundSetter   = setter.bind(this);
+
+                boundSetter(result);
+                boundCallback();
+            }).catch((e) => {
+                console.log(e);
+            });
+        }
+
+        findOne() {
+            this.findUserName();
+        }
+
+        send() {
+            this.res.setHeader('Content-type', "application/force-download");
+            this.res.setHeader('Content-disposition', 'attachment; filename=db_export.csv');
+    
+            this.res.send(this.csvStr);
+        }
+
+        export() {
+            this.findOne();
+        }
+
+        addNext() {
+            ++this.count;
+            if(this.count >= this.queriableArr.length) {
+                this.send();
+                return;
+            } else {
+                this.clear();
+                this.id = this.queriableArr[this.count];
+                this.findOne();
+            }
+        }
+
+        clear() {
+            this.name = "";
+            this.groups = [];
+            this.users = [];
+            this.rooms = [];
+            this.subjects = [];
+            this.constraints = [];
+        }
+
     }
 
     const exportDb = (req, res) => {
-        
         if(req.header("id")) {
-            userID = parseInt(req.header("id"));
+            var userID = parseInt(req.header("id"));
             if(isNaN(userID)) {
                 res.json({success: false});
-                return;
             }
-        }
-            
-        getGroups().then((groups) => {
-            
-            getRooms().then((rooms) => {
-                
-                getUsers().then((users) => {
-                    
-                    getSubjects().then((subjects) => {
-                        
-                        getResources("").then((resources) => {
-                            if(userID === undefined) {
-                                
-                                getAllConstraints().then((constraints) => {
+            const userId = userID;
+            var exp = new ExportableData([userId], req, res);
+            exp.export();
+        } else {
+            getUsers().then((users) => {
+                var arr = [];
+                for(var i = 0; i < users.length; ++i) {
+                    arr.push( parseInt(users[i]["id"]) );
+                }
 
-                                    buildCSV(groups, rooms, users, subjects, constraints, resources);
-                                    sendCsv(res);
-                        
-                                }).catch((e) => {
-                                    console.log(e);
-                                });
-                            } else {
-                                const userId = userID;
-                                getConstraints({userId}).then((constraints) => {
-
-                                    buildCSV(groups, rooms, users, subjects, constraints, resources);
-                                    sendCsv(res);
-                        
-                                }).catch((e) => {
-                                    console.log(e);
-                                });
-                            }
-                        }).catch((e) => {
-                            console.log(e);
-                        });
-
-                    }).catch((e) => {
-                        console.log(e);
-                    });
-
-                }).catch((e) => {
-                    console.log(e);
-                });
+                const userId = userID;
+                var exp = new ExportableData(arr, req, res);
+                exp.export();
 
             }).catch((e) => {
                 console.log(e);
             });
-            
-        }).catch((e) => {
-            console.log(e);
-        });
+        }
     };
 
     return {
