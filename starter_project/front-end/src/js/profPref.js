@@ -172,7 +172,7 @@ function getRooms(){
 
 function send(){
 
-  getActivity();
+  // getActivity();
   getSubject();
   getGroup();
   getDate();
