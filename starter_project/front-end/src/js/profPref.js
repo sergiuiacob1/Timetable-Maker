@@ -20,17 +20,32 @@ function populateTable() {
   tableArray.push(["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
   if (hoursSelected === 1)
     tableArray.push(["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"]);
-  else 
+  else
     tableArray.push(["08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"]);
 
   var orar = document.getElementById("orar");
   $('#orar').empty();
+
 //populate header
   var thead = document.createElement("thead");
     var tr = document.createElement("tr");
-  for (var j = 0; j < 7; j++) {
+
+
+    var th = document.createElement("th");
+    var txt = document.createTextNode("Selection");
+    th.appendChild(txt);
+    tr.appendChild(th);
+
+    for (var j = 1; j < 8; j++) {
      var th = document.createElement("th");
-     var txt = document.createTextNode(tableArray[0][j]);
+        var txt = document.createTextNode(tableArray[0][j - 1]);
+        var inCheck = document.createElement("input");
+        inCheck.type = "checkbox";
+        inCheck.name = tableArray[0][j - 1];
+        inCheck.value = j - 1;
+        inCheck.className = "day-checker";
+
+        th.appendChild(inCheck);
      th.appendChild(txt);
      tr.appendChild(th);
   }
@@ -43,12 +58,23 @@ function populateTable() {
   var lineIndex = 0;
   for (var i = 0 ; i < tableArray[1].length; i++) {
    var tr = document.createElement("tr");
-   for (var j = 0; j < tableArray[0].length; j++) {
-     var td = document.createElement("td");
-     td.className = "noColor";
+      for (var j = 0; j < tableArray[0].length + 1; j++) {
+          var td = document.createElement("td");
+          td.className = "noColor";
+          if (j == 0) {
+              var inCheck = document.createElement("input");
+              inCheck.type = "checkbox";
+              inCheck.name = "rowChecker_" + i;
+              inCheck.value = j;
+              inCheck.className = "day-checker";
+              td.appendChild(inCheck);
+              tr.appendChild(td);
+          }
+          else {
      var txt = document.createTextNode(tableArray[1][lineIndex]);
      td.appendChild(txt);
      tr.appendChild(td);
+          }
     }
   lineIndex++;
   tbody.appendChild(tr);
@@ -298,7 +324,7 @@ function getRoomsShow(){
       $(".loader-bck").hide();
 
       addRooms();
-    
+
   });
 };
 
