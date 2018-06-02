@@ -261,7 +261,8 @@ $(document).ready(function(){
 				`<li class="mdl-list__item mdl-list__item--two-line" id="user${index}" key=${index}>
 					<span class="mdl-list__item-primary-content">
 						<i class="material-icons mdl-list__item-avatar">person</i>
-						<span>${user.fullName}</span>
+						<span>${user.fullName}</span> <i id="user${index}" class="fas fa-download"></i>
+
 						<span class="mdl-list__item-sub-title">${user.mail}</span>
 					</span>
 						
@@ -324,8 +325,10 @@ $(document).ready(function(){
 				</div>`
 			);
 			$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).hide();
+			$(`.fas.fa-download#user${index}`).hide();
 			
 			$(`#panel-user${index}`).on("click", function(event) {
+
 				if (!event.target.matches(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`) &&
 					$(`#content-dropdown-${index} .demo-list-control.mdl-list.dropdown`).has(event.target).length === 0 &&
 					!event.target.matches(`#edit-subjects-${user.id}`)) {
@@ -352,11 +355,24 @@ $(document).ready(function(){
 				}
 				
 			});
+
+			$(`.fas.fa-download#user${index}`).on('click', function(){
+
+				console.log("export user-data", user.id);
+
+				const urlExport = `http://${hostName}/api/export?id=${user.id}&token=${token}`;
+				//$(location).attr('href', urlExport);
+				window.open(urlExport, '_blank');
+				return;
+
+			});
 		});
 
 		componentHandler.upgradeDom();
 
-		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {	
+		$(".mdl-list__item.mdl-list__item--two-line").on("click", function() {
+
+			$(`.fas.fa-download#${$(this).attr("id")}`).toggle();
 			$(`.user-buttons#buttons-${$(this).attr("id")}`).toggle();	
 		});
 

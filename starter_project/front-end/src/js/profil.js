@@ -14,10 +14,37 @@ $(document).ready(function(){
 	// const hostName = '0.0.0.0:2222';
 	const hostName = '89.34.92.135:2222';
 
+
+
+
 	let token = localStorage.getItem("token");
 	let logoutButton = ".mdl-navigation__link#logout";
 	let changePassButton = ".mdl-button#change-pass"
 	let errorMsg = "Auch!!! Ceva nu a mers bine!";
+	let userInfo;
+
+
+	apiUserInfo(function(response){
+		if (response === true){
+			$(".hello-name").append(`Salut ${userInfo.fullName}`);
+		}
+	})
+
+	function apiUserInfo(callback){
+		$(".loader-bck").show();
+
+		const urlGetUserInfo = `http://${hostName}/api/user_info?token=${token}`;
+		$.get(urlGetUserInfo)
+		.done(function(response){
+			$(".loader-bck").hide();
+			console.log(response);
+
+			if(response.success === true){
+				userInfo = response.user;
+				callback(true);
+			}
+		});
+	}
 
 	function apiChangeUserPasswordPost(data, callback){
 
