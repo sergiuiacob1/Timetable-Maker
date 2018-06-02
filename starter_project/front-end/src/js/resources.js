@@ -111,10 +111,6 @@ $(document).ready(() => {
         capacity.type = "number";
         submitButton.type = "submit";
 
-        type.placeholder = "Laptop";
-        name.placeholder = "Asus";
-        capacity.placeholder = "10";
-
         submitButton.addEventListener("click", event => {
             event.preventDefault();
             addResource({

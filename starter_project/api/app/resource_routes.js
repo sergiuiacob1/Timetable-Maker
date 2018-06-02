@@ -37,11 +37,11 @@ module.exports = (() => {
               })
               .catch((e) => {
                   console.log(e);
-                  res.json({ success: false, message: 'An error occured!' });
+                  res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
               })
       }
       else {
-          res.json({ success: false, message: 'Resource type, name and capacity must be provided.' });
+          res.json({success: false, message: 'Tipul resursei, numele si capacitatea trebuie specificate'});
       }
   };
 
@@ -53,7 +53,7 @@ module.exports = (() => {
       })
       .catch((e) => {
         console.log(e);
-        res.json({ success: false, message: 'An error occured!' });
+          res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
       })
   };
 
@@ -69,11 +69,11 @@ module.exports = (() => {
           });
       }
       else {
-        res.json({ success: false, message: "Element not found" });
+          res.json({success: false, message: 'Resursa nu a fost gasita'});
       }
     }).catch((e) => {
       console.log(e);
-      res.json({ success: false, message: 'An error occurred' });
+        res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
     })
   }
 
@@ -88,11 +88,11 @@ module.exports = (() => {
           res.json({ success: result });
         }).catch((e) => {
           console.log(e);
-          res.json({ success: false, message: 'An error occured!' });
+          res.json({success: false, message: 'A aparut o eroare. Incercati mai tarziu'});
         })
     }
     else {
-      res.json({ success: false, message: 'Resource id must be provided.' });
+        res.json({success: false, message: 'Id-ul resursei trebuie specificat'});
     }
   };
 
