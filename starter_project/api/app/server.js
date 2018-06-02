@@ -67,6 +67,7 @@ module.exports = (() => {
       apiRoutes.post('/users/reset', userResetPasswordRoute);
 
     apiRoutes.get('/rooms', getRoomsRoute);
+    apiRoutes.get('/user_info', getUserRoute);
       apiRoutes.post('/users/changepassword', changePasswordRoute);
     adminRoutes.post('/users/:id/update', updateUserRoute);
       adminRoutes.post('/users/:id/reset', resetPasswordRoute);

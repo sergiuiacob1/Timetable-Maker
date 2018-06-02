@@ -405,6 +405,13 @@ $(document).ready(function() {
   getRoomsShow();
   getGroupsShow();
   addListeners();
+  $('.motiv-fix').hide();
+
+  $('#switch1').on('change', function() {
+    debugger;
+    if (this.checked === true) $('.motiv-fix').show();
+    else $('.motiv-fix').hide();
+  });
 });
 
 function addListeners(){
