@@ -12,13 +12,19 @@ require('../less/profPref.less');
 
 $(".loader-bck").hide();
 
+var hoursSelected = 1;
+
 function populateTable() {
 
   var tableArray = [];
   tableArray.push(["Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
-  tableArray.push(["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"]);
+  if (hoursSelected === 1)
+    tableArray.push(["08:00 - 09:00", "09:00 - 10:00", "10:00 - 11:00", "11:00 - 12:00", "12:00 - 13:00", "13:00 - 14:00", "14:00 - 15:00", "15:00 - 16:00", "16:00 - 17:00", "17:00 - 18:00", "18:00 - 19:00", "19:00 - 20:00"]);
+  else 
+    tableArray.push(["08:00 - 10:00", "10:00 - 12:00", "12:00 - 14:00", "14:00 - 16:00", "16:00 - 18:00", "18:00 - 20:00"]);
 
   var orar = document.getElementById("orar");
+  $('#orar').empty();
 //populate header
   var thead = document.createElement("thead");
     var tr = document.createElement("tr");
@@ -166,7 +172,7 @@ function getRooms(){
 
 function send(){
 
-  getActivity();
+  // getActivity();
   getSubject();
   getGroup();
   getDate();
@@ -213,34 +219,78 @@ function openTab(tabName) {
 };*/
 
 
+var subjects;
 
 function getSubjectsShow(){
   var url = 'http://'+hostName+'/api/subjects?token=' + token;
     $(".loader-bck").show();
   $.get(`${url}`).done(function (result){
+      subjects = result.subjects;
       $(".loader-bck").hide();
     for(var i=0;i<result.subjects.length;i++){
-      $("#materie").append('<option value="' + result.subjects[i].id + '">' + result.subjects[i].name + '</option>');
+      $("#materie").append(`<option value=${result.subjects[i].id}>${result.subjects[i].name}</option>`);
     }
+
+    $('#materie').on('change', function() {
+      console.log('changeee');
+      // console.log($(this).val());
+      var selectedId = $(this).val() * 1;
+      for (var i = 0; i < subjects.length; ++i) {
+        var subject = subjects[i];
+        if (subject.id === selectedId) {
+          console.log(subject);
+          hoursSelected = subject.duration;
+          populateTable();
+          $('#orar .noColor').on('click', cSwap);
+          if (subject.frequency === 0) {
+            $('.frequency').show();
+          }
+          else {
+            $('.frequency').hide();
+          }
+          // console.log(groups);
+        }
+      }
+    });
   });
 };
 
+var rooms;
+var groups;
+var maxGroupNo = 0;
+
+function addRooms() {
+  var myRooms = [];
+  var pos;
+  for (var j = 0; j < rooms.length; ++j) {
+    if (maxGroupNo <= rooms[j].capacity) {
+      myRooms.push(rooms[j]);
+    }
+  }
+  $('#sali tbody').empty();
+  for(var i=0;i<myRooms.length;i++){
+    pos = Math.ceil((i+1)/3);
+    if(i%3 == 0)
+      $('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
+    $("#tr"+pos).append(`<td data-id=${myRooms[i].id} class="noColor">`+myRooms[i].name+'</td>');
+    // addListeners();
+  }
+  $('#sali .noColor').on('click', cSwap);
+}
 
 function getRoomsShow(){
   var url = 'http://'+hostName+'/api/rooms?token=' + token;
   var pos;
     $(".loader-bck").show();
   $.get(`${url}`).done(function(result){
+      rooms = result.rooms;
       $(".loader-bck").hide();
-    for(var i=0;i<result.rooms.length;i++){
-      pos = Math.ceil((i+1)/3);
-      if(i%3 == 0)
-        $('#sali tbody').append('<tr id="tr'+pos+'"></tr>');
-      $("#tr"+pos).append(`<td data-id=${result.rooms[i].id} class="noColor">`+result.rooms[i].name+'</td>');
-      addListeners();
-    }
+
+      addRooms();
+    
   });
 };
+
 
 function getGroupsShow(){
   var url = 'http://'+hostName+'/api/groups?token=' + token;
@@ -248,9 +298,37 @@ function getGroupsShow(){
     $(".loader-bck").show();
     $.get(`${url}`).done(function(result){
       $(".loader-bck").hide();
+      groups = result.groups;
     for(var i=0;i<result.groups.length;i++){
-      $("#grupa").append('<input type="checkbox" onchange="getGroup(this.value)" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
+      groups[i].selected = false;
+      $("#grupa").append('<input type="checkbox" name="grupa" value="'+result.groups[i].id+'">'+result.groups[i].name+'<br>');
     }
+
+    $('#grupa input').on('change', function() {
+      var checked = $(this)[0].checked;
+      // console.log($(this).val());
+      var id = $(this).val() * 1;
+      for (var j = 0; j < groups.length; ++j) {
+        if (groups[j].id === id) {
+          groups[j].selected = checked;
+        }
+      }
+
+      // console.log(groups);
+      var maxNo = 0;
+      for (var j = 0; j < groups.length; ++j) {
+        var group = groups[j];
+
+        if (group.selected === true) {
+          if (group.number > maxNo)
+            maxNo = group.number;
+        }
+      }
+
+      maxGroupNo = maxNo;
+      addRooms();
+
+    });
   });
 };
 
