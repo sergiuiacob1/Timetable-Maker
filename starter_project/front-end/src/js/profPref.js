@@ -61,12 +61,14 @@ function populateTable() {
       for (var j = 0; j < tableArray[0].length + 1; j++) {
           var td = document.createElement("td");
           td.className = "noColor";
+          $(td).attr('data-value', j - 1);
           if (j == 0) {
               var inCheck = document.createElement("input");
               inCheck.type = "checkbox";
               inCheck.name = "rowChecker_" + i;
               inCheck.value = j;
-              inCheck.className = "day-checker";
+              inCheck.className = "hour-checker";
+              td.className = "";
               td.appendChild(inCheck);
               tr.appendChild(td);
           }
@@ -80,6 +82,22 @@ function populateTable() {
   tbody.appendChild(tr);
   orar.appendChild(tbody);
   }
+
+    $('.hour-checker').on('click', function () {
+        if (this.checked === true)
+            $(this).parents('tr').find('.noColor').click();
+        else
+            $(this).parents('tr').find('.redColor').click();
+    });
+
+    $('.day-checker').on('click', function () {
+        console.log($(this).val());
+        var val = $(this).val() * 1;
+        if (this.checked === true)
+            $('.ore').find(`td[data-value=${val}].noColor`).click()
+        else
+            $('.ore').find(`td[data-value=${val}].redColor`).click()
+    });
 //populate body
 };
 
