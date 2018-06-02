@@ -24,7 +24,9 @@ module.exports = (() => {
         }
 
         setName(name) {
-            this.name = name[0]["fullName"];
+            if(name.length > 0) {
+                this.name = name[0]["fullName"];
+            }
         }
         
         users() {
@@ -43,7 +45,6 @@ module.exports = (() => {
             this.groups = new Map();
 
             for(var i = 0; i < groups.length; ++i) {
-                console.log(groups[i]["id"], groups[i]["name"]);
                 this.groups[ groups[i]["id"] ] = groups[i]["name"];
             }
         }
@@ -56,7 +57,6 @@ module.exports = (() => {
             this.rooms = new Map();
 
             for(var i = 0; i < rooms.length; ++i) {
-                console.log(rooms[i]["id"], rooms[i]["name"]);
                 this.rooms[ rooms[i]["id"] ] = rooms[i]["name"];
             }
         }
@@ -117,16 +117,6 @@ module.exports = (() => {
         }
 
         exportData() {
-            console.log(this.name)
-            
-            console.log(this.subjects)
-            
-            console.log(this.constraints)   
-            
-            console.log(this.rooms)
-
-            console.log(this.groups)
-
             this.addField(this.name);
             this.endFieldLine();
             this.endFieldLine();
@@ -145,12 +135,14 @@ module.exports = (() => {
                 this.parseMap(this.constraints[i]["group_ids"], this.groups);
                 this.parseMap(this.constraints[i]["room_ids"], this.rooms);
 
-                this.addField(this.constraints[i]["possible_intervals"]);
+                // this.addField();
+                this.parseConstraints(this.constraints[i]["possible_intervals"]);
+                
+
                 this.endFieldLine();
                 this.endFieldLine();
             }
             
-            console.log(this.csvStr);
             this.addNext();
         }
 
@@ -160,6 +152,16 @@ module.exports = (() => {
                 this.addField(arr[obj[j]]);
             }
             this.endFieldLine();
+        }
+
+        parseConstraints(arr) {
+            var obj = JSON.parse(arr);
+            this.addField("Luni;Marti;Miercuri;Joi;Vineri;Sambada;Duminica");
+            this.endFieldLine();
+            for(var i = 0; i < obj.length; ++i) {
+                console.log(obj[i]);
+                this.addField(obj[i]["intervals"]);
+            }
         }
 
         query(queryStr, callback, setter) {
@@ -182,6 +184,10 @@ module.exports = (() => {
         }
 
         send() {
+            if(this.csvStr === "") {
+                res.json({success: false});
+                return;
+            }
             this.res.setHeader('Content-type', "application/force-download");
             this.res.setHeader('Content-disposition', 'attachment; filename=db_export.csv');
     
@@ -216,8 +222,11 @@ module.exports = (() => {
     }
 
     const exportDb = (req, res) => {
-        if(req.header("id")) {
-            var userID = parseInt(req.header("id"));
+
+        var export_id = req.param('id') || req.headers['id'];
+
+        if(export_id) {
+            var userID = parseInt(export_id);
             if(isNaN(userID)) {
                 res.json({success: false});
             }

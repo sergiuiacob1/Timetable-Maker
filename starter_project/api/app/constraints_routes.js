@@ -15,7 +15,9 @@ module.exports = (() => {
   };
 
   const getConstraintsRoute = (req, res) => {
-    const userId = parseInt(req.headers["id"]);
+    var constraint_id = req.param('id') || req.headers['id'];
+
+    const userId = parseInt(constraint_id);
 
     if(isNaN(userId)) {
       res.json({success: false});
