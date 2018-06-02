@@ -2,6 +2,12 @@ module.exports = (() => {
   'use strict';
 
   const resource = require('./models/resource');
+    const {
+        getRoom,
+        getRooms,
+        newRoom
+    } = require('./room_actions');
+
   const {
     newResource,
     getResources,
@@ -15,20 +21,28 @@ module.exports = (() => {
     const name = req.body.name;
     const capacity = req.body.capacity;
 
-    if (type || name || capacity) {
-      newResource({ type, name, capacity })
-        .then((result) => {
-          console.log(result);
-          res.json({ success: result });
-        })
-        .catch((e) => {
-          console.log(e);
-          res.json({ success: false, message: 'An error occured!' });
-        })
-    }
-    else {
-      res.json({ success: false, message: 'Resource type, name and capacity must be provided.' });
-    }
+      if (type.toLowerCase() == 'sala') {
+          newRoom({name: name, capacity: capacity}).then((rezult) => {
+              if (typeof rezult != 'undefined' && rezult)
+                  res.json({success: true, message: 'Resursa de tip sala a fost inserata'});
+              else
+                  res.json({success: false, message: 'Request invalid. Resursa nu a fost adaugata'});
+          });
+      }
+      else if (type || name || capacity) {
+          newResource({ type, name, capacity })
+              .then((result) => {
+                  console.log(result);
+                  res.json({ success: result });
+              })
+              .catch((e) => {
+                  console.log(e);
+                  res.json({ success: false, message: 'An error occured!' });
+              })
+      }
+      else {
+          res.json({ success: false, message: 'Resource type, name and capacity must be provided.' });
+      }
   };
 
   const getResourcesRoute = (req, res) => {
