@@ -13,13 +13,13 @@ Pentru a primi credențiale de acces fie la aplicație, fie la Jenkins, contacta
 
 ***
 
-# Componenta echipelor
+# Componența echipelor
 
 | Team | Scrum Master | Front-end | Back-end | Testing |
 | :--: | :----------: | :-------: | :------: | :-----: |
-| Team Sierra | Iacob Sergiu | Ivan Monica, Cojocaru Stefan | Casuneanu Andrei, Morcotet Marian | Arvinte Cristian |
+| Team Sierra | Iacob Sergiu | Ivan Monica, Cojocaru Ștefan | Cășuneanu Andrei, Morcoteț Marian | Arvinte Cristian |
 | Team Lima | Bosînceanu Lucian | Timofte Andrei, Cobzac Șerban | Medvichi Ștefan, Cojocaru Dragoș, Stan Radu | Bosînceanu Lucian |
 | Team Tango | Feciuc Stelian-Teodor | Anton Cătălin, Cojocariu Paul-Alexandru | Bojescu Mihai | Apușcășiței Silviu |
-| Team Mike | Stan Mihai |  Crivoi Andrei, Rafael Martonca | Stan Mihai, Andrei Tirpescu | Rares Darabana, Cristian Ginju |
+| Team Mike | Stan Mihai |  Crivoi Andrei, Rafael Martoncă | Stan Mihai, Andrei Tîrpescu | Rareș Darabană, Cristian Gînju |
 
 ***
