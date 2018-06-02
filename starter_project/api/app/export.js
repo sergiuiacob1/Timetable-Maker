@@ -5,7 +5,7 @@ module.exports = (() => {
     const {getRooms}            = require('./room_actions');
     const {getUsers}            = require('./user_actions.js');
     const {getSubjects}         = require('./subject_actions.js');
-    const {getAllConstraints}   = require('./constraints_actions.js');
+    const {getAllConstraints, getConstraints}   = require('./constraints_actions.js');
     const {getResources}        = require('./resource_actions.js');
     
     var result = {
@@ -13,6 +13,8 @@ module.exports = (() => {
     };
 
     const CSV_SEPARATOR = ';';
+
+    var userID = undefined;
 
     function addField(csvString, fieldValue) {
         csvString.csvStr += fieldValue;
@@ -62,9 +64,12 @@ module.exports = (() => {
 
         addSection("RESURSE", ["tip", "nume", "capacitate"]);
         addDataFromDb(resources, ["type", "name", "capacity"]);
-
-        buildConstraints(groups, rooms, users, subjects, constraints);
+        if(!userID)
+            buildConstraints(groups, rooms, users, subjects, constraints);
+        else
+            buildConstraintsForOneUser(groups, rooms, users, subjects, constraints);
     }
+
 
     function sendCsv(res) {
         res.setHeader('Content-type', "application/force-download");
@@ -72,12 +77,13 @@ module.exports = (() => {
 
         res.send(result.csvStr);
         result.csvStr = "";
+        userID = undefined;
     }
 
     function getIdentifier(dbRes, nameKey, idKey, id) {
 
         for(var i = 0; i < dbRes.length; ++i) {
-
+            console.log(dbRes[i][idKey], id)
             if(dbRes[i][idKey] === id)
             {
                 return dbRes[i][nameKey];
@@ -88,7 +94,10 @@ module.exports = (() => {
     }
 
     function extractDataArray(arr, dbResp, nameKey, idKey){
-        var obj = JSON.parse(arr);
+        var obj = arr;
+        if(!userID)
+            obj = JSON.parse(arr);
+        
         var str = '';
         for(var it = 0; it < obj.length; ++it) {
             str += getIdentifier(dbResp, nameKey, idKey, obj[it]);
@@ -104,7 +113,7 @@ module.exports = (() => {
         addSection("CONSTRANGERI", ["user", "subiect", "sali", "grupe", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
 
         for(var i = 0; i < constraints.length; ++i) {
-            
+            console.log("zzz", constraints[i])
             var obj = JSON.parse(constraints[i]["possible_intervals"]);
             console.log(obj);
             
@@ -122,7 +131,38 @@ module.exports = (() => {
         }
     }
 
+    function buildConstraintsForOneUser(groups, rooms, users, subjects, constraints) {
+        addSection("CONSTRANGERI", ["user", "subiect", "sali", "grupe", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata", "Duminica"]);
+
+        for(var i = 0; i < constraints.length; ++i) {
+            console.log("zzz", constraints[i])
+            var obj = constraints[i]["possibleIntervals"];
+            console.log(obj);
+            
+            addField(result, getIdentifier(users, "fullName", "id", constraints[i]["roomIds"]));
+            addField(result, getIdentifier(subjects, "name", "id", constraints[i]["subjectIds"]));
+
+            addField(result, extractDataArray(constraints[i]["roomIds"], rooms, "name", "id"));
+            addField(result, extractDataArray(constraints[i]["groupIds"], groups, "name", "id"));
+
+            for(var it = 0; it < obj.length; ++it) {
+                addField(result, obj[it]["intervals"]); 
+            }
+
+            endFieldLine(result);
+        }
+    }
+
     const exportDb = (req, res) => {
+        
+        if(req.header("id")) {
+            userID = parseInt(req.header("id"));
+            if(isNaN(userID)) {
+                res.json({success: false});
+                return;
+            }
+        }
+            
         getGroups().then((groups) => {
             
             getRooms().then((rooms) => {
@@ -132,22 +172,30 @@ module.exports = (() => {
                     getSubjects().then((subjects) => {
                         
                         getResources("").then((resources) => {
+                            if(userID === undefined) {
+                                
+                                getAllConstraints().then((constraints) => {
 
-                            getAllConstraints().then((constraints) => {
+                                    buildCSV(groups, rooms, users, subjects, constraints, resources);
+                                    sendCsv(res);
+                        
+                                }).catch((e) => {
+                                    console.log(e);
+                                });
+                            } else {
+                                const userId = userID;
+                                getConstraints({userId}).then((constraints) => {
 
-                                buildCSV(groups, rooms, users, subjects, constraints, resources);
-                                sendCsv(res);
-                    
-                            }).catch((e) => {
-                                console.log(e);
-                            });
-
+                                    buildCSV(groups, rooms, users, subjects, constraints, resources);
+                                    sendCsv(res);
+                        
+                                }).catch((e) => {
+                                    console.log(e);
+                                });
+                            }
                         }).catch((e) => {
                             console.log(e);
                         });
-
-                       
-
 
                     }).catch((e) => {
                         console.log(e);
@@ -160,7 +208,7 @@ module.exports = (() => {
             }).catch((e) => {
                 console.log(e);
             });
-
+            
         }).catch((e) => {
             console.log(e);
         });
