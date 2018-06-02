@@ -14,9 +14,9 @@ $(document).ready(function(){
 	let navLinkButton = ".mdl-navigation__link";
 	let pageContent = ".mdl-layout__content .page-content";
 	let addButton = ".mdl-button.add-newUser";
-	let removeButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.remove-button";
+	let removeButton = ".remove-button";
 	let sendEditedButton = ".save-changes-button";
-	let resetButton = ".mdl-button.mdl-js-button.mdl-button--raised.mdl-button--colored.reset-button";
+	let resetButton = ".reset-button";
 	let searchInput = ".users-management .mdl-textfield__input";
 	let subjectsInput = ".add-user .mdl-textfield__input#subjects";
 	let errorMsg = "Auch!!! Ceva nu a mers bine!";
