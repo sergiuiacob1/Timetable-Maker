@@ -15,6 +15,20 @@ module.exports = (() => {
       });
   };
 
+    const newRoom = (({
+                          name,
+                          capacity
+                      }) => {
+        return new Room()
+            .insert()
+            .set('name', name)
+            .set('capacity', capacity)
+            .valueOf()
+            .then(() => {
+                return true;
+            });
+    });
+
   const getRoomResources = (roomId) => {
     return new RoomResource()
       .field('resource_id')
@@ -67,6 +81,7 @@ module.exports = (() => {
 
   return {
     getRoom,
-    getRooms
+      getRooms,
+      newRoom
   };
 })();
