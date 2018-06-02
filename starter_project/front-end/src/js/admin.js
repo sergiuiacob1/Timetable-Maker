@@ -267,13 +267,13 @@ $(document).ready(function(){
 						
 				</li>
 				<div class="user-buttons" id="buttons-user${index}" userId="${user.id}">
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored edit-button">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent edit-button">
 						Modifica
 					</button>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored remove-button">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent remove-button">
 						Sterge
 					</button>
-					<button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored reset-button">
+					<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent reset-button">
 						Reseteaza parola
 					</button><br><br>
 				</div>`
@@ -312,7 +312,7 @@ $(document).ready(function(){
                         <p class="input-req" id="edit-subjects-req-${user.id}"></p>
 					</div>
 					<div class="mdl-card__actions mdl-card--border">
-						<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect save-changes-button">
+						<a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--colored save-changes-button">
 							Salveaza schimbarile
 						</a>
 					</div>
