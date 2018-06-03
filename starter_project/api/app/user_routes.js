@@ -209,23 +209,32 @@ module.exports = (() => {
       fullName: body.fullName
     }).then((result) => {
 
-        return deleteSubject({
+      deleteSubject({
+    id_user: id
+  }).then(() => {
+    let i;
+        for (i = 0; i < body.id_subjects.length; i++) {
+      let values = {
+        id_subject: body.id_subjects[i],
         id_user: id
-      }).then(() => {
-        let i;
-            return Promise.all(body.id_subjects.map((id_subject) => {
-          let values = {
-            id_subject: body.id_subjects[i],
-            id_user: id
-          };
-                return newTeacherSubjectMap(values).then((relation) => {
-            console.log('Added relation from ' + values.id_subject + ' to ' + values.id_user);
-          });
-            }));
+      };
+          newTeacherSubjectMap(values).then((relation) => {
+        console.log('Added relation from ' + values.id_subject + ' to ' + values.id_user);
       });
-    }).then(() => {
+        }
+      }).catch((e) => {
+        console.log("eroarea la delete e", e);
         res.json({
-            success: true,
+          success: false,
+            message: 'A aparut o eroare. Incercati mai tarziu'
+        })
+        return;
+  });
+
+}).then(() => {
+    res.json({
+        success: true,
+
             message: 'Utilizatorul a fost actualizat cu succes'
         });
     }).catch((e) => {
