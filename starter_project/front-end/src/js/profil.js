@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 	apiUserInfo(function(response){
 		if (response === true){
-			$(".hello-name").append(`Salut ${userInfo.fullName}`);
+			$(".hello-name").append(`Salut, ${userInfo.fullName}!`);
 		}
 	})
 
