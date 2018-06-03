@@ -28,6 +28,17 @@ module.exports = (() => {
                 this.name = name[0]["fullName"];
             }
         }
+
+        email() {
+            return this.email;
+        }
+
+        setEmail(email) {
+            console.log("MUIIIIIIIIIIIIIIIIIE", email[0]["mail"]);
+            if(email.length > 0) {
+                this.email = email[0]["mail"];
+            }
+        }
         
         users() {
             return this.users;
@@ -79,7 +90,12 @@ module.exports = (() => {
 
         findUserName() {
             var queryString = "SELECT fullName FROM users WHERE id = " + this.id;
-            this.query(queryString, this.findUsersSubjects, this.setName)
+            this.query(queryString, this.findEmail, this.setName)
+        }
+
+        findEmail() {
+            var queryString = "SELECT mail FROM users WHERE id = " + this.id;
+            this.query(queryString, this.findUsersSubjects, this.setEmail)
         }
 
         findUsersSubjects() {
@@ -119,12 +135,15 @@ module.exports = (() => {
         exportData() {
             this.addField(this.name);
             this.endFieldLine();
+            this.addField(this.email);
             this.endFieldLine();
-
+            this.addField(this.subjects.length);
+            this.endFieldLine();
             for(var i = 0; i < this.subjects.length; ++i) {
                 this.addField(this.subjects[i]["name"]);
                 this.endFieldLine();
             }
+            this.addField(this.constraints.length);
             this.endFieldLine();
 
             for(var i = 0; i < this.constraints.length; ++i) {
@@ -136,10 +155,9 @@ module.exports = (() => {
                 this.parseMap(this.constraints[i]["room_ids"], this.rooms);
 
                 // this.addField();
-                this.parseConstraints(this.constraints[i]["possible_intervals"]);
+                this.addField(this.constraints[i]["possible_intervals"]);
                 
 
-                this.endFieldLine();
                 this.endFieldLine();
             }
             
@@ -148,6 +166,8 @@ module.exports = (() => {
 
         parseMap(map, arr) {
             var obj = JSON.parse(map);
+            this.addField(obj.length);
+            this.endFieldLine();
             for(var j = 0; j < obj.length; ++j) {
                 this.addField(arr[obj[j]]);
             }
@@ -212,6 +232,7 @@ module.exports = (() => {
 
         clear() {
             this.name = "";
+            this.email = "";
             this.groups = [];
             this.users = [];
             this.rooms = [];
