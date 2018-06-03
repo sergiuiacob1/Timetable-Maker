@@ -18,8 +18,22 @@ padding:0;
   text-align: center;
 }
 
-.mdl-data-table td:first-of-type, .mdl-data-table th:first-of-type {
-  padding-left: 16px;
+@media (max-width: 1100px) {
+  .mdl-data-table th {
+    padding: 0 14px 12px 14px;
+  }
+
+  .mdl-data-table td {
+    font-size: 11px;
+  }
+  
+  .mdl-data-table td:first-of-type, .mdl-data-table th:first-of-type {
+    padding-left: 14px;
+  }
+
+  .mdl-data-table td:last-of-type, .mdl-data-table th:last-of-type {
+    padding-right: 14px;
+  }
 }
 
 .demo-card-wide.mdl-card{
