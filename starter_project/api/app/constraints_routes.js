@@ -15,14 +15,15 @@ module.exports = (() => {
   };
 
   const getConstraintsRoute = (req, res) => {
+
     var constraint_id = req.param('id') || req.headers['id'];
+    var idd = parseInt(constraint_id);
 
-    const userId = parseInt(constraint_id);
-
-    if(isNaN(userId)) {
-      res.json({success: false});
-      return;
+    if(isNaN(idd)) {
+      idd = req.decoded.user.id;
     }
+
+    const userId = idd;
 
     getConstraints({userId}).then((constraints) => {
       console.log(constraints);

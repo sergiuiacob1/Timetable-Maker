@@ -34,7 +34,6 @@ module.exports = (() => {
         }
 
         setEmail(email) {
-            console.log("MUIIIIIIIIIIIIIIIIIE", email[0]["mail"]);
             if(email.length > 0) {
                 this.email = email[0]["mail"];
             }
