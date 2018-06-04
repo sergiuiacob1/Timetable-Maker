@@ -12,6 +12,7 @@ module.exports = (() => {
             this.rooms = [];
             this.subjects = [];
             this.constraints = [];
+            this.linkedConstraints = [];
             this.queriableArr = querriableArr;
             this.id = querriableArr[0];
             this.count = 0;
@@ -87,6 +88,15 @@ module.exports = (() => {
             this.constraints = constraints;
         }
 
+        linkedConstraints() {
+            return this.linkedConstraints;
+        }
+
+        setLinkedConstraints(linkedConstraints) {
+            this.linkedConstraints = linkedConstraints;
+        }
+
+
         findUserName() {
             var queryString = "SELECT fullName FROM users WHERE id = " + this.id;
             this.query(queryString, this.findEmail, this.setName)
@@ -103,13 +113,18 @@ module.exports = (() => {
         }
         
         findConstraintsForUser() {
-            var queryString = "SELECT u.fullName, s.name, c.room_ids, c.group_ids,c.possible_intervals\
+            var queryString = "SELECT u.fullName, s.name, c.id, c.room_ids, c.group_ids,c.possible_intervals\
             FROM users u \
             JOIN constraints c on c.user_id = u.id \
             JOIN subjects s on s.id = c.subject_id \
             WHERE u.id = " + this.id;
             
-            this.query(queryString, this.findRoomNames, this.setConstraints);
+            this.query(queryString, this.findLinkedConstraintsForUser, this.setConstraints);
+        }
+
+        findLinkedConstraintsForUser() {
+            var queryString = "SELECT ids, days FROM `linked_constraints` WHERE user_id = " + this.id;
+            this.query(queryString, this.findRoomNames, this.setLinkedConstraints);
         }
 
         findRoomNames() {
@@ -146,20 +161,32 @@ module.exports = (() => {
             this.endFieldLine();
 
             for(var i = 0; i < this.constraints.length; ++i) {
-                            
+
+                this.addField(this.constraints[i]["id"]);
+                this.endFieldLine();
+
                 this.addField(this.constraints[i]["name"]);
                 this.endFieldLine();
 
                 this.parseMap(this.constraints[i]["group_ids"], this.groups);
                 this.parseMap(this.constraints[i]["room_ids"], this.rooms);
 
-                // this.addField();
                 this.addField(this.constraints[i]["possible_intervals"]);
                 
-
                 this.endFieldLine();
             }
             
+            this.addField(this.linkedConstraints.length);
+            this.endFieldLine();
+            for(var i = 0; i < this.linkedConstraints.length; ++i) {
+                
+                this.addField(this.linkedConstraints[i]["ids"]);
+                this.endFieldLine();
+                this.addField(this.linkedConstraints[i]["days"]);
+                this.endFieldLine();
+
+            }
+
             this.addNext();
         }
 
@@ -237,6 +264,7 @@ module.exports = (() => {
             this.rooms = [];
             this.subjects = [];
             this.constraints = [];
+            this.linkedConstraints = [];
         }
 
     }
